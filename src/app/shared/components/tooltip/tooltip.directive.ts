@@ -35,6 +35,7 @@ export class TooltipDirective implements OnDestroy {
   private delayTimeout: any;
   private isVisible = false;
   private clickListener?: () => void;
+  private clickTimeout?: number;
 
   private readonly elementRef = inject(ElementRef);
   private readonly viewContainerRef = inject(ViewContainerRef);
@@ -45,6 +46,11 @@ export class TooltipDirective implements OnDestroy {
   private readonly document = inject(DOCUMENT);
 
   ngOnDestroy() {
+    // Clear timeout if pending
+    if (this.clickTimeout) {
+      clearTimeout(this.clickTimeout);
+    }
+    
     this.hideTooltip();
     this.removeTooltipElement();
     if (this.clickListener) {
@@ -74,11 +80,16 @@ export class TooltipDirective implements OnDestroy {
         this.hideTooltip();
       } else {
         this.showTooltip();
+        // Clear existing timeout if any
+        if (this.clickTimeout) {
+          clearTimeout(this.clickTimeout);
+        }
+        
         // Add document click listener to close on outside click
-        setTimeout(() => {
+        this.clickTimeout = window.setTimeout(() => {
           this.clickListener = () => this.hideTooltip();
           this.document.addEventListener('click', this.clickListener);
-        });
+        }, 100);
       }
     }
   }
@@ -169,6 +180,12 @@ export class TooltipDirective implements OnDestroy {
       setTimeout(() => {
         this.removeTooltipElement();
       }, 200);
+    }
+
+    // Clear click timeout if exists
+    if (this.clickTimeout) {
+      clearTimeout(this.clickTimeout);
+      this.clickTimeout = undefined;
     }
 
     if (this.clickListener) {

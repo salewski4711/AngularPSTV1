@@ -1,6 +1,7 @@
 import { Component, inject, ChangeDetectionStrategy, signal, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { take } from 'rxjs/operators';
 import { LogoComponent } from '../../shared/components/logo/logo.component';
 import { ThemeService } from '../../core/services/theme.service';
 import { AuthService } from '../../features/auth/auth.service';
@@ -143,7 +144,9 @@ export class HeaderComponent {
   }
   
   logout(): void {
-    this.authService.logout().subscribe(() => {
+    this.authService.logout().pipe(
+      take(1) // Automatisches Complete nach erstem Emit
+    ).subscribe(() => {
       this.router.navigate(['/auth/login']);
     });
   }

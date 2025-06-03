@@ -35,6 +35,7 @@ export class SearchComponent implements OnInit, OnDestroy {
   
   private searchSubject = new Subject<string>();
   private destroy$ = new Subject<void>();
+  private blurTimeout?: number;
   
   constructor(private searchService: SearchService) {}
   
@@ -61,6 +62,11 @@ export class SearchComponent implements OnInit, OnDestroy {
   }
   
   ngOnDestroy() {
+    // Clear timeout if still pending
+    if (this.blurTimeout) {
+      clearTimeout(this.blurTimeout);
+    }
+    
     this.destroy$.next();
     this.destroy$.complete();
   }
@@ -83,8 +89,13 @@ export class SearchComponent implements OnInit, OnDestroy {
   }
   
   onBlur() {
+    // Clear existing timeout if any
+    if (this.blurTimeout) {
+      clearTimeout(this.blurTimeout);
+    }
+    
     // Delay to allow click events on results
-    setTimeout(() => {
+    this.blurTimeout = window.setTimeout(() => {
       this.showDropdown = false;
     }, 200);
   }

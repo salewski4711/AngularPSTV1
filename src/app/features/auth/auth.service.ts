@@ -31,14 +31,20 @@ export class AuthService {
           this.isAuthenticatedSubject.next(true);
           this.currentUserSubject.next({ ...response.user, isAuthenticated: true });
           
+          // Sanitize user data before storing
+          const sanitizedUser = this.sanitizeUserData(response.user);
+          if (!sanitizedUser) {
+            throw new Error('Invalid user data received');
+          }
+          
           // Store in localStorage if rememberMe is checked
           if (credentials.rememberMe) {
             localStorage.setItem(this.AUTH_TOKEN_KEY, response.token);
-            localStorage.setItem(this.USER_KEY, JSON.stringify(response.user));
+            localStorage.setItem(this.USER_KEY, JSON.stringify(sanitizedUser));
           } else {
             // Store in sessionStorage for current session only
             sessionStorage.setItem(this.AUTH_TOKEN_KEY, response.token);
-            sessionStorage.setItem(this.USER_KEY, JSON.stringify(response.user));
+            sessionStorage.setItem(this.USER_KEY, JSON.stringify(sanitizedUser));
           }
         }
       }),
@@ -83,7 +89,13 @@ export class AuthService {
     
     if (token && userStr) {
       try {
-        JSON.parse(userStr); // Validate JSON format
+        const rawUser = JSON.parse(userStr);
+        const sanitizedUser = this.sanitizeUserData(rawUser);
+        
+        if (!sanitizedUser) {
+          this.clearAuthState();
+          return;
+        }
         
         // Validate token with backend
         this.http.get<AuthResponse>('/api/auth/me', {
@@ -91,8 +103,13 @@ export class AuthService {
         }).subscribe({
           next: (response) => {
             if (response.success && response.user) {
-              this.isAuthenticatedSubject.next(true);
-              this.currentUserSubject.next({ ...response.user, isAuthenticated: true });
+              const sanitizedResponseUser = this.sanitizeUserData(response.user);
+              if (sanitizedResponseUser) {
+                this.isAuthenticatedSubject.next(true);
+                this.currentUserSubject.next({ ...sanitizedResponseUser, isAuthenticated: true });
+              } else {
+                this.clearAuthState();
+              }
             } else {
               this.clearAuthState();
             }
@@ -101,7 +118,8 @@ export class AuthService {
             this.clearAuthState();
           }
         });
-      } catch {
+      } catch (error) {
+        console.error('Failed to parse user data:', error);
         this.clearAuthState();
       }
     }
@@ -127,5 +145,46 @@ export class AuthService {
     localStorage.removeItem(this.USER_KEY);
     sessionStorage.removeItem(this.AUTH_TOKEN_KEY);
     sessionStorage.removeItem(this.USER_KEY);
+  }
+  
+  private sanitizeUserData(data: any): User | null {
+    if (!data || typeof data !== 'object') {
+      return null;
+    }
+    
+    // Whitelist approach - only allow known fields
+    const sanitized: User = {
+      id: this.sanitizeString(data.id),
+      username: this.sanitizeString(data.username),
+      email: this.sanitizeEmail(data.email),
+      isAuthenticated: false
+    };
+    
+    // Validate required fields
+    if (!sanitized.id || !sanitized.username || !sanitized.email) {
+      return null;
+    }
+    
+    return sanitized;
+  }
+  
+  private sanitizeString(value: any): string {
+    if (typeof value !== 'string') {
+      return '';
+    }
+    // Remove potential XSS vectors
+    return value
+      .replace(/<script[^>]*>.*?<\/script>/gi, '')
+      .replace(/<[^>]+>/g, '')
+      .replace(/javascript:/gi, '')
+      .replace(/on\w+\s*=/gi, '')
+      .trim();
+  }
+  
+  private sanitizeEmail(value: any): string {
+    const sanitized = this.sanitizeString(value);
+    // Basic email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(sanitized) ? sanitized : '';
   }
 }
