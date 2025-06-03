@@ -1,12 +1,4 @@
 import { Routes } from '@angular/router';
-import { BetaPlaygroundComponent } from './shared/components-beta/_playground/beta-playground.component';
-import { ShowcaseComponent } from './shared/components-beta/showcase/showcase.component';
-import { HomeComponent } from './features/home/home.component';
-import { CustomersComponent } from './features/customers/customers.component';
-import { OffersComponent } from './features/offers/offers.component';
-import { ProjectsComponent } from './features/projects/projects.component';
-import { WorkflowComponent } from './features/workflow/workflow.component';
-import { NavigationDemoComponent } from './features/navigation-demo/navigation-demo.component';
 import { authGuard } from './core/guards/auth.guard';
 
 export const routes: Routes = [
@@ -21,49 +13,49 @@ export const routes: Routes = [
   },
   {
     path: 'dashboard',
-    component: HomeComponent,
+    loadComponent: () => import('./features/home/home.component').then(m => m.HomeComponent),
     canActivate: [authGuard],
     title: 'Dashboard - ProSolarTec CRM'
   },
   {
     path: 'customers',
-    component: CustomersComponent,
+    loadComponent: () => import('./features/customers/customers.component').then(m => m.CustomersComponent),
     canActivate: [authGuard],
     title: 'Kunden - ProSolarTec CRM'
   },
   {
     path: 'offers',
-    component: OffersComponent,
+    loadComponent: () => import('./features/offers/offers.component').then(m => m.OffersComponent),
     canActivate: [authGuard],
     title: 'Angebote - ProSolarTec CRM'
   },
   {
     path: 'projects',
-    component: ProjectsComponent,
+    loadComponent: () => import('./features/projects/projects.component').then(m => m.ProjectsComponent),
     canActivate: [authGuard],
     title: 'Projekte - ProSolarTec CRM'
   },
   {
     path: 'workflow',
-    component: WorkflowComponent,
+    loadComponent: () => import('./features/workflow/workflow.component').then(m => m.WorkflowComponent),
     canActivate: [authGuard],
     title: 'Workflow - ProSolarTec CRM'
   },
   {
     path: 'navigation-demo',
-    component: NavigationDemoComponent,
+    loadComponent: () => import('./features/navigation-demo/navigation-demo.component').then(m => m.NavigationDemoComponent),
     canActivate: [authGuard],
     title: 'Navigation Demo - ProSolarTec CRM'
   },
   { 
     path: 'beta', 
-    component: ShowcaseComponent,
+    loadComponent: () => import('./shared/components-beta/showcase/showcase.component').then(m => m.ShowcaseComponent),
     canActivate: [authGuard],
     title: 'Component Showcase - Beta'
   },
   { 
     path: 'beta-old', 
-    component: BetaPlaygroundComponent,
+    loadComponent: () => import('./shared/components-beta/_playground/beta-playground.component').then(m => m.BetaPlaygroundComponent),
     canActivate: [authGuard],
     title: 'Beta Components Playground'
   },
