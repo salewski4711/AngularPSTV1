@@ -1,0 +1,62 @@
+<!-- Line Height Examples -->
+<div class="space-y-8">
+  <!-- Tight Line Height -->
+  <div>
+    <app-typography variant="h5" class="mb-2">Tight Line Height (leading-tight)</app-typography>
+    <app-typography variant="h1" class="p-4 bg-gray-100 dark:bg-gray-800 rounded">
+      Large Display Text Benefits from Tight Line Height
+    </app-typography>
+    <app-typography variant="caption" class="mt-2 text-gray-600 dark:text-gray-400">
+      Used for headings where lines should be closer together
+    </app-typography>
+  </div>
+
+  <!-- Normal Line Height -->
+  <div>
+    <app-typography variant="h5" class="mb-2">Normal Line Height (leading-normal)</app-typography>
+    <div class="p-4 bg-gray-100 dark:bg-gray-800 rounded">
+      <app-typography variant="h5">This is a heading with normal line height that wraps to multiple lines for demonstration purposes</app-typography>
+    </div>
+    <app-typography variant="caption" class="mt-2 text-gray-600 dark:text-gray-400">
+      Default for most text elements
+    </app-typography>
+  </div>
+
+  <!-- Relaxed Line Height -->
+  <div>
+    <app-typography variant="h5" class="mb-2">Relaxed Line Height (leading-relaxed)</app-typography>
+    <div class="p-4 bg-gray-100 dark:bg-gray-800 rounded max-w-2xl">
+      <app-typography variant="body1">
+        Body text benefits from relaxed line height for improved readability. When reading longer paragraphs, the extra space between lines helps the eye track from the end of one line to the beginning of the next. This is especially important for content-heavy interfaces where users need to read and comprehend information quickly.
+      </app-typography>
+    </div>
+    <app-typography variant="caption" class="mt-2 text-gray-600 dark:text-gray-400">
+      Best for body text and longer content
+    </app-typography>
+  </div>
+
+  <!-- Comparison -->
+  <div>
+    <app-typography variant="h5" class="mb-4">Line Height Comparison</app-typography>
+    <div class="grid gap-4 md:grid-cols-3">
+      <div class="p-4 bg-gray-100 dark:bg-gray-800 rounded">
+        <app-typography variant="h6" class="mb-2 text-primary">Tight</app-typography>
+        <p class="text-sm leading-tight">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        </p>
+      </div>
+      <div class="p-4 bg-gray-100 dark:bg-gray-800 rounded">
+        <app-typography variant="h6" class="mb-2 text-primary">Normal</app-typography>
+        <p class="text-sm leading-normal">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        </p>
+      </div>
+      <div class="p-4 bg-gray-100 dark:bg-gray-800 rounded">
+        <app-typography variant="h6" class="mb-2 text-primary">Relaxed</app-typography>
+        <p class="text-sm leading-relaxed">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

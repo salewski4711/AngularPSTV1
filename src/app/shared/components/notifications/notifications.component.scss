@@ -1,0 +1,52 @@
+// Notifications Component Styles
+
+:host {
+  display: block;
+}
+
+// Custom scrollbar for notifications list
+.max-h-96 {
+  scrollbar-width: thin;
+  scrollbar-color: theme('colors.gray.300') theme('colors.gray.100');
+
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: theme('colors.gray.100');
+    border-radius: 3px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: theme('colors.gray.300');
+    border-radius: 3px;
+
+    &:hover {
+      background: theme('colors.gray.400');
+    }
+  }
+
+  // Dark mode scrollbar
+  :host-context(.dark) & {
+    scrollbar-color: theme('colors.gray.600') theme('colors.gray.800');
+
+    &::-webkit-scrollbar-track {
+      background: theme('colors.gray.800');
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: theme('colors.gray.600');
+
+      &:hover {
+        background: theme('colors.gray.500');
+      }
+    }
+  }
+}
+
+// Badge positioning adjustment
+.absolute.-top-1.-right-1 {
+  // Ensure badge is properly positioned on the bell icon
+  transform: translate(25%, -25%);
+}

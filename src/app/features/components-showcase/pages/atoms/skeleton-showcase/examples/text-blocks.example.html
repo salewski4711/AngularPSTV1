@@ -1,0 +1,18 @@
+<!-- Basic paragraph skeleton -->
+<div class="space-y-4">
+  <h4 class="text-sm font-medium text-gray-600 dark:text-gray-400">Paragraph</h4>
+  <app-skeleton type="text" lines="3"></app-skeleton>
+</div>
+
+<!-- Heading with text -->
+<div class="space-y-4 mt-6">
+  <h4 class="text-sm font-medium text-gray-600 dark:text-gray-400">Heading + Text</h4>
+  <app-skeleton type="text" lines="1" [lineWidths]="[40]" size="lg" class="mb-3"></app-skeleton>
+  <app-skeleton type="text" lines="2"></app-skeleton>
+</div>
+
+<!-- Different line widths -->
+<div class="space-y-4 mt-6">
+  <h4 class="text-sm font-medium text-gray-600 dark:text-gray-400">Custom Line Widths</h4>
+  <app-skeleton type="text" lines="4" [lineWidths]="[100, 80, 90, 60]"></app-skeleton>
+</div>

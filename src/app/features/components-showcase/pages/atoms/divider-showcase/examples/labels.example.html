@@ -1,0 +1,45 @@
+<!-- Dividers with labels -->
+<div class="space-y-6">
+  <!-- Label positions -->
+  <div>
+    <p class="text-sm text-gray-600 mb-2">Label positions</p>
+    <app-divider label="Left aligned" labelPosition="left" class="mb-4"></app-divider>
+    <app-divider label="Center aligned" labelPosition="center" class="mb-4"></app-divider>
+    <app-divider label="Right aligned" labelPosition="right"></app-divider>
+  </div>
+
+  <!-- Labels with different variants -->
+  <div>
+    <p class="text-sm text-gray-600 mb-2">Labels with variants</p>
+    <app-divider label="Solid Section" variant="solid" class="mb-4"></app-divider>
+    <app-divider label="Dashed Section" variant="dashed" class="mb-4"></app-divider>
+    <app-divider label="Dotted Section" variant="dotted"></app-divider>
+  </div>
+
+  <!-- Labels with colors -->
+  <div>
+    <p class="text-sm text-gray-600 mb-2">Labels with colors</p>
+    <app-divider label="Important" color="primary" class="mb-4"></app-divider>
+    <app-divider label="Information" color="secondary" class="mb-4"></app-divider>
+    <app-divider label="Custom Color" color="custom" customColor="#8b5cf6"></app-divider>
+  </div>
+
+  <!-- Combined styles -->
+  <div>
+    <p class="text-sm text-gray-600 mb-2">Combined styles</p>
+    <app-divider 
+      label="Featured Section" 
+      color="primary" 
+      variant="dashed" 
+      thickness="medium"
+      labelPosition="left"
+      class="mb-4"
+    ></app-divider>
+    <app-divider 
+      label="End of Section" 
+      color="secondary" 
+      variant="dotted" 
+      labelPosition="right"
+    ></app-divider>
+  </div>
+</div>

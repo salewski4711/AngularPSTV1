@@ -1,0 +1,24 @@
+<div class="flex items-center gap-4 flex-wrap">
+  <button 
+    class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+    appTooltip="This is a basic tooltip"
+  >
+    Hover me
+  </button>
+
+  <button 
+    class="px-4 py-2 bg-gray-600 text-white rounded hover:bg-gray-700"
+    appTooltip="Click to see this tooltip"
+    tooltipTrigger="click"
+  >
+    Click me
+  </button>
+
+  <input 
+    type="text"
+    class="px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+    placeholder="Focus to see tooltip"
+    appTooltip="This tooltip appears on focus"
+    tooltipTrigger="focus"
+  />
+</div>

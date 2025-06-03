@@ -1,0 +1,70 @@
+<div class="search-container" (keydown)="onKeyDown($event)">
+  <div class="search-input-wrapper">
+    <app-icon name="search" class="search-icon"></app-icon>
+    
+    <input
+      #searchInput
+      type="text"
+      class="search-input"
+      [(ngModel)]="searchQuery"
+      (ngModelChange)="onSearch($event)"
+      (focus)="onFocus()"
+      (blur)="onBlur()"
+      placeholder="Search customers, projects, documents..."
+      autocomplete="off"
+      role="combobox"
+      [attr.aria-expanded]="showDropdown"
+      [attr.aria-controls]="showDropdown ? 'search-results' : null"
+      [attr.aria-activedescendant]="selectedIndex >= 0 ? 'result-' + selectedIndex : null"
+    />
+    
+    <button
+      *ngIf="searchQuery"
+      class="clear-button"
+      (click)="clearSearch()"
+      type="button"
+      aria-label="Clear search"
+    >
+      <app-icon name="x" [size]="16"></app-icon>
+    </button>
+    
+    <div *ngIf="isLoading" class="loading-spinner">
+      <app-icon name="loader-2" class="animate-spin"></app-icon>
+    </div>
+  </div>
+  
+  <div
+    *ngIf="showDropdown"
+    id="search-results"
+    class="search-dropdown"
+    role="listbox"
+  >
+    <div *ngIf="!searchQuery && recentSearches.length > 0" class="dropdown-section">
+      <h3 class="dropdown-section-title">Recent Searches</h3>
+    </div>
+    
+    <div *ngIf="searchResults.length === 0 && searchQuery && !isLoading" class="empty-state">
+      <app-icon name="search" [size]="24" class="empty-icon"></app-icon>
+      <p>No results found for "{{ searchQuery }}"</p>
+    </div>
+    
+    <ul *ngIf="searchResults.length > 0" class="results-list">
+      <li
+        *ngFor="let result of searchResults; let i = index"
+        [id]="'result-' + i"
+        class="result-item"
+        [class.selected]="selectedIndex === i"
+        (click)="selectResult(result)"
+        role="option"
+        [attr.aria-selected]="selectedIndex === i"
+      >
+        <app-icon [name]="getResultIcon(result.type)" class="result-icon"></app-icon>
+        <div class="result-content">
+          <div class="result-title">{{ result.title }}</div>
+          <div *ngIf="result.subtitle" class="result-subtitle">{{ result.subtitle }}</div>
+        </div>
+        <span class="result-type">{{ result.type }}</span>
+      </li>
+    </ul>
+  </div>
+</div>

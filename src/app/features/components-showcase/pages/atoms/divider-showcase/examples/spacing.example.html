@@ -1,0 +1,23 @@
+<!-- Different spacing options -->
+<div>
+  <p class="text-gray-600">Content before small spacing</p>
+  <app-divider spacing="sm"></app-divider>
+  <p class="text-gray-600">Small spacing (2 units)</p>
+  
+  <app-divider spacing="md"></app-divider>
+  <p class="text-gray-600">Medium spacing (4 units - default)</p>
+  
+  <app-divider spacing="lg"></app-divider>
+  <p class="text-gray-600">Large spacing (6 units)</p>
+
+  <!-- Vertical spacing example -->
+  <div class="flex items-center h-16 mt-8">
+    <span class="text-gray-600">Small</span>
+    <app-divider orientation="vertical" spacing="sm"></app-divider>
+    <span class="text-gray-600">Medium</span>
+    <app-divider orientation="vertical" spacing="md"></app-divider>
+    <span class="text-gray-600">Large</span>
+    <app-divider orientation="vertical" spacing="lg"></app-divider>
+    <span class="text-gray-600">End</span>
+  </div>
+</div>

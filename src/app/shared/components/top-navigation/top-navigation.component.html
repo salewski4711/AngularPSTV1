@@ -1,0 +1,63 @@
+<header [class]="headerClasses">
+  <!-- Äußerer Container mit App-Background -->
+  <div class="w-full bg-gray-50 dark:bg-black">
+    <!-- Container für Zentrierung und max-width -->
+    <div class="w-full flex justify-center sm:px-4 md:px-6 lg:px-8">
+      <!-- Innerer Container mit Menü-Background -->
+      <div class="bg-white dark:bg-gray-800 border-b sm:border border-gray-200 dark:border-gray-700 sm:rounded-b-lg md:rounded-b-xl max-w-8xl w-full sm:shadow-2xl">
+        <div class="header-content">
+      <!-- Logo Section -->
+      <div class="logo-section" *ngIf="config.showLogo">
+        <app-logo
+          [variant]="config.logoVariant || 'horizontal'"
+          [size]="'md'"
+          (click)="onLogoClick()"
+          class="cursor-pointer"
+        ></app-logo>
+      </div>
+
+      <!-- Desktop Navigation -->
+      <div class="desktop-navigation">
+        <!-- Search -->
+        <div class="search-section" *ngIf="config.showSearch">
+          <app-search
+            (searchSubmit)="onSearchSubmit($event)"
+            placeholder="Suchen..."
+          ></app-search>
+        </div>
+
+        <!-- Right Section -->
+        <div class="right-section">
+          <!-- Notifications -->
+          <div class="notifications-section" *ngIf="config.showNotifications">
+            <app-notifications
+              (notificationClick)="onNotificationClick($event)"
+            ></app-notifications>
+          </div>
+
+          <!-- User Menu -->
+          <div class="user-menu-section" *ngIf="config.showUserMenu">
+            <app-user-menu
+              (menuAction)="onUserMenuAction($event)"
+            ></app-user-menu>
+          </div>
+        </div>
+      </div>
+
+    </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile Menu -->
+  <app-mobile-menu
+    *ngIf="mobileMenuOpen"
+    [showSearch]="config.showSearch ?? true"
+    [showNotifications]="config.showNotifications ?? true"
+    [showUserMenu]="config.showUserMenu ?? true"
+    (searchSubmit)="onSearchSubmit($event)"
+    (notificationClick)="onNotificationClick($event)"
+    (userMenuAction)="onUserMenuAction($event)"
+    (close)="toggleMobileMenu()"
+  ></app-mobile-menu>
+</header>

@@ -1,0 +1,81 @@
+{
+  "color": {
+    "primitive": {
+      "orange": {
+        "400": { "value": "#F6B154", "description": "Helles Orange für Akzente" },
+        "500": { "value": "#F99600", "description": "ProSolarTec Hauptorange" },
+        "600": { "value": "#e5a54e", "description": "Orange Hover-State" }
+      },
+      "blue": {
+        "100": { "value": "#DBEAFE", "description": "Info Background Light Mode" },
+        "500": { "value": "#3B82F6", "description": "Info Standard" },
+        "700": { "value": "#1C3661", "description": "ProSolarTec Hauptblau" },
+        "800": { "value": "#1E3A8A", "description": "Info Background Dark Mode" },
+        "900": { "value": "#075985", "description": "Info Text Dark WCAG AA" }
+      },
+      "gray": {
+        "50": { "value": "#FAFAFA", "description": "Hellster Grauton" },
+        "100": { "value": "#F9FAFB", "description": "Sehr helles Grau" },
+        "200": { "value": "#F3F4F6", "description": "Helles Grau" },
+        "300": { "value": "#E5E7EB", "description": "Mittelhelles Grau" },
+        "400": { "value": "#D1D5DB", "description": "Mittleres Grau" },
+        "500": { "value": "#9CA3AF", "description": "Neutrales Grau" },
+        "600": { "value": "#6B7280", "description": "Dunkles Grau" },
+        "700": { "value": "#4B5563", "description": "Sehr dunkles Grau" },
+        "800": { "value": "#374151", "description": "Fast schwarz" },
+        "900": { "value": "#212529", "description": "Textfarbe dunkel" },
+        "950": { "value": "#111827", "description": "Tiefes Schwarz" }
+      },
+      "black": {
+        "base": { "value": "#1A1A1A", "description": "Dark Mode Haupthintergrund" },
+        "light": { "value": "#222222", "description": "Dark Mode Section" },
+        "lighter": { "value": "#2A2A2A", "description": "Dark Mode Card" }
+      },
+      "white": {
+        "base": { "value": "#FFFFFF", "description": "Reines Weiß" },
+        "dark": { "value": "#E2E2E2", "description": "Dark Mode Text" }
+      },
+      "green": {
+        "50": { "value": "#DCFCE7", "description": "Success Background Very Light" },
+        "100": { "value": "#D1FAE5", "description": "Success Background Light" },
+        "400": { "value": "#34D399", "description": "Success Text Dark Mode" },
+        "500": { "value": "#10B981", "description": "Success Standard" },
+        "700": { "value": "#065F46", "description": "Success Text Light Mode WCAG AA" },
+        "800": { "value": "#064E3B", "description": "Success Background Dark Mode" },
+        "900": { "value": "#065F46", "description": "Success Text Dark WCAG AA" }
+      },
+      "red": {
+        "100": { "value": "#FEE2E2", "description": "Error Background Light" },
+        "400": { "value": "#FCA5A5", "description": "Error Text Dark Mode" },
+        "500": { "value": "#EF4444", "description": "Error Standard" },
+        "700": { "value": "#991B1B", "description": "Error Text Light Mode WCAG AA" },
+        "800": { "value": "#7F1D1D", "description": "Error Background Dark Mode" },
+        "900": { "value": "#991B1B", "description": "Error Text Dark WCAG AA" }
+      },
+      "amber": {
+        "50": { "value": "#FEF9C3", "description": "Warning Background Very Light" },
+        "100": { "value": "#FEF3C7", "description": "Warning Background Light" },
+        "400": { "value": "#FCD34D", "description": "Warning Text Dark Mode" },
+        "500": { "value": "#F59E0B", "description": "Warning Standard" },
+        "700": { "value": "#92400E", "description": "Warning Text Light Mode WCAG AA" },
+        "800": { "value": "#78350F", "description": "Warning Background Dark Mode" },
+        "900": { "value": "#92400E", "description": "Warning Text Dark WCAG AA" }
+      }
+    },
+    "semantic": {
+      "primary": { 
+        "value": "{color.primitive.orange.500}", 
+        "description": "Primäre Markenfarbe" 
+      },
+      "primary-hover": { 
+        "value": "{color.primitive.orange.600}", 
+        "description": "Primär Hover-State" 
+      },
+      "primary-light": { 
+        "value": "{color.primitive.orange.400}", 
+        "description": "Primär hell" 
+      },
+      "secondary": { 
+        "value": "{color.primitive.blue.700}", 
+        "description": "Sekundäre Markenfarbe" 
+      }

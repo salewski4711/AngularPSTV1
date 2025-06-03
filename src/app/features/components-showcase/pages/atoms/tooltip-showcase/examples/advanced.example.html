@@ -1,0 +1,65 @@
+<div class="space-y-6">
+  <!-- Delayed tooltip -->
+  <div class="flex items-center gap-4">
+    <button 
+      class="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700"
+      appTooltip="This tooltip appears after 1 second"
+      [tooltipDelay]="1000"
+    >
+      Delayed Tooltip (1s)
+    </button>
+    
+    <span class="text-sm text-gray-600 dark:text-gray-400">
+      Hover and wait 1 second
+    </span>
+  </div>
+
+  <!-- Long content with max width -->
+  <div class="flex items-center gap-4">
+    <button 
+      class="px-4 py-2 bg-orange-600 text-white rounded hover:bg-orange-700"
+      appTooltip="This is a very long tooltip content that demonstrates how the max width property works. The tooltip will wrap the text when it exceeds the maximum width."
+      [tooltipMaxWidth]="300"
+    >
+      Long Content (300px max)
+    </button>
+    
+    <button 
+      class="px-4 py-2 bg-orange-600 text-white rounded hover:bg-orange-700"
+      appTooltip="This is a very long tooltip content that demonstrates how the max width property works. The tooltip will wrap the text when it exceeds the maximum width."
+      [tooltipMaxWidth]="150"
+    >
+      Long Content (150px max)
+    </button>
+  </div>
+
+  <!-- Multiple triggers -->
+  <div class="flex items-center gap-4">
+    <button 
+      class="px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700"
+      appTooltip="This tooltip works with both hover and click"
+      [tooltipTrigger]="['hover', 'click']"
+    >
+      Hover or Click
+    </button>
+    
+    <span class="text-sm text-gray-600 dark:text-gray-400">
+      Multiple trigger modes
+    </span>
+  </div>
+
+  <!-- Disabled tooltip -->
+  <div class="flex items-center gap-4">
+    <button 
+      class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700"
+      appTooltip="This tooltip is disabled"
+      [tooltipDisabled]="true"
+    >
+      Disabled Tooltip
+    </button>
+    
+    <span class="text-sm text-gray-600 dark:text-gray-400">
+      Tooltip won't show
+    </span>
+  </div>
+</div>

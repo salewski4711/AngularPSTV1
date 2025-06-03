@@ -1,0 +1,23 @@
+<!-- Basic card skeleton -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+  <div>
+    <h4 class="text-sm font-medium text-gray-600 dark:text-gray-400 mb-3">Basic Card</h4>
+    <app-skeleton type="card" [showCardFooter]="false"></app-skeleton>
+  </div>
+  
+  <div>
+    <h4 class="text-sm font-medium text-gray-600 dark:text-gray-400 mb-3">Card with Footer</h4>
+    <app-skeleton type="card" [showCardFooter]="true"></app-skeleton>
+  </div>
+</div>
+
+<!-- Custom card skeleton -->
+<div class="mt-6">
+  <h4 class="text-sm font-medium text-gray-600 dark:text-gray-400 mb-3">Custom Card Content</h4>
+  <app-skeleton 
+    type="card" 
+    [showCardHeader]="true"
+    [showCardFooter]="true"
+    [cardContentLines]="6"
+  ></app-skeleton>
+</div>

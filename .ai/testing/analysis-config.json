@@ -1,0 +1,62 @@
+{
+  "analysis": {
+    "version": "1.0.0",
+    "timestamp": "2024-01-01",
+    "project": "ProSolarTec Angular Application",
+    "rules": {
+      "typescript": {
+        "noAny": true,
+        "strictNullChecks": true,
+        "noImplicitAny": true,
+        "strictPropertyInitialization": true
+      },
+      "angular": {
+        "preferStandalone": true,
+        "preferOnPush": true,
+        "preferReactiveForms": true,
+        "requireTrackBy": true,
+        "requireAriaLabels": true
+      },
+      "complexity": {
+        "maxCyclomaticComplexity": 10,
+        "maxLinesPerFunction": 20,
+        "maxLinesPerFile": 300,
+        "maxParameters": 4
+      },
+      "testing": {
+        "minCoverage": 80,
+        "requireUnitTests": true,
+        "requireIntegrationTests": false
+      }
+    },
+    "patterns": {
+      "required": [
+        "standalone-components",
+        "smart-dumb-pattern",
+        "dependency-injection",
+        "reactive-forms",
+        "observable-patterns"
+      ],
+      "preferred": [
+        "signals",
+        "computed-properties",
+        "content-projection",
+        "custom-validators",
+        "error-handling"
+      ],
+      "avoid": [
+        "any-type",
+        "direct-dom-manipulation",
+        "nested-subscriptions",
+        "memory-leaks",
+        "circular-dependencies"
+      ]
+    },
+    "directories": [
+      "src/app/components",
+      "src/app/shared/components-beta",
+      "src/app/pages",
+      "src/app/shared"
+    ]
+  }
+}

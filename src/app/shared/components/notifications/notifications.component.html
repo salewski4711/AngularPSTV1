@@ -1,0 +1,149 @@
+<div class="relative">
+  <!-- Notification Bell Button -->
+  <button
+    type="button"
+    (click)="toggleDropdown()"
+    class="relative p-2 text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white transition-colors"
+    [attr.aria-label]="'Benachrichtigungen (' + unreadCount() + ' ungelesen)'"
+    [attr.aria-expanded]="isOpen()"
+  >
+    <app-icon name="bell" [size]="20"></app-icon>
+    
+    <!-- Badge for unread count -->
+    @if (unreadCount() > 0) {
+      <app-badge
+        variant="filled"
+        color="error"
+        size="xs"
+        shape="pill"
+        position="absolute"
+        class="absolute -top-1 -right-1 min-w-[20px] h-5 flex items-center justify-center"
+      >
+        {{ unreadCount() > 99 ? '99+' : unreadCount() }}
+      </app-badge>
+    }
+  </button>
+
+  <!-- Notifications Dropdown -->
+  @if (isOpen()) {
+    <div
+      @dropdown
+      #dropdownRef
+      class="absolute right-0 mt-2 w-96 bg-white dark:bg-gray-800 rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 z-50"
+      role="menu"
+      aria-orientation="vertical"
+      aria-labelledby="notifications-menu"
+    >
+      <!-- Header -->
+      <div class="px-4 py-3 border-b border-gray-200 dark:border-gray-700">
+        <div class="flex items-center justify-between">
+          <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+            Benachrichtigungen
+          </h3>
+          <div class="flex items-center gap-2">
+            @if (unreadCount() > 0) {
+              <button
+                type="button"
+                (click)="markAllAsRead()"
+                class="text-sm text-primary hover:text-primary-dark transition-colors"
+              >
+                Alle als gelesen markieren
+              </button>
+            }
+          </div>
+        </div>
+      </div>
+
+      <!-- Notifications List -->
+      <div class="max-h-96 overflow-y-auto">
+        @if (hasNotifications()) {
+          @for (notification of notifications(); track notification.id) {
+            <div
+              [class]="notificationClasses(notification)"
+              (click)="markAsRead(notification)"
+              role="menuitem"
+            >
+              <div class="flex items-start gap-3">
+                <!-- Icon -->
+                <div [class]="'flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center ' + getNotificationStyles(notification.type)">
+                  <app-icon 
+                    [name]="getNotificationIcon(notification.type)" 
+                    [size]="20"
+                  ></app-icon>
+                </div>
+
+                <!-- Content -->
+                <div class="flex-1 min-w-0">
+                  <div class="flex items-start justify-between gap-2">
+                    <div class="flex-1">
+                      <p class="text-sm font-medium text-gray-900 dark:text-white">
+                        {{ notification.title }}
+                      </p>
+                      @if (notification.message) {
+                        <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
+                          {{ notification.message }}
+                        </p>
+                      }
+                      <p class="mt-1 text-xs text-gray-500 dark:text-gray-500">
+                        {{ getRelativeTime(notification.timestamp) }}
+                      </p>
+                      
+                      <!-- Actions -->
+                      @if (notification.actions && notification.actions.length > 0) {
+                        <div class="mt-2 flex items-center gap-2">
+                          @for (action of notification.actions; track action.label) {
+                            <button
+                              type="button"
+                              (click)="executeAction($event, action.action)"
+                              class="text-xs font-medium text-primary hover:text-primary-dark transition-colors"
+                            >
+                              {{ action.label }}
+                            </button>
+                          }
+                        </div>
+                      }
+                    </div>
+
+                    <!-- Dismiss Button -->
+                    <button
+                      type="button"
+                      (click)="dismissNotification($event, notification.id)"
+                      class="flex-shrink-0 p-1 text-gray-400 hover:text-gray-600 dark:text-gray-500 dark:hover:text-gray-300 transition-colors"
+                      aria-label="Benachrichtigung entfernen"
+                    >
+                      <app-icon name="x" [size]="16"></app-icon>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          }
+        } @else {
+          <div class="px-4 py-12 text-center">
+            <app-icon 
+              name="bell" 
+              [size]="48" 
+              cssClasses="mx-auto text-gray-300 dark:text-gray-600 mb-3"
+            ></app-icon>
+            <p class="text-sm text-gray-500 dark:text-gray-400">
+              Keine Benachrichtigungen vorhanden
+            </p>
+          </div>
+        }
+      </div>
+
+      <!-- Footer -->
+      @if (hasNotifications()) {
+        <div class="px-4 py-3 border-t border-gray-200 dark:border-gray-700">
+          <button
+            type="button"
+            (click)="clearAll()"
+            class="w-full text-center text-sm text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white transition-colors"
+          >
+            Alle Benachrichtigungen löschen
+          </button>
+        </div>
+      }
+    </div>
+  }
+</div>

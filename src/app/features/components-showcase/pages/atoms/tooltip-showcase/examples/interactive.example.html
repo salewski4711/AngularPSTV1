@@ -1,0 +1,89 @@
+<div class="space-y-6">
+  <!-- Icons with tooltips -->
+  <div class="flex items-center gap-4">
+    <div class="flex gap-2">
+      <button 
+        class="p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-700"
+        appTooltip="Edit item"
+        tooltipPosition="top"
+      >
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+        </svg>
+      </button>
+      
+      <button 
+        class="p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-700"
+        appTooltip="Delete item"
+        tooltipPosition="top"
+      >
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+        </svg>
+      </button>
+      
+      <button 
+        class="p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-700"
+        appTooltip="Share item"
+        tooltipPosition="top"
+      >
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m9.632 4.268C18.114 15.938 18 16.482 18 17c0 .482.114.938.316 1.342m0-2.684a3 3 0 110 2.684M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+        </svg>
+      </button>
+    </div>
+    
+    <span class="text-sm text-gray-600 dark:text-gray-400">
+      Icon buttons with tooltips
+    </span>
+  </div>
+
+  <!-- Form validation messages -->
+  <div class="space-y-4">
+    <div>
+      <label class="block text-sm font-medium mb-1">Email Address</label>
+      <input 
+        type="email"
+        class="w-full max-w-xs px-3 py-2 border border-red-500 rounded focus:outline-none focus:ring-2 focus:ring-red-500"
+        placeholder="Enter email"
+        appTooltip="Please enter a valid email address"
+        tooltipTrigger="focus"
+        tooltipPosition="right"
+      />
+    </div>
+    
+    <div>
+      <label class="block text-sm font-medium mb-1">Password</label>
+      <input 
+        type="password"
+        class="w-full max-w-xs px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+        placeholder="Enter password"
+        appTooltip="Password must be at least 8 characters long and contain uppercase, lowercase, and numbers"
+        tooltipTrigger="focus"
+        tooltipPosition="right"
+        [tooltipMaxWidth]="250"
+      />
+    </div>
+  </div>
+
+  <!-- Overflow test -->
+  <div class="border rounded p-4 overflow-x-auto">
+    <div class="flex gap-4 min-w-max">
+      <button 
+        class="px-4 py-2 bg-teal-600 text-white rounded hover:bg-teal-700"
+        appTooltip="This tooltip adjusts position near viewport edges"
+        tooltipPosition="auto"
+      >
+        Scroll Right →
+      </button>
+      <div class="w-96"></div>
+      <button 
+        class="px-4 py-2 bg-teal-600 text-white rounded hover:bg-teal-700"
+        appTooltip="This tooltip adjusts position near viewport edges"
+        tooltipPosition="auto"
+      >
+        Near Edge
+      </button>
+    </div>
+  </div>
+</div>

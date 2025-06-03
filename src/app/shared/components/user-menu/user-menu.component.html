@@ -1,0 +1,129 @@
+<div class="relative inline-block text-left">
+  <!-- Avatar Button -->
+  <button
+    type="button"
+    class="flex items-center text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary dark:focus:ring-offset-gray-800"
+    [attr.aria-expanded]="isOpen()"
+    aria-haspopup="true"
+    (click)="toggleMenu()"
+  >
+    <app-avatar
+      [name]="user.name"
+      [src]="user.avatar"
+      size="sm"
+      bgColor="bg-primary"
+      textColor="text-white"
+    ></app-avatar>
+  </button>
+
+  <!-- Dropdown Menu -->
+  <div
+    #dropdown
+    *ngIf="isOpen()"
+    class="origin-top-right absolute right-0 mt-2 w-64 rounded-lg shadow-lg bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5 focus:outline-none z-50"
+    role="menu"
+    aria-orientation="vertical"
+    tabindex="-1"
+  >
+    <!-- User Info Section -->
+    <div class="px-4 py-3 border-b border-gray-200 dark:border-gray-700">
+      <div class="flex items-center space-x-3">
+        <app-avatar
+          [name]="user.name"
+          [src]="user.avatar"
+          size="md"
+          bgColor="bg-primary"
+          textColor="text-white"
+        ></app-avatar>
+        <div class="flex-1 min-w-0">
+          <p class="text-sm font-medium text-gray-900 dark:text-white truncate">
+            {{ user.name }}
+          </p>
+          <p class="text-xs text-gray-500 dark:text-gray-400 truncate">
+            {{ user.email }}
+          </p>
+          <p *ngIf="user.role" class="text-xs text-gray-500 dark:text-gray-400 mt-0.5">
+            {{ user.role }}
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dark Mode Toggle -->
+    <div class="px-4 py-3 border-b border-gray-200 dark:border-gray-700">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center space-x-2">
+          <app-icon
+            [name]="isDarkMode() ? 'moon' : 'sun'"
+            [size]="16"
+            cssClasses="text-gray-500 dark:text-gray-400"
+          ></app-icon>
+          <span class="text-sm text-gray-700 dark:text-gray-200">
+            Dark Mode
+          </span>
+        </div>
+        <button
+          type="button"
+          role="switch"
+          [attr.aria-checked]="isDarkMode()"
+          (click)="toggleTheme()"
+          class="relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 dark:focus:ring-offset-gray-800"
+          [class.bg-primary]="isDarkMode()"
+          [class.bg-gray-200]="!isDarkMode()"
+        >
+          <span
+            aria-hidden="true"
+            class="pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out"
+            [class.translate-x-5]="isDarkMode()"
+            [class.translate-x-0]="!isDarkMode()"
+          ></span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Menu Items -->
+    <div class="py-1" role="none">
+      <button
+        *ngFor="let item of menuItems; let i = index"
+        type="button"
+        [class]="getMenuItemClasses(item, i)"
+        role="menuitem"
+        tabindex="-1"
+        (click)="handleMenuItemClick(item)"
+        (mouseenter)="focusedIndex.set(i)"
+      >
+        <app-icon
+          *ngIf="item.icon"
+          [name]="item.icon"
+          [size]="16"
+          cssClasses="mr-3"
+        ></app-icon>
+        <span>{{ item.label }}</span>
+      </button>
+    </div>
+
+    <!-- Divider -->
+    <div [class]="getDividerClasses()"></div>
+
+    <!-- Bottom Menu Items -->
+    <div class="py-1" role="none">
+      <button
+        *ngFor="let item of bottomMenuItems; let i = index"
+        type="button"
+        [class]="getMenuItemClasses(item, menuItems.length + i)"
+        role="menuitem"
+        tabindex="-1"
+        (click)="handleMenuItemClick(item)"
+        (mouseenter)="focusedIndex.set(menuItems.length + i)"
+      >
+        <app-icon
+          *ngIf="item.icon"
+          [name]="item.icon"
+          [size]="16"
+          cssClasses="mr-3"
+        ></app-icon>
+        <span>{{ item.label }}</span>
+      </button>
+    </div>
+  </div>
+</div>

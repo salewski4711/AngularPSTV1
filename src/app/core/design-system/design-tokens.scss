@@ -1,0 +1,78 @@
+/**
+ * CSS Custom Properties for Design Tokens
+ * Auto-generated from design-tokens.ts
+ */
+
+:root {
+  // Colors
+  --color-primary-50: #FFF7ED;
+  --color-primary-100: #FFEDD5;
+  --color-primary-200: #FED7AA;
+  --color-primary-300: #FDBA74;
+  --color-primary-400: #FB923C;
+  --color-primary-500: #F99600;
+  --color-primary-600: #EA580C;
+  --color-primary-700: #C2410C;
+  --color-primary-800: #9A3412;
+  --color-primary-900: #7C2D12;
+  
+  --color-secondary-50: #EFF6FF;
+  --color-secondary-100: #DBEAFE;
+  --color-secondary-200: #BFDBFE;
+  --color-secondary-300: #93C5FD;
+  --color-secondary-400: #60A5FA;
+  --color-secondary-500: #1C3661;
+  --color-secondary-600: #1E40AF;
+  --color-secondary-700: #1D4ED8;
+  --color-secondary-800: #1E3A8A;
+  --color-secondary-900: #1E3A8A;
+  
+  // Semantic colors
+  --color-background: #FFFFFF;
+  --color-surface: #FAFAFA;
+  --color-text-primary: #171717;
+  --color-text-secondary: #525252;
+  --color-text-tertiary: #737373;
+  --color-border: #E5E5E5;
+  
+  // Spacing
+  --spacing-xs: 0.5rem;   // 8px
+  --spacing-sm: 1rem;     // 16px
+  --spacing-md: 1.5rem;   // 24px
+  --spacing-lg: 2rem;     // 32px
+  --spacing-xl: 3rem;     // 48px
+  
+  // Typography
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.25rem;
+  
+  // Radius
+  --radius-sm: 0.125rem;
+  --radius-base: 0.25rem;
+  --radius-md: 0.375rem;
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.75rem;
+  
+  // Shadows
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-base: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  
+  // Transitions
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-base: 200ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+// Dark theme overrides
+.dark {
+  --color-background: #171717;
+  --color-surface: #262626;
+  --color-text-primary: #FAFAFA;
+  --color-text-secondary: #D4D4D4;
+  --color-text-tertiary: #A3A3A3;
+  --color-border: #404040;
+}

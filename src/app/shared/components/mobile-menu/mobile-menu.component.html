@@ -1,0 +1,130 @@
+<!-- Backdrop -->
+<div 
+  class="mobile-menu-backdrop"
+  [@fadeIn]="isOpen ? 'open' : 'closed'"
+  (click)="closeMenu()"
+  [class.pointer-events-none]="!isOpen">
+</div>
+
+<!-- Menu Container -->
+<div 
+  class="mobile-menu-container"
+  [@slideIn]="isOpen ? 'open' : 'closed'"
+  [attr.aria-hidden]="!isOpen">
+  
+  <!-- Header -->
+  <div class="mobile-menu-header">
+    <div class="logo-section">
+      <img src="/logos/pst_weiss.svg" alt="ProSolarTec" class="logo">
+    </div>
+    <button 
+      type="button"
+      class="close-button"
+      (click)="closeMenu()"
+      [attr.aria-label]="'Menü schließen'">
+      <app-icon name="x" [size]="24"></app-icon>
+    </button>
+  </div>
+
+  <!-- Search -->
+  <div class="mobile-menu-search">
+    <button 
+      type="button"
+      class="search-button"
+      (click)="onMobileSearch()">
+      <app-icon name="search" [size]="20"></app-icon>
+      <span>Suchen...</span>
+    </button>
+  </div>
+
+  <!-- Navigation -->
+  <nav class="mobile-menu-nav">
+    <ul class="menu-list">
+      <li *ngFor="let item of menuItems; let i = index" class="menu-item">
+        <button
+          type="button"
+          class="menu-button"
+          (click)="navigate(item)"
+          [class.has-children]="!!item.children">
+          
+          <span class="menu-button-content">
+            <app-icon 
+              *ngIf="item.icon" 
+              [name]="item.icon" 
+              [size]="20"
+              class="menu-icon">
+            </app-icon>
+            <span class="menu-label">{{ item.label }}</span>
+            <app-badge 
+              *ngIf="item.badge"
+              color="primary"
+              variant="filled"
+              size="sm"
+              class="menu-badge">
+              {{ item.badge }}
+            </app-badge>
+          </span>
+          
+          <app-icon 
+            *ngIf="item.children"
+            name="chevron-down"
+            [size]="16"
+            class="expand-icon"
+            [class.expanded]="isExpanded(i)">
+          </app-icon>
+        </button>
+
+        <!-- Submenu -->
+        <ul 
+          *ngIf="item.children"
+          class="submenu"
+          [@expandCollapse]="isExpanded(i) ? 'expanded' : 'collapsed'">
+          <li *ngFor="let child of item.children" class="submenu-item">
+            <a
+              [routerLink]="child.route"
+              class="submenu-link"
+              (click)="closeMenu()">
+              {{ child.label }}
+            </a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- Footer -->
+  <div class="mobile-menu-footer" *ngIf="user">
+    <div class="user-info">
+      <app-avatar 
+        [name]="user.name"
+        [src]="user.avatar"
+        size="sm">
+      </app-avatar>
+      <div class="user-details">
+        <div class="user-name">{{ user.name }}</div>
+        <div class="user-email">{{ user.email }}</div>
+      </div>
+    </div>
+    
+    <div class="footer-actions">
+      <button 
+        type="button"
+        class="theme-toggle"
+        (click)="themeService.toggleTheme()"
+        [attr.aria-label]="'Theme wechseln'">
+        <app-icon 
+          [name]="themeService.isDarkMode() ? 'sun' : 'moon'" 
+          [size]="20">
+        </app-icon>
+      </button>
+      
+      <button 
+        type="button"
+        class="logout-button"
+        (click)="logout()">
+        <app-icon name="logout" [size]="20"></app-icon>
+        <span>Abmelden</span>
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,24 @@
+<!-- Removable tags -->
+<app-tag 
+  color="primary" 
+  [removable]="true"
+  (remove)="handleRemove('Angular')"
+>
+  Angular
+</app-tag>
+
+<app-tag 
+  color="info" 
+  [removable]="true"
+  (remove)="handleRemove('TypeScript')"
+>
+  TypeScript
+</app-tag>
+
+<app-tag 
+  variant="outline"
+  [removable]="true"
+  (remove)="handleRemove('Filter')"
+>
+  Price: $0-$100
+</app-tag>

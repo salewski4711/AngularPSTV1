@@ -1,0 +1,39 @@
+<!-- Different thickness options -->
+<div class="space-y-6">
+  <div>
+    <p class="text-sm text-gray-600 mb-2">Thin (1px - default)</p>
+    <app-divider thickness="thin"></app-divider>
+  </div>
+
+  <div>
+    <p class="text-sm text-gray-600 mb-2">Medium (2px)</p>
+    <app-divider thickness="medium"></app-divider>
+  </div>
+
+  <div>
+    <p class="text-sm text-gray-600 mb-2">Thick (4px)</p>
+    <app-divider thickness="thick"></app-divider>
+  </div>
+
+  <!-- Different thicknesses with colors -->
+  <div>
+    <p class="text-sm text-gray-600 mb-2">Thickness with colors</p>
+    <app-divider thickness="thin" color="primary" class="mb-3"></app-divider>
+    <app-divider thickness="medium" color="secondary" class="mb-3"></app-divider>
+    <app-divider thickness="thick" color="custom" customColor="#10b981"></app-divider>
+  </div>
+
+  <!-- Vertical dividers with different thicknesses -->
+  <div>
+    <p class="text-sm text-gray-600 mb-2">Vertical dividers</p>
+    <div class="flex items-center gap-4 h-16">
+      <span>Thin</span>
+      <app-divider orientation="vertical" thickness="thin"></app-divider>
+      <span>Medium</span>
+      <app-divider orientation="vertical" thickness="medium"></app-divider>
+      <span>Thick</span>
+      <app-divider orientation="vertical" thickness="thick"></app-divider>
+      <span>End</span>
+    </div>
+  </div>
+</div>
