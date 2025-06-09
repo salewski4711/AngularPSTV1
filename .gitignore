@@ -57,3 +57,4 @@ lerna-debug.log*
 
 # Yarn Integrity file
 .yarn-integrity
+/git-credential-manager/

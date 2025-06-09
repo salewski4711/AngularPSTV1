@@ -7,9 +7,9 @@ import { TabsComponent, Tab } from '../../../../../shared/components/tabs';
   standalone: true,
   imports: [CommonModule, TabsComponent],
   template: `
-    <div class="showcase-container">
-      <h1>Tabs Component</h1>
-      <p class="lead">Navigation component for organizing content into tabbed sections.</p>
+    <div class="p-8 max-w-6xl mx-auto">
+      <h1 class="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-4">Tabs Component</h1>
+      <p class="text-lg text-gray-600 dark:text-gray-400 mb-8">Navigation component for organizing content into tabbed sections.</p>
 
       <!-- Line Variant -->
       <section class="showcase-section">
@@ -331,53 +331,7 @@ import { TabsComponent, Tab } from '../../../../../shared/components/tabs';
       </section>
     </div>
   `,
-  styles: [`
-    .showcase-container {
-      padding: 2rem;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    h1 {
-      @apply text-3xl font-bold text-gray-900 dark:text-gray-100 mb-4;
-    }
-
-    h2 {
-      @apply text-xl font-semibold text-gray-800 dark:text-gray-200 mb-3;
-    }
-
-    h3 {
-      @apply text-lg font-medium text-gray-700 dark:text-gray-300 mb-2;
-    }
-
-    .lead {
-      @apply text-lg text-gray-600 dark:text-gray-400 mb-8;
-    }
-
-    .showcase-section {
-      @apply mb-12;
-    }
-
-    .example-container {
-      @apply border border-gray-200 dark:border-gray-700 rounded-lg p-6 mb-4;
-    }
-
-    .props-table {
-      @apply overflow-x-auto;
-    }
-
-    .props-table table {
-      @apply w-full text-sm;
-    }
-
-    .props-table th {
-      @apply text-left font-medium text-gray-700 dark:text-gray-300 p-3 border-b border-gray-200 dark:border-gray-700;
-    }
-
-    .props-table td {
-      @apply p-3 border-b border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-400;
-    }
-  `]
+  styles: []
 })
 export class TabsShowcaseComponent {
   activeTab = 'overview';
