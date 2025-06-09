@@ -1,13 +1,13 @@
 <!-- Router links for internal navigation -->
-<app-link routerLink="/home">Home</app-link>
+<pst-link routerLink="/home">Home</pst-link>
 
-<app-link [routerLink]="['/customers', 'list']" variant="primary">
+<pst-link [routerLink]="['/customers', 'list']" variant="primary">
   Customer List
-</app-link>
+</pst-link>
 
-<app-link 
+<pst-link 
   routerLink="/products" 
   [queryParams]="{category: 'solar', page: 1}"
   fragment="featured">
   Products with Query Params
-</app-link>
+</pst-link>

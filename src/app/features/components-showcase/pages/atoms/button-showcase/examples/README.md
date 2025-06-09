@@ -14,7 +14,7 @@ Each example file should contain valid Angular template code:
 
 ```html
 <!-- Description of the example -->
-<app-button variant="primary">Button Text</app-button>
+<pst-button variant="primary">Button Text</pst-button>
 ```
 
 ## Available examples

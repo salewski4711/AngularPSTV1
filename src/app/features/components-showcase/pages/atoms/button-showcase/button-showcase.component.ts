@@ -5,7 +5,7 @@ import { CodeBlockComponent } from '../../../shared/components/code-block.compon
 import { PlaygroundComponent, PlaygroundConfig } from '../../../shared/components/playground.component';
 import * as examples from './examples';
 @Component({
-  selector: 'app-button-showcase',
+  selector: 'pst-button-showcase',
   standalone: true,
   imports: [
     CommonModule, 
@@ -85,10 +85,10 @@ import * as examples from './examples';
                 <h3 class="text-lg font-medium text-gray-900 dark:text-gray-100 mb-4">
                   Import
                 </h3>
-                <app-code-block
+                <pst-code-block
                   [code]="importCode"
                   language="typescript"
-                ></app-code-block>
+                ></pst-code-block>
               </div>
             </section>
           }
@@ -111,19 +111,19 @@ import * as examples from './examples';
                 
                 <div class="bg-gray-50 dark:bg-gray-900 p-8 rounded-lg mb-4">
                   <div class="flex flex-wrap gap-4">
-                    <app-button variant="primary">Primary</app-button>
-                    <app-button variant="secondary">Secondary</app-button>
-                    <app-button variant="outline-primary">Outline</app-button>
-                    <app-button variant="tertiary">Tertiary</app-button>
-                    <app-button variant="ghost">Ghost</app-button>
-                    <app-button variant="danger">Danger</app-button>
+                    <pst-button variant="primary">Primary</pst-button>
+                    <pst-button variant="secondary">Secondary</pst-button>
+                    <pst-button variant="outline-primary">Outline</pst-button>
+                    <pst-button variant="tertiary">Tertiary</pst-button>
+                    <pst-button variant="ghost">Ghost</pst-button>
+                    <pst-button variant="danger">Danger</pst-button>
                   </div>
                 </div>
                 
-                <app-code-block
+                <pst-code-block
                   [code]="variantsCode"
                   language="html"
-                ></app-code-block>
+                ></pst-code-block>
               </div>
 
               <!-- Sizes -->
@@ -137,18 +137,18 @@ import * as examples from './examples';
                 
                 <div class="bg-gray-50 dark:bg-gray-900 p-8 rounded-lg mb-4">
                   <div class="flex flex-wrap items-center gap-4">
-                    <app-button size="xs">Extra Small</app-button>
-                    <app-button size="sm">Small</app-button>
-                    <app-button size="md">Medium</app-button>
-                    <app-button size="lg">Large</app-button>
-                    <app-button size="xl">Extra Large</app-button>
+                    <pst-button size="xs">Extra Small</pst-button>
+                    <pst-button size="sm">Small</pst-button>
+                    <pst-button size="md">Medium</pst-button>
+                    <pst-button size="lg">Large</pst-button>
+                    <pst-button size="xl">Extra Large</pst-button>
                   </div>
                 </div>
                 
-                <app-code-block
+                <pst-code-block
                   [code]="sizesCode"
                   language="html"
-                ></app-code-block>
+                ></pst-code-block>
               </div>
 
               <!-- States -->
@@ -162,17 +162,17 @@ import * as examples from './examples';
                 
                 <div class="bg-gray-50 dark:bg-gray-900 p-8 rounded-lg mb-4">
                   <div class="flex flex-wrap gap-4">
-                    <app-button>Normal</app-button>
-                    <app-button [disabled]="true">Disabled</app-button>
-                    <app-button [loading]="true">Loading</app-button>
-                    <app-button [loading]="true" loadingText="Saving...">Loading with Text</app-button>
+                    <pst-button>Normal</pst-button>
+                    <pst-button [disabled]="true">Disabled</pst-button>
+                    <pst-button [loading]="true">Loading</pst-button>
+                    <pst-button [loading]="true" loadingText="Saving...">Loading with Text</pst-button>
                   </div>
                 </div>
                 
-                <app-code-block
+                <pst-code-block
                   [code]="statesCode"
                   language="html"
-                ></app-code-block>
+                ></pst-code-block>
               </div>
 
               <!-- With Icons -->
@@ -186,17 +186,17 @@ import * as examples from './examples';
                 
                 <div class="bg-gray-50 dark:bg-gray-900 p-8 rounded-lg mb-4">
                   <div class="flex flex-wrap gap-4">
-                    <app-button icon="save">Save</app-button>
-                    <app-button icon="download" iconPosition="right">Download</app-button>
-                    <app-button icon="trash" variant="danger">Delete</app-button>
-                    <app-button icon="edit" [iconOnly]="true" variant="ghost"></app-button>
+                    <pst-button icon="save">Save</pst-button>
+                    <pst-button icon="download" iconPosition="right">Download</pst-button>
+                    <pst-button icon="trash" variant="danger">Delete</pst-button>
+                    <pst-button icon="edit" [iconOnly]="true" variant="ghost"></pst-button>
                   </div>
                 </div>
                 
-                <app-code-block
+                <pst-code-block
                   [code]="iconsCode"
                   language="html"
-                ></app-code-block>
+                ></pst-code-block>
               </div>
 
               <!-- Full Width -->
@@ -210,15 +210,15 @@ import * as examples from './examples';
                 
                 <div class="bg-gray-50 dark:bg-gray-900 p-8 rounded-lg mb-4">
                   <div class="max-w-md mx-auto space-y-4">
-                    <app-button [fullWidth]="true">Full Width Primary</app-button>
-                    <app-button [fullWidth]="true" variant="secondary">Full Width Secondary</app-button>
+                    <pst-button [fullWidth]="true">Full Width Primary</pst-button>
+                    <pst-button [fullWidth]="true" variant="secondary">Full Width Secondary</pst-button>
                   </div>
                 </div>
                 
-                <app-code-block
+                <pst-code-block
                   [code]="fullWidthCode"
                   language="html"
-                ></app-code-block>
+                ></pst-code-block>
               </div>
             </section>
           }
@@ -233,9 +233,9 @@ import * as examples from './examples';
                 Experiment with different button configurations in real-time.
               </p>
               
-              <app-playground
+              <pst-playground
                 [config]="playgroundConfig"
-              ></app-playground>
+              ></pst-playground>
             </section>
           }
           
@@ -280,7 +280,7 @@ import * as examples from './examples';
                             {{ prop.type }}
                           </td>
                           <td class="px-6 py-4 whitespace-nowrap text-sm font-mono text-gray-500 dark:text-gray-400">
-                            {{ prop.default }}
+                            {{ prop.defaultValue }}
                           </td>
                           <td class="px-6 py-4 text-sm text-gray-500 dark:text-gray-400">
                             {{ prop.description }}
@@ -419,8 +419,8 @@ export class ButtonShowcaseComponent {
   sizesCode = examples.sizesExample;
   statesCode = examples.statesExample;
   iconsCode = examples.withIconsExample;
-  fullWidthCode = `<app-button [fullWidth]="true">Full Width Primary</app-button>
-<app-button [fullWidth]="true" variant="secondary">Full Width Secondary</app-button>`;
+  fullWidthCode = `<pst-button [fullWidth]="true">Full Width Primary</pst-button>
+<pst-button [fullWidth]="true" variant="secondary">Full Width Secondary</pst-button>`;
 
   playgroundConfig: PlaygroundConfig = {
     component: ButtonComponent,
@@ -515,9 +515,9 @@ export class ButtonShowcaseComponent {
       
       const attributesStr = attributes.length > 0 ? '\n  ' + attributes.join('\n  ') : '';
       
-      return `<app-button${attributesStr}>
+      return `<pst-button${attributesStr}>
   ${props.iconOnly ? '' : 'Button Text'}
-</app-button>`;
+</pst-button>`;
     }
   };
 
@@ -525,79 +525,79 @@ export class ButtonShowcaseComponent {
     {
       name: 'variant',
       type: 'ButtonVariant',
-      default: "'primary'",
+      defaultValue: 'primary',
       description: 'The visual style of the button'
     },
     {
       name: 'size',
       type: 'ButtonSize',
-      default: "'md'",
+      defaultValue: "'md'",
       description: 'The size of the button'
     },
     {
       name: 'type',
       type: "'button' | 'submit' | 'reset'",
-      default: "'button'",
+      defaultValue: "'button'",
       description: 'The HTML button type attribute'
     },
     {
       name: 'disabled',
       type: 'boolean',
-      default: 'false',
+      defaultValue: 'false',
       description: 'Whether the button is disabled'
     },
     {
       name: 'loading',
       type: 'boolean',
-      default: 'false',
+      defaultValue: 'false',
       description: 'Whether to show loading spinner'
     },
     {
       name: 'loadingText',
       type: 'string',
-      default: "''",
+      defaultValue: "''",
       description: 'Text to display during loading state'
     },
     {
       name: 'spinnerType',
       type: "'circle' | 'dots' | 'bars'",
-      default: "'circle'",
+      defaultValue: "'circle'",
       description: 'Type of loading spinner'
     },
     {
       name: 'fullWidth',
       type: 'boolean',
-      default: 'false',
+      defaultValue: 'false',
       description: 'Whether button should fill container width'
     },
     {
       name: 'icon',
       type: 'IconName',
-      default: 'undefined',
+      defaultValue: 'undefined',
       description: 'Icon to display in the button'
     },
     {
       name: 'iconPosition',
       type: "'left' | 'right'",
-      default: "'left'",
+      defaultValue: "'left'",
       description: 'Position of the icon relative to text'
     },
     {
       name: 'iconOnly',
       type: 'boolean',
-      default: 'false',
+      defaultValue: 'false',
       description: 'Whether to show only icon without text'
     },
     {
       name: 'ariaLabel',
       type: 'string',
-      default: 'undefined',
+      defaultValue: 'undefined',
       description: 'Accessible label for screen readers'
     },
     {
       name: 'ripple',
       type: 'boolean',
-      default: 'false',
+      defaultValue: 'false',
       description: 'Whether to show ripple effect on click'
     },
   ];

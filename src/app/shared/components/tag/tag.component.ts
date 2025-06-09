@@ -9,14 +9,14 @@ export type TagSize = 'xs' | 'sm' | 'md' | 'lg';
 export type TagShape = 'rounded' | 'pill' | 'square';
 
 @Component({
-  selector: 'app-tag',
+  selector: 'pst-tag',
   standalone: true,
   imports: [CommonModule, IconComponent],
   template: `
     <span [class]="tagClasses()">
       <!-- Leading Icon -->
       @if (leadingIcon) {
-        <app-icon 
+        <pst-icon 
           [name]="leadingIcon" 
           [size]="iconSize()"
           [cssClasses]="iconClasses()"
@@ -30,7 +30,7 @@ export type TagShape = 'rounded' | 'pill' | 'square';
       
       <!-- Trailing Icon -->
       @if (trailingIcon) {
-        <app-icon 
+        <pst-icon 
           [name]="trailingIcon" 
           [size]="iconSize()"
           [cssClasses]="iconClasses('trailing')"

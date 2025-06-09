@@ -6,7 +6,7 @@ export type DividerVariant = 'solid' | 'dashed' | 'dotted';
 export type DividerSpacing = 'sm' | 'md' | 'lg';
 
 @Component({
-  selector: 'app-divider',
+  selector: 'pst-divider',
   standalone: true,
   imports: [CommonModule],
   template: `

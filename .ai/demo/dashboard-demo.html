@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Demo - ProSolarTec Style</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f5f5f5;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            font-size: 28px;
+            margin-bottom: 30px;
+            color: #333;
+        }
+        
+        /* HAUPTDASHBOARD STYLES */
+        .theme-section {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 24px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .section-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 20px;
+            padding-left: 4px;
+        }
+        
+        /* Widget Row */
+        .widget-row {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        
+        /* Individual Widget Card - Rechteckig! */
+        .widget-card {
+            background: #f8f8f8;
+            border: 1px solid #e5e5e5;
+            border-radius: 8px;
+            padding: 32px 20px;
+            width: 276px;
+            height: 124px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            text-align: center;
+            box-sizing: border-box;
+        }
+        
+        .widget-card:hover {
+            border-color: #F99600;
+            background: #fff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+        }
+        
+        /* Highlighted widget (e.g., "Neuen Kontakt") */
+        .widget-card.highlighted {
+            border: 2px solid #F99600;
+            background: white;
+            /* No padding adjustment needed with box-sizing: border-box */
+        }
+        
+        /* Widget Icon - kleiner und links */
+        .widget-icon {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            flex-shrink: 0;
+        }
+        
+        .widget-icon svg {
+            width: 28px;
+            height: 28px;
+            stroke: #666;
+        }
+        
+        .widget-card:hover .widget-icon svg {
+            stroke: #333;
+        }
+        
+        .widget-card.highlighted .widget-icon svg {
+            stroke: #F99600;
+        }
+        
+        /* Widget Label - rechts vom Icon */
+        .widget-label {
+            font-size: 15px;
+            font-weight: 700; /* Alle Labels bold! */
+            color: #333;
+        }
+        
+        /* Badge for notifications */
+        .badge {
+            position: absolute;
+            top: -6px;
+            right: -6px;
+            background: #ef4444;
+            color: white;
+            font-size: 11px;
+            font-weight: 600;
+            padding: 2px 6px;
+            border-radius: 10px;
+            min-width: 18px;
+            text-align: center;
+            line-height: 1;
+        }
+        
+        /* SUB-DASHBOARD DEMO */
+        .sub-dashboard {
+            background: #fff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+        }
+        
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #666;
+            text-decoration: none;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+        
+        .back-button:hover {
+            color: #333;
+        }
+        
+        /* Stats Row */
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin-bottom: 30px;
+        }
+        
+        .stat-card {
+            background: #f8f8f8;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 28px;
+            font-weight: 700;
+            color: #333;
+        }
+        
+        .stat-label {
+            font-size: 12px;
+            color: #666;
+            margin-top: 4px;
+        }
+        
+        /* Action Cards */
+        .actions-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+        
+        .action-card {
+            background: white;
+            border: 1px solid #e5e5e5;
+            padding: 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        
+        .action-card:hover {
+            border-color: #F99600;
+            background: #fffbf5;
+        }
+        
+        .action-icon {
+            width: 40px;
+            height: 40px;
+            background: #f5f5f5;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .action-content h3 {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 2px;
+        }
+        
+        .action-content p {
+            font-size: 13px;
+            color: #666;
+        }
+        
+        .divider {
+            margin: 50px 0;
+            border-bottom: 2px dashed #ddd;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Dashboard Demo - So soll es aussehen:</h1>
+        
+        <!-- HAUPTDASHBOARD -->
+        <h2 style="margin-bottom: 20px; color: #666;">1. Hauptdashboard (Theme-Sections mit einzelnen Widgets)</h2>
+        
+        <!-- Kontaktmanagement Section -->
+        <div class="theme-section">
+            <h2 class="section-title">Kontaktmanagement</h2>
+            <div class="widget-row">
+                <!-- Alle Kontakte -->
+                <div class="widget-card">
+                    <div class="widget-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="9" cy="7" r="4"></circle>
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                        </svg>
+                    </div>
+                    <div class="widget-label">Alle Kontakte</div>
+                </div>
+                
+                <!-- Neuen Kontakt -->
+                <div class="widget-card highlighted">
+                    <div class="widget-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="12" y1="5" x2="12" y2="19"></line>
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                        </svg>
+                    </div>
+                    <div class="widget-label">Neuen Kontakt</div>
+                </div>
+                
+                <!-- Kontakt-Aufgaben -->
+                <div class="widget-card">
+                    <div class="widget-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="8" y1="6" x2="21" y2="6"></line>
+                            <line x1="8" y1="12" x2="21" y2="12"></line>
+                            <line x1="8" y1="18" x2="21" y2="18"></line>
+                            <line x1="3" y1="6" x2="3.01" y2="6"></line>
+                            <line x1="3" y1="12" x2="3.01" y2="12"></line>
+                            <line x1="3" y1="18" x2="3.01" y2="18"></line>
+                        </svg>
+                        <span class="badge">3</span>
+                    </div>
+                    <div class="widget-label">Kontakt-Aufgaben</div>
+                </div>
+                
+                <!-- Kalender -->
+                <div class="widget-card">
+                    <div class="widget-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                            <line x1="16" y1="2" x2="16" y2="6"></line>
+                            <line x1="8" y1="2" x2="8" y2="6"></line>
+                            <line x1="3" y1="10" x2="21" y2="10"></line>
+                        </svg>
+                    </div>
+                    <div class="widget-label">Kalender</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Angebotsmanagement Section -->
+        <div class="theme-section">
+            <h2 class="section-title">Angebotsmanagement</h2>
+            <div class="widget-row">
+                <!-- Alle Angebote -->
+                <div class="widget-card">
+                    <div class="widget-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                            <polyline points="14 2 14 8 20 8"></polyline>
+                        </svg>
+                    </div>
+                    <div class="widget-label">Alle Angebote</div>
+                </div>
+                
+                <!-- Neues Angebot -->
+                <div class="widget-card">
+                    <div class="widget-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                            <polyline points="14 2 14 8 20 8"></polyline>
+                            <line x1="12" y1="18" x2="12" y2="12"></line>
+                            <line x1="9" y1="15" x2="15" y2="15"></line>
+                        </svg>
+                    </div>
+                    <div class="widget-label">Neues Angebot</div>
+                </div>
+                
+                <!-- Vorlagen -->
+                <div class="widget-card">
+                    <div class="widget-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                    </div>
+                    <div class="widget-label">Vorlagen</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="divider"></div>
+        
+        <!-- SUB-DASHBOARD -->
+        <h2 style="margin-bottom: 20px; color: #666;">2. Sub-Dashboard (z.B. nach Klick auf Kontaktmanagement)</h2>
+        <div class="sub-dashboard">
+            <a href="#" class="back-button">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M19 12H5M12 19l-7-7 7-7"></path>
+                </svg>
+                Zurück zum Dashboard
+            </a>
+            
+            <h2 style="margin-bottom: 20px;">Kontaktmanagement</h2>
+            
+            <!-- Stats Row -->
+            <div class="stats-row">
+                <div class="stat-card">
+                    <div class="stat-value">247</div>
+                    <div class="stat-label">Aktive Kunden</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">34</div>
+                    <div class="stat-label">Neue Leads</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">24%</div>
+                    <div class="stat-label">Conversion Rate</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">100k+</div>
+                    <div class="stat-label">Gesamt Kontakte</div>
+                </div>
+            </div>
+            
+            <!-- Action Cards -->
+            <h3 style="margin-bottom: 16px; color: #666; font-size: 14px;">AKTIONEN</h3>
+            <div class="actions-grid">
+                <div class="action-card">
+                    <div class="action-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="8.5" cy="7" r="4"></circle>
+                            <line x1="20" y1="8" x2="20" y2="14"></line>
+                            <line x1="23" y1="11" x2="17" y2="11"></line>
+                        </svg>
+                    </div>
+                    <div class="action-content">
+                        <h3>Neuen Kontakt anlegen</h3>
+                        <p>Kunde oder Lead erfassen</p>
+                    </div>
+                </div>
+                
+                <div class="action-card">
+                    <div class="action-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="9" cy="7" r="4"></circle>
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                        </svg>
+                    </div>
+                    <div class="action-content">
+                        <h3>Kontaktliste anzeigen</h3>
+                        <p>Alle Kontakte durchsuchen</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="divider"></div>
+        
+        <h2 style="color: #666;">Wichtige Unterschiede:</h2>
+        <ul style="line-height: 1.8; color: #666;">
+            <li><strong>Theme-Sections:</strong> Große, rechteckige Karten (nicht quadratisch!)</li>
+            <li><strong>Layout:</strong> Icon links, Text mittig, Pfeil rechts</li>
+            <li><strong>Größe:</strong> Deutlich größer als normale Widgets</li>
+            <li><strong>Hierarchie:</strong> Klare Trennung zwischen Haupt- und Sub-Dashboard</li>
+            <li><strong>Sub-Dashboard:</strong> Stats oben (kompakt), Actions unten (größer)</li>
+        </ul>
+    </div>
+</body>
+</html>

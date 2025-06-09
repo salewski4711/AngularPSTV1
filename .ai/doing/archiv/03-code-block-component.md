@@ -43,7 +43,7 @@ npm install prismjs @types/prismjs
 
 ### 3. Example Usage
 ```html
-<app-code-block 
+<pst-code-block 
   [code]="exampleCode" 
   language="typescript"
   [showLineNumbers]="true"

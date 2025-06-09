@@ -21,7 +21,7 @@
 ```typescript
 // Current - No OnPush strategy
 @Component({
-  selector: 'app-button-beta',
+  selector: 'pst-button-beta',
   standalone: true,
   // Missing: changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -74,7 +74,7 @@ iconSize = computed(() => {...});
 import { ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
-  selector: 'app-button-beta',
+  selector: 'pst-button-beta',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   // ... rest of config
@@ -103,9 +103,9 @@ export type ButtonVariant = keyof typeof BUTTON_VARIANTS;
 /**
  * Beta version of the button component with multiple style variants
  * @example
- * <app-button-beta variant="primary" size="md" (clicked)="handleClick()">
+ * <pst-button-beta variant="primary" size="md" (clicked)="handleClick()">
  *   Click me
- * </app-button-beta>
+ * </pst-button-beta>
  */
 @Component({...})
 export class ButtonBetaComponent {
@@ -137,7 +137,7 @@ interface ButtonState {
 ```typescript
 // Create beta-badge.component.ts
 @Component({
-  selector: 'app-beta-badge',
+  selector: 'pst-beta-badge',
   standalone: true,
   template: `
     <div class="text-xs text-green-600 dark:text-green-400 text-center mt-1">

@@ -55,9 +55,9 @@ config: any;
 /**
  * Displays a customizable button with multiple style variants
  * @example
- * <app-button variant="primary" (clicked)="handleClick()">
+ * <pst-button variant="primary" (clicked)="handleClick()">
  *   Click me
- * </app-button>
+ * </pst-button>
  */
 export class ButtonComponent {
   /**

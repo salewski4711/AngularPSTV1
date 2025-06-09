@@ -66,7 +66,7 @@ import { CommonModule } from '@angular/common';
 type TypographyVariant = 'h1' | 'h2' | 'h3' | 'body' | 'caption' | 'button' | 'label';
 
 @Component({
-  selector: 'app-typography',
+  selector: 'pst-typography',
   standalone: true,
   imports: [CommonModule],
   template: `
@@ -115,7 +115,7 @@ export class TypographyComponent {
 ```typescript
 // src/app/design-system/components/grid/container.component.ts
 @Component({
-  selector: 'app-container',
+  selector: 'pst-container',
   standalone: true,
   template: `
     <div [class]="containerClasses">
@@ -145,7 +145,7 @@ export class ContainerComponent {
 
 // src/app/design-system/components/grid/grid.component.ts
 @Component({
-  selector: 'app-grid',
+  selector: 'pst-grid',
   standalone: true,
   template: `<div [class]="gridClasses"><ng-content></ng-content></div>`
 })

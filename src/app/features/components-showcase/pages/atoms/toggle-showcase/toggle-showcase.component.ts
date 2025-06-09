@@ -5,7 +5,7 @@ import { ToggleComponent } from '../../../../../shared/components/toggle/toggle.
 import { CodeBlockComponent } from '../../../shared/components/code-block.component';
 
 @Component({
-  selector: 'app-toggle-showcase',
+  selector: 'pst-toggle-showcase',
   standalone: true,
   imports: [
     CommonModule, 
@@ -31,10 +31,10 @@ import { CodeBlockComponent } from '../../../shared/components/code-block.compon
         <h2 class="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-4">
           Import
         </h2>
-        <app-code-block
+        <pst-code-block
           [code]="importCode"
           language="typescript"
-        ></app-code-block>
+        ></pst-code-block>
       </section>
 
       <!-- Examples -->
@@ -50,17 +50,17 @@ import { CodeBlockComponent } from '../../../shared/components/code-block.compon
           </h3>
           <div class="bg-gray-50 dark:bg-gray-900 p-8 rounded-lg mb-4">
             <div class="space-y-4">
-              <app-toggle 
+              <pst-toggle 
                 label="Enable notifications"
                 [(ngModel)]="basicToggle"
-              ></app-toggle>
+              ></pst-toggle>
               <p class="text-sm text-gray-600 dark:text-gray-400">Enabled: {{ basicToggle() }}</p>
             </div>
           </div>
-          <app-code-block
+          <pst-code-block
             [code]="basicCode"
             language="html"
-          ></app-code-block>
+          ></pst-code-block>
         </div>
 
         <!-- Sizes -->
@@ -70,15 +70,15 @@ import { CodeBlockComponent } from '../../../shared/components/code-block.compon
           </h3>
           <div class="bg-gray-50 dark:bg-gray-900 p-8 rounded-lg mb-4">
             <div class="space-y-4">
-              <app-toggle label="Small toggle" size="sm"></app-toggle>
-              <app-toggle label="Medium toggle (default)" size="md"></app-toggle>
-              <app-toggle label="Large toggle" size="lg"></app-toggle>
+              <pst-toggle label="Small toggle" size="sm"></pst-toggle>
+              <pst-toggle label="Medium toggle (default)" size="md"></pst-toggle>
+              <pst-toggle label="Large toggle" size="lg"></pst-toggle>
             </div>
           </div>
-          <app-code-block
+          <pst-code-block
             [code]="sizesCode"
             language="html"
-          ></app-code-block>
+          ></pst-code-block>
         </div>
 
         <!-- States -->
@@ -88,17 +88,17 @@ import { CodeBlockComponent } from '../../../shared/components/code-block.compon
           </h3>
           <div class="bg-gray-50 dark:bg-gray-900 p-8 rounded-lg mb-4">
             <div class="space-y-4">
-              <app-toggle label="Off state"></app-toggle>
-              <app-toggle label="On state" [ngModel]="true"></app-toggle>
-              <app-toggle label="Disabled off" [disabled]="true"></app-toggle>
-              <app-toggle label="Disabled on" [disabled]="true" [ngModel]="true"></app-toggle>
-              <app-toggle label="Required field" [required]="true"></app-toggle>
+              <pst-toggle label="Off state"></pst-toggle>
+              <pst-toggle label="On state" [ngModel]="true"></pst-toggle>
+              <pst-toggle label="Disabled off" [disabled]="true"></pst-toggle>
+              <pst-toggle label="Disabled on" [disabled]="true" [ngModel]="true"></pst-toggle>
+              <pst-toggle label="Required field" [required]="true"></pst-toggle>
             </div>
           </div>
-          <app-code-block
+          <pst-code-block
             [code]="statesCode"
             language="html"
-          ></app-code-block>
+          ></pst-code-block>
         </div>
 
         <!-- With Helper Text -->
@@ -108,29 +108,29 @@ import { CodeBlockComponent } from '../../../shared/components/code-block.compon
           </h3>
           <div class="bg-gray-50 dark:bg-gray-900 p-8 rounded-lg mb-4">
             <div class="space-y-4">
-              <app-toggle 
+              <pst-toggle 
                 label="Dark mode"
                 helperText="Use dark theme across the application"
                 [showHelperText]="true"
-              ></app-toggle>
-              <app-toggle 
+              ></pst-toggle>
+              <pst-toggle 
                 label="Auto-save"
                 helperText="Automatically save your work every 5 minutes"
                 [showHelperText]="true"
                 [(ngModel)]="autoSave"
-              ></app-toggle>
-              <app-toggle 
+              ></pst-toggle>
+              <pst-toggle 
                 label="Beta features"
                 helperText="Enable experimental features"
                 errorMessage="Beta features may be unstable"
                 [showHelperText]="true"
-              ></app-toggle>
+              ></pst-toggle>
             </div>
           </div>
-          <app-code-block
+          <pst-code-block
             [code]="helperTextCode"
             language="html"
-          ></app-code-block>
+          ></pst-code-block>
         </div>
 
         <!-- Label Position -->
@@ -140,20 +140,20 @@ import { CodeBlockComponent } from '../../../shared/components/code-block.compon
           </h3>
           <div class="bg-gray-50 dark:bg-gray-900 p-8 rounded-lg mb-4">
             <div class="space-y-4">
-              <app-toggle 
+              <pst-toggle 
                 label="Label on right (default)"
                 labelPosition="right"
-              ></app-toggle>
-              <app-toggle 
+              ></pst-toggle>
+              <pst-toggle 
                 label="Label on left"
                 labelPosition="left"
-              ></app-toggle>
+              ></pst-toggle>
             </div>
           </div>
-          <app-code-block
+          <pst-code-block
             [code]="labelPositionCode"
             language="html"
-          ></app-code-block>
+          ></pst-code-block>
         </div>
 
         <!-- Without Label -->
@@ -163,14 +163,14 @@ import { CodeBlockComponent } from '../../../shared/components/code-block.compon
           </h3>
           <div class="bg-gray-50 dark:bg-gray-900 p-8 rounded-lg mb-4">
             <div class="flex items-center gap-4">
-              <app-toggle [ariaLabel]="'Toggle feature'"></app-toggle>
+              <pst-toggle [ariaLabel]="'Toggle feature'"></pst-toggle>
               <span class="text-gray-700 dark:text-gray-300">Toggle without label (uses aria-label)</span>
             </div>
           </div>
-          <app-code-block
+          <pst-code-block
             [code]="withoutLabelCode"
             language="html"
-          ></app-code-block>
+          ></pst-code-block>
         </div>
 
         <!-- Real-world Examples -->
@@ -182,41 +182,41 @@ import { CodeBlockComponent } from '../../../shared/components/code-block.compon
             <div class="space-y-6">
               <div class="space-y-4">
                 <h4 class="text-sm font-medium text-gray-700 dark:text-gray-300">Notification Settings</h4>
-                <app-toggle 
+                <pst-toggle 
                   label="Email notifications"
                   [(ngModel)]="settings.emailNotifications"
-                ></app-toggle>
-                <app-toggle 
+                ></pst-toggle>
+                <pst-toggle 
                   label="Push notifications"
                   [(ngModel)]="settings.pushNotifications"
-                ></app-toggle>
-                <app-toggle 
+                ></pst-toggle>
+                <pst-toggle 
                   label="SMS notifications"
                   [(ngModel)]="settings.smsNotifications"
-                ></app-toggle>
+                ></pst-toggle>
               </div>
               
               <div class="space-y-4">
                 <h4 class="text-sm font-medium text-gray-700 dark:text-gray-300">Privacy Settings</h4>
-                <app-toggle 
+                <pst-toggle 
                   label="Make profile public"
                   helperText="Allow others to see your profile"
                   [showHelperText]="true"
                   [(ngModel)]="settings.publicProfile"
-                ></app-toggle>
-                <app-toggle 
+                ></pst-toggle>
+                <pst-toggle 
                   label="Show online status"
                   helperText="Let others know when you're online"
                   [showHelperText]="true"
                   [(ngModel)]="settings.showOnlineStatus"
-                ></app-toggle>
+                ></pst-toggle>
               </div>
             </div>
           </div>
-          <app-code-block
+          <pst-code-block
             [code]="realWorldCode"
             language="html"
-          ></app-code-block>
+          ></pst-code-block>
         </div>
       </section>
     </div>
@@ -246,62 +246,62 @@ export class ToggleShowcaseComponent {
   imports: [ToggleComponent, FormsModule]
 })`;
 
-  basicCode = `<app-toggle 
+  basicCode = `<pst-toggle 
   label="Enable notifications"
   [(ngModel)]="isEnabled"
-></app-toggle>`;
+></pst-toggle>`;
 
-  sizesCode = `<app-toggle label="Small toggle" size="sm"></app-toggle>
-<app-toggle label="Medium toggle (default)" size="md"></app-toggle>
-<app-toggle label="Large toggle" size="lg"></app-toggle>`;
+  sizesCode = `<pst-toggle label="Small toggle" size="sm"></pst-toggle>
+<pst-toggle label="Medium toggle (default)" size="md"></pst-toggle>
+<pst-toggle label="Large toggle" size="lg"></pst-toggle>`;
 
-  statesCode = `<app-toggle label="Off state"></app-toggle>
-<app-toggle label="On state" [ngModel]="true"></app-toggle>
-<app-toggle label="Disabled off" [disabled]="true"></app-toggle>
-<app-toggle label="Disabled on" [disabled]="true" [ngModel]="true"></app-toggle>
-<app-toggle label="Required field" [required]="true"></app-toggle>`;
+  statesCode = `<pst-toggle label="Off state"></pst-toggle>
+<pst-toggle label="On state" [ngModel]="true"></pst-toggle>
+<pst-toggle label="Disabled off" [disabled]="true"></pst-toggle>
+<pst-toggle label="Disabled on" [disabled]="true" [ngModel]="true"></pst-toggle>
+<pst-toggle label="Required field" [required]="true"></pst-toggle>`;
 
-  helperTextCode = `<app-toggle 
+  helperTextCode = `<pst-toggle 
   label="Dark mode"
   helperText="Use dark theme across the application"
   [showHelperText]="true"
-></app-toggle>
+></pst-toggle>
 
-<app-toggle 
+<pst-toggle 
   label="Auto-save"
   helperText="Automatically save your work every 5 minutes"
   [showHelperText]="true"
   [(ngModel)]="autoSave"
-></app-toggle>
+></pst-toggle>
 
-<app-toggle 
+<pst-toggle 
   label="Beta features"
   helperText="Enable experimental features"
   errorMessage="Beta features may be unstable"
   [showHelperText]="true"
-></app-toggle>`;
+></pst-toggle>`;
 
-  labelPositionCode = `<app-toggle label="Label on right (default)" labelPosition="right"></app-toggle>
-<app-toggle label="Label on left" labelPosition="left"></app-toggle>`;
+  labelPositionCode = `<pst-toggle label="Label on right (default)" labelPosition="right"></pst-toggle>
+<pst-toggle label="Label on left" labelPosition="left"></pst-toggle>`;
 
-  withoutLabelCode = `<app-toggle [ariaLabel]="'Toggle feature'"></app-toggle>`;
+  withoutLabelCode = `<pst-toggle [ariaLabel]="'Toggle feature'"></pst-toggle>`;
 
   realWorldCode = `<!-- Notification Settings -->
-<app-toggle label="Email notifications" [(ngModel)]="settings.emailNotifications"></app-toggle>
-<app-toggle label="Push notifications" [(ngModel)]="settings.pushNotifications"></app-toggle>
-<app-toggle label="SMS notifications" [(ngModel)]="settings.smsNotifications"></app-toggle>
+<pst-toggle label="Email notifications" [(ngModel)]="settings.emailNotifications"></pst-toggle>
+<pst-toggle label="Push notifications" [(ngModel)]="settings.pushNotifications"></pst-toggle>
+<pst-toggle label="SMS notifications" [(ngModel)]="settings.smsNotifications"></pst-toggle>
 
 <!-- Privacy Settings -->
-<app-toggle 
+<pst-toggle 
   label="Make profile public"
   helperText="Allow others to see your profile"
   [showHelperText]="true"
   [(ngModel)]="settings.publicProfile"
-></app-toggle>
-<app-toggle 
+></pst-toggle>
+<pst-toggle 
   label="Show online status"
   helperText="Let others know when you're online"
   [showHelperText]="true"
   [(ngModel)]="settings.showOnlineStatus"
-></app-toggle>`;
+></pst-toggle>`;
 }

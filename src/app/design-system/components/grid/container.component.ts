@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 export type ContainerSize = 'sm' | 'md' | 'lg' | 'xl' | 'full';
 
 @Component({
-  selector: 'app-container',
+  selector: 'pst-container',
   standalone: true,
   imports: [CommonModule],
   template: `

@@ -2,81 +2,81 @@
 // Run "node sync-examples.js" to regenerate
 
 export const basicExample = `<!-- Basic button example -->
-<app-button>Click me</app-button>
+<pst-button>Click me</pst-button>
 
 <!-- Button with custom text -->
-<app-button>Save changes</app-button>
+<pst-button>Save changes</pst-button>
 
 <!-- Button with longer text -->
-<app-button>Continue to next step</app-button>`;
+<pst-button>Continue to next step</pst-button>`;
 
 export const sizesExample = `<!-- Small size -->
-<app-button size="sm">Small Button</app-button>
+<pst-button size="sm">Small Button</pst-button>
 
 <!-- Medium size (default) -->
-<app-button size="md">Medium Button</app-button>
+<pst-button size="md">Medium Button</pst-button>
 
 <!-- Large size -->
-<app-button size="lg">Large Button</app-button>
+<pst-button size="lg">Large Button</pst-button>
 
 <!-- Extra large size -->
-<app-button size="xl">Extra Large Button</app-button>`;
+<pst-button size="xl">Extra Large Button</pst-button>`;
 
 export const statesExample = `<!-- Normal state -->
-<app-button>Normal Button</app-button>
+<pst-button>Normal Button</pst-button>
 
 <!-- Disabled state -->
-<app-button disabled>Disabled Button</app-button>
+<pst-button disabled>Disabled Button</pst-button>
 
 <!-- Loading state -->
-<app-button loading>Loading Button</app-button>
+<pst-button loading>Loading Button</pst-button>
 
 <!-- Loading state with custom text -->
-<app-button loading loadingText="Processing...">Submit Form</app-button>
+<pst-button loading loadingText="Processing...">Submit Form</pst-button>
 
 <!-- Disabled secondary button -->
-<app-button variant="secondary" disabled>Disabled Secondary</app-button>
+<pst-button variant="secondary" disabled>Disabled Secondary</pst-button>
 
 <!-- Loading danger button -->
-<app-button variant="danger" loading>Delete Item</app-button>`;
+<pst-button variant="danger" loading>Delete Item</pst-button>`;
 
 export const variantsExample = `<!-- Primary variant (default) -->
-<app-button variant="primary">Primary Button</app-button>
+<pst-button variant="primary">Primary Button</pst-button>
 
 <!-- Secondary variant -->
-<app-button variant="secondary">Secondary Button</app-button>
+<pst-button variant="secondary">Secondary Button</pst-button>
 
 <!-- Tertiary variant -->
-<app-button variant="tertiary">Tertiary Button</app-button>
+<pst-button variant="tertiary">Tertiary Button</pst-button>
 
 <!-- Danger variant -->
-<app-button variant="danger">Danger Button</app-button>
+<pst-button variant="danger">Danger Button</pst-button>
 
 <!-- Ghost variant -->
-<app-button variant="ghost">Ghost Button</app-button>`;
+<pst-button variant="ghost">Ghost Button</pst-button>`;
 
 export const withIconsExample = `<!-- Button with icon on the left -->
-<app-button icon="save">Save Document</app-button>
+<pst-button icon="save">Save Document</pst-button>
 
 <!-- Button with icon on the right -->
-<app-button icon="arrow-right" iconPosition="right">Next Step</app-button>
+<pst-button icon="arrow-right" iconPosition="right">Next Step</pst-button>
 
 <!-- Icon-only button -->
-<app-button icon="settings" ariaLabel="Settings"></app-button>
+<pst-button icon="settings" ariaLabel="Settings"></pst-button>
 
 <!-- Different variants with icons -->
-<app-button variant="secondary" icon="download">Download File</app-button>
+<pst-button variant="secondary" icon="download">Download File</pst-button>
 
-<app-button variant="danger" icon="trash">Delete Item</app-button>
+<pst-button variant="danger" icon="trash">Delete Item</pst-button>
 
-<app-button variant="ghost" icon="external-link" iconPosition="right">Open External</app-button>
+<pst-button variant="ghost" icon="external-link" iconPosition="right">Open External</pst-button>
 
 <!-- Small button with icon -->
-<app-button size="sm" icon="plus">Add Item</app-button>
+<pst-button size="sm" icon="plus">Add Item</pst-button>
 
 <!-- Large button with icon -->
-<app-button size="lg" icon="upload">Upload Files</app-button>
+<pst-button size="lg" icon="upload">Upload Files</pst-button>
 
 <!-- Loading state with icon -->
-<app-button icon="refresh" loading>Refreshing</app-button>`;
+<pst-button icon="refresh" loading>Refreshing</pst-button>`;
 

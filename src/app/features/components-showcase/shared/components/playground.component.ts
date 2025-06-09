@@ -38,7 +38,7 @@ export interface PlaygroundConfig {
 }
 
 @Component({
-  selector: 'app-playground',
+  selector: 'pst-playground',
   standalone: true,
   imports: [CommonModule, FormsModule, IconComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -54,7 +54,7 @@ export interface PlaygroundConfig {
             (click)="resetToDefaults()"
             class="text-sm px-3 py-1.5 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-md hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
           >
-            <app-icon name="arrow-left" [size]="16" class="inline mr-1"></app-icon>
+            <pst-icon name="arrow-left" [size]="16" class="inline mr-1"></pst-icon>
             Reset to Defaults
           </button>
         </div>
@@ -191,7 +191,7 @@ export interface PlaygroundConfig {
                 (click)="copyCode()"
                 class="text-sm px-3 py-1.5 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-md hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
               >
-                <app-icon name="copy" [size]="16" class="inline mr-1"></app-icon>
+                <pst-icon name="copy" [size]="16" class="inline mr-1"></pst-icon>
                 {{ copySuccess() ? 'Copied!' : 'Copy' }}
               </button>
             </div>
@@ -336,9 +336,9 @@ export class PlaygroundComponent implements OnInit, OnChanges, AfterViewInit {
     
     const attributesStr = attributes.length > 0 ? ' ' + attributes.join('\n  ') : '';
     
-    return `<app-${componentName}${attributesStr}>
+    return `<pst-${componentName}${attributesStr}>
   Content here
-</app-${componentName}>`;
+</pst-${componentName}>`;
   }
   
   async copyCode() {

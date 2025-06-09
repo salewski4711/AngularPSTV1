@@ -5,7 +5,7 @@ import { IconComponent } from '../../../../shared/icons/icon.component';
 declare let Prism: any;
 
 @Component({
-  selector: 'app-code-block',
+  selector: 'pst-code-block',
   standalone: true,
   imports: [CommonModule, IconComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -39,9 +39,9 @@ declare let Prism: any;
           title="Copy to clipboard"
         >
           @if (copyFeedback()) {
-            <app-icon name="check" [size]="16" class="text-green-400"></app-icon>
+            <pst-icon name="check" [size]="16" class="text-green-400"></pst-icon>
           } @else {
-            <app-icon name="copy" [size]="16"></app-icon>
+            <pst-icon name="copy" [size]="16"></pst-icon>
           }
         </button>
 

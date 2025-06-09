@@ -62,7 +62,7 @@ Alle Komponenten nutzen Angular's Standalone API:
 
 ```typescript
 @Component({
-  selector: 'app-button',
+  selector: 'pst-button',
   standalone: true,
   imports: [CommonModule, IconComponent],
   // ...

@@ -39,7 +39,7 @@ export interface PropDefinition {
 
 ### Example Usage
 ```html
-<app-props-table [props]="componentProps" />
+<pst-props-table [props]="componentProps" />
 ```
 
 ## Styling

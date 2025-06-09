@@ -13,7 +13,7 @@ mv "src/app/shared/components-beta/button/button-beta.component.ts" "src/app/sha
 ### 2. Update Code
 ```typescript
 // Change selector:
-selector: 'app-button',  // was: 'app-button-beta'
+selector: 'pst-button',  // was: 'app-button-beta'
 
 // Change class:
 export class ButtonComponent {  // was: ButtonBetaComponent

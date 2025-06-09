@@ -36,13 +36,13 @@
 ```typescript
 // Current
 @Component({
-  selector: 'app-button-beta',
+  selector: 'pst-button-beta',
   // Missing change detection strategy
 })
 
 // Suggested
 @Component({
-  selector: 'app-button-beta',
+  selector: 'pst-button-beta',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 ```

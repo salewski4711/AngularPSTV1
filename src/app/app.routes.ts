@@ -13,9 +13,13 @@ export const routes: Routes = [
   },
   {
     path: 'dashboard',
-    loadComponent: () => import('./features/home/home.component').then(m => m.HomeComponent),
-    canActivate: [authGuard],
-    title: 'Dashboard - ProSolarTec CRM'
+    loadChildren: () => import('./features/dashboard/dashboard.routes').then(m => m.dashboardRoutes),
+    canActivate: [authGuard]
+  },
+  {
+    path: 'contacts',
+    loadChildren: () => import('./features/contacts/contacts.routes').then(m => m.contactsRoutes),
+    canActivate: [authGuard]
   },
   {
     path: 'customers',

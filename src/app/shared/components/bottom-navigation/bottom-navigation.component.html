@@ -2,12 +2,12 @@
   [class]="getNavigationClasses()"
   [attr.aria-label]="'Hauptnavigation'">
   
-  <!-- Äußerer Container mit App-Background -->
+  <!-- Äußerer Container mit Hintergrund -->
   <div class="w-full bg-gray-50 dark:bg-black">
     <!-- Container für Zentrierung und max-width -->
     <div class="w-full flex justify-center sm:px-4 md:px-6 lg:px-8">
       <!-- Innerer Container mit Menü-Background -->
-      <div class="bg-white dark:bg-gray-800 border-t sm:border border-gray-200 dark:border-gray-700 sm:rounded-t-lg md:rounded-t-xl max-w-8xl w-full sm:shadow-2xl">
+      <div class="bg-white dark:bg-gray-800 border-t sm:border border-gray-200 dark:border-gray-700 sm:rounded-t-lg md:rounded-t-xl max-w-7xl w-full sm:shadow-2xl">
       <!-- Navigation Grid -->
       <div class="grid h-16 px-4" [style.grid-template-columns]="'repeat(' + activeItems().length + ', 1fr)'">
       
@@ -51,7 +51,7 @@
             
             <!-- Badge -->
             @if (config.enableBadges && item.badge) {
-              <app-badge
+              <pst-badge
                 [color]="item.badge.type === 'notification' ? 'error' : item.badge.type"
                 variant="filled"
                 size="xs"
@@ -61,7 +61,7 @@
                 [topPosition]="-20"
                 [rightPosition]="-18">
                 {{ item.badge.count }}
-              </app-badge>
+              </pst-badge>
             }
           </div>
           

@@ -7,11 +7,11 @@
     [attr.aria-label]="'Benachrichtigungen (' + unreadCount() + ' ungelesen)'"
     [attr.aria-expanded]="isOpen()"
   >
-    <app-icon name="bell" [size]="20"></app-icon>
+    <pst-icon name="bell" [size]="20"></pst-icon>
     
     <!-- Badge for unread count -->
     @if (unreadCount() > 0) {
-      <app-badge
+      <pst-badge
         variant="filled"
         color="error"
         size="xs"
@@ -20,7 +20,7 @@
         class="absolute -top-1 -right-1 min-w-[20px] h-5 flex items-center justify-center"
       >
         {{ unreadCount() > 99 ? '99+' : unreadCount() }}
-      </app-badge>
+      </pst-badge>
     }
   </button>
 
@@ -66,10 +66,10 @@
               <div class="flex items-start gap-3">
                 <!-- Icon -->
                 <div [class]="'flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center ' + getNotificationStyles(notification.type)">
-                  <app-icon 
+                  <pst-icon 
                     [name]="getNotificationIcon(notification.type)" 
                     [size]="20"
-                  ></app-icon>
+                  ></pst-icon>
                 </div>
 
                 <!-- Content -->
@@ -111,7 +111,7 @@
                       class="flex-shrink-0 p-1 text-gray-400 hover:text-gray-600 dark:text-gray-500 dark:hover:text-gray-300 transition-colors"
                       aria-label="Benachrichtigung entfernen"
                     >
-                      <app-icon name="x" [size]="16"></app-icon>
+                      <pst-icon name="x" [size]="16"></pst-icon>
                     </button>
                   </div>
                 </div>
@@ -120,11 +120,11 @@
           }
         } @else {
           <div class="px-4 py-12 text-center">
-            <app-icon 
+            <pst-icon 
               name="bell" 
               [size]="48" 
               cssClasses="mx-auto text-gray-300 dark:text-gray-600 mb-3"
-            ></app-icon>
+            ></pst-icon>
             <p class="text-sm text-gray-500 dark:text-gray-400">
               Keine Benachrichtigungen vorhanden
             </p>

@@ -216,7 +216,7 @@ describe('BadgeComponent', () => {
       const testFixture = TestBed.createComponent(TestHostComponent);
       testFixture.detectChanges();
       
-      const badge = testFixture.debugElement.query(By.css('app-badge span'));
+      const badge = testFixture.debugElement.query(By.css('pst-badge span'));
       expect(badge.nativeElement.textContent).toContain('Test Content');
     });
   });
@@ -237,7 +237,7 @@ describe('BadgeComponent', () => {
 
 // Test host component for content projection
 @Component({
-  template: `<app-badge>Test Content</app-badge>`,
+  template: `<pst-badge>Test Content</pst-badge>`,
   imports: [BadgeComponent],
   standalone: true
 })

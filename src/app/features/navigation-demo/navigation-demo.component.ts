@@ -11,7 +11,7 @@ import { SelectComponent } from '../../shared/components/select/select.component
 import { ToggleComponent } from '../../shared/components/toggle/toggle.component';
 
 @Component({
-  selector: 'app-navigation-demo',
+  selector: 'pst-navigation-demo',
   standalone: true,
   imports: [
     CommonModule,
@@ -28,14 +28,14 @@ import { ToggleComponent } from '../../shared/components/toggle/toggle.component
       
       <!-- Demo Navigation -->
       <div class="mb-8 border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
-        <app-top-navigation
+        <pst-top-navigation
           [config]="navigationConfig"
           (logoClick)="onLogoClick()"
           (searchSubmit)="onSearchSubmit($event)"
           (notificationClick)="onNotificationClick($event)"
           (userMenuAction)="onUserMenuAction($event)"
           (mobileMenuToggle)="onMobileMenuToggle($event)"
-        ></app-top-navigation>
+        ></pst-top-navigation>
       </div>
 
       <!-- Configuration Panel -->
@@ -49,86 +49,86 @@ import { ToggleComponent } from '../../shared/components/toggle/toggle.component
             <div class="grid grid-cols-2 gap-4">
               <div>
                 <label class="block text-sm font-medium mb-2">Show Logo</label>
-                <app-toggle
+                <pst-toggle
                   [(ngModel)]="navigationConfig.showLogo"
                   label="Logo Visibility"
-                ></app-toggle>
+                ></pst-toggle>
               </div>
               
               <div>
                 <label class="block text-sm font-medium mb-2">Show Search</label>
-                <app-toggle
+                <pst-toggle
                   [(ngModel)]="navigationConfig.showSearch"
                   label="Search Visibility"
-                ></app-toggle>
+                ></pst-toggle>
               </div>
               
               <div>
                 <label class="block text-sm font-medium mb-2">Show Notifications</label>
-                <app-toggle
+                <pst-toggle
                   [(ngModel)]="navigationConfig.showNotifications"
                   label="Notifications Visibility"
-                ></app-toggle>
+                ></pst-toggle>
               </div>
               
               <div>
                 <label class="block text-sm font-medium mb-2">Show User Menu</label>
-                <app-toggle
+                <pst-toggle
                   [(ngModel)]="navigationConfig.showUserMenu"
                   label="User Menu Visibility"
-                ></app-toggle>
+                ></pst-toggle>
               </div>
               
               <div>
                 <label class="block text-sm font-medium mb-2">Sticky Header</label>
-                <app-toggle
+                <pst-toggle
                   [(ngModel)]="navigationConfig.sticky"
                   label="Sticky Behavior"
-                ></app-toggle>
+                ></pst-toggle>
               </div>
               
               <div>
                 <label class="block text-sm font-medium mb-2">Transparent</label>
-                <app-toggle
+                <pst-toggle
                   [(ngModel)]="navigationConfig.transparent"
                   label="Transparent Style"
-                ></app-toggle>
+                ></pst-toggle>
               </div>
               
               <div>
                 <label class="block text-sm font-medium mb-2">Elevated</label>
-                <app-toggle
+                <pst-toggle
                   [(ngModel)]="navigationConfig.elevated"
                   label="Shadow Effect"
-                ></app-toggle>
+                ></pst-toggle>
               </div>
               
               <div>
                 <label class="block text-sm font-medium mb-2">Full Width</label>
-                <app-toggle
+                <pst-toggle
                   [(ngModel)]="navigationConfig.fullWidth"
                   label="Full Width Layout"
-                ></app-toggle>
+                ></pst-toggle>
               </div>
             </div>
             
             <!-- Logo Variant Selector -->
             <div>
               <label class="block text-sm font-medium mb-2">Logo Variant</label>
-              <app-select
+              <pst-select
                 [(ngModel)]="navigationConfig.logoVariant"
                 [options]="logoVariantOptions"
                 placeholder="Select logo variant"
-              ></app-select>
+              ></pst-select>
             </div>
             
             <!-- Custom Class Input -->
             <div>
               <label class="block text-sm font-medium mb-2">Custom CSS Class</label>
-              <app-input
+              <pst-input
                 [(ngModel)]="navigationConfig.customClass"
                 placeholder="e.g., bg-primary-500"
-              ></app-input>
+              ></pst-input>
             </div>
           </div>
         </div>
@@ -143,42 +143,42 @@ import { ToggleComponent } from '../../shared/components/toggle/toggle.component
               <div>
                 <label class="block text-sm font-medium mb-2">Add Notification</label>
                 <div class="flex gap-2">
-                  <app-select
+                  <pst-select
                     [(ngModel)]="newNotificationType"
                     [options]="notificationTypes"
                     placeholder="Type"
                     class="flex-1"
-                  ></app-select>
-                  <app-input
+                  ></pst-select>
+                  <pst-input
                     [(ngModel)]="newNotificationTitle"
                     placeholder="Title"
                     class="flex-2"
-                  ></app-input>
-                  <app-button
+                  ></pst-input>
+                  <pst-button
                     (click)="addNotification()"
                     variant="primary"
                     [disabled]="!newNotificationTitle"
                   >
                     Add
-                  </app-button>
+                  </pst-button>
                 </div>
               </div>
               
               <div class="flex gap-2">
-                <app-button
+                <pst-button
                   (click)="markAllAsRead()"
                   variant="secondary"
                   size="sm"
                 >
                   Mark All Read
-                </app-button>
-                <app-button
+                </pst-button>
+                <pst-button
                   (click)="clearAllNotifications()"
                   variant="danger"
                   size="sm"
                 >
                   Clear All
-                </app-button>
+                </pst-button>
               </div>
               
               <div class="text-sm text-gray-600 dark:text-gray-400">
@@ -204,33 +204,33 @@ import { ToggleComponent } from '../../shared/components/toggle/toggle.component
                     }
                   </div>
                   <div class="flex gap-1">
-                    <app-button
+                    <pst-button
                       (click)="setBadge(item.id)"
                       size="sm"
                       variant="ghost"
                     >
                       Badge
-                    </app-button>
-                    <app-button
+                    </pst-button>
+                    <pst-button
                       (click)="removeNavigationItem(item.id)"
                       size="sm"
                       variant="ghost"
                     >
                       Remove
-                    </app-button>
+                    </pst-button>
                   </div>
                 </div>
               }
             </div>
             
             <div class="mt-4">
-              <app-button
+              <pst-button
                 (click)="addNavigationItem()"
                 variant="primary"
                 size="sm"
               >
                 Add Custom Item
-              </app-button>
+              </pst-button>
             </div>
           </div>
 
@@ -254,14 +254,14 @@ import { ToggleComponent } from '../../shared/components/toggle/toggle.component
             </div>
             
             @if (eventLog.length > 0) {
-              <app-button
+              <pst-button
                 (click)="clearEventLog()"
                 variant="ghost"
                 size="sm"
                 class="mt-2"
               >
                 Clear Log
-              </app-button>
+              </pst-button>
             }
           </div>
         </div>
@@ -354,8 +354,7 @@ export class NavigationDemoComponent {
     this.notificationsService.addNotification({
       type: this.newNotificationType,
       title: this.newNotificationTitle,
-      message: `This is a ${this.newNotificationType} notification created from the demo page.`,
-      read: false
+      message: `This is a ${this.newNotificationType} notification created from the demo page.`
     });
 
     this.logEvent(`Added ${this.newNotificationType} notification: "${this.newNotificationTitle}"`);

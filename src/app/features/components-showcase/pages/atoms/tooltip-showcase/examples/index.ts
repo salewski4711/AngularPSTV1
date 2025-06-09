@@ -117,12 +117,12 @@ export const tooltipExamples = {
   <!-- Icon with Tooltip -->
   <div class="flex items-center gap-2">
     <span class="text-gray-700">Need help?</span>
-    <app-icon 
+    <pst-icon 
       name="info" 
       [size]="20"
       class="text-blue-600 cursor-help"
       appTooltip="Click here to learn more about this feature"
-    ></app-icon>
+    ></pst-icon>
   </div>
 
   <!-- Form Field with Validation Tooltip -->
@@ -147,21 +147,21 @@ export const tooltipExamples = {
       class="px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-l-lg hover:bg-gray-100"
       appTooltip="Edit this item"
     >
-      <app-icon name="edit" [size]="16"></app-icon>
+      <pst-icon name="edit" [size]="16"></pst-icon>
     </button>
     <button 
       type="button" 
       class="px-4 py-2 text-sm font-medium text-gray-900 bg-white border-t border-b border-gray-200 hover:bg-gray-100"
       appTooltip="Duplicate this item"
     >
-      <app-icon name="copy" [size]="16"></app-icon>
+      <pst-icon name="copy" [size]="16"></pst-icon>
     </button>
     <button 
       type="button" 
       class="px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-r-md hover:bg-gray-100"
       appTooltip="Delete this item"
     >
-      <app-icon name="delete" [size]="16"></app-icon>
+      <pst-icon name="delete" [size]="16"></pst-icon>
     </button>
   </div>
 </div>`

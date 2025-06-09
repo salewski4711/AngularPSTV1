@@ -71,13 +71,13 @@ src/app/
 ```typescript
 // button-showcase.component.ts
 @Component({
-  selector: 'app-button-showcase',
+  selector: 'pst-button-showcase',
   standalone: true,
   template: `
     <div class="showcase-container">
       <!-- Header -->
       <h1>Button Component</h1>
-      <app-badge variant="success">Stable</app-badge>
+      <pst-badge variant="success">Stable</pst-badge>
       
       <!-- Description -->
       <section>
@@ -89,9 +89,9 @@ src/app/
       <section>
         <h2>Variants</h2>
         <div class="example-grid">
-          <app-button variant="primary">Primary</app-button>
-          <app-button variant="secondary">Secondary</app-button>
-          <app-button variant="ghost">Ghost</app-button>
+          <pst-button variant="primary">Primary</pst-button>
+          <pst-button variant="secondary">Secondary</pst-button>
+          <pst-button variant="ghost">Ghost</pst-button>
         </div>
       </section>
 
@@ -100,16 +100,16 @@ src/app/
         <h2>Playground</h2>
         <div class="playground">
           <div class="controls">
-            <app-select [(ngModel)]="variant" label="Variant">
+            <pst-select [(ngModel)]="variant" label="Variant">
               <option value="primary">Primary</option>
               <option value="secondary">Secondary</option>
-            </app-select>
+            </pst-select>
             <!-- More controls... -->
           </div>
           <div class="preview">
-            <app-button [variant]="variant" [size]="size">
+            <pst-button [variant]="variant" [size]="size">
               {{ text }}
-            </app-button>
+            </pst-button>
           </div>
         </div>
       </section>
@@ -117,13 +117,13 @@ src/app/
       <!-- Code Examples -->
       <section>
         <h2>Code</h2>
-        <app-code-block [code]="currentCode" language="html" />
+        <pst-code-block [code]="currentCode" language="html" />
       </section>
 
       <!-- Props Table -->
       <section>
         <h2>Properties</h2>
-        <app-props-table [props]="buttonProps" />
+        <pst-props-table [props]="buttonProps" />
       </section>
     </div>
   `
@@ -136,9 +136,9 @@ export class ButtonShowcaseComponent {
   
   // Dynamic code generation
   get currentCode() {
-    return `<app-button variant="${this.variant}" size="${this.size}">
+    return `<pst-button variant="${this.variant}" size="${this.size}">
   ${this.text}
-</app-button>`;
+</pst-button>`;
   }
   
   buttonProps = [

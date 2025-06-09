@@ -142,7 +142,7 @@ ${content}
    * Get the component tag name
    */
   protected getComponentTag(): string {
-    return 'app-' + this.component.name
+    return 'pst-' + this.component.name
       .replace(/Component$/, '')
       .replace(/([A-Z])/g, '-$1')
       .toLowerCase()

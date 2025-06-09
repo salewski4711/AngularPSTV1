@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { CustomerService, Customer } from '../../../features/customers/customer.service';
 
 @Component({
-  selector: 'app-msw-demo',
+  selector: 'pst-msw-demo',
   standalone: true,
   imports: [CommonModule],
   changeDetection: ChangeDetectionStrategy.OnPush,

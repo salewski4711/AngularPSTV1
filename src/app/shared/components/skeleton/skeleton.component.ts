@@ -5,7 +5,7 @@ export type SkeletonVariant = 'text' | 'circular' | 'rectangular' | 'button';
 export type SkeletonAnimation = 'pulse' | 'wave' | 'none';
 
 @Component({
-  selector: 'app-skeleton',
+  selector: 'pst-skeleton',
   standalone: true,
   imports: [CommonModule],
   template: `

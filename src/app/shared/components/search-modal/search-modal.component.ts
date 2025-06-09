@@ -10,7 +10,7 @@ interface SearchResult extends ShowcaseComponent {
 }
 
 @Component({
-  selector: 'app-search-modal',
+  selector: 'pst-search-modal',
   standalone: true,
   imports: [CommonModule, FormsModule, IconComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -24,7 +24,7 @@ interface SearchResult extends ShowcaseComponent {
         <div class="w-full max-w-2xl bg-white dark:bg-gray-800 rounded-lg shadow-2xl overflow-hidden" (click)="$event.stopPropagation()">
           <!-- Search Input -->
           <div class="flex items-center px-4 border-b border-gray-200 dark:border-gray-700">
-            <app-icon name="search" class="text-gray-400" [size]="20"></app-icon>
+            <pst-icon name="search" class="text-gray-400" [size]="20"></pst-icon>
             <input
               #searchInput
               type="text"
@@ -64,7 +64,7 @@ interface SearchResult extends ShowcaseComponent {
                           class="w-full px-4 py-3 flex items-center justify-between hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors rounded"
                         >
                           <div class="flex items-center gap-3">
-                            <app-icon name="package" class="text-gray-400" [size]="16"></app-icon>
+                            <pst-icon name="package" class="text-gray-400" [size]="16"></pst-icon>
                             <div class="text-left">
                               <div class="text-sm font-medium text-gray-900 dark:text-gray-100">
                                 {{ result.name }}

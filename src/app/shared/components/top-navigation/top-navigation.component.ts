@@ -20,7 +20,7 @@ export interface HeaderConfig {
 }
 
 @Component({
-  selector: 'app-top-navigation',
+  selector: 'pst-top-navigation',
   standalone: true,
   imports: [
     CommonModule,
@@ -31,7 +31,6 @@ export interface HeaderConfig {
     MobileMenuComponent
   ],
   templateUrl: './top-navigation.component.html',
-  styleUrls: ['./top-navigation.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TopNavigationComponent {
@@ -56,13 +55,41 @@ export class TopNavigationComponent {
   mobileMenuOpen = false;
 
   get headerClasses(): string {
-    const classes = ['top-navigation'];
+    const classes = ['w-full', 'bg-gray-50', 'dark:bg-black', 'transition-colors', 'duration-300'];
     
-    if (this.config.sticky) {classes.push('sticky-header');}
-    if (this.config.transparent) {classes.push('transparent-header');}
-    if (this.config.elevated) {classes.push('elevated-header');}
-    if (this.config.fullWidth) {classes.push('full-width');}
-    if (this.config.customClass) {classes.push(this.config.customClass);}
+    if (this.config.sticky) {
+      classes.push('sticky', 'top-0', 'z-50');
+    }
+    
+    return classes.join(' ');
+  }
+
+  get getInnerContainerClasses(): string {
+    const classes = [
+      'bg-white', 
+      'dark:bg-gray-800', 
+      'border-b',
+      'sm:border',
+      'border-gray-200',
+      'dark:border-gray-700',
+      'sm:rounded-b-lg',
+      'md:rounded-b-xl',
+      'max-w-7xl',
+      'w-full',
+      'sm:shadow-2xl',
+      'transition-colors',
+      'duration-300'
+    ];
+    
+    if (this.config.transparent) {
+      classes.push('bg-transparent', 'shadow-none', 'border-transparent');
+    }
+    if (this.config.elevated && !this.config.transparent) {
+      classes.push('shadow-lg');
+    }
+    if (this.config.customClass) {
+      classes.push(this.config.customClass);
+    }
     
     return classes.join(' ');
   }

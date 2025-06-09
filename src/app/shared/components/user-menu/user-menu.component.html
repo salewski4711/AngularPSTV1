@@ -7,13 +7,13 @@
     aria-haspopup="true"
     (click)="toggleMenu()"
   >
-    <app-avatar
+    <pst-avatar
       [name]="user.name"
       [src]="user.avatar"
       size="sm"
       bgColor="bg-primary"
       textColor="text-white"
-    ></app-avatar>
+    ></pst-avatar>
   </button>
 
   <!-- Dropdown Menu -->
@@ -28,13 +28,13 @@
     <!-- User Info Section -->
     <div class="px-4 py-3 border-b border-gray-200 dark:border-gray-700">
       <div class="flex items-center space-x-3">
-        <app-avatar
+        <pst-avatar
           [name]="user.name"
           [src]="user.avatar"
           size="md"
           bgColor="bg-primary"
           textColor="text-white"
-        ></app-avatar>
+        ></pst-avatar>
         <div class="flex-1 min-w-0">
           <p class="text-sm font-medium text-gray-900 dark:text-white truncate">
             {{ user.name }}
@@ -53,11 +53,11 @@
     <div class="px-4 py-3 border-b border-gray-200 dark:border-gray-700">
       <div class="flex items-center justify-between">
         <div class="flex items-center space-x-2">
-          <app-icon
+          <pst-icon
             [name]="isDarkMode() ? 'moon' : 'sun'"
             [size]="16"
             cssClasses="text-gray-500 dark:text-gray-400"
-          ></app-icon>
+          ></pst-icon>
           <span class="text-sm text-gray-700 dark:text-gray-200">
             Dark Mode
           </span>
@@ -92,12 +92,12 @@
         (click)="handleMenuItemClick(item)"
         (mouseenter)="focusedIndex.set(i)"
       >
-        <app-icon
+        <pst-icon
           *ngIf="item.icon"
           [name]="item.icon"
           [size]="16"
           cssClasses="mr-3"
-        ></app-icon>
+        ></pst-icon>
         <span>{{ item.label }}</span>
       </button>
     </div>
@@ -116,12 +116,12 @@
         (click)="handleMenuItemClick(item)"
         (mouseenter)="focusedIndex.set(menuItems.length + i)"
       >
-        <app-icon
+        <pst-icon
           *ngIf="item.icon"
           [name]="item.icon"
           [size]="16"
           cssClasses="mr-3"
-        ></app-icon>
+        ></pst-icon>
         <span>{{ item.label }}</span>
       </button>
     </div>

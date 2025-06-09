@@ -52,7 +52,7 @@ Analysiere alle Komponenten in folgenden Verzeichnissen:
 #### Standalone Components (Angular 14+)
 ```typescript
 @Component({
-  selector: 'app-example',
+  selector: 'pst-example',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
   template: ''

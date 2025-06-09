@@ -96,7 +96,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-new-component',
+  selector: 'pst-new-component',
   standalone: true,
   imports: [CommonModule],
   template: `

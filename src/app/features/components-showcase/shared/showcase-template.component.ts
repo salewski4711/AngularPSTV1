@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PlaygroundComponent, PlaygroundConfig } from './components/playground.component';
-import { PropsTableComponent } from './components/props-table.component';
+import { PropsTableComponent, EventDefinition } from './components/props-table.component';
 import { CodeBlockComponent } from './components/code-block.component';
 import { ShowcaseProp } from './base-showcase.component';
 
@@ -16,7 +16,7 @@ export interface ShowcaseSection {
  * Implements DRY principle for all showcase pages
  */
 @Component({
-  selector: 'app-showcase-template',
+  selector: 'pst-showcase-template',
   standalone: true,
   imports: [
     CommonModule,
@@ -34,13 +34,13 @@ export interface ShowcaseSection {
 
       <!-- Interactive Playground -->
       <section *ngIf="playgroundConfig">
-        <app-playground [config]="playgroundConfig"></app-playground>
+        <pst-playground [config]="playgroundConfig"></pst-playground>
       </section>
 
       <!-- Props Table -->
-      <section *ngIf="props && props.length > 0">
-        <h2 class="text-2xl font-semibold mb-6">Props</h2>
-        <app-props-table [props]="props"></app-props-table>
+      <section *ngIf="(props && props.length > 0) || (events && events.length > 0)">
+        <h2 class="text-2xl font-semibold mb-6">API</h2>
+        <pst-props-table [props]="props" [events]="events"></pst-props-table>
       </section>
 
       <!-- Code Examples -->
@@ -50,7 +50,7 @@ export interface ShowcaseSection {
           <p *ngIf="section.description" class="text-gray-600 dark:text-gray-400 mb-4">
             {{ section.description }}
           </p>
-          <app-code-block [code]="section.code" language="html"></app-code-block>
+          <pst-code-block [code]="section.code" language="html"></pst-code-block>
         </section>
       </ng-container>
 
@@ -88,6 +88,7 @@ export class ShowcaseTemplateComponent {
   @Input() description!: string;
   @Input() playgroundConfig?: PlaygroundConfig;
   @Input() props: ShowcaseProp[] = [];
+  @Input() events: EventDefinition[] = [];
   @Input() sections: ShowcaseSection[] = [];
   @Input() bestPractices?: {
     do: string[];

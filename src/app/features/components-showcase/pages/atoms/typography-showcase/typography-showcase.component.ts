@@ -1,153 +1,33 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { TypographyComponent, TypographyVariant, TypographyWeight } from '../../../../../design-system/typography/typography.component';
-import { PropsTableComponent } from '../../../shared/components/props-table.component';
-import { PlaygroundComponent, PlaygroundProp } from '../../../shared/components/playground.component';
-import { CodeBlockComponent } from '../../../shared/components/code-block.component';
-import { BaseShowcaseComponent } from '../../../shared/base-showcase.component';
+import { ShowcaseTemplateComponent } from '../../../shared/showcase-template.component';
+import { PlaygroundConfig } from '../../../shared/components/playground.component';
+import { ShowcaseProp } from '../../../shared/base-showcase.component';
+import { TypographyComponent } from '../../../../../design-system/typography/typography.component';
 
 @Component({
-  selector: 'app-typography-showcase',
+  selector: 'pst-typography-showcase',
   standalone: true,
   imports: [
     CommonModule,
-    TypographyComponent,
-    PropsTableComponent,
-    PlaygroundComponent,
-    CodeBlockComponent
+    ShowcaseTemplateComponent
   ],
   template: `
-    <div class="space-y-12">
-      <!-- Header -->
-      <div>
-        <app-typography variant="h2">{{ title }}</app-typography>
-        <app-typography variant="body1" class="mt-2 text-gray-600 dark:text-gray-400">
-          {{ description }}
-        </app-typography>
-      </div>
-
-      <!-- Interactive Playground -->
-      <app-playground 
-        [config]="playgroundConfig">
-      </app-playground>
-
-      <!-- Props Table -->
-      <div>
-        <app-typography variant="h3" class="mb-6">Props</app-typography>
-        <app-props-table [props]="props"></app-props-table>
-      </div>
-
-      <!-- Font Size Scale -->
-      <div>
-        <app-typography variant="h3" class="mb-6">Font Size Scale</app-typography>
-        <div class="space-y-4 p-6 bg-gray-50 dark:bg-gray-800 rounded-lg">
-          <div class="flex items-baseline gap-4">
-            <span class="text-xs text-gray-500 w-20">text-xs</span>
-            <app-typography variant="caption">12px - Caption text</app-typography>
-          </div>
-          <div class="flex items-baseline gap-4">
-            <span class="text-xs text-gray-500 w-20">text-sm</span>
-            <app-typography variant="body2">14px - Small body text</app-typography>
-          </div>
-          <div class="flex items-baseline gap-4">
-            <span class="text-xs text-gray-500 w-20">text-base</span>
-            <app-typography variant="body1">16px - Regular body text</app-typography>
-          </div>
-          <div class="flex items-baseline gap-4">
-            <span class="text-xs text-gray-500 w-20">text-lg</span>
-            <app-typography variant="subtitle1">18px - Subtitle text</app-typography>
-          </div>
-          <div class="flex items-baseline gap-4">
-            <span class="text-xs text-gray-500 w-20">text-xl</span>
-            <app-typography variant="h5">20px - Small heading</app-typography>
-          </div>
-          <div class="flex items-baseline gap-4">
-            <span class="text-xs text-gray-500 w-20">text-2xl</span>
-            <app-typography variant="h4">24px - Medium heading</app-typography>
-          </div>
-          <div class="flex items-baseline gap-4">
-            <span class="text-xs text-gray-500 w-20">text-3xl</span>
-            <app-typography variant="h3">30px - Large heading</app-typography>
-          </div>
-          <div class="flex items-baseline gap-4">
-            <span class="text-xs text-gray-500 w-20">text-4xl</span>
-            <app-typography variant="h2">36px - Extra large heading</app-typography>
-          </div>
-          <div class="flex items-baseline gap-4">
-            <span class="text-xs text-gray-500 w-20">text-5xl</span>
-            <app-typography variant="h1">48px - Display heading</app-typography>
-          </div>
-        </div>
-      </div>
-
-      <!-- Font Weights -->
-      <div>
-        <app-typography variant="h3" class="mb-6">Font Weights</app-typography>
-        <app-code-block 
-          [code]="examples['weight']"
-          language="html">
-        </app-code-block>
-      </div>
-
-      <!-- Text Variants -->
-      <div>
-        <app-typography variant="h3" class="mb-6">Text Variants</app-typography>
-        <app-code-block 
-          [code]="examples['variant']"
-          language="html">
-        </app-code-block>
-      </div>
-
-      <!-- Line Heights -->
-      <div>
-        <app-typography variant="h3" class="mb-6">Line Heights</app-typography>
-        <app-code-block 
-          [code]="examples['lineHeight']"
-          language="html">
-        </app-code-block>
-      </div>
-
-      <!-- Real-world Examples -->
-      <div>
-        <app-typography variant="h3" class="mb-6">Real-world Examples</app-typography>
-        <app-code-block 
-          [code]="examples['realWorld']"
-          language="html">
-        </app-code-block>
-      </div>
-
-      <!-- Best Practices -->
-      <div>
-        <app-typography variant="h3" class="mb-6">Best Practices</app-typography>
-        <div class="grid gap-6 md:grid-cols-2">
-          <div class="p-6 bg-green-50 dark:bg-green-900/20 rounded-lg">
-            <app-typography variant="h5" class="text-green-800 dark:text-green-200 mb-3">Do</app-typography>
-            <ul class="space-y-2 text-sm text-green-700 dark:text-green-300">
-              <li>• Use semantic heading hierarchy (h1 → h6)</li>
-              <li>• Maintain consistent font sizes across similar content</li>
-              <li>• Use appropriate line heights for readability</li>
-              <li>• Consider contrast ratios for accessibility</li>
-            </ul>
-          </div>
-          <div class="p-6 bg-red-50 dark:bg-red-900/20 rounded-lg">
-            <app-typography variant="h5" class="text-red-800 dark:text-red-200 mb-3">Don't</app-typography>
-            <ul class="space-y-2 text-sm text-red-700 dark:text-red-300">
-              <li>• Skip heading levels (h1 → h3)</li>
-              <li>• Use heading tags for styling only</li>
-              <li>• Mix different font families without purpose</li>
-              <li>• Use font sizes smaller than 12px for body text</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
+    <pst-showcase-template
+      [title]="title"
+      [description]="description"
+      [playgroundConfig]="playgroundConfig"
+      [props]="props"
+      [sections]="sections"
+      [bestPractices]="bestPractices">
+    </pst-showcase-template>
   `
 })
-export class TypographyShowcaseComponent extends BaseShowcaseComponent {
-  component = TypographyComponent;
+export class TypographyShowcaseComponent {
   title = 'Typography';
   description = 'Consistent typography system for headings, body text, and special text styles.';
-  props = [
+  
+  props: ShowcaseProp[] = [
     {
       name: 'variant',
       type: "'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'body1' | 'body2' | 'subtitle1' | 'subtitle2' | 'caption' | 'overline'",
@@ -186,142 +66,231 @@ export class TypographyShowcaseComponent extends BaseShowcaseComponent {
     }
   ];
 
-  // Override base class methods for custom behavior
-  protected override createPlaygroundProps(): PlaygroundProp[] {
-    const baseProps = super.createPlaygroundProps();
-    // Add content prop for text content
-    return [
+  playgroundConfig: PlaygroundConfig = {
+    component: TypographyComponent,
+    props: [
       {
         name: 'content',
-        type: 'string' as const,
+        type: 'string',
         defaultValue: 'The quick brown fox jumps over the lazy dog',
         description: 'Text content to display'
       },
-      ...baseProps
-    ];
-  }
-
-  protected override transformPropToPlayground(prop: any): PlaygroundProp {
-    const playgroundProp = super.transformPropToPlayground(prop);
-    
-    // Handle weight prop with empty option
-    if (prop.name === 'weight') {
-      playgroundProp.options = ['', 'light', 'normal', 'medium', 'semibold', 'bold'];
-    }
-    
-    return playgroundProp;
-  }
-
-  protected override generateCode(props: any): string {
-    const attributes: string[] = [];
-    
-    if (props.variant && props.variant !== 'body1') {
-      attributes.push(`variant="${props.variant}"`);
-    }
-    if (props.align && props.align !== 'left') {
-      attributes.push(`align="${props.align}"`);
-    }
-    if (props.weight) {
-      attributes.push(`weight="${props.weight}"`);
-    }
-    if (props.color) {
-      attributes.push(`color="${props.color}"`);
-    }
-    if (props.noMargin) {
-      attributes.push('[noMargin]="true"');
-    }
-    if (props.truncate) {
-      attributes.push('[truncate]="true"');
-    }
-    
-    const content = props.content || 'The quick brown fox jumps over the lazy dog';
-    
-    return `<app-typography${attributes.length > 0 ? '\n  ' + attributes.join('\n  ') : ''}>
+      {
+        name: 'variant',
+        type: 'enum',
+        options: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'body1', 'body2', 'subtitle1', 'subtitle2', 'caption', 'overline'],
+        defaultValue: 'body1'
+      },
+      {
+        name: 'align',
+        type: 'enum',
+        options: ['left', 'center', 'right', 'justify'],
+        defaultValue: 'left'
+      },
+      {
+        name: 'weight',
+        type: 'enum',
+        options: ['', 'light', 'normal', 'medium', 'semibold', 'bold'],
+        defaultValue: ''
+      },
+      {
+        name: 'color',
+        type: 'string',
+        defaultValue: ''
+      },
+      {
+        name: 'noMargin',
+        type: 'boolean',
+        defaultValue: false
+      },
+      {
+        name: 'truncate',
+        type: 'boolean',
+        defaultValue: false
+      }
+    ],
+    code: (props: any) => {
+      const attributes: string[] = [];
+      
+      if (props.variant && props.variant !== 'body1') {
+        attributes.push(`variant="${props.variant}"`);
+      }
+      if (props.align && props.align !== 'left') {
+        attributes.push(`align="${props.align}"`);
+      }
+      if (props.weight) {
+        attributes.push(`weight="${props.weight}"`);
+      }
+      if (props.color) {
+        attributes.push(`color="${props.color}"`);
+      }
+      if (props.noMargin) {
+        attributes.push('[noMargin]="true"');
+      }
+      if (props.truncate) {
+        attributes.push('[truncate]="true"');
+      }
+      
+      const content = props.content || 'The quick brown fox jumps over the lazy dog';
+      
+      return `<pst-typography${attributes.length > 0 ? '\n  ' + attributes.join('\n  ') : ''}>
   ${content}
-</app-typography>`;
-  }
+</pst-typography>`;
+    }
+  };
 
-  examples: Record<string, string> = {
-    weight: `<!-- Font Weight Examples -->
-<div class="space-y-4">
-  <app-typography variant="h4" weight="light">Light (100) - Elegant and Subtle</app-typography>
-  <app-typography variant="h4" weight="normal">Normal (400) - Standard Weight</app-typography>
-  <app-typography variant="h4" weight="medium">Medium (500) - Slightly Bold</app-typography>
-  <app-typography variant="h4" weight="semibold">Semibold (600) - Emphasis</app-typography>
-  <app-typography variant="h4" weight="bold">Bold (700) - Strong Emphasis</app-typography>
+  sections = [
+    {
+      title: 'Font Size Scale',
+      code: `<!-- Font Size Scale -->
+<div class="space-y-4 p-6 bg-gray-50 dark:bg-gray-800 rounded-lg">
+  <div class="flex items-baseline gap-4">
+    <span class="text-xs text-gray-500 w-20">text-xs</span>
+    <pst-typography variant="caption">12px - Caption text</pst-typography>
+  </div>
+  <div class="flex items-baseline gap-4">
+    <span class="text-xs text-gray-500 w-20">text-sm</span>
+    <pst-typography variant="body2">14px - Small body text</pst-typography>
+  </div>
+  <div class="flex items-baseline gap-4">
+    <span class="text-xs text-gray-500 w-20">text-base</span>
+    <pst-typography variant="body1">16px - Regular body text</pst-typography>
+  </div>
+  <div class="flex items-baseline gap-4">
+    <span class="text-xs text-gray-500 w-20">text-lg</span>
+    <pst-typography variant="subtitle1">18px - Subtitle text</pst-typography>
+  </div>
+  <div class="flex items-baseline gap-4">
+    <span class="text-xs text-gray-500 w-20">text-xl</span>
+    <pst-typography variant="h5">20px - Small heading</pst-typography>
+  </div>
+  <div class="flex items-baseline gap-4">
+    <span class="text-xs text-gray-500 w-20">text-2xl</span>
+    <pst-typography variant="h4">24px - Medium heading</pst-typography>
+  </div>
+  <div class="flex items-baseline gap-4">
+    <span class="text-xs text-gray-500 w-20">text-3xl</span>
+    <pst-typography variant="h3">30px - Large heading</pst-typography>
+  </div>
+  <div class="flex items-baseline gap-4">
+    <span class="text-xs text-gray-500 w-20">text-4xl</span>
+    <pst-typography variant="h2">36px - Extra large heading</pst-typography>
+  </div>
+  <div class="flex items-baseline gap-4">
+    <span class="text-xs text-gray-500 w-20">text-5xl</span>
+    <pst-typography variant="h1">48px - Display heading</pst-typography>
+  </div>
 </div>`,
-
-    variant: `<!-- Heading Variants -->
+      description: 'Our typography scale provides a harmonious set of font sizes for different UI contexts.'
+    },
+    {
+      title: 'Font Weights',
+      code: `<!-- Font Weight Examples -->
 <div class="space-y-4">
-  <app-typography variant="h1">H1 - Page Title</app-typography>
-  <app-typography variant="h2">H2 - Section Title</app-typography>
-  <app-typography variant="h3">H3 - Subsection Title</app-typography>
-  <app-typography variant="h4">H4 - Card Title</app-typography>
-  <app-typography variant="h5">H5 - Widget Title</app-typography>
-  <app-typography variant="h6">H6 - Small Title</app-typography>
+  <pst-typography variant="h4" weight="light">Light (100) - Elegant and Subtle</pst-typography>
+  <pst-typography variant="h4" weight="normal">Normal (400) - Standard Weight</pst-typography>
+  <pst-typography variant="h4" weight="medium">Medium (500) - Slightly Bold</pst-typography>
+  <pst-typography variant="h4" weight="semibold">Semibold (600) - Emphasis</pst-typography>
+  <pst-typography variant="h4" weight="bold">Bold (700) - Strong Emphasis</pst-typography>
+</div>`,
+      description: 'Multiple font weights allow for subtle hierarchy and emphasis without changing font size.'
+    },
+    {
+      title: 'Text Variants',
+      code: `<!-- Heading Variants -->
+<div class="space-y-4">
+  <pst-typography variant="h1">H1 - Page Title</pst-typography>
+  <pst-typography variant="h2">H2 - Section Title</pst-typography>
+  <pst-typography variant="h3">H3 - Subsection Title</pst-typography>
+  <pst-typography variant="h4">H4 - Card Title</pst-typography>
+  <pst-typography variant="h5">H5 - Widget Title</pst-typography>
+  <pst-typography variant="h6">H6 - Small Title</pst-typography>
 </div>
 
 <!-- Body and Text Variants -->
 <div class="mt-8 space-y-4">
-  <app-typography variant="subtitle1">Subtitle 1 - Section Introduction</app-typography>
-  <app-typography variant="body1">Body 1 is the default paragraph style.</app-typography>
-  <app-typography variant="subtitle2">Subtitle 2 - Smaller Introduction</app-typography>
-  <app-typography variant="body2">Body 2 is used for secondary content.</app-typography>
-  <app-typography variant="caption">CAPTION - Metadata, timestamps</app-typography>
-  <app-typography variant="overline">OVERLINE - LABELS</app-typography>
+  <pst-typography variant="subtitle1">Subtitle 1 - Section Introduction</pst-typography>
+  <pst-typography variant="body1">Body 1 is the default paragraph style.</pst-typography>
+  <pst-typography variant="subtitle2">Subtitle 2 - Smaller Introduction</pst-typography>
+  <pst-typography variant="body2">Body 2 is used for secondary content.</pst-typography>
+  <pst-typography variant="caption">CAPTION - Metadata, timestamps</pst-typography>
+  <pst-typography variant="overline">OVERLINE - LABELS</pst-typography>
 </div>`,
-
-    lineHeight: `<!-- Tight Line Height -->
+      description: 'Predefined text variants ensure consistent typography across the application.'
+    },
+    {
+      title: 'Line Heights',
+      code: `<!-- Tight Line Height -->
 <div>
-  <app-typography variant="h5" class="mb-2">Tight Line Height</app-typography>
-  <app-typography variant="h1">Large Display Text Benefits from Tight Line Height</app-typography>
+  <pst-typography variant="h5" class="mb-2">Tight Line Height</pst-typography>
+  <pst-typography variant="h1">Large Display Text Benefits from Tight Line Height</pst-typography>
 </div>
 
 <!-- Normal Line Height -->
 <div>
-  <app-typography variant="h5" class="mb-2">Normal Line Height</app-typography>
-  <app-typography variant="h5">This is a heading with normal line height</app-typography>
+  <pst-typography variant="h5" class="mb-2">Normal Line Height</pst-typography>
+  <pst-typography variant="h5">This is a heading with normal line height</pst-typography>
 </div>
 
 <!-- Relaxed Line Height -->
 <div>
-  <app-typography variant="h5" class="mb-2">Relaxed Line Height</app-typography>
-  <app-typography variant="body1">
+  <pst-typography variant="h5" class="mb-2">Relaxed Line Height</pst-typography>
+  <pst-typography variant="body1">
     Body text benefits from relaxed line height for improved readability.
-  </app-typography>
+  </pst-typography>
 </div>`,
-
-    realWorld: `<!-- Article Example -->
+      description: 'Appropriate line heights improve readability for different text types.'
+    },
+    {
+      title: 'Real-world Examples',
+      code: `<!-- Article Example -->
 <article class="max-w-3xl">
   <header class="mb-8">
-    <app-typography variant="overline" class="text-primary mb-2">TECHNOLOGY</app-typography>
-    <app-typography variant="h1" class="mb-4">
+    <pst-typography variant="overline" class="text-primary mb-2">TECHNOLOGY</pst-typography>
+    <pst-typography variant="h1" class="mb-4">
       Building Scalable Applications with Angular
-    </app-typography>
+    </pst-typography>
     <div class="flex items-center gap-4 text-gray-600 dark:text-gray-400">
-      <app-typography variant="caption">By John Doe</app-typography>
+      <pst-typography variant="caption">By John Doe</pst-typography>
       <span>•</span>
-      <app-typography variant="caption">March 15, 2024</app-typography>
+      <pst-typography variant="caption">March 15, 2024</pst-typography>
       <span>•</span>
-      <app-typography variant="caption">5 min read</app-typography>
+      <pst-typography variant="caption">5 min read</pst-typography>
     </div>
   </header>
 
   <div class="space-y-6">
-    <app-typography variant="subtitle1" class="text-gray-700 dark:text-gray-300">
+    <pst-typography variant="subtitle1" class="text-gray-700 dark:text-gray-300">
       Learn how to architect and build enterprise-scale applications.
-    </app-typography>
+    </pst-typography>
 
-    <app-typography variant="body1">
+    <pst-typography variant="body1">
       Angular has evolved significantly over the years...
-    </app-typography>
+    </pst-typography>
 
-    <app-typography variant="h2" class="mt-8 mb-4">Getting Started</app-typography>
+    <pst-typography variant="h2" class="mt-8 mb-4">Getting Started</pst-typography>
     
-    <app-typography variant="body1">
+    <pst-typography variant="body1">
       Before diving into advanced patterns...
-    </app-typography>
+    </pst-typography>
   </div>
-</article>`
+</article>`,
+      description: 'Example showing how to combine different typography variants in a real article layout.'
+    }
+  ];
+
+  bestPractices = {
+    do: [
+      'Use semantic heading hierarchy (h1 → h6)',
+      'Maintain consistent font sizes across similar content',
+      'Use appropriate line heights for readability',
+      'Consider contrast ratios for accessibility'
+    ],
+    dont: [
+      'Skip heading levels (h1 → h3)',
+      'Use heading tags for styling only',
+      'Mix different font families without purpose',
+      'Use font sizes smaller than 12px for body text'
+    ]
   };
 }

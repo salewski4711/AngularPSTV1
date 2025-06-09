@@ -4,7 +4,7 @@ import { BadgeComponent } from '../../../../../shared/components/badge/badge.com
 import { CodeBlockComponent } from '../../../shared/components/code-block.component';
 
 @Component({
-  selector: 'app-badge-showcase',
+  selector: 'pst-badge-showcase',
   standalone: true,
   imports: [
     CommonModule, 
@@ -29,10 +29,10 @@ import { CodeBlockComponent } from '../../../shared/components/code-block.compon
         <h2 class="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-4">
           Import
         </h2>
-        <app-code-block
+        <pst-code-block
           [code]="importCode"
           language="typescript"
-        ></app-code-block>
+        ></pst-code-block>
       </section>
 
       <!-- Examples -->
@@ -48,19 +48,19 @@ import { CodeBlockComponent } from '../../../shared/components/code-block.compon
           </h3>
           <div class="bg-gray-50 dark:bg-gray-900 p-8 rounded-lg mb-4">
             <div class="flex flex-wrap gap-3">
-              <app-badge>Default</app-badge>
-              <app-badge color="primary">Primary</app-badge>
-              <app-badge color="gray">Secondary</app-badge>
-              <app-badge color="success">Success</app-badge>
-              <app-badge color="warning">Warning</app-badge>
-              <app-badge color="error">Danger</app-badge>
-              <app-badge color="info">Info</app-badge>
+              <pst-badge>Default</pst-badge>
+              <pst-badge color="primary">Primary</pst-badge>
+              <pst-badge color="gray">Secondary</pst-badge>
+              <pst-badge color="success">Success</pst-badge>
+              <pst-badge color="warning">Warning</pst-badge>
+              <pst-badge color="error">Danger</pst-badge>
+              <pst-badge color="info">Info</pst-badge>
             </div>
           </div>
-          <app-code-block
+          <pst-code-block
             [code]="basicCode"
             language="html"
-          ></app-code-block>
+          ></pst-code-block>
         </div>
 
         <!-- Sizes -->
@@ -70,15 +70,15 @@ import { CodeBlockComponent } from '../../../shared/components/code-block.compon
           </h3>
           <div class="bg-gray-50 dark:bg-gray-900 p-8 rounded-lg mb-4">
             <div class="flex flex-wrap items-center gap-3">
-              <app-badge size="sm">Small</app-badge>
-              <app-badge size="md">Medium</app-badge>
-              <app-badge size="lg">Large</app-badge>
+              <pst-badge size="sm">Small</pst-badge>
+              <pst-badge size="md">Medium</pst-badge>
+              <pst-badge size="lg">Large</pst-badge>
             </div>
           </div>
-          <app-code-block
+          <pst-code-block
             [code]="sizesCode"
             language="html"
-          ></app-code-block>
+          ></pst-code-block>
         </div>
 
         <!-- With Icons -->
@@ -88,17 +88,17 @@ import { CodeBlockComponent } from '../../../shared/components/code-block.compon
           </h3>
           <div class="bg-gray-50 dark:bg-gray-900 p-8 rounded-lg mb-4">
             <div class="flex flex-wrap gap-3">
-              <app-badge icon="check" color="success">Completed</app-badge>
-              <app-badge icon="x" color="error">Failed</app-badge>
-              <app-badge icon="clock" color="warning">Pending</app-badge>
-              <app-badge icon="info" color="info">Information</app-badge>
-              <app-badge icon="star" color="primary">Featured</app-badge>
+              <pst-badge icon="check" color="success">Completed</pst-badge>
+              <pst-badge icon="x" color="error">Failed</pst-badge>
+              <pst-badge icon="clock" color="warning">Pending</pst-badge>
+              <pst-badge icon="info" color="info">Information</pst-badge>
+              <pst-badge icon="star" color="primary">Featured</pst-badge>
             </div>
           </div>
-          <app-code-block
+          <pst-code-block
             [code]="iconsCode"
             language="html"
-          ></app-code-block>
+          ></pst-code-block>
         </div>
 
         <!-- Pill Style -->
@@ -108,16 +108,16 @@ import { CodeBlockComponent } from '../../../shared/components/code-block.compon
           </h3>
           <div class="bg-gray-50 dark:bg-gray-900 p-8 rounded-lg mb-4">
             <div class="flex flex-wrap gap-3">
-              <app-badge shape="pill">Default Pill</app-badge>
-              <app-badge shape="pill" color="primary">Primary Pill</app-badge>
-              <app-badge shape="pill" color="success">Success Pill</app-badge>
-              <app-badge shape="pill" color="error">Danger Pill</app-badge>
+              <pst-badge shape="pill">Default Pill</pst-badge>
+              <pst-badge shape="pill" color="primary">Primary Pill</pst-badge>
+              <pst-badge shape="pill" color="success">Success Pill</pst-badge>
+              <pst-badge shape="pill" color="error">Danger Pill</pst-badge>
             </div>
           </div>
-          <app-code-block
+          <pst-code-block
             [code]="pillCode"
             language="html"
-          ></app-code-block>
+          ></pst-code-block>
         </div>
 
         <!-- Removable Badges -->
@@ -127,16 +127,16 @@ import { CodeBlockComponent } from '../../../shared/components/code-block.compon
           </h3>
           <div class="bg-gray-50 dark:bg-gray-900 p-8 rounded-lg mb-4">
             <div class="flex flex-wrap gap-3">
-              <app-badge [removable]="true" (remove)="onRemove('Tag 1')">Tag 1</app-badge>
-              <app-badge [removable]="true" (remove)="onRemove('Tag 2')" color="primary">Tag 2</app-badge>
-              <app-badge [removable]="true" (remove)="onRemove('Tag 3')" color="success">Tag 3</app-badge>
-              <app-badge [removable]="true" shape="pill" (remove)="onRemove('Filter')" color="info">Filter</app-badge>
+              <pst-badge [removable]="true" (remove)="onRemove('Tag 1')">Tag 1</pst-badge>
+              <pst-badge [removable]="true" (remove)="onRemove('Tag 2')" color="primary">Tag 2</pst-badge>
+              <pst-badge [removable]="true" (remove)="onRemove('Tag 3')" color="success">Tag 3</pst-badge>
+              <pst-badge [removable]="true" shape="pill" (remove)="onRemove('Filter')" color="info">Filter</pst-badge>
             </div>
           </div>
-          <app-code-block
+          <pst-code-block
             [code]="removableCode"
             language="html"
-          ></app-code-block>
+          ></pst-code-block>
         </div>
 
         <!-- Real-world Examples -->
@@ -150,10 +150,10 @@ import { CodeBlockComponent } from '../../../shared/components/code-block.compon
               <div>
                 <h4 class="text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">Status Indicators</h4>
                 <div class="flex flex-wrap gap-3">
-                  <app-badge color="success" icon="check-circle">Active</app-badge>
-                  <app-badge color="error" icon="x-circle">Inactive</app-badge>
-                  <app-badge color="warning" icon="clock">Pending</app-badge>
-                  <app-badge color="info" icon="pause">On Hold</app-badge>
+                  <pst-badge color="success" icon="check-circle">Active</pst-badge>
+                  <pst-badge color="error" icon="x-circle">Inactive</pst-badge>
+                  <pst-badge color="warning" icon="clock">Pending</pst-badge>
+                  <pst-badge color="info" icon="pause">On Hold</pst-badge>
                 </div>
               </div>
 
@@ -162,9 +162,9 @@ import { CodeBlockComponent } from '../../../shared/components/code-block.compon
                 <h4 class="text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">Counts</h4>
                 <div class="flex items-center gap-4">
                   <span class="text-gray-700 dark:text-gray-300">Notifications</span>
-                  <app-badge color="error" size="sm">99+</app-badge>
+                  <pst-badge color="error" size="sm">99+</pst-badge>
                   <span class="text-gray-700 dark:text-gray-300 ml-4">Messages</span>
-                  <app-badge color="primary" size="sm">5</app-badge>
+                  <pst-badge color="primary" size="sm">5</pst-badge>
                 </div>
               </div>
 
@@ -172,11 +172,11 @@ import { CodeBlockComponent } from '../../../shared/components/code-block.compon
               <div>
                 <h4 class="text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">Categories</h4>
                 <div class="flex flex-wrap gap-2">
-                  <app-badge shape="pill" color="gray">Technology</app-badge>
-                  <app-badge shape="pill" color="gray">Design</app-badge>
-                  <app-badge shape="pill" color="gray">Business</app-badge>
-                  <app-badge shape="pill" color="gray">Marketing</app-badge>
-                  <app-badge shape="pill" color="gray">Development</app-badge>
+                  <pst-badge shape="pill" color="gray">Technology</pst-badge>
+                  <pst-badge shape="pill" color="gray">Design</pst-badge>
+                  <pst-badge shape="pill" color="gray">Business</pst-badge>
+                  <pst-badge shape="pill" color="gray">Marketing</pst-badge>
+                  <pst-badge shape="pill" color="gray">Development</pst-badge>
                 </div>
               </div>
 
@@ -184,17 +184,17 @@ import { CodeBlockComponent } from '../../../shared/components/code-block.compon
               <div>
                 <h4 class="text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">Priority</h4>
                 <div class="flex flex-wrap gap-3">
-                  <app-badge color="error" icon="arrow-up">High</app-badge>
-                  <app-badge color="warning" icon="minus">Medium</app-badge>
-                  <app-badge color="success" icon="arrow-down">Low</app-badge>
+                  <pst-badge color="error" icon="arrow-up">High</pst-badge>
+                  <pst-badge color="warning" icon="minus">Medium</pst-badge>
+                  <pst-badge color="success" icon="arrow-down">Low</pst-badge>
                 </div>
               </div>
             </div>
           </div>
-          <app-code-block
+          <pst-code-block
             [code]="realWorldCode"
             language="html"
-          ></app-code-block>
+          ></pst-code-block>
         </div>
       </section>
     </div>
@@ -217,33 +217,33 @@ export class BadgeShowcaseComponent {
   imports: [BadgeComponent]
 })`;
 
-  basicCode = `<app-badge>Default</app-badge>
-<app-badge color="primary">Primary</app-badge>
-<app-badge color="gray">Secondary</app-badge>
-<app-badge color="success">Success</app-badge>
-<app-badge color="warning">Warning</app-badge>
-<app-badge color="error">Danger</app-badge>
-<app-badge color="info">Info</app-badge>`;
+  basicCode = `<pst-badge>Default</pst-badge>
+<pst-badge color="primary">Primary</pst-badge>
+<pst-badge color="gray">Secondary</pst-badge>
+<pst-badge color="success">Success</pst-badge>
+<pst-badge color="warning">Warning</pst-badge>
+<pst-badge color="error">Danger</pst-badge>
+<pst-badge color="info">Info</pst-badge>`;
 
-  sizesCode = `<app-badge size="sm">Small</app-badge>
-<app-badge size="md">Medium</app-badge>
-<app-badge size="lg">Large</app-badge>`;
+  sizesCode = `<pst-badge size="sm">Small</pst-badge>
+<pst-badge size="md">Medium</pst-badge>
+<pst-badge size="lg">Large</pst-badge>`;
 
-  iconsCode = `<app-badge icon="check" color="success">Completed</app-badge>
-<app-badge icon="x" color="error">Failed</app-badge>
-<app-badge icon="clock" color="warning">Pending</app-badge>
-<app-badge icon="info" color="info">Information</app-badge>
-<app-badge icon="star" color="primary">Featured</app-badge>`;
+  iconsCode = `<pst-badge icon="check" color="success">Completed</pst-badge>
+<pst-badge icon="x" color="error">Failed</pst-badge>
+<pst-badge icon="clock" color="warning">Pending</pst-badge>
+<pst-badge icon="info" color="info">Information</pst-badge>
+<pst-badge icon="star" color="primary">Featured</pst-badge>`;
 
-  pillCode = `<app-badge shape="pill">Default Pill</app-badge>
-<app-badge shape="pill" color="primary">Primary Pill</app-badge>
-<app-badge shape="pill" color="success">Success Pill</app-badge>
-<app-badge shape="pill" color="error">Danger Pill</app-badge>`;
+  pillCode = `<pst-badge shape="pill">Default Pill</pst-badge>
+<pst-badge shape="pill" color="primary">Primary Pill</pst-badge>
+<pst-badge shape="pill" color="success">Success Pill</pst-badge>
+<pst-badge shape="pill" color="error">Danger Pill</pst-badge>`;
 
-  removableCode = `<app-badge [removable]="true" (remove)="onRemove('Tag 1')">Tag 1</app-badge>
-<app-badge [removable]="true" (remove)="onRemove('Tag 2')" color="primary">Tag 2</app-badge>
-<app-badge [removable]="true" (remove)="onRemove('Tag 3')" color="success">Tag 3</app-badge>
-<app-badge [removable]="true" shape="pill" (remove)="onRemove('Filter')" color="info">Filter</app-badge>
+  removableCode = `<pst-badge [removable]="true" (remove)="onRemove('Tag 1')">Tag 1</pst-badge>
+<pst-badge [removable]="true" (remove)="onRemove('Tag 2')" color="primary">Tag 2</pst-badge>
+<pst-badge [removable]="true" (remove)="onRemove('Tag 3')" color="success">Tag 3</pst-badge>
+<pst-badge [removable]="true" shape="pill" (remove)="onRemove('Filter')" color="info">Filter</pst-badge>
 
 // Component:
 onRemove(tag: string): void {
@@ -251,20 +251,20 @@ onRemove(tag: string): void {
 }`;
 
   realWorldCode = `<!-- Status Indicators -->
-<app-badge color="success" icon="check-circle">Active</app-badge>
-<app-badge color="error" icon="x-circle">Inactive</app-badge>
-<app-badge color="warning" icon="clock">Pending</app-badge>
+<pst-badge color="success" icon="check-circle">Active</pst-badge>
+<pst-badge color="error" icon="x-circle">Inactive</pst-badge>
+<pst-badge color="warning" icon="clock">Pending</pst-badge>
 
 <!-- Counts -->
-<app-badge color="error" size="sm">99+</app-badge>
-<app-badge color="primary" size="sm">5</app-badge>
+<pst-badge color="error" size="sm">99+</pst-badge>
+<pst-badge color="primary" size="sm">5</pst-badge>
 
 <!-- Categories -->
-<app-badge shape="pill" color="gray">Technology</app-badge>
-<app-badge shape="pill" color="gray">Design</app-badge>
+<pst-badge shape="pill" color="gray">Technology</pst-badge>
+<pst-badge shape="pill" color="gray">Design</pst-badge>
 
 <!-- Priority -->
-<app-badge color="error" icon="arrow-up">High</app-badge>
-<app-badge color="warning" icon="minus">Medium</app-badge>
-<app-badge color="success" icon="arrow-down">Low</app-badge>`;
+<pst-badge color="error" icon="arrow-up">High</pst-badge>
+<pst-badge color="warning" icon="minus">Medium</pst-badge>
+<pst-badge color="success" icon="arrow-down">Low</pst-badge>`;
 }

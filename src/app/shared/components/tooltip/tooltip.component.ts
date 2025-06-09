@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { TooltipPosition } from './tooltip.service';
 
 @Component({
-  selector: 'app-tooltip',
+  selector: 'pst-tooltip',
   standalone: true,
   imports: [CommonModule],
   template: `

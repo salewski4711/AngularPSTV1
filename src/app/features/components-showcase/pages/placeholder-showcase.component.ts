@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-placeholder-showcase',
+  selector: 'pst-placeholder-showcase',
   standalone: true,
   imports: [CommonModule],
   template: `

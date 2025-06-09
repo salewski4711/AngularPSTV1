@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 export type SpinnerType = 'circle' | 'dots' | 'bars';
 
 @Component({
-  selector: 'app-spinner',
+  selector: 'pst-spinner',
   standalone: true,
   imports: [CommonModule],
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -10,7 +10,7 @@ import { SearchModalComponent } from '../../shared/components/search-modal/searc
 import { NotificationsComponent } from '../../shared/components/notifications/notifications.component';
 
 @Component({
-  selector: 'app-header',
+  selector: 'pst-header',
   standalone: true,
   imports: [CommonModule, LogoComponent, IconComponent, SearchModalComponent, NotificationsComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -19,7 +19,7 @@ import { NotificationsComponent } from '../../shared/components/notifications/no
       <div class="container mx-auto px-4">
         <div class="flex items-center justify-between h-16">
           <!-- Logo -->
-          <app-logo size="md"></app-logo>
+          <pst-logo size="md"></pst-logo>
           
           <!-- Navigation - Ausgeblendet, da wir Bottom Navigation verwenden -->
           <!-- <nav class="hidden md:flex items-center space-x-8">
@@ -35,11 +35,11 @@ import { NotificationsComponent } from '../../shared/components/notifications/no
               aria-label="Search components (⌘K)"
               title="Search components (⌘K)"
             >
-              <app-icon name="search" [size]="20"></app-icon>
+              <pst-icon name="search" [size]="20"></pst-icon>
             </button>
             
             <!-- Notifications -->
-            <app-notifications></app-notifications>
+            <pst-notifications></pst-notifications>
             
             <!-- Theme Toggle -->
             <button
@@ -71,11 +71,11 @@ import { NotificationsComponent } from '../../shared/components/notifications/no
                   (click)="toggleUserMenu()"
                   class="flex items-center space-x-2 p-2 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
                 >
-                  <app-icon name="user" [size]="20"></app-icon>
+                  <pst-icon name="user" [size]="20"></pst-icon>
                   @if (currentUser$ | async; as user) {
                     <span class="text-sm font-medium">{{ user.username }}</span>
                   }
-                  <app-icon name="arrow-down" [size]="16"></app-icon>
+                  <pst-icon name="arrow-down" [size]="16"></pst-icon>
                 </button>
                 
                 <!-- Dropdown Menu -->
@@ -92,7 +92,7 @@ import { NotificationsComponent } from '../../shared/components/notifications/no
                         (click)="logout()"
                         class="w-full flex items-center space-x-2 px-3 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
                       >
-                        <app-icon name="logout" [size]="16"></app-icon>
+                        <pst-icon name="logout" [size]="16"></pst-icon>
                         <span>Abmelden</span>
                       </button>
                     </div>
@@ -107,7 +107,7 @@ import { NotificationsComponent } from '../../shared/components/notifications/no
     
     <!-- Search Modal -->
     @if (showSearch()) {
-      <app-search-modal (close)="closeSearch()"></app-search-modal>
+      <pst-search-modal (close)="closeSearch()"></pst-search-modal>
     }
   `,
   styles: []

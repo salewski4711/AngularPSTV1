@@ -1,0 +1,62 @@
+# Entity List View - Konfigurationen
+
+## 💼 Wiederverwendbare Entitäts-Konfigurationen
+
+### Kontakte:
+```typescript
+const CONTACT_CONFIG: EntityListViewConfig<Contact> = {
+  entityType: 'contacts',
+  title: 'Kontakte',
+  backRoute: '/dashboard/kontakte',
+  searchPlaceholder: 'Kontakte durchsuchen...',
+  createButtonText: 'Neuer Kontakt'
+};
+```
+
+### Verträge:
+```typescript
+const CONTRACT_CONFIG: EntityListViewConfig<Contract> = {
+  entityType: 'contracts',
+  title: 'Verträge',
+  backRoute: '/dashboard/vertraege',
+  searchPlaceholder: 'Verträge durchsuchen...',
+  createButtonText: 'Neuer Vertrag'
+};
+```
+
+### Angebote:
+```typescript
+const OFFER_CONFIG: EntityListViewConfig<Offer> = {
+  entityType: 'offers',
+  title: 'Angebote',
+  backRoute: '/dashboard/angebote',
+  searchPlaceholder: 'Angebote durchsuchen...',
+  createButtonText: 'Neues Angebot'
+};
+```
+
+### Projekte:
+```typescript
+const PROJECT_CONFIG: EntityListViewConfig<Project> = {
+  entityType: 'projects',
+  title: 'Projekte',
+  backRoute: '/dashboard/projekte',
+  searchPlaceholder: 'Projekte durchsuchen...',
+  createButtonText: 'Neues Projekt'
+};
+```
+
+## 🎨 Card-Field Konfigurationen
+
+### Standard Kontakt-Karte:
+- Avatar (Initialen)
+- Name (Titel)
+- E-Mail (Untertitel)
+- Telefon (Info)
+- Status (Badge)
+
+### Standard Vertrag-Karte:
+- Vertragsnummer (Titel)
+- Kundenname (Untertitel)
+- Wert (Währung)
+- Status (Badge)

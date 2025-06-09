@@ -117,11 +117,6 @@ export const ICONS = {
     viewBox: '0 0 24 24',
     path: 'M16 7a4 4 0 1 1-8 0 4 4 0 0 1 8 0zM12 14a7 7 0 0 0-7 7h14a7 7 0 0 0-7-7z'
   },
-  'users': {
-    name: 'users',
-    viewBox: '0 0 24 24',
-    path: 'M17 20h5v-2a3 3 0 0 0-5.356-1.857M17 20H7m10 0v-2c0-.768-.231-1.48-.629-2.072M7 20H2v-2a3 3 0 0 1 5.356-1.857M7 20v-2c0-.768.231-1.48.629-2.072m0 0A5.998 5.998 0 0 1 12 14c1.729 0 3.295.73 4.371 1.928M15 7a3 3 0 1 1-6 0 3 3 0 0 1 6 0zm6 3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zM7 10a2 2 0 1 1-4 0 2 2 0 0 1 4 0z'
-  },
   'logout': {
     name: 'logout',
     viewBox: '0 0 24 24',
@@ -165,6 +160,126 @@ export const ICONS = {
     name: 'alert-triangle',
     viewBox: '0 0 24 24',
     path: 'M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z'
+  },
+  'users': {
+    name: 'users',
+    viewBox: '0 0 24 24',
+    path: 'M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 7a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75'
+  },
+  'document-text': {
+    name: 'document-text',
+    viewBox: '0 0 24 24',
+    path: 'M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z'
+  },
+  'chart-bar': {
+    name: 'chart-bar',
+    viewBox: '0 0 24 24',
+    path: 'M9 19V13m6-4v10m-10 0h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z'
+  },
+  'template': {
+    name: 'template',
+    viewBox: '0 0 24 24',
+    path: 'M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z'
+  },
+  'clipboard-list': {
+    name: 'clipboard-list',
+    viewBox: '0 0 24 24',
+    path: 'M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01'
+  },
+  'user-plus': {
+    name: 'user-plus',
+    viewBox: '0 0 24 24',
+    path: 'M16 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M8 7a4 4 0 110 8 4 4 0 010-8zM20 8v6m-3-3h6'
+  },
+  'sparkles': {
+    name: 'sparkles',
+    viewBox: '0 0 24 24',
+    path: 'M12 2l2 7h7l-5.5 4 2 7L12 16l-5.5 4 2-7L3 9h7l2-7z'
+  },
+  'cloud-upload': {
+    name: 'cloud-upload',
+    viewBox: '0 0 24 24',
+    path: 'M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12'
+  },
+  'document-plus': {
+    name: 'document-plus',
+    viewBox: '0 0 24 24',
+    path: 'M9 13h6m-3-3v6m5 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z'
+  },
+  'duplicate': {
+    name: 'duplicate',
+    viewBox: '0 0 24 24',
+    path: 'M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z'
+  },
+  'trending-up': {
+    name: 'trending-up',
+    viewBox: '0 0 24 24',
+    path: 'M23 6l-9.5 9.5-5-5L1 18M17 6h6v6'
+  },
+  'trending-down': {
+    name: 'trending-down',
+    viewBox: '0 0 24 24',
+    path: 'M23 18l-9.5-9.5-5 5L1 6M17 18h6v-6'
+  },
+  'currency-euro': {
+    name: 'currency-euro',
+    viewBox: '0 0 24 24',
+    path: 'M14.121 6.343A4 4 0 0012 6c-1.465 0-2.732.781-3.43 1.957H12M8.571 16.043A4 4 0 0012 18a4 4 0 002.121-.343M3 12h12M3 14h9'
+  },
+  'chart-pie': {
+    name: 'chart-pie',
+    viewBox: '0 0 24 24',
+    path: 'M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z'
+  },
+  'document-report': {
+    name: 'document-report',
+    viewBox: '0 0 24 24',
+    path: 'M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z'
+  },
+  'presentation-chart-line': {
+    name: 'presentation-chart-line',
+    viewBox: '0 0 24 24',
+    path: 'M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4v12a1 1 0 001 1h14a1 1 0 001-1V4'
+  },
+  'calculator': {
+    name: 'calculator',
+    viewBox: '0 0 24 24',
+    path: 'M4 2a2 2 0 00-2 2v16a2 2 0 002 2h16a2 2 0 002-2V4a2 2 0 00-2-2H4zm1 2h14a1 1 0 011 1v3a1 1 0 01-1 1H5a1 1 0 01-1-1V5a1 1 0 011-1zm0 7h3v2H5v-2zm5 0h3v2h-3v-2zm5 0h3v2h-3v-2zM5 15h3v2H5v-2zm5 0h3v2h-3v-2zm5 0h3v2h-3v-2zm0 4h3v2h-3v-2z'
+  },
+  'pencil': {
+    name: 'pencil',
+    viewBox: '0 0 24 24',
+    path: 'M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z'
+  },
+  'lightning-bolt': {
+    name: 'lightning-bolt',
+    viewBox: '0 0 24 24',
+    path: 'M13 10V3L4 14h7v7l9-11h-7z'
+  },
+  'collection': {
+    name: 'collection',
+    viewBox: '0 0 24 24',
+    path: 'M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10'
+  },
+  'document-add': {
+    name: 'document-add',
+    viewBox: '0 0 24 24',
+    path: 'M9 13h6m-3-3v6m5 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z'
+  },
+  'shield-check': {
+    name: 'shield-check',
+    viewBox: '0 0 24 24',
+    path: 'M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z'
+  },
+  'folder-open': {
+    name: 'folder-open',
+    viewBox: '0 0 24 24',
+    path: 'M5 19a2 2 0 01-2-2V7a2 2 0 012-2h4l2 2h5a2 2 0 012 2v1M5 19h14a2 2 0 002-2v-5a2 2 0 00-2-2H9a2 2 0 00-2 2v5a2 2 0 01-2 2z'
+  },
+  'exclamation-circle': {
+    name: 'exclamation-circle',
+    viewBox: '0 0 24 24',
+    path: 'M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z'
   },
   
   // Theme
@@ -283,6 +398,21 @@ export const ICONS = {
     viewBox: '0 0 24 24',
     path: 'M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z M12 8v4m0 4h.01'
   },
+  'document-duplicate': {
+    name: 'document-duplicate',
+    viewBox: '0 0 24 24',
+    path: 'M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2'
+  },
+  'view-boards': {
+    name: 'view-boards',
+    viewBox: '0 0 24 24',
+    path: 'M9 3v18m6-18v18M3 7h18M3 17h18M3 3h18a2 2 0 012 2v14a2 2 0 01-2 2H3a2 2 0 01-2-2V5a2 2 0 012-2z'
+  },
+  'cog': {
+    name: 'cog',
+    viewBox: '0 0 24 24',
+    path: 'M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z M15 12a3 3 0 11-6 0 3 3 0 016 0z'
+  },
   'check-circle': {
     name: 'check-circle',
     viewBox: '0 0 24 24',
@@ -347,6 +477,56 @@ export const ICONS = {
     name: 'list-ordered',
     viewBox: '0 0 24 24',
     path: 'M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 0a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H4m3 0H4m3 4H4v-2'
+  },
+  'file': {
+    name: 'file',
+    viewBox: '0 0 24 24',
+    path: 'M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z M13 2v7h7'
+  },
+  'file-text': {
+    name: 'file-text',
+    viewBox: '0 0 24 24',
+    path: 'M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z M14 2v6h6 M16 13H8 M16 17H8 M10 9H8'
+  },
+  'image': {
+    name: 'image',
+    viewBox: '0 0 24 24',
+    path: 'M21 19V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2z M8.5 13.5l2.5 3L14.5 11l4.5 6 M10 8.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z'
+  },
+  'play-circle': {
+    name: 'play-circle',
+    viewBox: '0 0 24 24',
+    path: 'M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z M10 8l6 4-6 4V8z'
+  },
+  'table': {
+    name: 'table',
+    viewBox: '0 0 24 24',
+    path: 'M3 6h18m-18 6h18M3 3h18v18H3z M9 3v18m6-18v18'
+  },
+  'monitor': {
+    name: 'monitor',
+    viewBox: '0 0 24 24',
+    path: 'M20 3H4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2z M8 21h8 M12 17v4'
+  },
+  'archive': {
+    name: 'archive',
+    viewBox: '0 0 24 24',
+    path: 'M21 8v13H3V8 M23 3H1v5h22V3z M10 12h4'
+  },
+  'user-check': {
+    name: 'user-check',
+    viewBox: '0 0 24 24',
+    path: 'M16 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M8 7a4 4 0 110 8 4 4 0 010-8zM20 8l2 2 4-4'
+  },
+  'refresh': {
+    name: 'refresh',
+    viewBox: '0 0 24 24',
+    path: 'M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15'
+  },
+  'plus-circle': {
+    name: 'plus-circle',  
+    viewBox: '0 0 24 24',
+    path: 'M12 9v6m-3-3h6m9 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0z'
   }
 } as const;
 

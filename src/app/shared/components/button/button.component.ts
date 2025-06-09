@@ -9,7 +9,7 @@ export type ButtonVariant = 'primary' | 'secondary' | 'outline-primary' | 'terti
 export type ButtonSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 
 @Component({
-  selector: 'app-button',
+  selector: 'pst-button',
   standalone: true,
   imports: [CommonModule, IconComponent, RippleDirective, SpinnerComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -25,10 +25,10 @@ export type ButtonSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
     >
       <span class="inline-flex items-center justify-center gap-2">
         @if (loading) {
-          <app-spinner [type]="spinnerType" [size]="size"></app-spinner>
+          <pst-spinner [type]="spinnerType" [size]="size"></pst-spinner>
         }
         @if (icon && iconPosition === 'left' && !loading) {
-          <app-icon [name]="icon" [size]="iconSize()"></app-icon>
+          <pst-icon [name]="icon" [size]="iconSize()"></pst-icon>
         }
         @if (!iconOnly) {
           @if (loading && loadingText) {
@@ -38,7 +38,7 @@ export type ButtonSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
           }
         }
         @if (icon && iconPosition === 'right' && !loading && !iconOnly) {
-          <app-icon [name]="icon" [size]="iconSize()"></app-icon>
+          <pst-icon [name]="icon" [size]="iconSize()"></pst-icon>
         }
       </span>
     </button>

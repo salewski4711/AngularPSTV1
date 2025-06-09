@@ -10,10 +10,10 @@
 
 ### Erwartete Props (aus navigation-demo.component.ts):
 ```html
-<app-button variant="primary" [disabled]="!newNotificationTitle">Add</app-button>
-<app-button variant="secondary" size="small">Mark All Read</app-button>
-<app-button variant="danger" size="small">Clear All</app-button>
-<app-button variant="ghost" size="small">Badge</app-button>
+<pst-button variant="primary" [disabled]="!newNotificationTitle">Add</pst-button>
+<pst-button variant="secondary" size="small">Mark All Read</pst-button>
+<pst-button variant="danger" size="small">Clear All</pst-button>
+<pst-button variant="ghost" size="small">Badge</pst-button>
 ```
 
 ### ButtonComponent muss erstellt werden mit:

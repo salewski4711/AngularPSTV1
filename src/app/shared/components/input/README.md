@@ -11,7 +11,7 @@ import { InputComponent } from '@shared/components/input/input.component';
   standalone: true,
   imports: [InputComponent, ReactiveFormsModule],
   template: `
-    <app-input
+    <pst-input
       label="Email Address"
       type="email"
       placeholder="name@example.com"
@@ -54,7 +54,7 @@ export class MyComponent {
 
 ### Basic Input
 ```html
-<app-input
+<pst-input
   label="Name"
   placeholder="Enter your name"
   [formControl]="nameControl"
@@ -63,7 +63,7 @@ export class MyComponent {
 
 ### With Icons
 ```html
-<app-input
+<pst-input
   label="Search"
   type="search"
   placeholder="Search..."
@@ -75,7 +75,7 @@ export class MyComponent {
 
 ### Password Input
 ```html
-<app-input
+<pst-input
   label="Password"
   type="password"
   placeholder="Enter password"
@@ -86,7 +86,7 @@ export class MyComponent {
 
 ### Loading State
 ```html
-<app-input
+<pst-input
   label="Username"
   placeholder="Checking availability..."
   [loading]="true"

@@ -1,17 +1,18 @@
 import { Component, Input, computed, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ICONS, IconName, isValidIconName } from './icon-definitions';
+import { IconSizeVariant, getIconSize } from '../utils/icon-size.utils';
 
 @Component({
-  selector: 'app-icon',
+  selector: 'pst-icon',
   standalone: true,
   imports: [CommonModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     @if (iconPath()) {
       <svg 
-        [attr.width]="size"
-        [attr.height]="size"
+        [attr.width]="computedSize()"
+        [attr.height]="computedSize()"
         [attr.viewBox]="viewBox()"
         fill="none"
         stroke="currentColor"
@@ -36,9 +37,11 @@ import { ICONS, IconName, isValidIconName } from './icon-definitions';
 })
 export class IconComponent {
   @Input({ required: true }) name!: string;
-  @Input() size: number = 20;
+  @Input() size: IconSizeVariant | number = 'md';
   @Input() cssClasses: string = '';
   @Input() ariaLabel?: string;
+
+  computedSize = computed(() => getIconSize(this.size));
 
   iconPath = computed(() => {
     if (isValidIconName(this.name)) {

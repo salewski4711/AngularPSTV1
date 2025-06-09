@@ -94,14 +94,14 @@ The navigation demo is accessible at `/navigation-demo` and requires authenticat
 
 ### Basic Usage
 ```html
-<app-top-navigation
+<pst-top-navigation
   [config]="navigationConfig"
   (logoClick)="onLogoClick()"
   (searchSubmit)="onSearchSubmit($event)"
   (notificationClick)="onNotificationClick($event)"
   (userMenuAction)="onUserMenuAction($event)"
   (mobileMenuToggle)="onMobileMenuToggle($event)"
-></app-top-navigation>
+></pst-top-navigation>
 ```
 
 ### Configuration Options

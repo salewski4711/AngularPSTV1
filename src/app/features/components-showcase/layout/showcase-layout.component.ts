@@ -6,7 +6,7 @@ import { filter } from 'rxjs/operators';
 import { showcaseNavigation } from '../showcase-navigation';
 
 @Component({
-  selector: 'app-showcase-layout',
+  selector: 'pst-showcase-layout',
   standalone: true,
   imports: [CommonModule, RouterModule, IconComponent],
   template: `
@@ -16,7 +16,7 @@ import { showcaseNavigation } from '../showcase-navigation';
         <div class="p-6">
           <!-- Header -->
           <div class="flex items-center gap-3 mb-8">
-            <app-icon name="package" class="text-orange-600" [size]="24"></app-icon>
+            <pst-icon name="package" class="text-orange-600" [size]="24"></pst-icon>
             <h2 class="text-xl font-bold text-gray-900 dark:text-gray-100">Component Library</h2>
           </div>
 

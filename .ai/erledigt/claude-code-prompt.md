@@ -10,7 +10,7 @@ npm install @angular/animations
 mv "src/app/shared/components-beta/button/button-beta.component.ts" "src/app/shared/components/button/button.component.ts"
 
 # Edit button.component.ts:
-# 1. selector: 'app-button-beta' → 'app-button'
+# 1. selector: 'pst-button-beta' → 'app-button'
 # 2. class: ButtonBetaComponent → ButtonComponent  
 # 3. Remove: @Input() showBetaBadge = true;
 # 4. Remove: showBetaBadge template section

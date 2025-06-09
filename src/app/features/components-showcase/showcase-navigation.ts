@@ -133,16 +133,112 @@ export const showcaseNavigation: ShowcaseCategory[] = [
     description: 'Composite components built from atoms',
     components: [
       {
+        name: 'Alert',
+        path: '/components/molecules/alert',
+        status: 'stable',
+        description: 'Feedback component for displaying important messages and notifications'
+      },
+      {
+        name: 'Form Field',
+        path: '/components/molecules/form-field',
+        status: 'stable',
+        description: 'Container component for form inputs with label, help text, and error handling'
+      },
+      {
         name: 'Card',
         path: '/components/molecules/card',
         status: 'beta',
         description: 'Container component for grouped content'
       },
       {
+        name: 'Dashboard Widget',
+        path: '/components/molecules/dashboard-widget',
+        status: 'stable',
+        description: 'Hierarchical widget navigation for dashboard system'
+      },
+      {
         name: 'Button Group',
         path: '/components/molecules/button-group',
         status: 'stable',
         description: 'Group of buttons with shared behavior'
+      },
+      {
+        name: 'Modal',
+        path: '/components/molecules/modal',
+        status: 'stable',
+        description: 'Dialog component for overlaying content'
+      },
+      {
+        name: 'Tabs',
+        path: '/components/molecules/tabs',
+        status: 'stable',
+        description: 'Navigation component for organizing content into tabbed sections'
+      },
+      {
+        name: 'Breadcrumb',
+        path: '/components/molecules/breadcrumb',
+        status: 'stable',
+        description: 'Navigation component showing hierarchy path'
+      },
+      {
+        name: 'Dropdown',
+        path: '/components/molecules/dropdown',
+        status: 'stable',
+        description: 'Contextual menu for displaying a list of actions or options'
+      },
+      {
+        name: 'Accordion',
+        path: '/components/molecules/accordion',
+        status: 'stable',
+        description: 'Collapsible content panels for organizing information'
+      },
+      {
+        name: 'Pagination',
+        path: '/components/molecules/pagination',
+        status: 'stable',
+        description: 'Navigation for paginated content with page size options'
+      },
+      {
+        name: 'Date Picker',
+        path: '/components/molecules/date-picker',
+        status: 'stable',
+        description: 'Calendar-based date selection component'
+      },
+      {
+        name: 'Time Picker',
+        path: '/components/molecules/time-picker',
+        status: 'stable',
+        description: 'Time selection with hour/minute controls and format options'
+      },
+      {
+        name: 'Bottom Navigation',
+        path: '/components/molecules/bottom-navigation',
+        status: 'stable',
+        description: 'Mobile-friendly bottom navigation bar for primary app navigation'
+      },
+      {
+        name: 'Notifications',
+        path: '/components/molecules/notifications',
+        status: 'stable',
+        description: 'Notification center for displaying system messages and alerts'
+      },
+      {
+        name: 'Search Modal',
+        path: '/components/molecules/search-modal',
+        status: 'stable',
+        description: 'Command palette-style search for finding components quickly'
+      },
+      {
+        name: 'User Menu',
+        path: '/components/molecules/user-menu',
+        status: 'stable',
+        description: 'User account dropdown with profile actions and theme toggle'
+      },
+      {
+        name: 'File Upload',
+        path: '/components/molecules/file-upload',
+        status: 'stable',
+        description: 'Drag & drop and click-to-browse file upload with preview'
       }
     ]
   },
@@ -150,7 +246,30 @@ export const showcaseNavigation: ShowcaseCategory[] = [
     name: 'Organisms',
     description: 'Complex components composed of molecules and atoms',
     components: [
-      // Future organisms will be added here
+      {
+        name: 'Top Navigation',
+        path: '/components/organisms/top-navigation',
+        status: 'stable',
+        description: 'Primary application header with logo, search, notifications, and user menu'
+      },
+      {
+        name: 'Mobile Menu',
+        path: '/components/organisms/mobile-menu',
+        status: 'stable',
+        description: 'Full-screen mobile navigation drawer with slide-in animation'
+      },
+      {
+        name: 'Stepper',
+        path: '/components/organisms/stepper',
+        status: 'stable',
+        description: 'Multi-step navigation component for guiding users through complex processes'
+      },
+      {
+        name: 'Search',
+        path: '/components/organisms/search',
+        status: 'stable',
+        description: 'Advanced search with autocomplete, recent searches, and keyboard navigation'
+      }
     ]
   }
 ];

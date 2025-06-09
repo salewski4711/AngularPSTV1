@@ -27,6 +27,97 @@ export const handlers = [
     });
   }),
 
+  // GET contacts with pagination, search and filters (High-Performance Endpoint)
+  http.get('/api/contacts', async ({ request }) => {
+    await delay(DELAY_MS / 2); // Faster response for performance testing
+    
+    const url = new URL(request.url);
+    const page = parseInt(url.searchParams.get('page') || '1');
+    const pageSize = parseInt(url.searchParams.get('pageSize') || '50');
+    const search = url.searchParams.get('search') || '';
+    const status = url.searchParams.get('status') || '';
+    const type = url.searchParams.get('type') || '';
+    const sortBy = url.searchParams.get('sortBy') || 'name';
+    const sortOrder = url.searchParams.get('sortOrder') || 'asc';
+    
+    // Generate a large dataset (simulate 100k+ contacts)
+    const totalItems = 100000;
+    const startIndex = (page - 1) * pageSize;
+    const endIndex = startIndex + pageSize;
+    
+    // Generate contacts for current page
+    const contacts = Array.from({ length: pageSize }, (_, i) => {
+      const id = startIndex + i + 1;
+      const contact = generateMockCustomer(id);
+      
+      // Add more realistic data for contacts
+      return {
+        ...contact,
+        id: id.toString(),
+        firstName: contact.name.split(' ')[0],
+        lastName: contact.name.split(' ')[1] || '',
+        company: contact.type === 'business' ? contact.name : '',
+        position: contact.type === 'business' ? 'Geschäftsführer' : '',
+        tags: ['Solar', 'Neukunde', 'Premium'][id % 3] ? [['Solar', 'Neukunde', 'Premium'][id % 3]] : [],
+        notes: `Notiz für Kontakt ${id}`,
+        lastActivity: new Date(Date.now() - Math.random() * 30 * 24 * 60 * 60 * 1000).toISOString(),
+        score: Math.floor(Math.random() * 100),
+      };
+    });
+    
+    // Apply search filter
+    let filteredContacts = contacts;
+    if (search) {
+      filteredContacts = contacts.filter(c => 
+        c.name.toLowerCase().includes(search.toLowerCase()) ||
+        c.email.toLowerCase().includes(search.toLowerCase()) ||
+        c.phone.includes(search) ||
+        c.city.toLowerCase().includes(search.toLowerCase())
+      );
+    }
+    
+    // Apply status filter
+    if (status) {
+      filteredContacts = filteredContacts.filter(c => c.status === status);
+    }
+    
+    // Apply type filter
+    if (type) {
+      filteredContacts = filteredContacts.filter(c => c.type === type);
+    }
+    
+    // Apply sorting
+    filteredContacts.sort((a, b) => {
+      const aValue = a[sortBy as keyof typeof a];
+      const bValue = b[sortBy as keyof typeof b];
+      
+      if (sortOrder === 'asc') {
+        return aValue > bValue ? 1 : -1;
+      } else {
+        return aValue < bValue ? 1 : -1;
+      }
+    });
+    
+    return HttpResponse.json({
+      success: true,
+      data: filteredContacts,
+      pagination: {
+        page,
+        pageSize,
+        totalItems,
+        totalPages: Math.ceil(totalItems / pageSize),
+        hasNextPage: endIndex < totalItems,
+        hasPreviousPage: page > 1
+      },
+      meta: {
+        searchApplied: !!search,
+        filtersApplied: !!(status || type),
+        sortedBy: sortBy,
+        sortOrder
+      }
+    });
+  }),
+
   // GET single customer
   http.get('/api/customers/:id', async ({ params }) => {
     await delay(DELAY_MS);

@@ -12,7 +12,7 @@ All components use Angular's standalone API:
 
 ```typescript
 @Component({
-  selector: 'app-example',
+  selector: 'pst-example',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
   template: './example.component.html',
@@ -31,10 +31,10 @@ export class ExampleComponent {}
 
 ```typescript
 @Component({
-  selector: 'app-customer-list-container',
+  selector: 'pst-customer-list-container',
   standalone: true,
   template: `
-    <app-customer-list 
+    <pst-customer-list 
       [customers]="customers()" 
       [loading]="loading()"
       (customerSelected)="onCustomerSelect($event)"
@@ -61,7 +61,7 @@ export class CustomerListContainerComponent {
 
 ```typescript
 @Component({
-  selector: 'app-customer-list',
+  selector: 'pst-customer-list',
   standalone: true,
   template: `...`,
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -325,7 +325,7 @@ describe('CustomerService', () => {
     <!-- Loading States -->
     <div role="status" aria-live="polite" aria-busy="true">
       <span class="sr-only">Daten werden geladen...</span>
-      <app-spinner></app-spinner>
+      <pst-spinner></pst-spinner>
     </div>
     
     <!-- Interactive Elements -->
@@ -533,19 +533,19 @@ export class SafeComponent {
  * 
  * @example Basic usage
  * ```html
- * <app-button variant="primary" (clicked)="save()">
+ * <pst-button variant="primary" (clicked)="save()">
  *   Save
- * </app-button>
+ * </pst-button>
  * ```
  * 
  * @example With loading state
  * ```html
- * <app-button 
+ * <pst-button 
  *   [loading]="saving$ | async"
  *   loadingText="Saving..."
  * >
  *   Save
- * </app-button>
+ * </pst-button>
  * ```
  */
 @Component({...})

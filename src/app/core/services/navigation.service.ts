@@ -32,6 +32,13 @@ export class NavigationService {
       icon: 'dashboard'
     },
     {
+      id: 'contacts',
+      label: 'Kontakte',
+      path: '/contacts',
+      icon: 'users',
+      badge: '100k+'
+    },
+    {
       id: 'customers',
       label: 'Customers',
       path: '/customers',

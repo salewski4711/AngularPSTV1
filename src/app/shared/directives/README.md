@@ -12,8 +12,8 @@ Eine Angular-Directive, die einen Material Design-ähnlichen Ripple-Effekt zu El
 <button [appRipple]="isEnabled">Click me</button>
 
 <!-- Mit Button-Komponente -->
-<app-button-beta [ripple]="true">Mit Ripple</app-button-beta>
-<app-button-beta [ripple]="false">Ohne Ripple</app-button-beta>
+<pst-button-beta [ripple]="true">Mit Ripple</pst-button-beta>
+<pst-button-beta [ripple]="false">Ohne Ripple</pst-button-beta>
 ```
 
 ## Features

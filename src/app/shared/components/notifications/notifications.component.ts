@@ -7,7 +7,7 @@ import { NotificationsService, Notification, NotificationType } from '../../serv
 import { cn } from '../../utils/tailwind.utils';
 
 @Component({
-  selector: 'app-notifications',
+  selector: 'pst-notifications',
   standalone: true,
   imports: [CommonModule, BadgeComponent, IconComponent],
   templateUrl: './notifications.component.html',

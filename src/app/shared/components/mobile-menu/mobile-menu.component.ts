@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, HostListener, OnInit, OnDestroy, OnChanges } from '@angular/core';
+import { Component, Input, Output, EventEmitter, HostListener, OnInit, OnDestroy, OnChanges, HostBinding } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 import { animate, state, style, transition, trigger } from '@angular/animations';
@@ -18,7 +18,7 @@ interface MenuItem {
 }
 
 @Component({
-  selector: 'app-mobile-menu',
+  selector: 'pst-mobile-menu',
   standalone: true,
   imports: [
     CommonModule,
@@ -29,7 +29,6 @@ interface MenuItem {
     // SearchComponent
   ],
   templateUrl: './mobile-menu.component.html',
-  styleUrls: ['./mobile-menu.component.scss'],
   animations: [
     trigger('slideIn', [
       state('closed', style({
@@ -65,6 +64,8 @@ interface MenuItem {
   ]
 })
 export class MobileMenuComponent implements OnInit, OnDestroy, OnChanges {
+  @HostBinding('class') hostClass = 'fixed inset-0 z-[9999] pointer-events-none';
+  
   @Input() isOpen = false;
   @Input() user: any = null;
   @Input() showSearch = true;

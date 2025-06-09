@@ -25,7 +25,7 @@ export interface MenuItem {
 }
 
 @Component({
-  selector: 'app-user-menu',
+  selector: 'pst-user-menu',
   standalone: true,
   imports: [CommonModule, AvatarComponent, IconComponent],
   templateUrl: './user-menu.component.html',
@@ -94,7 +94,7 @@ export class UserMenuComponent {
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: MouseEvent): void {
     const target = event.target as HTMLElement;
-    const isClickInside = target.closest('app-user-menu');
+    const isClickInside = target.closest('pst-user-menu');
     
     if (!isClickInside && this.isOpen()) {
       this.closeMenu();

@@ -1,35 +1,38 @@
 # Component Showcase Tasks - Status Board
 
 ## ✅ Erledigte Tasks (siehe archiv/)
-- Tasks 01-09: Alle Basis-Tasks abgeschlossen
+- Tasks 01-16: Alle Atom-Komponenten abgeschlossen
 
-## 🟡 Ready for Development - PARALLEL AUSFÜHRBAR!
+## 🟡 Ready for Development - Molecule Components
+
+### 🚀 ALLE TASKS KÖNNEN PARALLEL AUSGEFÜHRT WERDEN!
 
 | Task | Component | Time | Extraction | Source |
 |------|-----------|------|-----------|--------|
-| 10 | Typography Showcase | 1.5h | ✅ FULL | `CRM_Chatgpt_WEB/typography` |
-| 11 | Link | 2h | ❌ NEW | - |
-| 12 | Divider | 1.5h | ❌ NEW | - |
-| 13 | Tag/Chip | 2.5h | ✅ FULL | `CRM_Chatgpt_WEB/badges` |
-| 14 | Tooltip | 3h | ❌ NEW | - |
-| 15 | Progress Bar | 2h | ⚠️ PARTIAL | `CRM_Chatgpt_WEB/stepper` |
-| 16 | Skeleton | 2h | ❌ NEW | - |
+| 17 | Form Field | 2.5h | ✅ FULL | `CRM_Chatgpt_WEB/forms` |
+| 18 | Alert/Toast | 2.5h | ❌ NEW | - |
+| 19 | Modal/Dialog | 3h | ✅ FULL | `CRM_Chatgpt_WEB/modals` |
+| 20 | Dropdown Menu | 2.5h | ⚠️ PARTIAL | `CRM_Chatgpt_WEB/navigation` |
+| 21 | Tabs | 2.5h | ✅ FULL | `CRM_Chatgpt_WEB/navigation/tabs` |
+| 22 | Accordion | 2h | ❌ NEW | - |
+| 23 | Breadcrumb | 1.5h | ❌ NEW | - |
+| 24 | Pagination | 2h | ✅ FULL | `CRM_Chatgpt_WEB/tables` |
+| 25 | Date Picker | 3.5h | ❌ NEW | - |
+| 26 | Time Picker | 2.5h | ❌ NEW | - |
+| 27 | File Upload | 3h | ❌ NEW | - |
 
 ## 📊 Summary
-- **With Extraction:** 3 components (10, 13, 15)
-- **New Creation:** 4 components (11, 12, 14, 16)
-- **Total Time:** ~14.5h sequential, ~3h parallel
+- **With Extraction:** 5 components (17, 19, 20, 21, 24)
+- **New Creation:** 6 components (18, 22, 23, 25, 26, 27)
+- **Total Time:** ~27.5h sequential, ~3.5h parallel
 
-## 🚀 Execution Groups
-
-### Group A: Extraction Tasks (5h)
-- Typography + Tag/Chip + Progress
-
-### Group B: New Components (8.5h)
-- Link + Divider + Tooltip + Skeleton
+## 🎯 Component Categories
+- **Atoms (Done):** Basic building blocks
+- **Molecules (Current):** Combined components
+- **Organisms (Next):** Complex page sections
 
 ## 📝 Notes
-- Tasks 10, 13 have complete HTML/tokens to extract
-- Task 15 can extract progress elements from stepper
-- Tasks 11, 12, 14, 16 need creation from scratch
-- All tasks can run in parallel!
+- All molecule components in `pages/molecules/`
+- Follow existing patterns from atoms
+- Use Angular Signals where appropriate
+- Include dark mode support

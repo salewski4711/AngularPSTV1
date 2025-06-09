@@ -4,7 +4,7 @@ import { ButtonComponent } from '../../components/button/button.component';
 import { ButtonGroupComponent } from '../../components/button-group/button-group.component';
 
 @Component({
-  selector: 'app-beta-playground',
+  selector: 'pst-beta-playground',
   standalone: true,
   imports: [CommonModule, ButtonComponent, ButtonGroupComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -195,12 +195,12 @@ import { ButtonGroupComponent } from '../../components/button-group/button-group
             <div class="mb-6">
               <h4 class="text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">Varianten:</h4>
               <div class="flex flex-wrap gap-3">
-                <app-button variant="primary" icon="plus">Primary</app-button>
-                <app-button variant="secondary" icon="list">Secondary</app-button>
-                <app-button variant="outline-primary" icon="save">Outline</app-button>
-                <app-button variant="tertiary" icon="filter">Tertiary</app-button>
-                <app-button variant="ghost" icon="arrow-left">Ghost</app-button>
-                <app-button variant="danger" icon="trash">Danger</app-button>
+                <pst-button variant="primary" icon="plus">Primary</pst-button>
+                <pst-button variant="secondary" icon="list">Secondary</pst-button>
+                <pst-button variant="outline-primary" icon="save">Outline</pst-button>
+                <pst-button variant="tertiary" icon="filter">Tertiary</pst-button>
+                <pst-button variant="ghost" icon="arrow-left">Ghost</pst-button>
+                <pst-button variant="danger" icon="trash">Danger</pst-button>
               </div>
             </div>
             
@@ -208,11 +208,11 @@ import { ButtonGroupComponent } from '../../components/button-group/button-group
             <div class="mb-6">
               <h4 class="text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">Größen:</h4>
               <div class="flex flex-wrap items-center gap-3">
-                <app-button size="xs">XS</app-button>
-                <app-button size="sm">SM</app-button>
-                <app-button size="md">MD</app-button>
-                <app-button size="lg">LG</app-button>
-                <app-button size="xl">XL</app-button>
+                <pst-button size="xs">XS</pst-button>
+                <pst-button size="sm">SM</pst-button>
+                <pst-button size="md">MD</pst-button>
+                <pst-button size="lg">LG</pst-button>
+                <pst-button size="xl">XL</pst-button>
               </div>
             </div>
             
@@ -220,9 +220,9 @@ import { ButtonGroupComponent } from '../../components/button-group/button-group
             <div>
               <h4 class="text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">Zustände:</h4>
               <div class="flex flex-wrap gap-3">
-                <app-button>Normal</app-button>
-                <app-button [disabled]="true">Disabled</app-button>
-                <app-button [loading]="true">Loading</app-button>
+                <pst-button>Normal</pst-button>
+                <pst-button [disabled]="true">Disabled</pst-button>
+                <pst-button [loading]="true">Loading</pst-button>
               </div>
             </div>
             
@@ -237,10 +237,10 @@ import { ButtonGroupComponent } from '../../components/button-group/button-group
               <div class="mb-4">
                 <p class="text-xs text-gray-600 dark:text-gray-400 mb-2">Standard Loading (Circle Spinner):</p>
                 <div class="flex flex-wrap gap-3">
-                  <app-button variant="primary" [loading]="true">Speichern</app-button>
-                  <app-button variant="secondary" [loading]="true" loadingText="Wird geladen...">Mit Text</app-button>
-                  <app-button variant="outline-primary" [loading]="true" size="sm">Klein</app-button>
-                  <app-button variant="tertiary" [loading]="true" size="lg">Groß</app-button>
+                  <pst-button variant="primary" [loading]="true">Speichern</pst-button>
+                  <pst-button variant="secondary" [loading]="true" loadingText="Wird geladen...">Mit Text</pst-button>
+                  <pst-button variant="outline-primary" [loading]="true" size="sm">Klein</pst-button>
+                  <pst-button variant="tertiary" [loading]="true" size="lg">Groß</pst-button>
                 </div>
               </div>
               
@@ -248,24 +248,24 @@ import { ButtonGroupComponent } from '../../components/button-group/button-group
               <div class="mb-4">
                 <p class="text-xs text-gray-600 dark:text-gray-400 mb-2">Verschiedene Spinner-Typen:</p>
                 <div class="flex flex-wrap gap-3">
-                  <app-button 
+                  <pst-button 
                     variant="primary" 
                     [loading]="true" 
                     spinnerType="circle"
                     loadingText="Circle">
-                  </app-button>
-                  <app-button 
+                  </pst-button>
+                  <pst-button 
                     variant="secondary" 
                     [loading]="true" 
                     spinnerType="dots"
                     loadingText="Dots">
-                  </app-button>
-                  <app-button 
+                  </pst-button>
+                  <pst-button 
                     variant="outline-primary" 
                     [loading]="true" 
                     spinnerType="bars"
                     loadingText="Bars">
-                  </app-button>
+                  </pst-button>
                 </div>
               </div>
               
@@ -273,14 +273,14 @@ import { ButtonGroupComponent } from '../../components/button-group/button-group
               <div class="mb-4">
                 <p class="text-xs text-gray-600 dark:text-gray-400 mb-2">Icon-Only Buttons mit Loading:</p>
                 <div class="flex flex-wrap gap-3">
-                  <app-button 
+                  <pst-button 
                     icon="save" 
                     variant="primary" 
                     [iconOnly]="true" 
                     [loading]="true"
                     ariaLabel="Speichern">
-                  </app-button>
-                  <app-button 
+                  </pst-button>
+                  <pst-button 
                     icon="download" 
                     variant="ghost" 
                     [iconOnly]="true" 
@@ -288,53 +288,53 @@ import { ButtonGroupComponent } from '../../components/button-group/button-group
                     size="lg"
                     spinnerType="dots"
                     ariaLabel="Herunterladen">
-                  </app-button>
-                  <app-button 
+                  </pst-button>
+                  <pst-button 
                     icon="trash" 
                     variant="danger" 
                     [iconOnly]="true" 
                     [loading]="true"
                     size="sm"
                     ariaLabel="Löschen">
-                  </app-button>
+                  </pst-button>
                 </div>
               </div>
               
               <!-- Full Width Loading -->
               <div>
                 <p class="text-xs text-gray-600 dark:text-gray-400 mb-2">Full Width mit Loading:</p>
-                <app-button 
+                <pst-button 
                   variant="primary" 
                   [fullWidth]="true" 
                   [loading]="true"
                   loadingText="Daten werden verarbeitet...">
                   Submit Form
-                </app-button>
+                </pst-button>
               </div>
               
               <!-- Interaktive Loading Demo -->
               <div class="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700">
                 <p class="text-xs text-gray-600 dark:text-gray-400 mb-2">🎮 Interaktive Demo (Klicken zum Testen):</p>
                 <div class="flex flex-wrap gap-3">
-                  <app-button 
+                  <pst-button 
                     variant="primary" 
                     icon="save"
                     [loading]="isLoading1"
                     loadingText="Speichern..."
                     (clicked)="simulateLoading(1)">
                     Speichern
-                  </app-button>
+                  </pst-button>
                   
-                  <app-button 
+                  <pst-button 
                     variant="secondary" 
                     [loading]="isLoading2"
                     spinnerType="dots"
                     loadingText="Hochladen..."
                     (clicked)="simulateLoading(2)">
                     Datei hochladen
-                  </app-button>
+                  </pst-button>
                   
-                  <app-button 
+                  <pst-button 
                     icon="download"
                     variant="outline-primary" 
                     [iconOnly]="true"
@@ -343,7 +343,7 @@ import { ButtonGroupComponent } from '../../components/button-group/button-group
                     ariaLabel="Download"
                     size="lg"
                     (clicked)="simulateLoading(3)">
-                  </app-button>
+                  </pst-button>
                 </div>
                 <p class="text-xs text-gray-500 dark:text-gray-400 mt-2">
                   💡 Buttons werden automatisch nach 1.5-3 Sekunden wieder aktiviert
@@ -358,9 +358,9 @@ import { ButtonGroupComponent } from '../../components/button-group/button-group
                 Klicken Sie auf die Buttons, um den Welleneffekt zu sehen!
               </p>
               <div class="flex flex-wrap gap-3">
-                <app-button variant="primary" [ripple]="true">Mit Ripple</app-button>
-                <app-button variant="secondary">Ohne Ripple (Standard)</app-button>
-                <app-button icon="bell" variant="ghost" [iconOnly]="true" size="lg" [ripple]="true" ariaLabel="Icon mit Ripple"></app-button>
+                <pst-button variant="primary" [ripple]="true">Mit Ripple</pst-button>
+                <pst-button variant="secondary">Ohne Ripple (Standard)</pst-button>
+                <pst-button icon="bell" variant="ghost" [iconOnly]="true" size="lg" [ripple]="true" ariaLabel="Icon mit Ripple"></pst-button>
               </div>
             </div>
             
@@ -375,19 +375,19 @@ import { ButtonGroupComponent } from '../../components/button-group/button-group
                 <div>
                   <p class="text-xs text-gray-600 dark:text-gray-400 mb-2">Standard (keine Toggle-Funktion):</p>
                   <div class="flex gap-3">
-                    <app-button-group ariaLabel="Filter und Sortierung">
-                      <app-button icon="filter" variant="tertiary" size="sm">Filter</app-button>
-                      <app-button icon="arrow-down" variant="tertiary" size="sm">Sortieren</app-button>
-                      <app-button icon="download" variant="tertiary" size="sm">Export</app-button>
-                    </app-button-group>
+                    <pst-button-group ariaLabel="Filter und Sortierung">
+                      <pst-button icon="filter" variant="tertiary" size="sm">Filter</pst-button>
+                      <pst-button icon="arrow-down" variant="tertiary" size="sm">Sortieren</pst-button>
+                      <pst-button icon="download" variant="tertiary" size="sm">Export</pst-button>
+                    </pst-button-group>
                     
-                    <app-button-group ariaLabel="Seitennavigation">
-                      <app-button variant="outline-primary" size="sm">Zurück</app-button>
-                      <app-button variant="outline-primary" size="sm">1</app-button>
-                      <app-button variant="outline-primary" size="sm">2</app-button>
-                      <app-button variant="outline-primary" size="sm">3</app-button>
-                      <app-button variant="outline-primary" size="sm">Weiter</app-button>
-                    </app-button-group>
+                    <pst-button-group ariaLabel="Seitennavigation">
+                      <pst-button variant="outline-primary" size="sm">Zurück</pst-button>
+                      <pst-button variant="outline-primary" size="sm">1</pst-button>
+                      <pst-button variant="outline-primary" size="sm">2</pst-button>
+                      <pst-button variant="outline-primary" size="sm">3</pst-button>
+                      <pst-button variant="outline-primary" size="sm">Weiter</pst-button>
+                    </pst-button-group>
                   </div>
                 </div>
                 
@@ -397,29 +397,29 @@ import { ButtonGroupComponent } from '../../components/button-group/button-group
                   <div class="flex flex-wrap gap-3">
                     <div>
                       <p class="text-xs text-gray-500 mb-1">Ansicht-Switcher:</p>
-                      <app-button-group 
+                      <pst-button-group 
                         ariaLabel="Ansicht wählen" 
                         mode="toggle"
                         [(value)]="selectedView"
                         (valueChange)="onViewChange($event)">
-                        <app-button icon="list" variant="tertiary" size="sm">Liste</app-button>
-                        <app-button icon="grid" variant="tertiary" size="sm">Kacheln</app-button>
-                        <app-button icon="calendar" variant="tertiary" size="sm">Kalender</app-button>
-                      </app-button-group>
+                        <pst-button icon="list" variant="tertiary" size="sm">Liste</pst-button>
+                        <pst-button icon="grid" variant="tertiary" size="sm">Kacheln</pst-button>
+                        <pst-button icon="calendar" variant="tertiary" size="sm">Kalender</pst-button>
+                      </pst-button-group>
                       <p class="text-xs text-gray-500 mt-1">Ausgewählt: {{ selectedView || 'Keine' }}</p>
                     </div>
                     
                     <div>
                       <p class="text-xs text-gray-500 mb-1">Zeitraum:</p>
-                      <app-button-group 
+                      <pst-button-group 
                         ariaLabel="Zeitraum wählen" 
                         mode="toggle"
                         [(value)]="selectedPeriod">
-                        <app-button variant="outline-primary" size="sm">Tag</app-button>
-                        <app-button variant="outline-primary" size="sm">Woche</app-button>
-                        <app-button variant="outline-primary" size="sm">Monat</app-button>
-                        <app-button variant="outline-primary" size="sm">Jahr</app-button>
-                      </app-button-group>
+                        <pst-button variant="outline-primary" size="sm">Tag</pst-button>
+                        <pst-button variant="outline-primary" size="sm">Woche</pst-button>
+                        <pst-button variant="outline-primary" size="sm">Monat</pst-button>
+                        <pst-button variant="outline-primary" size="sm">Jahr</pst-button>
+                      </pst-button-group>
                       <p class="text-xs text-gray-500 mt-1">Zeitraum: {{ selectedPeriod || 'Keiner' }}</p>
                     </div>
                   </div>
@@ -430,16 +430,16 @@ import { ButtonGroupComponent } from '../../components/button-group/button-group
                   <p class="text-xs text-gray-600 dark:text-gray-400 mb-2">Toggle Mode (Mehrfachauswahl) - NEU! 🎯:</p>
                   <div>
                     <p class="text-xs text-gray-500 mb-1">Filter-Optionen:</p>
-                    <app-button-group 
+                    <pst-button-group 
                       ariaLabel="Filter auswählen" 
                       mode="toggle-multiple"
                       [(value)]="selectedFilters"
                       (valueChange)="onFiltersChange($event)">
-                      <app-button icon="check" variant="ghost" size="sm">Aktiv</app-button>
-                      <app-button icon="x" variant="ghost" size="sm">Inaktiv</app-button>
-                      <app-button icon="clock" variant="ghost" size="sm">Ausstehend</app-button>
-                      <app-button icon="warning" variant="ghost" size="sm">Kritisch</app-button>
-                    </app-button-group>
+                      <pst-button icon="check" variant="ghost" size="sm">Aktiv</pst-button>
+                      <pst-button icon="x" variant="ghost" size="sm">Inaktiv</pst-button>
+                      <pst-button icon="clock" variant="ghost" size="sm">Ausstehend</pst-button>
+                      <pst-button icon="warning" variant="ghost" size="sm">Kritisch</pst-button>
+                    </pst-button-group>
                     <p class="text-xs text-gray-500 mt-1">Ausgewählte Filter: {{ selectedFilters.length ? selectedFilters.join(', ') : 'Keine' }}</p>
                   </div>
                 </div>
@@ -448,16 +448,16 @@ import { ButtonGroupComponent } from '../../components/button-group/button-group
                 <div>
                   <p class="text-xs text-gray-600 dark:text-gray-400 mb-2">Vertikale Toggle-Gruppe:</p>
                   <div class="flex gap-4">
-                    <app-button-group 
+                    <pst-button-group 
                       orientation="vertical" 
                       ariaLabel="Aktionen"
                       mode="toggle"
                       [(value)]="selectedAction">
-                      <app-button icon="edit" variant="ghost">Bearbeiten</app-button>
-                      <app-button icon="copy" variant="ghost">Duplizieren</app-button>
-                      <app-button icon="trash" variant="ghost">Löschen</app-button>
-                      <app-button icon="download" variant="ghost">Exportieren</app-button>
-                    </app-button-group>
+                      <pst-button icon="edit" variant="ghost">Bearbeiten</pst-button>
+                      <pst-button icon="copy" variant="ghost">Duplizieren</pst-button>
+                      <pst-button icon="trash" variant="ghost">Löschen</pst-button>
+                      <pst-button icon="download" variant="ghost">Exportieren</pst-button>
+                    </pst-button-group>
                     <div class="text-xs text-gray-500">
                       <p>Ausgewählte Aktion:</p>
                       <p class="font-medium">{{ selectedAction || 'Keine' }}</p>

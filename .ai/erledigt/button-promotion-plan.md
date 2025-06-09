@@ -13,7 +13,7 @@
 mv "src/app/shared/components-beta/button/button-beta.component.ts" "src/app/shared/components/button/button.component.ts"
 
 # 2. Edit button.component.ts:
-#    selector: 'app-button-beta' → 'app-button'
+#    selector: 'pst-button-beta' → 'app-button'
 #    class: ButtonBetaComponent → ButtonComponent  
 #    Remove: showBetaBadge features
 

@@ -1,18 +1,22 @@
 @if (isAuthenticated$ | async) {
   <!-- Authenticated Layout with Top Navigation -->
-  <app-top-navigation
+  <pst-top-navigation
     [config]="navigationConfig"
     (logoClick)="onLogoClick()"
     (searchSubmit)="onSearchSubmit($event)"
     (notificationClick)="onNotificationClick($event)"
     (userMenuAction)="onUserMenuAction($event)"
     (mobileMenuToggle)="onMobileMenuToggle($event)"
-  ></app-top-navigation>
-  <main class="min-h-screen bg-gray-50 dark:bg-black transition-colors duration-300 pb-16">
-    <router-outlet></router-outlet>
+  ></pst-top-navigation>
+  <main class="min-h-screen bg-gray-50 dark:bg-[var(--color-background)] transition-colors duration-300 pb-16">
+    <div class="w-full flex justify-center px-4 sm:px-6 lg:px-8">
+      <div class="w-full max-w-7xl">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
   </main>
   <!-- Bottom Navigation immer sichtbar -->
-  <app-bottom-navigation></app-bottom-navigation>
+  <pst-bottom-navigation></pst-bottom-navigation>
 } @else {
   <!-- Unauthenticated Layout - No Header -->
   <router-outlet></router-outlet>

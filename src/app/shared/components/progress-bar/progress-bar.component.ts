@@ -1,12 +1,12 @@
 import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-export type ProgressVariant = 'linear' | 'segmented' | 'circular';
+export type ProgressVariant = 'linear' | 'circular';
 export type ProgressSize = 'sm' | 'md' | 'lg';
 export type ProgressColor = 'primary' | 'success' | 'warning' | 'error' | 'info';
 
 @Component({
-  selector: 'app-progress-bar',
+  selector: 'pst-progress-bar',
   standalone: true,
   imports: [CommonModule],
   template: `
@@ -14,38 +14,21 @@ export type ProgressColor = 'primary' | 'success' | 'warning' | 'error' | 'info'
     <div *ngIf="variant === 'linear'" [class]="containerClasses">
       <div class="flex justify-between items-center mb-2" *ngIf="showLabel">
         <span class="text-sm font-medium text-gray-700 dark:text-gray-300">{{ label }}</span>
-        <span class="text-sm font-medium text-gray-700 dark:text-gray-300">{{ value }}%</span>
+        <span class="text-sm font-medium text-gray-700 dark:text-gray-300">{{ Math.round((value / max) * 100) }}%</span>
       </div>
       <div [class]="linearTrackClasses">
         <div 
           [class]="linearBarClasses"
-          [style.width.%]="value"
+          [style.width.%]="(value / max) * 100"
           [attr.role]="'progressbar'"
           [attr.aria-valuenow]="value"
           [attr.aria-valuemin]="0"
-          [attr.aria-valuemax]="100"
+          [attr.aria-valuemax]="max"
           [attr.aria-label]="label || 'Progress'">
         </div>
       </div>
     </div>
 
-    <!-- Segmented Progress -->
-    <div *ngIf="variant === 'segmented'" [class]="containerClasses">
-      <div class="flex justify-between items-center mb-2" *ngIf="showLabel">
-        <span class="text-sm font-medium text-gray-700 dark:text-gray-300">{{ label }}</span>
-        <span class="text-sm font-medium text-gray-700 dark:text-gray-300">{{ completedSegments }}/{{ segments }}</span>
-      </div>
-      <div class="flex gap-1">
-        <div 
-          *ngFor="let segment of segmentArray; let i = index"
-          [class]="getSegmentClasses(i)"
-          [attr.role]="'progressbar'"
-          [attr.aria-valuenow]="i < completedSegments ? 100 : 0"
-          [attr.aria-valuemin]="0"
-          [attr.aria-valuemax]="100">
-        </div>
-      </div>
-    </div>
 
     <!-- Circular Progress -->
     <div *ngIf="variant === 'circular'" [class]="circularContainerClasses">
@@ -100,21 +83,16 @@ export type ProgressColor = 'primary' | 'success' | 'warning' | 'error' | 'info'
 export class ProgressBarComponent {
   @Input() variant: ProgressVariant = 'linear';
   @Input() value = 0;
+  @Input() max = 100;
   @Input() size: ProgressSize = 'md';
   @Input() color: ProgressColor = 'primary';
   @Input() label?: string;
   @Input() showLabel = true;
   @Input() animated = true;
-  @Input() segments = 4; // For segmented variant
   @Input() indeterminate = false;
 
-  get completedSegments(): number {
-    return Math.floor((this.value / 100) * this.segments);
-  }
-
-  get segmentArray(): number[] {
-    return Array(this.segments).fill(0);
-  }
+  // Expose Math for template
+  Math = Math;
 
   get radius(): number {
     return 45 - this.strokeWidth / 2;
@@ -185,20 +163,6 @@ export class ProgressBarComponent {
     return classes.join(' ');
   }
 
-  getSegmentClasses(index: number): string {
-    const baseClasses = [
-      'flex-1 rounded-full transition-all duration-300',
-      this.sizeClasses[this.size]
-    ];
-    
-    if (index < this.completedSegments) {
-      baseClasses.push(this.colorClasses[this.color]);
-    } else {
-      baseClasses.push('bg-gray-200 dark:bg-gray-700');
-    }
-    
-    return baseClasses.join(' ');
-  }
 
   get circularContainerClasses(): string {
     const sizes: Record<ProgressSize, string> = {

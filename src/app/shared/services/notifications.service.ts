@@ -87,11 +87,12 @@ export class NotificationsService {
     this.notificationsSubject.next(notifications);
   }
 
-  addNotification(notification: Omit<Notification, 'id' | 'timestamp'>): void {
+  addNotification(notification: Omit<Notification, 'id' | 'timestamp' | 'read'>): void {
     const newNotification: Notification = {
       ...notification,
       id: this.generateId(),
-      timestamp: new Date()
+      timestamp: new Date(),
+      read: false
     };
 
     const currentNotifications = [...this.notificationsSignal()];

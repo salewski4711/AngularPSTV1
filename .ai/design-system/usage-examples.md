@@ -5,101 +5,101 @@
 ### Container
 ```html
 <!-- Standard Container (max-width: 1280px) -->
-<app-container>
+<pst-container>
   <h1>Mein Content</h1>
-</app-container>
+</pst-container>
 
 <!-- Full Width Container -->
-<app-container size="full" [noPadding]="true">
+<pst-container size="full" [noPadding]="true">
   <img src="hero.jpg" class="w-full">
-</app-container>
+</pst-container>
 
 <!-- Small Container für Formulare -->
-<app-container size="sm">
-  <app-login-form></app-login-form>
-</app-container>
+<pst-container size="sm">
+  <pst-login-form></pst-login-form>
+</pst-container>
 ```
 
 ### Grid System
 ```html
 <!-- Responsive 3-Column Grid -->
-<app-grid [cols]="1" [colsMd]="2" [colsLg]="3" [gap]="6">
-  <app-card>Card 1</app-card>
-  <app-card>Card 2</app-card>
-  <app-card>Card 3</app-card>
-</app-grid>
+<pst-grid [cols]="1" [colsMd]="2" [colsLg]="3" [gap]="6">
+  <pst-card>Card 1</pst-card>
+  <pst-card>Card 2</pst-card>
+  <pst-card>Card 3</pst-card>
+</pst-grid>
 
 <!-- Grid mit unterschiedlichen Spans -->
-<app-grid [cols]="12" [gap]="4">
-  <app-grid-item [span]="8" [spanMd]="9">
-    <app-main-content></app-main-content>
-  </app-grid-item>
-  <app-grid-item [span]="4" [spanMd]="3">
-    <app-sidebar></app-sidebar>
-  </app-grid-item>
-</app-grid>
+<pst-grid [cols]="12" [gap]="4">
+  <pst-grid-item [span]="8" [spanMd]="9">
+    <pst-main-content></pst-main-content>
+  </pst-grid-item>
+  <pst-grid-item [span]="4" [spanMd]="3">
+    <pst-sidebar></pst-sidebar>
+  </pst-grid-item>
+</pst-grid>
 ```
 
 ## Typography
 
 ```html
 <!-- Überschriften -->
-<app-text variant="h1">Haupt-Überschrift</app-text>
-<app-text variant="h2" color="var(--color-primary)">Farbige Überschrift</app-text>
-<app-text variant="h3" align="center">Zentrierte Überschrift</app-text>
+<pst-text variant="h1">Haupt-Überschrift</pst-text>
+<pst-text variant="h2" color="var(--color-primary)">Farbige Überschrift</pst-text>
+<pst-text variant="h3" align="center">Zentrierte Überschrift</pst-text>
 
 <!-- Body Text -->
-<app-text variant="body">
+<pst-text variant="body">
   Standard Paragraph mit automatischem Dark Mode Support.
-</app-text>
+</pst-text>
 
-<app-text variant="body-sm" weight="medium">
+<pst-text variant="body-sm" weight="medium">
   Kleinerer Text mit medium Gewicht.
-</app-text>
+</pst-text>
 
 <!-- Utility Texte -->
-<app-text variant="caption" className="text-gray-500">
+<pst-text variant="caption" className="text-gray-500">
   Caption Text für zusätzliche Informationen
-</app-text>
+</pst-text>
 
-<app-text variant="overline">
+<pst-text variant="overline">
   Overline Text
-</app-text>
+</pst-text>
 ```
 
 ## Zusammengesetzte Layouts
 
 ```html
 <!-- Dashboard Layout -->
-<app-container>
-  <app-grid [cols]="1" [colsLg]="4" [gap]="6">
+<pst-container>
+  <pst-grid [cols]="1" [colsLg]="4" [gap]="6">
     <!-- Stats Cards -->
-    <app-card variant="elevated">
-      <app-text variant="overline" className="text-gray-500">Umsatz</app-text>
-      <app-text variant="h2">€125.430</app-text>
-      <app-text variant="caption" className="text-green-600">+12% vs. Vormonat</app-text>
-    </app-card>
+    <pst-card variant="elevated">
+      <pst-text variant="overline" className="text-gray-500">Umsatz</pst-text>
+      <pst-text variant="h2">€125.430</pst-text>
+      <pst-text variant="caption" className="text-green-600">+12% vs. Vormonat</pst-text>
+    </pst-card>
     
     <!-- Weitere Stats... -->
-  </app-grid>
+  </pst-grid>
   
   <!-- Main Content Grid -->
-  <app-grid [cols]="1" [colsLg]="3" [gap]="6" className="mt-8">
-    <app-grid-item [span]="1" [spanLg]="2">
-      <app-card padding="lg">
-        <app-text variant="h3" className="mb-4">Haupt-Dashboard</app-text>
+  <pst-grid [cols]="1" [colsLg]="3" [gap]="6" className="mt-8">
+    <pst-grid-item [span]="1" [spanLg]="2">
+      <pst-card padding="lg">
+        <pst-text variant="h3" className="mb-4">Haupt-Dashboard</pst-text>
         <!-- Chart Component -->
-      </app-card>
-    </app-grid-item>
+      </pst-card>
+    </pst-grid-item>
     
-    <app-grid-item [span]="1">
-      <app-card variant="outlined">
-        <app-text variant="h4">Aktivitäten</app-text>
+    <pst-grid-item [span]="1">
+      <pst-card variant="outlined">
+        <pst-text variant="h4">Aktivitäten</pst-text>
         <!-- Activity List -->
-      </app-card>
-    </app-grid-item>
-  </app-grid>
-</app-container>
+      </pst-card>
+    </pst-grid-item>
+  </pst-grid>
+</pst-container>
 ```
 
 ## Dark Mode
@@ -108,11 +108,11 @@ Alle Komponenten unterstützen automatisch Dark Mode durch Tailwind CSS Classes:
 
 ```html
 <!-- Wird automatisch im Dark Mode angepasst -->
-<app-text>Text ist schwarz im Light Mode, weiß im Dark Mode</app-text>
+<pst-text>Text ist schwarz im Light Mode, weiß im Dark Mode</pst-text>
 
-<app-card>
+<pst-card>
   Hintergrund ist weiß im Light Mode, dunkelgrau im Dark Mode
-</app-card>
+</pst-card>
 ```
 
 ## Spacing System (8px Grid)

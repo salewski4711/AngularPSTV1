@@ -6,7 +6,7 @@ import { SelectOption, SelectSize } from './select.types';
 import { cn, formClasses } from '../../utils/tailwind.utils';
 
 @Component({
-  selector: 'app-select',
+  selector: 'pst-select',
   standalone: true,
   imports: [CommonModule],
   providers: [

@@ -8,18 +8,18 @@ A versatile tag/chip component for labeling, categorization, and filtering. Tags
 import { TagComponent } from '@app/shared/components/tag';
 
 @Component({
-  selector: 'app-example',
+  selector: 'pst-example',
   standalone: true,
   imports: [TagComponent],
   template: `
-    <app-tag color="primary">Primary Tag</app-tag>
-    <app-tag 
+    <pst-tag color="primary">Primary Tag</pst-tag>
+    <pst-tag 
       variant="outline" 
       [removable]="true"
       (remove)="handleRemove()"
     >
       Removable Tag
-    </app-tag>
+    </pst-tag>
   `
 })
 export class ExampleComponent {
@@ -53,72 +53,72 @@ export class ExampleComponent {
 
 ### Basic Usage
 ```html
-<app-tag>Default Tag</app-tag>
-<app-tag color="primary">Primary Tag</app-tag>
-<app-tag color="success">Success Tag</app-tag>
+<pst-tag>Default Tag</pst-tag>
+<pst-tag color="primary">Primary Tag</pst-tag>
+<pst-tag color="success">Success Tag</pst-tag>
 ```
 
 ### Size Variants
 ```html
-<app-tag size="xs">Extra Small</app-tag>
-<app-tag size="sm">Small</app-tag>
-<app-tag size="md">Medium</app-tag>
-<app-tag size="lg">Large</app-tag>
+<pst-tag size="xs">Extra Small</pst-tag>
+<pst-tag size="sm">Small</pst-tag>
+<pst-tag size="md">Medium</pst-tag>
+<pst-tag size="lg">Large</pst-tag>
 ```
 
 ### Style Variants
 ```html
-<app-tag variant="filled" color="primary">Filled</app-tag>
-<app-tag variant="outline" color="primary">Outline</app-tag>
-<app-tag variant="subtle" color="primary">Subtle</app-tag>
+<pst-tag variant="filled" color="primary">Filled</pst-tag>
+<pst-tag variant="outline" color="primary">Outline</pst-tag>
+<pst-tag variant="subtle" color="primary">Subtle</pst-tag>
 ```
 
 ### With Icons
 ```html
-<app-tag color="success" leadingIcon="check">Active</app-tag>
-<app-tag color="error" trailingIcon="alert-triangle">Urgent</app-tag>
-<app-tag color="info" leadingIcon="info" trailingIcon="chevron-right">Learn More</app-tag>
+<pst-tag color="success" leadingIcon="check">Active</pst-tag>
+<pst-tag color="error" trailingIcon="alert-triangle">Urgent</pst-tag>
+<pst-tag color="info" leadingIcon="info" trailingIcon="chevron-right">Learn More</pst-tag>
 ```
 
 ### Removable Tags
 ```html
-<app-tag 
+<pst-tag 
   color="primary" 
   [removable]="true"
   (remove)="handleRemove()"
 >
   Removable Tag
-</app-tag>
+</pst-tag>
 ```
 
 ### Common Use Cases
 
 #### Status Tags
 ```html
-<app-tag color="success" shape="pill" leadingIcon="circle" size="sm">Online</app-tag>
-<app-tag color="warning" shape="pill" leadingIcon="circle" size="sm">Away</app-tag>
-<app-tag color="gray" shape="pill" leadingIcon="circle" size="sm">Offline</app-tag>
+<pst-tag color="success" shape="pill" leadingIcon="circle" size="sm">Online</pst-tag>
+<pst-tag color="warning" shape="pill" leadingIcon="circle" size="sm">Away</pst-tag>
+<pst-tag color="gray" shape="pill" leadingIcon="circle" size="sm">Offline</pst-tag>
 ```
 
 #### Category Tags
 ```html
-<app-tag variant="subtle" color="info" [removable]="true">Technology</app-tag>
-<app-tag variant="subtle" color="info" [removable]="true">Design</app-tag>
-<app-tag variant="subtle" color="info" [removable]="true">Business</app-tag>
+<pst-tag variant="subtle" color="info" [removable]="true">Technology</pst-tag>
+<pst-tag variant="subtle" color="info" [removable]="true">Design</pst-tag>
+<pst-tag variant="subtle" color="info" [removable]="true">Business</pst-tag>
 ```
 
 #### Version Tags
 ```html
-<app-tag size="xs" color="gray" shape="square">v2.1.0</app-tag>
-<app-tag size="xs" color="info" variant="subtle" shape="square">Beta</app-tag>
-<app-tag size="xs" color="success" variant="subtle" shape="square">Stable</app-tag>
+<pst-tag size="xs" color="gray" shape="square">v2.1.0</pst-tag>
+<pst-tag size="xs" color="info" variant="subtle" shape="square">Beta</pst-tag>
+<pst-tag size="xs" color="success" variant="subtle" shape="square">Stable</pst-tag>
 ```
 
 #### Filter Tags
 ```html
-<app-tag variant="outline" [removable]="true">Price: $0-$100</app-tag>
-<app-tag variant="outline" [removable]="true">Brand: Apple</app-tag>
-<app-tag variant="outline" [removable]="true">Color: Black</app-tag>
+<pst-tag variant="outline" [removable]="true">Price: $0-$100</pst-tag>
+<pst-tag variant="outline" [removable]="true">Brand: Apple</pst-tag>
+<pst-tag variant="outline" [removable]="true">Color: Black</pst-tag>
 ```
 
 ## Accessibility

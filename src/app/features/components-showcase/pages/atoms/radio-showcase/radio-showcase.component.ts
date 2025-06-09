@@ -5,7 +5,7 @@ import { RadioGroupComponent } from '../../../../../shared/components/radio/radi
 import { CodeBlockComponent } from '../../../shared/components/code-block.component';
 
 @Component({
-  selector: 'app-radio-showcase',
+  selector: 'pst-radio-showcase',
   standalone: true,
   imports: [
     CommonModule, 
@@ -31,10 +31,10 @@ import { CodeBlockComponent } from '../../../shared/components/code-block.compon
         <h2 class="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-4">
           Import
         </h2>
-        <app-code-block
+        <pst-code-block
           [code]="importCode"
           language="typescript"
-        ></app-code-block>
+        ></pst-code-block>
       </section>
 
       <!-- Examples -->
@@ -50,18 +50,18 @@ import { CodeBlockComponent } from '../../../shared/components/code-block.compon
           </h3>
           <div class="bg-gray-50 dark:bg-gray-900 p-8 rounded-lg mb-4">
             <div class="space-y-4">
-              <app-radio-group
+              <pst-radio-group
                 label="Select your plan"
                 [options]="planOptions"
                 [(ngModel)]="selectedPlan"
-              ></app-radio-group>
+              ></pst-radio-group>
               <p class="text-sm text-gray-600 dark:text-gray-400">Selected: {{ selectedPlan() }}</p>
             </div>
           </div>
-          <app-code-block
+          <pst-code-block
             [code]="basicCode"
             language="html"
-          ></app-code-block>
+          ></pst-code-block>
         </div>
 
         <!-- Horizontal Layout -->
@@ -70,17 +70,17 @@ import { CodeBlockComponent } from '../../../shared/components/code-block.compon
             Horizontal Layout
           </h3>
           <div class="bg-gray-50 dark:bg-gray-900 p-8 rounded-lg mb-4">
-            <app-radio-group
+            <pst-radio-group
               label="Choose size"
               [options]="sizeOptions"
               orientation="horizontal"
               [(ngModel)]="selectedSize"
-            ></app-radio-group>
+            ></pst-radio-group>
           </div>
-          <app-code-block
+          <pst-code-block
             [code]="horizontalCode"
             language="html"
-          ></app-code-block>
+          ></pst-code-block>
         </div>
 
         <!-- With Descriptions -->
@@ -89,16 +89,16 @@ import { CodeBlockComponent } from '../../../shared/components/code-block.compon
             With Descriptions
           </h3>
           <div class="bg-gray-50 dark:bg-gray-900 p-8 rounded-lg mb-4">
-            <app-radio-group
+            <pst-radio-group
               label="Select deployment method"
               [options]="deploymentOptions"
               [(ngModel)]="selectedDeployment"
-            ></app-radio-group>
+            ></pst-radio-group>
           </div>
-          <app-code-block
+          <pst-code-block
             [code]="withDescriptionsCode"
             language="html"
-          ></app-code-block>
+          ></pst-code-block>
         </div>
 
         <!-- States -->
@@ -108,33 +108,33 @@ import { CodeBlockComponent } from '../../../shared/components/code-block.compon
           </h3>
           <div class="bg-gray-50 dark:bg-gray-900 p-8 rounded-lg mb-4">
             <div class="space-y-6">
-              <app-radio-group
+              <pst-radio-group
                 label="Normal state"
                 [options]="stateOptions"
-              ></app-radio-group>
+              ></pst-radio-group>
               
-              <app-radio-group
+              <pst-radio-group
                 label="Disabled state"
                 [options]="stateOptions"
                 [disabled]="true"
-              ></app-radio-group>
+              ></pst-radio-group>
               
-              <app-radio-group
+              <pst-radio-group
                 label="With disabled option"
                 [options]="disabledOptionExample"
-              ></app-radio-group>
+              ></pst-radio-group>
               
-              <app-radio-group
+              <pst-radio-group
                 label="With error message"
                 [options]="stateOptions"
                 errorMessage="Please select an option"
-              ></app-radio-group>
+              ></pst-radio-group>
             </div>
           </div>
-          <app-code-block
+          <pst-code-block
             [code]="statesCode"
             language="html"
-          ></app-code-block>
+          ></pst-code-block>
         </div>
 
         <!-- With Helper Text -->
@@ -143,17 +143,17 @@ import { CodeBlockComponent } from '../../../shared/components/code-block.compon
             With Helper Text
           </h3>
           <div class="bg-gray-50 dark:bg-gray-900 p-8 rounded-lg mb-4">
-            <app-radio-group
+            <pst-radio-group
               label="Notification preferences"
               [options]="notificationOptions"
               helperText="Choose how you want to receive notifications"
               [(ngModel)]="selectedNotification"
-            ></app-radio-group>
+            ></pst-radio-group>
           </div>
-          <app-code-block
+          <pst-code-block
             [code]="helperTextCode"
             language="html"
-          ></app-code-block>
+          ></pst-code-block>
         </div>
       </section>
     </div>
@@ -228,11 +228,11 @@ export class RadioShowcaseComponent {
   imports: [RadioGroupComponent, FormsModule]
 })`;
 
-  basicCode = `<app-radio-group
+  basicCode = `<pst-radio-group
   label="Select your plan"
   [options]="planOptions"
   [(ngModel)]="selectedPlan"
-></app-radio-group>
+></pst-radio-group>
 
 // Component:
 planOptions = [
@@ -241,18 +241,18 @@ planOptions = [
   { value: 'enterprise', label: 'Enterprise' }
 ];`;
 
-  horizontalCode = `<app-radio-group
+  horizontalCode = `<pst-radio-group
   label="Choose size"
   [options]="sizeOptions"
   orientation="horizontal"
   [(ngModel)]="selectedSize"
-></app-radio-group>`;
+></pst-radio-group>`;
 
-  withDescriptionsCode = `<app-radio-group
+  withDescriptionsCode = `<pst-radio-group
   label="Select deployment method"
   [options]="deploymentOptions"
   [(ngModel)]="selectedDeployment"
-></app-radio-group>
+></pst-radio-group>
 
 // Component:
 deploymentOptions = [
@@ -274,29 +274,29 @@ deploymentOptions = [
 ];`;
 
   statesCode = `<!-- Normal -->
-<app-radio-group label="Normal state" [options]="options"></app-radio-group>
+<pst-radio-group label="Normal state" [options]="options"></pst-radio-group>
 
 <!-- Disabled -->
-<app-radio-group label="Disabled state" [options]="options" [disabled]="true"></app-radio-group>
+<pst-radio-group label="Disabled state" [options]="options" [disabled]="true"></pst-radio-group>
 
 <!-- With disabled option -->
-<app-radio-group label="With disabled option" [options]="[
+<pst-radio-group label="With disabled option" [options]="[
   { value: 'active', label: 'Active' },
   { value: 'inactive', label: 'Inactive', disabled: true },
   { value: 'pending', label: 'Pending' }
-]"></app-radio-group>
+]"></pst-radio-group>
 
 <!-- With error message -->
-<app-radio-group 
+<pst-radio-group 
   label="With error message" 
   [options]="options" 
   errorMessage="Please select an option"
-></app-radio-group>`;
+></pst-radio-group>`;
 
-  helperTextCode = `<app-radio-group
+  helperTextCode = `<pst-radio-group
   label="Notification preferences"
   [options]="notificationOptions"
   helperText="Choose how you want to receive notifications"
   [(ngModel)]="selectedNotification"
-></app-radio-group>`;
+></pst-radio-group>`;
 }

@@ -10,7 +10,7 @@ import { MockAuthService } from './core/services/mock-auth.service';
 import { environment } from '../environments/environment';
 
 @Component({
-  selector: 'app-root',
+  selector: 'pst-root',
   imports: [CommonModule, RouterOutlet, TopNavigationComponent, BottomNavigationComponent],
   templateUrl: './app.html',
   styleUrl: './app.scss'

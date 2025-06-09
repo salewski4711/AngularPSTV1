@@ -32,9 +32,9 @@ examples/atoms/button/
 ### 3. Example File Format
 ```html
 <!-- basic.example.html -->
-<app-button variant="primary">Click me</app-button>
-<app-button variant="secondary">Click me</app-button>
-<app-button variant="ghost">Click me</app-button>
+<pst-button variant="primary">Click me</pst-button>
+<pst-button variant="secondary">Click me</pst-button>
+<pst-button variant="ghost">Click me</pst-button>
 ```
 
 ### 4. Create Example Loader Service

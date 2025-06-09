@@ -1,94 +1,33 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ShowcaseTemplateComponent, ShowcaseSection } from '../../../shared/showcase-template.component';
+import { PlaygroundConfig, PlaygroundProp } from '../../../shared/components/playground.component';
+import { ShowcaseProp } from '../../../shared/base-showcase.component';
 import { SkeletonComponent } from '../../../../../shared/components/skeleton/skeleton.component';
-import { PropsTableComponent } from '../../../shared/components/props-table.component';
-import { PlaygroundComponent, PlaygroundProp } from '../../../shared/components/playground.component';
-import { CodeBlockComponent } from '../../../shared/components/code-block.component';
-import { BaseShowcaseComponent } from '../../../shared/base-showcase.component';
 
 @Component({
-  selector: 'app-skeleton-showcase',
+  selector: 'pst-skeleton-showcase',
   standalone: true,
   imports: [
     CommonModule,
-    PlaygroundComponent,
-    PropsTableComponent,
-    CodeBlockComponent
+    ShowcaseTemplateComponent
   ],
   template: `
-    <div class="space-y-12">
-      <!-- Header -->
-      <div>
-        <h2 class="text-3xl font-bold mb-4">{{ title }}</h2>
-        <p class="text-gray-600 dark:text-gray-400">
-          {{ description }}
-        </p>
-      </div>
-
-      <!-- Interactive Playground -->
-      <app-playground 
-        [config]="playgroundConfig">
-      </app-playground>
-
-      <!-- Props Table -->
-      <div>
-        <h3 class="text-2xl font-semibold mb-6">Props</h3>
-        <app-props-table [props]="props"></app-props-table>
-      </div>
-
-      <!-- Text Skeletons -->
-      <div>
-        <h3 class="text-2xl font-semibold mb-6">Text Skeletons</h3>
-        <app-code-block 
-          [code]="examples['text']"
-          language="html">
-        </app-code-block>
-      </div>
-
-      <!-- Shape Variants -->
-      <div>
-        <h3 class="text-2xl font-semibold mb-6">Shape Variants</h3>
-        <app-code-block 
-          [code]="examples['shapes']"
-          language="html">
-        </app-code-block>
-      </div>
-
-      <!-- Animations -->
-      <div>
-        <h3 class="text-2xl font-semibold mb-6">Animation Types</h3>
-        <app-code-block 
-          [code]="examples['animations']"
-          language="html">
-        </app-code-block>
-      </div>
-
-      <!-- Complex Layouts -->
-      <div>
-        <h3 class="text-2xl font-semibold mb-6">Complex Layouts</h3>
-        <app-code-block 
-          [code]="examples['complex']"
-          language="html">
-        </app-code-block>
-      </div>
-
-      <!-- Real-world Examples -->
-      <div>
-        <h3 class="text-2xl font-semibold mb-6">Real-world Examples</h3>
-        <app-code-block 
-          [code]="examples['realWorld']"
-          language="html">
-        </app-code-block>
-      </div>
-    </div>
+    <pst-showcase-template
+      [title]="title"
+      [description]="description"
+      [playgroundConfig]="playgroundConfig"
+      [props]="props"
+      [sections]="sections"
+      [bestPractices]="bestPractices">
+    </pst-showcase-template>
   `
 })
-export class SkeletonShowcaseComponent extends BaseShowcaseComponent {
-  // Properties must be defined before accessing them
-  override component = SkeletonComponent;
-  override title = 'Skeleton';
-  override description = 'Loading placeholder for content with animated states.';
-  override props = [
+export class SkeletonShowcaseComponent {
+  title = 'Skeleton';
+  description = 'Loading placeholder for content with animated states.';
+  
+  props: ShowcaseProp[] = [
     {
       name: 'variant',
       type: "'text' | 'circular' | 'rectangular' | 'button'",
@@ -127,126 +66,147 @@ export class SkeletonShowcaseComponent extends BaseShowcaseComponent {
     }
   ];
 
-  override examples: Record<string, string> = {
-    text: `<!-- Basic text skeleton -->
-<app-skeleton></app-skeleton>
+  playgroundConfig: PlaygroundConfig = {
+    component: SkeletonComponent,
+    props: this.props.map(prop => this.transformPropToPlayground(prop)),
+    code: (props: any) => this.generateCode(props)
+  };
+
+  sections: ShowcaseSection[] = [
+    {
+      title: 'Text Skeletons',
+      description: 'Different configurations for text placeholders',
+      code: `<!-- Basic text skeleton -->
+<pst-skeleton></pst-skeleton>
 
 <!-- Single line -->
-<app-skeleton [lines]="1"></app-skeleton>
+<pst-skeleton [lines]="1"></pst-skeleton>
 
 <!-- Multiple lines -->
-<app-skeleton [lines]="5"></app-skeleton>
+<pst-skeleton [lines]="5"></pst-skeleton>
 
 <!-- Custom width -->
-<app-skeleton [lines]="2" width="200px"></app-skeleton>`,
-
-    shapes: `<!-- Circular (avatar) -->
-<app-skeleton variant="circular"></app-skeleton>
+<pst-skeleton [lines]="2" width="200px"></pst-skeleton>`
+    },
+    {
+      title: 'Shape Variants',
+      description: 'Different skeleton shapes for various UI elements',
+      code: `<!-- Circular (avatar) -->
+<pst-skeleton variant="circular"></pst-skeleton>
 
 <!-- Custom sized circle -->
-<app-skeleton 
+<pst-skeleton 
   variant="circular" 
   width="80px" 
   height="80px">
-</app-skeleton>
+</pst-skeleton>
 
 <!-- Rectangular (image/card) -->
-<app-skeleton variant="rectangular"></app-skeleton>
+<pst-skeleton variant="rectangular"></pst-skeleton>
 
 <!-- Rounded rectangular -->
-<app-skeleton 
+<pst-skeleton 
   variant="rectangular" 
   [rounded]="true"
   height="200px">
-</app-skeleton>
+</pst-skeleton>
 
 <!-- Button skeleton -->
-<app-skeleton variant="button"></app-skeleton>
+<pst-skeleton variant="button"></pst-skeleton>
 
 <!-- Custom button size -->
-<app-skeleton 
+<pst-skeleton 
   variant="button" 
   width="120px" 
   height="40px">
-</app-skeleton>`,
-
-    animations: `<!-- Pulse animation (default) -->
-<app-skeleton animation="pulse"></app-skeleton>
+</pst-skeleton>`
+    },
+    {
+      title: 'Animation Types',
+      description: 'Different animation effects for loading states',
+      code: `<!-- Pulse animation (default) -->
+<pst-skeleton animation="pulse"></pst-skeleton>
 
 <!-- Wave animation -->
-<app-skeleton animation="wave"></app-skeleton>
+<pst-skeleton animation="wave"></pst-skeleton>
 
 <!-- No animation -->
-<app-skeleton animation="none"></app-skeleton>
+<pst-skeleton animation="none"></pst-skeleton>
 
 <!-- Different animations for comparison -->
 <div class="space-y-4">
   <div>
     <p class="text-sm font-medium mb-2">Pulse</p>
-    <app-skeleton animation="pulse" [lines]="2"></app-skeleton>
+    <pst-skeleton animation="pulse" [lines]="2"></pst-skeleton>
   </div>
   <div>
     <p class="text-sm font-medium mb-2">Wave</p>
-    <app-skeleton animation="wave" [lines]="2"></app-skeleton>
+    <pst-skeleton animation="wave" [lines]="2"></pst-skeleton>
   </div>
-</div>`,
-
-    complex: `<!-- Card skeleton -->
+</div>`
+    },
+    {
+      title: 'Complex Layouts',
+      description: 'Combining skeletons for complete UI patterns',
+      code: `<!-- Card skeleton -->
 <div class="border rounded-lg p-4 space-y-4">
   <div class="flex items-center space-x-4">
-    <app-skeleton variant="circular" width="40px" height="40px"></app-skeleton>
+    <pst-skeleton variant="circular" width="40px" height="40px"></pst-skeleton>
     <div class="flex-1">
-      <app-skeleton [lines]="1" width="150px"></app-skeleton>
-      <app-skeleton [lines]="1" width="100px" class="mt-2"></app-skeleton>
+      <pst-skeleton [lines]="1" width="150px"></pst-skeleton>
+      <pst-skeleton [lines]="1" width="100px" class="mt-2"></pst-skeleton>
     </div>
   </div>
-  <app-skeleton [lines]="3"></app-skeleton>
+  <pst-skeleton [lines]="3"></pst-skeleton>
   <div class="flex space-x-2">
-    <app-skeleton variant="button" width="80px"></app-skeleton>
-    <app-skeleton variant="button" width="80px"></app-skeleton>
+    <pst-skeleton variant="button" width="80px"></pst-skeleton>
+    <pst-skeleton variant="button" width="80px"></pst-skeleton>
   </div>
 </div>
 
 <!-- List skeleton -->
 <div class="space-y-4">
   <div class="flex items-center space-x-4" *ngFor="let item of [1, 2, 3]">
-    <app-skeleton variant="circular" width="48px" height="48px"></app-skeleton>
+    <pst-skeleton variant="circular" width="48px" height="48px"></pst-skeleton>
     <div class="flex-1">
-      <app-skeleton [lines]="1" width="60%"></app-skeleton>
-      <app-skeleton [lines]="1" width="40%" class="mt-1"></app-skeleton>
+      <pst-skeleton [lines]="1" width="60%"></pst-skeleton>
+      <pst-skeleton [lines]="1" width="40%" class="mt-1"></pst-skeleton>
     </div>
   </div>
-</div>`,
-
-    realWorld: `<!-- Article skeleton -->
+</div>`
+    },
+    {
+      title: 'Real-world Examples',
+      description: 'Practical skeleton patterns for common UI scenarios',
+      code: `<!-- Article skeleton -->
 <article class="max-w-2xl">
-  <app-skeleton [lines]="1" width="80%" class="mb-4"></app-skeleton>
+  <pst-skeleton [lines]="1" width="80%" class="mb-4"></pst-skeleton>
   <div class="flex items-center space-x-2 mb-6">
-    <app-skeleton variant="circular" width="32px" height="32px"></app-skeleton>
-    <app-skeleton [lines]="1" width="120px"></app-skeleton>
-    <app-skeleton [lines]="1" width="80px"></app-skeleton>
+    <pst-skeleton variant="circular" width="32px" height="32px"></pst-skeleton>
+    <pst-skeleton [lines]="1" width="120px"></pst-skeleton>
+    <pst-skeleton [lines]="1" width="80px"></pst-skeleton>
   </div>
-  <app-skeleton 
+  <pst-skeleton 
     variant="rectangular" 
     height="300px" 
     [rounded]="true"
     class="mb-6">
-  </app-skeleton>
-  <app-skeleton [lines]="4"></app-skeleton>
+  </pst-skeleton>
+  <pst-skeleton [lines]="4"></pst-skeleton>
 </article>
 
 <!-- Product grid skeleton -->
 <div class="grid grid-cols-3 gap-4">
   <div class="space-y-3" *ngFor="let item of [1, 2, 3]">
-    <app-skeleton 
+    <pst-skeleton 
       variant="rectangular" 
       height="200px"
       [rounded]="true">
-    </app-skeleton>
-    <app-skeleton [lines]="2"></app-skeleton>
+    </pst-skeleton>
+    <pst-skeleton [lines]="2"></pst-skeleton>
     <div class="flex justify-between items-center">
-      <app-skeleton [lines]="1" width="60px"></app-skeleton>
-      <app-skeleton variant="button" width="100px"></app-skeleton>
+      <pst-skeleton [lines]="1" width="60px"></pst-skeleton>
+      <pst-skeleton variant="button" width="100px"></pst-skeleton>
     </div>
   </div>
 </div>
@@ -254,35 +214,65 @@ export class SkeletonShowcaseComponent extends BaseShowcaseComponent {
 <!-- Form skeleton -->
 <div class="space-y-4 max-w-md">
   <div>
-    <app-skeleton [lines]="1" width="80px" class="mb-2"></app-skeleton>
-    <app-skeleton variant="rectangular" height="40px"></app-skeleton>
+    <pst-skeleton [lines]="1" width="80px" class="mb-2"></pst-skeleton>
+    <pst-skeleton variant="rectangular" height="40px"></pst-skeleton>
   </div>
   <div>
-    <app-skeleton [lines]="1" width="100px" class="mb-2"></app-skeleton>
-    <app-skeleton variant="rectangular" height="40px"></app-skeleton>
+    <pst-skeleton [lines]="1" width="100px" class="mb-2"></pst-skeleton>
+    <pst-skeleton variant="rectangular" height="40px"></pst-skeleton>
   </div>
   <div>
-    <app-skeleton [lines]="1" width="120px" class="mb-2"></app-skeleton>
-    <app-skeleton variant="rectangular" height="100px"></app-skeleton>
+    <pst-skeleton [lines]="1" width="120px" class="mb-2"></pst-skeleton>
+    <pst-skeleton variant="rectangular" height="100px"></pst-skeleton>
   </div>
-  <app-skeleton variant="button" width="100%" height="44px"></app-skeleton>
+  <pst-skeleton variant="button" width="100%" height="44px"></pst-skeleton>
 </div>`
+    }
+  ];
+
+  bestPractices = {
+    do: [
+      'Use skeletons for content that takes time to load',
+      'Match skeleton dimensions closely to actual content',
+      'Use appropriate animations based on user experience needs',
+      'Provide skeletons for all visible content during loading',
+      'Keep skeleton layouts consistent with loaded content'
+    ],
+    dont: [
+      'Don\'t use skeletons for instant content',
+      'Don\'t mix different animation types in the same view',
+      'Don\'t show skeletons for too long without progress indication',
+      'Don\'t use overly complex skeleton layouts',
+      'Don\'t forget to remove skeletons once content loads'
+    ]
   };
 
-  // Override base class methods for custom behavior
-  protected override transformPropToPlayground(prop: any): PlaygroundProp {
-    const playgroundProp = super.transformPropToPlayground(prop);
-    
+  private transformPropToPlayground(prop: ShowcaseProp): PlaygroundProp {
+    const playgroundProp: PlaygroundProp = {
+      name: prop.name,
+      type: prop.type.includes('|') ? 'enum' : 
+            prop.type === 'boolean' ? 'boolean' : 
+            prop.type === 'number' ? 'number' : 'string',
+      defaultValue: prop.default
+    };
+
+    // Handle select options
+    if (prop.type.includes('|')) {
+      playgroundProp.options = prop.type
+        .split('|')
+        .map(option => option.trim().replace(/'/g, ''));
+    }
+
     // Add min/max for lines prop
     if (prop.name === 'lines') {
       playgroundProp.min = 1;
       playgroundProp.max = 10;
     }
-    
+
     return playgroundProp;
   }
 
-  protected override generateCode(props: any): string {
+  private generateCode(props: any): string {
     const attributes: string[] = [];
     
     if (props.variant && props.variant !== 'text') {
@@ -304,7 +294,7 @@ export class SkeletonShowcaseComponent extends BaseShowcaseComponent {
       attributes.push('[rounded]="true"');
     }
     
-    return `<app-skeleton${attributes.length > 0 ? '\n  ' + attributes.join('\n  ') : ''}>
-</app-skeleton>`;
+    return `<pst-skeleton${attributes.length > 0 ? '\n  ' + attributes.join('\n  ') : ''}>
+</pst-skeleton>`;
   }
 }

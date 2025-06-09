@@ -5,7 +5,7 @@ import { InputComponent } from '../../../../../shared/components/input/input.com
 import { CodeBlockComponent } from '../../../shared/components/code-block.component';
 
 @Component({
-  selector: 'app-input-showcase',
+  selector: 'pst-input-showcase',
   standalone: true,
   imports: [
     CommonModule, 
@@ -31,10 +31,10 @@ import { CodeBlockComponent } from '../../../shared/components/code-block.compon
         <h2 class="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-4">
           Import
         </h2>
-        <app-code-block
+        <pst-code-block
           [code]="importCode"
           language="typescript"
-        ></app-code-block>
+        ></pst-code-block>
       </section>
 
       <!-- Examples -->
@@ -50,18 +50,18 @@ import { CodeBlockComponent } from '../../../shared/components/code-block.compon
           </h3>
           <div class="bg-gray-50 dark:bg-gray-900 p-8 rounded-lg mb-4">
             <div class="max-w-md space-y-4">
-              <app-input 
+              <pst-input 
                 label="Full Name"
                 placeholder="Enter your full name"
                 [(ngModel)]="basicValue"
-              ></app-input>
+              ></pst-input>
               <p class="text-sm text-gray-600 dark:text-gray-400">Value: {{ basicValue() }}</p>
             </div>
           </div>
-          <app-code-block
+          <pst-code-block
             [code]="basicCode"
             language="html"
-          ></app-code-block>
+          ></pst-code-block>
         </div>
 
         <!-- Input Types -->
@@ -71,42 +71,42 @@ import { CodeBlockComponent } from '../../../shared/components/code-block.compon
           </h3>
           <div class="bg-gray-50 dark:bg-gray-900 p-8 rounded-lg mb-4">
             <div class="max-w-md space-y-4">
-              <app-input 
+              <pst-input 
                 type="text"
                 label="Text Input"
                 placeholder="Enter text"
-              ></app-input>
-              <app-input 
+              ></pst-input>
+              <pst-input 
                 type="email"
                 label="Email"
                 placeholder="email@example.com"
-              ></app-input>
-              <app-input 
+              ></pst-input>
+              <pst-input 
                 type="password"
                 label="Password"
                 placeholder="Enter password"
-              ></app-input>
-              <app-input 
+              ></pst-input>
+              <pst-input 
                 type="number"
                 label="Number"
                 placeholder="Enter a number"
-              ></app-input>
-              <app-input 
+              ></pst-input>
+              <pst-input 
                 type="tel"
                 label="Phone"
                 placeholder="+1 (555) 000-0000"
-              ></app-input>
-              <app-input 
+              ></pst-input>
+              <pst-input 
                 type="url"
                 label="Website"
                 placeholder="https://example.com"
-              ></app-input>
+              ></pst-input>
             </div>
           </div>
-          <app-code-block
+          <pst-code-block
             [code]="typesCode"
             language="html"
-          ></app-code-block>
+          ></pst-code-block>
         </div>
 
         <!-- States -->
@@ -116,31 +116,31 @@ import { CodeBlockComponent } from '../../../shared/components/code-block.compon
           </h3>
           <div class="bg-gray-50 dark:bg-gray-900 p-8 rounded-lg mb-4">
             <div class="max-w-md space-y-4">
-              <app-input 
+              <pst-input 
                 label="Normal Input"
                 placeholder="Normal state"
-              ></app-input>
-              <app-input 
+              ></pst-input>
+              <pst-input 
                 label="Disabled Input"
                 placeholder="This input is disabled"
                 [disabled]="true"
-              ></app-input>
-              <app-input 
+              ></pst-input>
+              <pst-input 
                 label="Required Input"
                 placeholder="This field is required"
                 [required]="true"
-              ></app-input>
-              <app-input 
+              ></pst-input>
+              <pst-input 
                 label="Read-only Input"
                 value="This is read-only"
                 [readonly]="true"
-              ></app-input>
+              ></pst-input>
             </div>
           </div>
-          <app-code-block
+          <pst-code-block
             [code]="statesCode"
             language="html"
-          ></app-code-block>
+          ></pst-code-block>
         </div>
 
         <!-- With Helper Text and Error -->
@@ -150,22 +150,22 @@ import { CodeBlockComponent } from '../../../shared/components/code-block.compon
           </h3>
           <div class="bg-gray-50 dark:bg-gray-900 p-8 rounded-lg mb-4">
             <div class="max-w-md space-y-4">
-              <app-input 
+              <pst-input 
                 label="Username"
                 placeholder="Choose a username"
                 helperText="Username must be 3-20 characters"
-              ></app-input>
-              <app-input 
+              ></pst-input>
+              <pst-input 
                 label="Email"
                 placeholder="Enter your email"
                 errorMessage="Please enter a valid email address"
-              ></app-input>
+              ></pst-input>
             </div>
           </div>
-          <app-code-block
+          <pst-code-block
             [code]="validationCode"
             language="html"
-          ></app-code-block>
+          ></pst-code-block>
         </div>
 
         <!-- With Icons -->
@@ -175,28 +175,28 @@ import { CodeBlockComponent } from '../../../shared/components/code-block.compon
           </h3>
           <div class="bg-gray-50 dark:bg-gray-900 p-8 rounded-lg mb-4">
             <div class="max-w-md space-y-4">
-              <app-input 
+              <pst-input 
                 label="Search"
                 placeholder="Search..."
                 leadingIcon="fas fa-search"
-              ></app-input>
-              <app-input 
+              ></pst-input>
+              <pst-input 
                 label="Email"
                 placeholder="Enter email"
                 leadingIcon="fas fa-envelope"
-              ></app-input>
-              <app-input 
+              ></pst-input>
+              <pst-input 
                 type="password"
                 label="Password"
                 placeholder="Enter password"
                 leadingIcon="fas fa-lock"
-              ></app-input>
+              ></pst-input>
             </div>
           </div>
-          <app-code-block
+          <pst-code-block
             [code]="iconsCode"
             language="html"
-          ></app-code-block>
+          ></pst-code-block>
         </div>
       </section>
     </div>
@@ -217,37 +217,37 @@ export class InputShowcaseComponent {
   imports: [InputComponent, FormsModule]
 })`;
 
-  basicCode = `<app-input 
+  basicCode = `<pst-input 
   label="Full Name"
   placeholder="Enter your full name"
   [(ngModel)]="fullName"
-></app-input>`;
+></pst-input>`;
 
-  typesCode = `<app-input type="text" label="Text Input" placeholder="Enter text"></app-input>
-<app-input type="email" label="Email" placeholder="email@example.com"></app-input>
-<app-input type="password" label="Password" placeholder="Enter password"></app-input>
-<app-input type="number" label="Number" placeholder="Enter a number"></app-input>
-<app-input type="tel" label="Phone" placeholder="+1 (555) 000-0000"></app-input>
-<app-input type="url" label="Website" placeholder="https://example.com"></app-input>`;
+  typesCode = `<pst-input type="text" label="Text Input" placeholder="Enter text"></pst-input>
+<pst-input type="email" label="Email" placeholder="email@example.com"></pst-input>
+<pst-input type="password" label="Password" placeholder="Enter password"></pst-input>
+<pst-input type="number" label="Number" placeholder="Enter a number"></pst-input>
+<pst-input type="tel" label="Phone" placeholder="+1 (555) 000-0000"></pst-input>
+<pst-input type="url" label="Website" placeholder="https://example.com"></pst-input>`;
 
-  statesCode = `<app-input label="Normal Input" placeholder="Normal state"></app-input>
-<app-input label="Disabled Input" placeholder="This input is disabled" [disabled]="true"></app-input>
-<app-input label="Required Input" placeholder="This field is required" [required]="true"></app-input>
-<app-input label="Read-only Input" value="This is read-only" [readonly]="true"></app-input>`;
+  statesCode = `<pst-input label="Normal Input" placeholder="Normal state"></pst-input>
+<pst-input label="Disabled Input" placeholder="This input is disabled" [disabled]="true"></pst-input>
+<pst-input label="Required Input" placeholder="This field is required" [required]="true"></pst-input>
+<pst-input label="Read-only Input" value="This is read-only" [readonly]="true"></pst-input>`;
 
-  validationCode = `<app-input 
+  validationCode = `<pst-input 
   label="Username"
   placeholder="Choose a username"
   helperText="Username must be 3-20 characters"
-></app-input>
+></pst-input>
 
-<app-input 
+<pst-input 
   label="Email"
   placeholder="Enter your email"
   errorMessage="Please enter a valid email address"
-></app-input>`;
+></pst-input>`;
 
-  iconsCode = `<app-input label="Search" placeholder="Search..." leadingIcon="fas fa-search"></app-input>
-<app-input label="Email" placeholder="Enter email" leadingIcon="fas fa-envelope"></app-input>
-<app-input type="password" label="Password" placeholder="Enter password" leadingIcon="fas fa-lock"></app-input>`;
+  iconsCode = `<pst-input label="Search" placeholder="Search..." leadingIcon="fas fa-search"></pst-input>
+<pst-input label="Email" placeholder="Enter email" leadingIcon="fas fa-envelope"></pst-input>
+<pst-input type="password" label="Password" placeholder="Enter password" leadingIcon="fas fa-lock"></pst-input>`;
 }

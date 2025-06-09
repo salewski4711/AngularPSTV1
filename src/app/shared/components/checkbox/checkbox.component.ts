@@ -1,4 +1,4 @@
-import { Component, Input, computed, ChangeDetectionStrategy, forwardRef, Injector } from '@angular/core';
+import { Component, Input, Output, EventEmitter, computed, ChangeDetectionStrategy, forwardRef, Injector } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { FormControlBase } from '../../utils/form-control.base';
@@ -7,7 +7,7 @@ import { cn, formClasses } from '../../utils/tailwind.utils';
 type CheckboxSize = 'sm' | 'md' | 'lg';
 
 @Component({
-  selector: 'app-checkbox',
+  selector: 'pst-checkbox',
   standalone: true,
   imports: [CommonModule],
   providers: [
@@ -54,6 +54,14 @@ export class CheckboxComponent extends FormControlBase {
   @Input() size: CheckboxSize = 'md';
   @Input() indeterminate = false;
   @Input() showHelperText = false;
+  @Input() 
+  set checked(value: boolean) {
+    this.writeValue(value);
+  }
+  get checked(): boolean {
+    return this.value();
+  }
+  @Output() checkedChange = new EventEmitter<boolean>();
   
   checkboxId = `checkbox-${Math.random().toString(36).substr(2, 9)}`;
   
@@ -107,5 +115,6 @@ export class CheckboxComponent extends FormControlBase {
   handleChange(event: Event): void {
     const checkbox = event.target as HTMLInputElement;
     this.updateValue(checkbox.checked);
+    this.checkedChange.emit(checkbox.checked);
   }
 }

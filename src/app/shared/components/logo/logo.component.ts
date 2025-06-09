@@ -6,7 +6,7 @@ export type LogoSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 export type LogoVariant = 'horizontal' | 'vertical' | 'icon';
 
 @Component({
-  selector: 'app-logo',
+  selector: 'pst-logo',
   standalone: true,
   imports: [CommonModule],
   changeDetection: ChangeDetectionStrategy.OnPush,

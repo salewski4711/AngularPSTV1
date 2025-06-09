@@ -5,7 +5,7 @@ export type GridCols = 1 | 2 | 3 | 4 | 6 | 12;
 export type GridGap = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 8;
 
 @Component({
-  selector: 'app-grid',
+  selector: 'pst-grid',
   standalone: true,
   imports: [CommonModule],
   template: `
@@ -43,7 +43,7 @@ export class GridComponent {
 
 // Grid Item Component für span control
 @Component({
-  selector: 'app-grid-item',
+  selector: 'pst-grid-item',
   standalone: true,
   imports: [CommonModule],
   template: `

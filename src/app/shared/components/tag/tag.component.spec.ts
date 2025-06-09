@@ -5,7 +5,7 @@ import { By } from '@angular/platform-browser';
 
 @Component({
   template: `
-    <app-tag 
+    <pst-tag 
       [variant]="variant"
       [color]="color"
       [size]="size"
@@ -17,7 +17,7 @@ import { By } from '@angular/platform-browser';
       (remove)="onRemove()"
     >
       {{ content }}
-    </app-tag>
+    </pst-tag>
   `
 })
 class TestHostComponent {
@@ -127,7 +127,7 @@ describe('TagComponent', () => {
       hostComponent.leadingIcon = 'check';
       hostFixture.detectChanges();
       
-      const iconElement = hostFixture.debugElement.query(By.css('app-icon'));
+      const iconElement = hostFixture.debugElement.query(By.css('pst-icon'));
       expect(iconElement).toBeTruthy();
       expect(iconElement.componentInstance.name).toBe('check');
     });
@@ -136,7 +136,7 @@ describe('TagComponent', () => {
       hostComponent.trailingIcon = 'chevron-right';
       hostFixture.detectChanges();
       
-      const iconElements = hostFixture.debugElement.queryAll(By.css('app-icon'));
+      const iconElements = hostFixture.debugElement.queryAll(By.css('pst-icon'));
       const trailingIcon = iconElements.find(el => 
         el.nativeElement.classList.contains('ml-1.5')
       );
@@ -148,7 +148,7 @@ describe('TagComponent', () => {
       hostComponent.trailingIcon = 'chevron-right';
       hostFixture.detectChanges();
       
-      const iconElements = hostFixture.debugElement.queryAll(By.css('app-icon'));
+      const iconElements = hostFixture.debugElement.queryAll(By.css('pst-icon'));
       expect(iconElements.length).toBe(2);
     });
   });

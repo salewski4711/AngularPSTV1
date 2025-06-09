@@ -18,7 +18,7 @@ npm install @angular/animations
 import { Component, Input } from '@angular/core';
 
 @Component({
-  selector: 'app-button',
+  selector: 'pst-button',
   template: `<button [class]="classes"><ng-content></ng-content></button>`,
   standalone: true
 })

@@ -14,7 +14,7 @@
 mv "src/app/shared/components-beta/button/button-beta.component.ts" "src/app/shared/components/button/button.component.ts"
 
 # 2. Für Produktiv-Einsatz anpassen:
-#    - selector: 'app-button-beta' → 'app-button'  
+#    - selector: 'pst-button-beta' → 'app-button'  
 #    - class: ButtonBetaComponent → ButtonComponent
 #    - Beta-Features entfernen (showBetaBadge)
 ```
@@ -29,7 +29,7 @@ mv "src/app/shared/components-beta/button/button-beta.component.ts" "src/app/sha
 ```typescript
 // ÄNDERUNG 1: Selector für Produktiv-Einsatz
 @Component({
-  selector: 'app-button',  // war: 'app-button-beta'
+  selector: 'pst-button',  // war: 'app-button-beta'
   
 // ÄNDERUNG 2: Klassen-Name  
 export class ButtonComponent {  // war: ButtonBetaComponent

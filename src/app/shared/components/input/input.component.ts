@@ -6,7 +6,7 @@ import { InputType, InputSize } from '../../types/form.types';
 import { cn, formClasses } from '../../utils/tailwind.utils';
 
 @Component({
-  selector: 'app-input',
+  selector: 'pst-input',
   standalone: true,
   imports: [CommonModule],
   providers: [

@@ -37,11 +37,11 @@ export const ICONS: Record<string, IconDefinition> = {
 ## 3. Icon verwenden
 
 ```html
-<app-button-beta icon="mein-icon" variant="primary">
+<pst-button-beta icon="mein-icon" variant="primary">
   Mit Icon
-</app-button-beta>
+</pst-button-beta>
 
-<app-icon name="mein-icon" [size]="24"></app-icon>
+<pst-icon name="mein-icon" [size]="24"></pst-icon>
 ```
 
 ## 4. Best Practices

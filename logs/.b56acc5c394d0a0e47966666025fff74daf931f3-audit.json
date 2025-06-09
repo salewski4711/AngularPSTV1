@@ -1,0 +1,15 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 14
+    },
+    "auditLog": "/mnt/c/Code/AngularPSTV1/logs/.b56acc5c394d0a0e47966666025fff74daf931f3-audit.json",
+    "files": [
+        {
+            "date": 1749497318070,
+            "name": "/mnt/c/Code/AngularPSTV1/logs/mcp-puppeteer-2025-06-09.log",
+            "hash": "65e582afc54211135af4f3541e796093611a017d96fbcd385ea79b0c251183ca"
+        }
+    ],
+    "hashType": "sha256"
+}

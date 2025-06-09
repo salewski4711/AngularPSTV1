@@ -4,7 +4,7 @@ import { LogoComponent } from '../../../../../shared/components/logo/logo.compon
 import { CodeBlockComponent } from '../../../shared/components/code-block.component';
 
 @Component({
-  selector: 'app-logo-showcase',
+  selector: 'pst-logo-showcase',
   standalone: true,
   imports: [
     CommonModule, 
@@ -29,10 +29,10 @@ import { CodeBlockComponent } from '../../../shared/components/code-block.compon
         <h2 class="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-4">
           Import
         </h2>
-        <app-code-block
+        <pst-code-block
           [code]="importCode"
           language="typescript"
-        ></app-code-block>
+        ></pst-code-block>
       </section>
 
       <!-- Examples -->
@@ -47,12 +47,12 @@ import { CodeBlockComponent } from '../../../shared/components/code-block.compon
             Basic Logo
           </h3>
           <div class="bg-gray-50 dark:bg-gray-900 p-8 rounded-lg mb-4">
-            <app-logo></app-logo>
+            <pst-logo></pst-logo>
           </div>
-          <app-code-block
+          <pst-code-block
             [code]="basicCode"
             language="html"
-          ></app-code-block>
+          ></pst-code-block>
         </div>
 
         <!-- Sizes -->
@@ -63,27 +63,27 @@ import { CodeBlockComponent } from '../../../shared/components/code-block.compon
           <div class="bg-gray-50 dark:bg-gray-900 p-8 rounded-lg mb-4">
             <div class="flex items-end gap-8">
               <div class="text-center">
-                <app-logo size="sm"></app-logo>
+                <pst-logo size="sm"></pst-logo>
                 <p class="text-xs text-gray-600 dark:text-gray-400 mt-2">Small</p>
               </div>
               <div class="text-center">
-                <app-logo size="md"></app-logo>
+                <pst-logo size="md"></pst-logo>
                 <p class="text-xs text-gray-600 dark:text-gray-400 mt-2">Medium</p>
               </div>
               <div class="text-center">
-                <app-logo size="lg"></app-logo>
+                <pst-logo size="lg"></pst-logo>
                 <p class="text-xs text-gray-600 dark:text-gray-400 mt-2">Large</p>
               </div>
               <div class="text-center">
-                <app-logo size="xl"></app-logo>
+                <pst-logo size="xl"></pst-logo>
                 <p class="text-xs text-gray-600 dark:text-gray-400 mt-2">Extra Large</p>
               </div>
             </div>
           </div>
-          <app-code-block
+          <pst-code-block
             [code]="sizesCode"
             language="html"
-          ></app-code-block>
+          ></pst-code-block>
         </div>
 
         <!-- Theme Variants -->
@@ -96,7 +96,7 @@ import { CodeBlockComponent } from '../../../shared/components/code-block.compon
               <div class="space-y-4">
                 <div>
                   <p class="text-sm font-medium text-gray-700 mb-2">Light Theme (Blue Logo)</p>
-                  <app-logo theme="light"></app-logo>
+                  <pst-logo theme="light"></pst-logo>
                 </div>
               </div>
             </div>
@@ -104,7 +104,7 @@ import { CodeBlockComponent } from '../../../shared/components/code-block.compon
               <div class="space-y-4">
                 <div>
                   <p class="text-sm font-medium text-gray-300 mb-2">Dark Theme (White Logo)</p>
-                  <app-logo theme="dark"></app-logo>
+                  <pst-logo theme="dark"></pst-logo>
                 </div>
               </div>
             </div>
@@ -112,15 +112,15 @@ import { CodeBlockComponent } from '../../../shared/components/code-block.compon
               <div class="space-y-4">
                 <div>
                   <p class="text-sm font-medium text-white mb-2">Force White on Colored Background</p>
-                  <app-logo theme="dark"></app-logo>
+                  <pst-logo theme="dark"></pst-logo>
                 </div>
               </div>
             </div>
           </div>
-          <app-code-block
+          <pst-code-block
             [code]="themeCode"
             language="html"
-          ></app-code-block>
+          ></pst-code-block>
         </div>
 
         <!-- Auto Theme -->
@@ -133,16 +133,16 @@ import { CodeBlockComponent } from '../../../shared/components/code-block.compon
               <p class="text-sm text-gray-600 dark:text-gray-400">
                 By default, the logo automatically switches between blue (light mode) and white (dark mode) based on the current theme.
               </p>
-              <app-logo></app-logo>
+              <pst-logo></pst-logo>
               <p class="text-xs text-gray-500 dark:text-gray-500 mt-2">
                 Toggle dark mode to see the logo change color
               </p>
             </div>
           </div>
-          <app-code-block
+          <pst-code-block
             [code]="autoThemeCode"
             language="html"
-          ></app-code-block>
+          ></pst-code-block>
         </div>
 
         <!-- With Link -->
@@ -152,13 +152,13 @@ import { CodeBlockComponent } from '../../../shared/components/code-block.compon
           </h3>
           <div class="bg-gray-50 dark:bg-gray-900 p-8 rounded-lg mb-4">
             <a href="/" class="inline-block hover:opacity-80 transition-opacity">
-              <app-logo></app-logo>
+              <pst-logo></pst-logo>
             </a>
           </div>
-          <app-code-block
+          <pst-code-block
             [code]="linkCode"
             language="html"
-          ></app-code-block>
+          ></pst-code-block>
         </div>
 
         <!-- Real-world Examples -->
@@ -172,7 +172,7 @@ import { CodeBlockComponent } from '../../../shared/components/code-block.compon
               <h4 class="text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">Header Navigation</h4>
               <div class="bg-white dark:bg-gray-800 shadow-sm rounded-lg">
                 <header class="px-6 py-4 flex items-center justify-between">
-                  <app-logo size="sm"></app-logo>
+                  <pst-logo size="sm"></pst-logo>
                   <nav class="flex items-center gap-6">
                     <a href="#" class="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100">Dashboard</a>
                     <a href="#" class="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100">Customers</a>
@@ -187,7 +187,7 @@ import { CodeBlockComponent } from '../../../shared/components/code-block.compon
               <h4 class="text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">Footer</h4>
               <div class="bg-gray-100 dark:bg-gray-800 rounded-lg">
                 <footer class="px-6 py-8 text-center">
-                  <app-logo size="md" class="mx-auto mb-4"></app-logo>
+                  <pst-logo size="md" class="mx-auto mb-4"></pst-logo>
                   <p class="text-sm text-gray-600 dark:text-gray-400">
                     © 2024 ProSolarTec. All rights reserved.
                   </p>
@@ -200,16 +200,16 @@ import { CodeBlockComponent } from '../../../shared/components/code-block.compon
               <h4 class="text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">Loading Screen</h4>
               <div class="bg-gray-50 dark:bg-gray-900 rounded-lg">
                 <div class="flex flex-col items-center justify-center p-12">
-                  <app-logo size="lg" class="animate-pulse"></app-logo>
+                  <pst-logo size="lg" class="animate-pulse"></pst-logo>
                   <p class="text-sm text-gray-600 dark:text-gray-400 mt-4">Loading...</p>
                 </div>
               </div>
             </div>
           </div>
-          <app-code-block
+          <pst-code-block
             [code]="realWorldCode"
             language="html"
-          ></app-code-block>
+          ></pst-code-block>
         </div>
       </section>
     </div>
@@ -228,29 +228,29 @@ export class LogoShowcaseComponent {
   imports: [LogoComponent]
 })`;
 
-  basicCode = `<app-logo></app-logo>`;
+  basicCode = `<pst-logo></pst-logo>`;
 
-  sizesCode = `<app-logo size="sm"></app-logo>
-<app-logo size="md"></app-logo>
-<app-logo size="lg"></app-logo>
-<app-logo size="xl"></app-logo>`;
+  sizesCode = `<pst-logo size="sm"></pst-logo>
+<pst-logo size="md"></pst-logo>
+<pst-logo size="lg"></pst-logo>
+<pst-logo size="xl"></pst-logo>`;
 
   themeCode = `<!-- Force light theme (blue logo) -->
-<app-logo theme="light"></app-logo>
+<pst-logo theme="light"></pst-logo>
 
 <!-- Force dark theme (white logo) -->
-<app-logo theme="dark"></app-logo>`;
+<pst-logo theme="dark"></pst-logo>`;
 
   autoThemeCode = `<!-- Automatically adapts to current theme -->
-<app-logo></app-logo>`;
+<pst-logo></pst-logo>`;
 
   linkCode = `<a href="/" class="inline-block hover:opacity-80 transition-opacity">
-  <app-logo></app-logo>
+  <pst-logo></pst-logo>
 </a>`;
 
   realWorldCode = `<!-- Header Navigation -->
 <header class="px-6 py-4 flex items-center justify-between">
-  <app-logo size="sm"></app-logo>
+  <pst-logo size="sm"></pst-logo>
   <nav class="flex items-center gap-6">
     <!-- Navigation items -->
   </nav>
@@ -258,7 +258,7 @@ export class LogoShowcaseComponent {
 
 <!-- Footer -->
 <footer class="px-6 py-8 text-center">
-  <app-logo size="md" class="mx-auto mb-4"></app-logo>
+  <pst-logo size="md" class="mx-auto mb-4"></pst-logo>
   <p class="text-sm text-gray-600">
     © 2024 ProSolarTec. All rights reserved.
   </p>
@@ -266,7 +266,7 @@ export class LogoShowcaseComponent {
 
 <!-- Loading Screen -->
 <div class="flex flex-col items-center justify-center p-12">
-  <app-logo size="lg" class="animate-pulse"></app-logo>
+  <pst-logo size="lg" class="animate-pulse"></pst-logo>
   <p class="text-sm text-gray-600 mt-4">Loading...</p>
 </div>`;
 }

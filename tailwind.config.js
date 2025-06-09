@@ -36,10 +36,30 @@ module.exports = {
           800: '#0B1426',
           900: '#060A13'
         },
+        'pst-blue': {
+          DEFAULT: '#1C3661',
+          light: '#2A4F8C',
+          dark: '#162A4D',
+          darker: '#111F3A'
+        },
+        'orange': {
+          DEFAULT: '#F99600',
+          50: '#FFF4E6',
+          100: '#FFE8CC',
+          200: '#FFD199',
+          300: '#FFBA66',
+          400: '#F6B154',
+          500: '#F99600',
+          600: '#e5a54e',
+          700: '#CC7A00',
+          800: '#B36800',
+          900: '#995700',
+          950: '#664400'
+        },
         'black': {
-          DEFAULT: '#1A1A1A',
-          light: '#222222',
-          lighter: '#2A2A2A'
+          DEFAULT: '#030712',
+          light: '#111827',
+          lighter: '#1f2937'
         },
         'white': {
           DEFAULT: '#FFFFFF',
@@ -53,5 +73,25 @@ module.exports = {
       }
     },
   },
-  plugins: [],
+  plugins: [
+    function({ addUtilities }) {
+      addUtilities({
+        '.scrollbar-thin': {
+          '&::-webkit-scrollbar': {
+            width: '4px',
+          },
+          '&::-webkit-scrollbar-track': {
+            backgroundColor: 'transparent',
+          },
+          '&::-webkit-scrollbar-thumb': {
+            backgroundColor: '#9CA3AF',
+            borderRadius: '2px',
+          },
+          '&::-webkit-scrollbar-thumb:hover': {
+            backgroundColor: '#6B7280',
+          },
+        },
+      })
+    }
+  ],
 }

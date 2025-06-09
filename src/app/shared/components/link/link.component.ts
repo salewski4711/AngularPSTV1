@@ -7,7 +7,7 @@ export type LinkVariant = 'default' | 'primary' | 'muted';
 export type LinkSize = 'sm' | 'md' | 'lg';
 
 @Component({
-  selector: 'app-link',
+  selector: 'pst-link',
   standalone: true,
   imports: [CommonModule, RouterLink, IconComponent],
   template: `
@@ -21,12 +21,12 @@ export type LinkSize = 'sm' | 'md' | 'lg';
       [attr.aria-disabled]="disabled"
       (click)="handleClick($event)">
       <ng-content></ng-content>
-      <app-icon 
+      <pst-icon 
         *ngIf="external" 
         name="external-link" 
         [size]="iconSize"
         class="ml-1 inline-block">
-      </app-icon>
+      </pst-icon>
     </a>
     
     <a

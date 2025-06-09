@@ -5,7 +5,7 @@ import { SelectComponent } from '../../../../../shared/components/select/select.
 import { CodeBlockComponent } from '../../../shared/components/code-block.component';
 
 @Component({
-  selector: 'app-select-showcase',
+  selector: 'pst-select-showcase',
   standalone: true,
   imports: [
     CommonModule, 
@@ -31,10 +31,10 @@ import { CodeBlockComponent } from '../../../shared/components/code-block.compon
         <h2 class="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-4">
           Import
         </h2>
-        <app-code-block
+        <pst-code-block
           [code]="importCode"
           language="typescript"
-        ></app-code-block>
+        ></pst-code-block>
       </section>
 
       <!-- Examples -->
@@ -50,19 +50,19 @@ import { CodeBlockComponent } from '../../../shared/components/code-block.compon
           </h3>
           <div class="bg-gray-50 dark:bg-gray-900 p-8 rounded-lg mb-4">
             <div class="max-w-md space-y-4">
-              <app-select 
+              <pst-select 
                 label="Select a country"
                 placeholder="Choose a country"
                 [options]="countryOptions"
                 [(ngModel)]="selectedCountry"
-              ></app-select>
+              ></pst-select>
               <p class="text-sm text-gray-600 dark:text-gray-400">Selected: {{ selectedCountry() || 'None' }}</p>
             </div>
           </div>
-          <app-code-block
+          <pst-code-block
             [code]="basicCode"
             language="html"
-          ></app-code-block>
+          ></pst-code-block>
         </div>
 
         <!-- With Groups -->
@@ -72,18 +72,18 @@ import { CodeBlockComponent } from '../../../shared/components/code-block.compon
           </h3>
           <div class="bg-gray-50 dark:bg-gray-900 p-8 rounded-lg mb-4">
             <div class="max-w-md">
-              <app-select 
+              <pst-select 
                 label="Select a fruit"
                 placeholder="Choose your favorite fruit"
                 [options]="groupedOptions"
                 [(ngModel)]="selectedFruit"
-              ></app-select>
+              ></pst-select>
             </div>
           </div>
-          <app-code-block
+          <pst-code-block
             [code]="groupedCode"
             language="html"
-          ></app-code-block>
+          ></pst-code-block>
         </div>
 
         <!-- States -->
@@ -93,38 +93,38 @@ import { CodeBlockComponent } from '../../../shared/components/code-block.compon
           </h3>
           <div class="bg-gray-50 dark:bg-gray-900 p-8 rounded-lg mb-4">
             <div class="max-w-md space-y-4">
-              <app-select 
+              <pst-select 
                 label="Normal state"
                 placeholder="Select an option"
                 [options]="stateOptions"
-              ></app-select>
+              ></pst-select>
               
-              <app-select 
+              <pst-select 
                 label="Disabled state"
                 placeholder="Select an option"
                 [options]="stateOptions"
                 [disabled]="true"
-              ></app-select>
+              ></pst-select>
               
-              <app-select 
+              <pst-select 
                 label="Required field"
                 placeholder="Select an option"
                 [options]="stateOptions"
                 [required]="true"
-              ></app-select>
+              ></pst-select>
               
-              <app-select 
+              <pst-select 
                 label="With error message"
                 placeholder="Select an option"
                 [options]="stateOptions"
                 errorMessage="Please select a valid option"
-              ></app-select>
+              ></pst-select>
             </div>
           </div>
-          <app-code-block
+          <pst-code-block
             [code]="statesCode"
             language="html"
-          ></app-code-block>
+          ></pst-code-block>
         </div>
 
         <!-- With Helper Text -->
@@ -134,26 +134,26 @@ import { CodeBlockComponent } from '../../../shared/components/code-block.compon
           </h3>
           <div class="bg-gray-50 dark:bg-gray-900 p-8 rounded-lg mb-4">
             <div class="max-w-md space-y-4">
-              <app-select 
+              <pst-select 
                 label="Time zone"
                 placeholder="Select your time zone"
                 [options]="timezoneOptions"
                 helperText="Used for scheduling and notifications"
-              ></app-select>
+              ></pst-select>
               
-              <app-select 
+              <pst-select 
                 label="Language"
                 placeholder="Select language"
                 [options]="languageOptions"
                 helperText="Choose your preferred language"
                 errorMessage="This language is not yet supported"
-              ></app-select>
+              ></pst-select>
             </div>
           </div>
-          <app-code-block
+          <pst-code-block
             [code]="helperTextCode"
             language="html"
-          ></app-code-block>
+          ></pst-code-block>
         </div>
 
         <!-- Allow Empty Selection -->
@@ -163,21 +163,21 @@ import { CodeBlockComponent } from '../../../shared/components/code-block.compon
           </h3>
           <div class="bg-gray-50 dark:bg-gray-900 p-8 rounded-lg mb-4">
             <div class="max-w-md space-y-4">
-              <app-select 
+              <pst-select 
                 label="Optional field"
                 placeholder="Select an option (optional)"
                 [options]="stateOptions"
                 [allowEmpty]="true"
-              ></app-select>
+              ></pst-select>
               <p class="text-sm text-gray-600 dark:text-gray-400">
                 This select allows clearing the selection
               </p>
             </div>
           </div>
-          <app-code-block
+          <pst-code-block
             [code]="allowEmptyCode"
             language="html"
-          ></app-code-block>
+          ></pst-code-block>
         </div>
       </section>
     </div>
@@ -271,12 +271,12 @@ export class SelectShowcaseComponent {
   imports: [SelectComponent, FormsModule]
 })`;
 
-  basicCode = `<app-select 
+  basicCode = `<pst-select 
   label="Select a country"
   placeholder="Choose a country"
   [options]="countryOptions"
   [(ngModel)]="selectedCountry"
-></app-select>
+></pst-select>
 
 // Component:
 countryOptions = [
@@ -286,12 +286,12 @@ countryOptions = [
   // ...
 ];`;
 
-  groupedCode = `<app-select 
+  groupedCode = `<pst-select 
   label="Select a fruit"
   placeholder="Choose your favorite fruit"
   [options]="groupedOptions"
   [(ngModel)]="selectedFruit"
-></app-select>
+></pst-select>
 
 // Component:
 groupedOptions = [
@@ -306,41 +306,41 @@ groupedOptions = [
 ];`;
 
   statesCode = `<!-- Normal -->
-<app-select label="Normal state" placeholder="Select an option" [options]="options"></app-select>
+<pst-select label="Normal state" placeholder="Select an option" [options]="options"></pst-select>
 
 <!-- Disabled -->
-<app-select label="Disabled state" placeholder="Select an option" [options]="options" [disabled]="true"></app-select>
+<pst-select label="Disabled state" placeholder="Select an option" [options]="options" [disabled]="true"></pst-select>
 
 <!-- Required -->
-<app-select label="Required field" placeholder="Select an option" [options]="options" [required]="true"></app-select>
+<pst-select label="Required field" placeholder="Select an option" [options]="options" [required]="true"></pst-select>
 
 <!-- With error message -->
-<app-select 
+<pst-select 
   label="With error message" 
   placeholder="Select an option" 
   [options]="options" 
   errorMessage="Please select a valid option"
-></app-select>`;
+></pst-select>`;
 
-  helperTextCode = `<app-select 
+  helperTextCode = `<pst-select 
   label="Time zone"
   placeholder="Select your time zone"
   [options]="timezoneOptions"
   helperText="Used for scheduling and notifications"
-></app-select>
+></pst-select>
 
-<app-select 
+<pst-select 
   label="Language"
   placeholder="Select language"
   [options]="languageOptions"
   helperText="Choose your preferred language"
   errorMessage="This language is not yet supported"
-></app-select>`;
+></pst-select>`;
 
-  allowEmptyCode = `<app-select 
+  allowEmptyCode = `<pst-select 
   label="Optional field"
   placeholder="Select an option (optional)"
   [options]="options"
   [allowEmpty]="true"
-></app-select>`;
+></pst-select>`;
 }

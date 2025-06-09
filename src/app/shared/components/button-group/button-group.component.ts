@@ -6,7 +6,7 @@ export type ButtonGroupOrientation = 'horizontal' | 'vertical';
 export type ButtonGroupMode = 'default' | 'toggle' | 'toggle-multiple';
 
 @Component({
-  selector: 'app-button-group',
+  selector: 'pst-button-group',
   standalone: true,
   imports: [CommonModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -37,7 +37,7 @@ export type ButtonGroupMode = 'default' | 'toggle' | 'toggle-multiple';
     }
     
     /* Remove gaps between buttons */
-    :host ::ng-deep app-button {
+    :host ::ng-deep pst-button {
       display: contents;
     }
     

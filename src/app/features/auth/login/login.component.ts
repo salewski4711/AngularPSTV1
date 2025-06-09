@@ -7,15 +7,14 @@ import { AuthService } from '../auth.service';
 import { ButtonComponent } from '../../../shared/components/button/button.component';
 
 @Component({
-  selector: 'app-login',
+  selector: 'pst-login',
   standalone: true,
   imports: [
     CommonModule,
     ReactiveFormsModule,
     ButtonComponent
   ],
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  templateUrl: './login.component.html'
 })
 export class LoginComponent implements OnInit {
   private fb = inject(FormBuilder);

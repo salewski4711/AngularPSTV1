@@ -6,7 +6,7 @@ export type TextAlign = 'left' | 'center' | 'right' | 'justify';
 export type TextWeight = 'light' | 'normal' | 'medium' | 'semibold' | 'bold';
 
 @Component({
-  selector: 'app-text',
+  selector: 'pst-text',
   standalone: true,
   imports: [CommonModule],
   template: `

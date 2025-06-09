@@ -5,7 +5,7 @@ import { CheckboxComponent } from '../../../../../shared/components/checkbox/che
 import { CodeBlockComponent } from '../../../shared/components/code-block.component';
 
 @Component({
-  selector: 'app-checkbox-showcase',
+  selector: 'pst-checkbox-showcase',
   standalone: true,
   imports: [
     CommonModule, 
@@ -31,10 +31,10 @@ import { CodeBlockComponent } from '../../../shared/components/code-block.compon
         <h2 class="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-4">
           Import
         </h2>
-        <app-code-block
+        <pst-code-block
           [code]="importCode"
           language="typescript"
-        ></app-code-block>
+        ></pst-code-block>
       </section>
 
       <!-- Examples -->
@@ -50,17 +50,17 @@ import { CodeBlockComponent } from '../../../shared/components/code-block.compon
           </h3>
           <div class="bg-gray-50 dark:bg-gray-900 p-8 rounded-lg mb-4">
             <div class="space-y-4">
-              <app-checkbox 
+              <pst-checkbox 
                 label="I agree to the terms and conditions"
                 [(ngModel)]="basicChecked"
-              ></app-checkbox>
+              ></pst-checkbox>
               <p class="text-sm text-gray-600 dark:text-gray-400">Checked: {{ basicChecked() }}</p>
             </div>
           </div>
-          <app-code-block
+          <pst-code-block
             [code]="basicCode"
             language="html"
-          ></app-code-block>
+          ></pst-code-block>
         </div>
 
         <!-- States -->
@@ -70,17 +70,17 @@ import { CodeBlockComponent } from '../../../shared/components/code-block.compon
           </h3>
           <div class="bg-gray-50 dark:bg-gray-900 p-8 rounded-lg mb-4">
             <div class="space-y-4">
-              <app-checkbox label="Unchecked"></app-checkbox>
-              <app-checkbox label="Checked" [ngModel]="true"></app-checkbox>
-              <app-checkbox label="Disabled" [disabled]="true"></app-checkbox>
-              <app-checkbox label="Disabled Checked" [disabled]="true" [ngModel]="true"></app-checkbox>
-              <app-checkbox label="Required field" [required]="true"></app-checkbox>
+              <pst-checkbox label="Unchecked"></pst-checkbox>
+              <pst-checkbox label="Checked" [ngModel]="true"></pst-checkbox>
+              <pst-checkbox label="Disabled" [disabled]="true"></pst-checkbox>
+              <pst-checkbox label="Disabled Checked" [disabled]="true" [ngModel]="true"></pst-checkbox>
+              <pst-checkbox label="Required field" [required]="true"></pst-checkbox>
             </div>
           </div>
-          <app-code-block
+          <pst-code-block
             [code]="statesCode"
             language="html"
-          ></app-code-block>
+          ></pst-code-block>
         </div>
 
         <!-- With Helper Text -->
@@ -90,23 +90,23 @@ import { CodeBlockComponent } from '../../../shared/components/code-block.compon
           </h3>
           <div class="bg-gray-50 dark:bg-gray-900 p-8 rounded-lg mb-4">
             <div class="space-y-4">
-              <app-checkbox 
+              <pst-checkbox 
                 label="Subscribe to newsletter"
                 helperText="We'll send you updates about new features and tips"
                 [showHelperText]="true"
-              ></app-checkbox>
-              <app-checkbox 
+              ></pst-checkbox>
+              <pst-checkbox 
                 label="Enable notifications"
                 helperText="Get notified about important updates"
                 errorMessage="You must enable notifications to continue"
                 [showHelperText]="true"
-              ></app-checkbox>
+              ></pst-checkbox>
             </div>
           </div>
-          <app-code-block
+          <pst-code-block
             [code]="helperTextCode"
             language="html"
-          ></app-code-block>
+          ></pst-code-block>
         </div>
 
         <!-- Multiple Checkboxes -->
@@ -117,31 +117,31 @@ import { CodeBlockComponent } from '../../../shared/components/code-block.compon
           <div class="bg-gray-50 dark:bg-gray-900 p-8 rounded-lg mb-4">
             <div class="space-y-4">
               <h4 class="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Select your interests:</h4>
-              <app-checkbox 
+              <pst-checkbox 
                 label="Technology"
                 [(ngModel)]="interests.technology"
-              ></app-checkbox>
-              <app-checkbox 
+              ></pst-checkbox>
+              <pst-checkbox 
                 label="Design"
                 [(ngModel)]="interests.design"
-              ></app-checkbox>
-              <app-checkbox 
+              ></pst-checkbox>
+              <pst-checkbox 
                 label="Business"
                 [(ngModel)]="interests.business"
-              ></app-checkbox>
-              <app-checkbox 
+              ></pst-checkbox>
+              <pst-checkbox 
                 label="Marketing"
                 [(ngModel)]="interests.marketing"
-              ></app-checkbox>
+              ></pst-checkbox>
               <p class="text-sm text-gray-600 dark:text-gray-400 mt-4">
                 Selected: {{ getSelectedInterests() }}
               </p>
             </div>
           </div>
-          <app-code-block
+          <pst-code-block
             [code]="multipleCode"
             language="html"
-          ></app-code-block>
+          ></pst-code-block>
         </div>
 
         <!-- Without Label -->
@@ -151,14 +151,14 @@ import { CodeBlockComponent } from '../../../shared/components/code-block.compon
           </h3>
           <div class="bg-gray-50 dark:bg-gray-900 p-8 rounded-lg mb-4">
             <div class="flex items-center gap-4">
-              <app-checkbox></app-checkbox>
+              <pst-checkbox></pst-checkbox>
               <span class="text-gray-700 dark:text-gray-300">Checkbox without label (uses aria-label)</span>
             </div>
           </div>
-          <app-code-block
+          <pst-code-block
             [code]="withoutLabelCode"
             language="html"
-          ></app-code-block>
+          ></pst-code-block>
         </div>
       </section>
     </div>
@@ -195,34 +195,34 @@ export class CheckboxShowcaseComponent {
   imports: [CheckboxComponent, FormsModule]
 })`;
 
-  basicCode = `<app-checkbox 
+  basicCode = `<pst-checkbox 
   label="I agree to the terms and conditions"
   [(ngModel)]="isChecked"
-></app-checkbox>`;
+></pst-checkbox>`;
 
-  statesCode = `<app-checkbox label="Unchecked"></app-checkbox>
-<app-checkbox label="Checked" [ngModel]="true"></app-checkbox>
-<app-checkbox label="Disabled" [disabled]="true"></app-checkbox>
-<app-checkbox label="Disabled Checked" [disabled]="true" [ngModel]="true"></app-checkbox>
-<app-checkbox label="Required field" [required]="true"></app-checkbox>`;
+  statesCode = `<pst-checkbox label="Unchecked"></pst-checkbox>
+<pst-checkbox label="Checked" [ngModel]="true"></pst-checkbox>
+<pst-checkbox label="Disabled" [disabled]="true"></pst-checkbox>
+<pst-checkbox label="Disabled Checked" [disabled]="true" [ngModel]="true"></pst-checkbox>
+<pst-checkbox label="Required field" [required]="true"></pst-checkbox>`;
 
-  helperTextCode = `<app-checkbox 
+  helperTextCode = `<pst-checkbox 
   label="Subscribe to newsletter"
   helperText="We'll send you updates about new features and tips"
   [showHelperText]="true"
-></app-checkbox>
+></pst-checkbox>
 
-<app-checkbox 
+<pst-checkbox 
   label="Enable notifications"
   helperText="Get notified about important updates"
   errorMessage="You must enable notifications to continue"
   [showHelperText]="true"
-></app-checkbox>`;
+></pst-checkbox>`;
 
-  multipleCode = `<app-checkbox label="Technology" [(ngModel)]="interests.technology"></app-checkbox>
-<app-checkbox label="Design" [(ngModel)]="interests.design"></app-checkbox>
-<app-checkbox label="Business" [(ngModel)]="interests.business"></app-checkbox>
-<app-checkbox label="Marketing" [(ngModel)]="interests.marketing"></app-checkbox>`;
+  multipleCode = `<pst-checkbox label="Technology" [(ngModel)]="interests.technology"></pst-checkbox>
+<pst-checkbox label="Design" [(ngModel)]="interests.design"></pst-checkbox>
+<pst-checkbox label="Business" [(ngModel)]="interests.business"></pst-checkbox>
+<pst-checkbox label="Marketing" [(ngModel)]="interests.marketing"></pst-checkbox>`;
 
-  withoutLabelCode = `<app-checkbox></app-checkbox>`;
+  withoutLabelCode = `<pst-checkbox></pst-checkbox>`;
 }

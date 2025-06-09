@@ -14,7 +14,7 @@ Create the main layout component with sidebar navigation for the Component Showc
 ```typescript
 // Path: src/app/features/components-showcase/layout/showcase-layout.component.ts
 @Component({
-  selector: 'app-showcase-layout',
+  selector: 'pst-showcase-layout',
   standalone: true,
   imports: [CommonModule, RouterModule, IconComponent],
   template: `
@@ -23,7 +23,7 @@ Create the main layout component with sidebar navigation for the Component Showc
       <aside class="w-64 bg-white dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 overflow-y-auto">
         <div class="p-4 border-b border-gray-200 dark:border-gray-700">
           <h1 class="text-2xl font-bold text-gray-900 dark:text-white flex items-center gap-2">
-            <app-icon name="package" [size]="24" />
+            <pst-icon name="package" [size]="24" />
             Component Library
           </h1>
         </div>
@@ -42,9 +42,9 @@ Create the main layout component with sidebar navigation for the Component Showc
                        class="flex items-center justify-between px-3 py-2 text-sm font-medium rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300">
                       <span>{{ item.label }}</span>
                       @if (item.status) {
-                        <app-badge [variant]="getBadgeVariant(item.status)" size="sm">
+                        <pst-badge [variant]="getBadgeVariant(item.status)" size="sm">
                           {{ item.status }}
-                        </app-badge>
+                        </pst-badge>
                       }
                     </a>
                   </li>

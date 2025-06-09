@@ -9,7 +9,7 @@ type RadioSize = 'sm' | 'md' | 'lg';
 type RadioOrientation = 'horizontal' | 'vertical';
 
 @Component({
-  selector: 'app-radio-group',
+  selector: 'pst-radio-group',
   standalone: true,
   imports: [CommonModule],
   providers: [

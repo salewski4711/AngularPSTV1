@@ -4,7 +4,7 @@ import { SpinnerComponent } from '../../../../../shared/components/spinner/spinn
 import { CodeBlockComponent } from '../../../shared/components/code-block.component';
 
 @Component({
-  selector: 'app-spinner-showcase',
+  selector: 'pst-spinner-showcase',
   standalone: true,
   imports: [
     CommonModule, 
@@ -29,10 +29,10 @@ import { CodeBlockComponent } from '../../../shared/components/code-block.compon
         <h2 class="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-4">
           Import
         </h2>
-        <app-code-block
+        <pst-code-block
           [code]="importCode"
           language="typescript"
-        ></app-code-block>
+        ></pst-code-block>
       </section>
 
       <!-- Examples -->
@@ -48,13 +48,13 @@ import { CodeBlockComponent } from '../../../shared/components/code-block.compon
           </h3>
           <div class="bg-gray-50 dark:bg-gray-900 p-8 rounded-lg mb-4">
             <div class="flex items-center gap-8">
-              <app-spinner></app-spinner>
+              <pst-spinner></pst-spinner>
             </div>
           </div>
-          <app-code-block
+          <pst-code-block
             [code]="basicCode"
             language="html"
-          ></app-code-block>
+          ></pst-code-block>
         </div>
 
         <!-- Spinner Types -->
@@ -65,23 +65,23 @@ import { CodeBlockComponent } from '../../../shared/components/code-block.compon
           <div class="bg-gray-50 dark:bg-gray-900 p-8 rounded-lg mb-4">
             <div class="flex items-center gap-8">
               <div class="text-center">
-                <app-spinner type="circle"></app-spinner>
+                <pst-spinner type="circle"></pst-spinner>
                 <p class="text-xs text-gray-600 dark:text-gray-400 mt-2">Circle</p>
               </div>
               <div class="text-center">
-                <app-spinner type="dots"></app-spinner>
+                <pst-spinner type="dots"></pst-spinner>
                 <p class="text-xs text-gray-600 dark:text-gray-400 mt-2">Dots</p>
               </div>
               <div class="text-center">
-                <app-spinner type="bars"></app-spinner>
+                <pst-spinner type="bars"></pst-spinner>
                 <p class="text-xs text-gray-600 dark:text-gray-400 mt-2">Bars</p>
               </div>
             </div>
           </div>
-          <app-code-block
+          <pst-code-block
             [code]="typesCode"
             language="html"
-          ></app-code-block>
+          ></pst-code-block>
         </div>
 
         <!-- Sizes -->
@@ -92,31 +92,31 @@ import { CodeBlockComponent } from '../../../shared/components/code-block.compon
           <div class="bg-gray-50 dark:bg-gray-900 p-8 rounded-lg mb-4">
             <div class="flex items-center gap-8">
               <div class="text-center">
-                <app-spinner size="xs"></app-spinner>
+                <pst-spinner size="xs"></pst-spinner>
                 <p class="text-xs text-gray-600 dark:text-gray-400 mt-2">XS</p>
               </div>
               <div class="text-center">
-                <app-spinner size="sm"></app-spinner>
+                <pst-spinner size="sm"></pst-spinner>
                 <p class="text-xs text-gray-600 dark:text-gray-400 mt-2">Small</p>
               </div>
               <div class="text-center">
-                <app-spinner size="md"></app-spinner>
+                <pst-spinner size="md"></pst-spinner>
                 <p class="text-xs text-gray-600 dark:text-gray-400 mt-2">Medium</p>
               </div>
               <div class="text-center">
-                <app-spinner size="lg"></app-spinner>
+                <pst-spinner size="lg"></pst-spinner>
                 <p class="text-xs text-gray-600 dark:text-gray-400 mt-2">Large</p>
               </div>
               <div class="text-center">
-                <app-spinner size="xl"></app-spinner>
+                <pst-spinner size="xl"></pst-spinner>
                 <p class="text-xs text-gray-600 dark:text-gray-400 mt-2">XL</p>
               </div>
             </div>
           </div>
-          <app-code-block
+          <pst-code-block
             [code]="sizesCode"
             language="html"
-          ></app-code-block>
+          ></pst-code-block>
         </div>
 
         <!-- Colors -->
@@ -127,35 +127,35 @@ import { CodeBlockComponent } from '../../../shared/components/code-block.compon
           <div class="bg-gray-50 dark:bg-gray-900 p-8 rounded-lg mb-4">
             <div class="flex items-center gap-8">
               <div class="text-center">
-                <app-spinner color="primary"></app-spinner>
+                <pst-spinner color="primary"></pst-spinner>
                 <p class="text-xs text-gray-600 dark:text-gray-400 mt-2">Primary</p>
               </div>
               <div class="text-center">
-                <app-spinner color="secondary"></app-spinner>
+                <pst-spinner color="secondary"></pst-spinner>
                 <p class="text-xs text-gray-600 dark:text-gray-400 mt-2">Secondary</p>
               </div>
               <div class="text-center">
-                <app-spinner color="success"></app-spinner>
+                <pst-spinner color="success"></pst-spinner>
                 <p class="text-xs text-gray-600 dark:text-gray-400 mt-2">Success</p>
               </div>
               <div class="text-center">
-                <app-spinner color="danger"></app-spinner>
+                <pst-spinner color="danger"></pst-spinner>
                 <p class="text-xs text-gray-600 dark:text-gray-400 mt-2">Danger</p>
               </div>
               <div class="text-center">
-                <app-spinner color="warning"></app-spinner>
+                <pst-spinner color="warning"></pst-spinner>
                 <p class="text-xs text-gray-600 dark:text-gray-400 mt-2">Warning</p>
               </div>
               <div class="text-center">
-                <app-spinner color="info"></app-spinner>
+                <pst-spinner color="info"></pst-spinner>
                 <p class="text-xs text-gray-600 dark:text-gray-400 mt-2">Info</p>
               </div>
             </div>
           </div>
-          <app-code-block
+          <pst-code-block
             [code]="colorsCode"
             language="html"
-          ></app-code-block>
+          ></pst-code-block>
         </div>
 
         <!-- With Label -->
@@ -165,15 +165,15 @@ import { CodeBlockComponent } from '../../../shared/components/code-block.compon
           </h3>
           <div class="bg-gray-50 dark:bg-gray-900 p-8 rounded-lg mb-4">
             <div class="space-y-4">
-              <app-spinner label="Loading..."></app-spinner>
-              <app-spinner label="Please wait" type="dots"></app-spinner>
-              <app-spinner label="Saving your changes" color="success" type="bars"></app-spinner>
+              <pst-spinner label="Loading..."></pst-spinner>
+              <pst-spinner label="Please wait" type="dots"></pst-spinner>
+              <pst-spinner label="Saving your changes" color="success" type="bars"></pst-spinner>
             </div>
           </div>
-          <app-code-block
+          <pst-code-block
             [code]="labelCode"
             language="html"
-          ></app-code-block>
+          ></pst-code-block>
         </div>
 
         <!-- Real-world Examples -->
@@ -187,7 +187,7 @@ import { CodeBlockComponent } from '../../../shared/components/code-block.compon
               <h4 class="text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">Loading Button</h4>
               <div class="bg-gray-50 dark:bg-gray-900 p-6 rounded-lg">
                 <button class="flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-lg" disabled>
-                  <app-spinner size="sm" color="white"></app-spinner>
+                  <pst-spinner size="sm" color="white"></pst-spinner>
                   <span>Saving...</span>
                 </button>
               </div>
@@ -199,7 +199,7 @@ import { CodeBlockComponent } from '../../../shared/components/code-block.compon
               <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm">
                 <div class="flex items-center justify-center h-48">
                   <div class="text-center">
-                    <app-spinner size="lg" color="primary"></app-spinner>
+                    <pst-spinner size="lg" color="primary"></pst-spinner>
                     <p class="text-sm text-gray-600 dark:text-gray-400 mt-4">Loading content...</p>
                   </div>
                 </div>
@@ -215,7 +215,7 @@ import { CodeBlockComponent } from '../../../shared/components/code-block.compon
                 </div>
                 <div class="p-8">
                   <div class="flex items-center justify-center">
-                    <app-spinner type="dots" label="Loading customers..."></app-spinner>
+                    <pst-spinner type="dots" label="Loading customers..."></pst-spinner>
                   </div>
                 </div>
               </div>
@@ -228,7 +228,7 @@ import { CodeBlockComponent } from '../../../shared/components/code-block.compon
                 <div class="space-y-3">
                   <div class="flex items-center justify-between">
                     <span class="text-sm text-gray-700 dark:text-gray-300">Checking availability</span>
-                    <app-spinner size="xs"></app-spinner>
+                    <pst-spinner size="xs"></pst-spinner>
                   </div>
                   <div class="flex items-center justify-between">
                     <span class="text-sm text-gray-700 dark:text-gray-300">Validating email</span>
@@ -236,16 +236,16 @@ import { CodeBlockComponent } from '../../../shared/components/code-block.compon
                   </div>
                   <div class="flex items-center justify-between">
                     <span class="text-sm text-gray-700 dark:text-gray-300">Processing payment</span>
-                    <app-spinner size="xs" type="dots"></app-spinner>
+                    <pst-spinner size="xs" type="dots"></pst-spinner>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <app-code-block
+          <pst-code-block
             [code]="realWorldCode"
             language="html"
-          ></app-code-block>
+          ></pst-code-block>
         </div>
       </section>
     </div>
@@ -264,49 +264,49 @@ export class SpinnerShowcaseComponent {
   imports: [SpinnerComponent]
 })`;
 
-  basicCode = `<app-spinner></app-spinner>`;
+  basicCode = `<pst-spinner></pst-spinner>`;
 
-  typesCode = `<app-spinner type="circle"></app-spinner>
-<app-spinner type="dots"></app-spinner>
-<app-spinner type="bars"></app-spinner>`;
+  typesCode = `<pst-spinner type="circle"></pst-spinner>
+<pst-spinner type="dots"></pst-spinner>
+<pst-spinner type="bars"></pst-spinner>`;
 
-  sizesCode = `<app-spinner size="xs"></app-spinner>
-<app-spinner size="sm"></app-spinner>
-<app-spinner size="md"></app-spinner>
-<app-spinner size="lg"></app-spinner>
-<app-spinner size="xl"></app-spinner>`;
+  sizesCode = `<pst-spinner size="xs"></pst-spinner>
+<pst-spinner size="sm"></pst-spinner>
+<pst-spinner size="md"></pst-spinner>
+<pst-spinner size="lg"></pst-spinner>
+<pst-spinner size="xl"></pst-spinner>`;
 
-  colorsCode = `<app-spinner color="primary"></app-spinner>
-<app-spinner color="secondary"></app-spinner>
-<app-spinner color="success"></app-spinner>
-<app-spinner color="danger"></app-spinner>
-<app-spinner color="warning"></app-spinner>
-<app-spinner color="info"></app-spinner>`;
+  colorsCode = `<pst-spinner color="primary"></pst-spinner>
+<pst-spinner color="secondary"></pst-spinner>
+<pst-spinner color="success"></pst-spinner>
+<pst-spinner color="danger"></pst-spinner>
+<pst-spinner color="warning"></pst-spinner>
+<pst-spinner color="info"></pst-spinner>`;
 
-  labelCode = `<app-spinner label="Loading..."></app-spinner>
-<app-spinner label="Please wait" type="dots"></app-spinner>
-<app-spinner label="Saving your changes" color="success" type="bars"></app-spinner>`;
+  labelCode = `<pst-spinner label="Loading..."></pst-spinner>
+<pst-spinner label="Please wait" type="dots"></pst-spinner>
+<pst-spinner label="Saving your changes" color="success" type="bars"></pst-spinner>`;
 
   realWorldCode = `<!-- Loading Button -->
 <button class="flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-lg" disabled>
-  <app-spinner size="sm" color="white"></app-spinner>
+  <pst-spinner size="sm" color="white"></pst-spinner>
   <span>Saving...</span>
 </button>
 
 <!-- Page Loading -->
 <div class="flex items-center justify-center h-48">
   <div class="text-center">
-    <app-spinner size="lg" color="primary"></app-spinner>
+    <pst-spinner size="lg" color="primary"></pst-spinner>
     <p class="text-sm text-gray-600 mt-4">Loading content...</p>
   </div>
 </div>
 
 <!-- Data Table Loading -->
-<app-spinner type="dots" label="Loading customers..."></app-spinner>
+<pst-spinner type="dots" label="Loading customers..."></pst-spinner>
 
 <!-- Inline Loading -->
 <div class="flex items-center justify-between">
   <span class="text-sm text-gray-700">Checking availability</span>
-  <app-spinner size="xs"></app-spinner>
+  <pst-spinner size="xs"></pst-spinner>
 </div>`;
 }

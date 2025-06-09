@@ -8,7 +8,7 @@ type ToggleSize = 'sm' | 'md' | 'lg';
 type LabelPosition = 'left' | 'right';
 
 @Component({
-  selector: 'app-toggle',
+  selector: 'pst-toggle',
   standalone: true,
   imports: [CommonModule],
   providers: [

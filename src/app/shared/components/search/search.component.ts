@@ -15,11 +15,10 @@ export interface SearchResult {
 }
 
 @Component({
-  selector: 'app-search',
+  selector: 'pst-search',
   standalone: true,
   imports: [CommonModule, FormsModule, IconComponent],
-  templateUrl: './search.component.html',
-  styleUrls: ['./search.component.scss']
+  templateUrl: './search.component.html'
 })
 export class SearchComponent implements OnInit, OnDestroy {
   @ViewChild('searchInput') searchInput!: ElementRef<HTMLInputElement>;

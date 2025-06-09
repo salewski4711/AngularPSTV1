@@ -3,12 +3,12 @@ import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 
 @Component({
-  selector: 'app-home',
+  selector: 'pst-home',
   standalone: true,
   imports: [CommonModule, RouterLink],
   template: `
-    <div class="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
-      <div class="max-w-4xl mx-auto px-4 py-16 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-center py-16">
+      <div class="w-full">
         <div class="text-center">
           <h1 class="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">
             Welcome to Angular CRM

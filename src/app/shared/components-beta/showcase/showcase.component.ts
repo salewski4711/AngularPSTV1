@@ -12,7 +12,7 @@ import { ButtonComponent } from '../../components/button/button.component';
 import { ButtonGroupComponent } from '../../components/button-group/button-group.component';
 
 @Component({
-  selector: 'app-showcase',
+  selector: 'pst-showcase',
   standalone: true,
   imports: [
     CommonModule,
@@ -51,7 +51,7 @@ import { ButtonGroupComponent } from '../../components/button-group/button-group
           
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <!-- Basic Input -->
-            <app-input
+            <pst-input
               label="Basic Input"
               placeholder="Enter text..."
               helperText="This is a helper text"
@@ -59,7 +59,7 @@ import { ButtonGroupComponent } from '../../components/button-group/button-group
             />
             
             <!-- Email with Icon -->
-            <app-input
+            <pst-input
               label="Email Address"
               type="email"
               placeholder="name@example.com"
@@ -69,7 +69,7 @@ import { ButtonGroupComponent } from '../../components/button-group/button-group
             />
             
             <!-- Password -->
-            <app-input
+            <pst-input
               label="Password"
               type="password"
               placeholder="Enter password"
@@ -79,7 +79,7 @@ import { ButtonGroupComponent } from '../../components/button-group/button-group
             />
             
             <!-- Search with Loading -->
-            <app-input
+            <pst-input
               label="Search"
               type="search"
               placeholder="Search..."
@@ -89,14 +89,14 @@ import { ButtonGroupComponent } from '../../components/button-group/button-group
             />
             
             <!-- Disabled Input -->
-            <app-input
+            <pst-input
               label="Disabled Input"
               placeholder="Cannot edit"
               [formControl]="disabledInputControl"
             />
             
             <!-- Success State -->
-            <app-input
+            <pst-input
               label="Success State"
               placeholder="Valid input"
               [formControl]="successControl"
@@ -108,9 +108,9 @@ import { ButtonGroupComponent } from '../../components/button-group/button-group
           <div class="mt-6 space-y-4">
             <h3 class="text-lg font-medium text-gray-900 dark:text-gray-100">Sizes</h3>
             <div class="flex gap-4 items-end">
-              <app-input size="sm" placeholder="Small" />
-              <app-input size="md" placeholder="Medium" />
-              <app-input size="lg" placeholder="Large" />
+              <pst-input size="sm" placeholder="Small" />
+              <pst-input size="md" placeholder="Medium" />
+              <pst-input size="lg" placeholder="Large" />
             </div>
           </div>
         </section>
@@ -121,7 +121,7 @@ import { ButtonGroupComponent } from '../../components/button-group/button-group
           
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <!-- Basic Select -->
-            <app-select
+            <pst-select
               label="Country"
               placeholder="Choose a country"
               [options]="countryOptions"
@@ -130,7 +130,7 @@ import { ButtonGroupComponent } from '../../components/button-group/button-group
             />
             
             <!-- Grouped Select -->
-            <app-select
+            <pst-select
               label="City"
               placeholder="Select a city"
               [options]="cityOptions"
@@ -138,7 +138,7 @@ import { ButtonGroupComponent } from '../../components/button-group/button-group
             />
             
             <!-- Required Select -->
-            <app-select
+            <pst-select
               label="Department"
               [options]="departmentOptions"
               [formControl]="departmentControl"
@@ -147,7 +147,7 @@ import { ButtonGroupComponent } from '../../components/button-group/button-group
             />
             
             <!-- Disabled Select -->
-            <app-select
+            <pst-select
               label="Disabled Select"
               [options]="countryOptions"
               [formControl]="disabledSelectControl"
@@ -161,13 +161,13 @@ import { ButtonGroupComponent } from '../../components/button-group/button-group
           
           <div class="space-y-4">
             <!-- Basic Checkbox -->
-            <app-checkbox
+            <pst-checkbox
               label="I agree to the terms and conditions"
               [formControl]="checkboxControl"
             />
             
             <!-- Required Checkbox -->
-            <app-checkbox
+            <pst-checkbox
               label="I accept the privacy policy"
               [required]="true"
               [formControl]="requiredCheckboxControl"
@@ -176,22 +176,22 @@ import { ButtonGroupComponent } from '../../components/button-group/button-group
             />
             
             <!-- Indeterminate -->
-            <app-checkbox
+            <pst-checkbox
               label="Select all items"
               [indeterminate]="true"
             />
             
             <!-- Disabled -->
-            <app-checkbox
+            <pst-checkbox
               label="Disabled checkbox"
               [formControl]="disabledCheckboxControl"
             />
             
             <!-- Sizes -->
             <div class="flex gap-6 items-center">
-              <app-checkbox size="sm" label="Small" />
-              <app-checkbox size="md" label="Medium" />
-              <app-checkbox size="lg" label="Large" />
+              <pst-checkbox size="sm" label="Small" />
+              <pst-checkbox size="md" label="Medium" />
+              <pst-checkbox size="lg" label="Large" />
             </div>
           </div>
         </section>
@@ -202,7 +202,7 @@ import { ButtonGroupComponent } from '../../components/button-group/button-group
           
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <!-- Vertical Radio Group -->
-            <app-radio-group
+            <pst-radio-group
               label="Subscription Plan"
               [options]="subscriptionOptions"
               [formControl]="radioControl"
@@ -210,7 +210,7 @@ import { ButtonGroupComponent } from '../../components/button-group/button-group
             />
             
             <!-- Horizontal Radio Group -->
-            <app-radio-group
+            <pst-radio-group
               label="Preferred Contact"
               [options]="contactOptions"
               [formControl]="contactControl"
@@ -226,12 +226,12 @@ import { ButtonGroupComponent } from '../../components/button-group/button-group
           <div class="space-y-6">
             <!-- Basic Toggles -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <app-toggle
+              <pst-toggle
                 label="Email notifications"
                 [formControl]="toggleControl"
               />
               
-              <app-toggle
+              <pst-toggle
                 label="Dark mode"
                 labelPosition="left"
                 [formControl]="darkModeControl"
@@ -239,7 +239,7 @@ import { ButtonGroupComponent } from '../../components/button-group/button-group
             </div>
             
             <!-- With Helper Text -->
-            <app-toggle
+            <pst-toggle
               label="Marketing emails"
               [showHelperText]="true"
               helperText="Receive updates about new features and promotions"
@@ -248,13 +248,13 @@ import { ButtonGroupComponent } from '../../components/button-group/button-group
             
             <!-- Sizes -->
             <div class="flex gap-6 items-center">
-              <app-toggle size="sm" label="Small" />
-              <app-toggle size="md" label="Medium" />
-              <app-toggle size="lg" label="Large" />
+              <pst-toggle size="sm" label="Small" />
+              <pst-toggle size="md" label="Medium" />
+              <pst-toggle size="lg" label="Large" />
             </div>
             
             <!-- Disabled -->
-            <app-toggle
+            <pst-toggle
               label="Disabled toggle"
               [formControl]="disabledToggleControl"
             />
@@ -270,12 +270,12 @@ import { ButtonGroupComponent } from '../../components/button-group/button-group
             <div>
               <h3 class="text-lg font-medium text-gray-900 dark:text-gray-100 mb-3">Variants</h3>
               <div class="flex flex-wrap gap-3">
-                <app-button variant="primary">Primary</app-button>
-                <app-button variant="secondary">Secondary</app-button>
-                <app-button variant="outline-primary">Outline Primary</app-button>
-                <app-button variant="tertiary">Tertiary</app-button>
-                <app-button variant="ghost">Ghost</app-button>
-                <app-button variant="danger">Danger</app-button>
+                <pst-button variant="primary">Primary</pst-button>
+                <pst-button variant="secondary">Secondary</pst-button>
+                <pst-button variant="outline-primary">Outline Primary</pst-button>
+                <pst-button variant="tertiary">Tertiary</pst-button>
+                <pst-button variant="ghost">Ghost</pst-button>
+                <pst-button variant="danger">Danger</pst-button>
               </div>
             </div>
             
@@ -283,11 +283,11 @@ import { ButtonGroupComponent } from '../../components/button-group/button-group
             <div>
               <h3 class="text-lg font-medium text-gray-900 dark:text-gray-100 mb-3">Sizes</h3>
               <div class="flex items-center gap-3">
-                <app-button size="xs" variant="primary">XS</app-button>
-                <app-button size="sm" variant="primary">Small</app-button>
-                <app-button size="md" variant="primary">Medium</app-button>
-                <app-button size="lg" variant="primary">Large</app-button>
-                <app-button size="xl" variant="primary">XL</app-button>
+                <pst-button size="xs" variant="primary">XS</pst-button>
+                <pst-button size="sm" variant="primary">Small</pst-button>
+                <pst-button size="md" variant="primary">Medium</pst-button>
+                <pst-button size="lg" variant="primary">Large</pst-button>
+                <pst-button size="xl" variant="primary">XL</pst-button>
               </div>
             </div>
             
@@ -295,10 +295,10 @@ import { ButtonGroupComponent } from '../../components/button-group/button-group
             <div>
               <h3 class="text-lg font-medium text-gray-900 dark:text-gray-100 mb-3">With Icons</h3>
               <div class="flex flex-wrap gap-3">
-                <app-button variant="primary" icon="save">Save</app-button>
-                <app-button variant="secondary" icon="download">Download</app-button>
-                <app-button variant="outline-primary" icon="edit" iconPosition="right">Edit</app-button>
-                <app-button variant="danger" icon="trash">Delete</app-button>
+                <pst-button variant="primary" icon="save">Save</pst-button>
+                <pst-button variant="secondary" icon="download">Download</pst-button>
+                <pst-button variant="outline-primary" icon="edit" iconPosition="right">Edit</pst-button>
+                <pst-button variant="danger" icon="trash">Delete</pst-button>
               </div>
             </div>
             
@@ -306,11 +306,11 @@ import { ButtonGroupComponent } from '../../components/button-group/button-group
             <div>
               <h3 class="text-lg font-medium text-gray-900 dark:text-gray-100 mb-3">Icon Only</h3>
               <div class="flex items-center gap-3">
-                <app-button size="xs" variant="primary" icon="plus" [iconOnly]="true" ariaLabel="Add"></app-button>
-                <app-button size="sm" variant="primary" icon="edit" [iconOnly]="true" ariaLabel="Edit"></app-button>
-                <app-button size="md" variant="primary" icon="save" [iconOnly]="true" ariaLabel="Save"></app-button>
-                <app-button size="lg" variant="primary" icon="download" [iconOnly]="true" ariaLabel="Download"></app-button>
-                <app-button size="xl" variant="primary" icon="settings" [iconOnly]="true" ariaLabel="Settings"></app-button>
+                <pst-button size="xs" variant="primary" icon="plus" [iconOnly]="true" ariaLabel="Add"></pst-button>
+                <pst-button size="sm" variant="primary" icon="edit" [iconOnly]="true" ariaLabel="Edit"></pst-button>
+                <pst-button size="md" variant="primary" icon="save" [iconOnly]="true" ariaLabel="Save"></pst-button>
+                <pst-button size="lg" variant="primary" icon="download" [iconOnly]="true" ariaLabel="Download"></pst-button>
+                <pst-button size="xl" variant="primary" icon="settings" [iconOnly]="true" ariaLabel="Settings"></pst-button>
               </div>
             </div>
             
@@ -318,26 +318,26 @@ import { ButtonGroupComponent } from '../../components/button-group/button-group
             <div>
               <h3 class="text-lg font-medium text-gray-900 dark:text-gray-100 mb-3">States</h3>
               <div class="flex flex-wrap gap-3">
-                <app-button variant="primary">Normal</app-button>
-                <app-button variant="primary" [disabled]="true">Disabled</app-button>
-                <app-button variant="primary" [loading]="true">Loading</app-button>
-                <app-button variant="primary" [loading]="true" loadingText="Saving...">Loading with Text</app-button>
+                <pst-button variant="primary">Normal</pst-button>
+                <pst-button variant="primary" [disabled]="true">Disabled</pst-button>
+                <pst-button variant="primary" [loading]="true">Loading</pst-button>
+                <pst-button variant="primary" [loading]="true" loadingText="Saving...">Loading with Text</pst-button>
               </div>
             </div>
             
             <!-- Full Width -->
             <div>
               <h3 class="text-lg font-medium text-gray-900 dark:text-gray-100 mb-3">Full Width</h3>
-              <app-button variant="primary" [fullWidth]="true">Full Width Button</app-button>
+              <pst-button variant="primary" [fullWidth]="true">Full Width Button</pst-button>
             </div>
             
             <!-- With Ripple Effect -->
             <div>
               <h3 class="text-lg font-medium text-gray-900 dark:text-gray-100 mb-3">With Ripple Effect</h3>
               <div class="flex flex-wrap gap-3">
-                <app-button variant="primary" [ripple]="true">Ripple Primary</app-button>
-                <app-button variant="secondary" [ripple]="true">Ripple Secondary</app-button>
-                <app-button variant="outline-primary" [ripple]="true">Ripple Outline</app-button>
+                <pst-button variant="primary" [ripple]="true">Ripple Primary</pst-button>
+                <pst-button variant="secondary" [ripple]="true">Ripple Secondary</pst-button>
+                <pst-button variant="outline-primary" [ripple]="true">Ripple Outline</pst-button>
               </div>
             </div>
             
@@ -345,9 +345,9 @@ import { ButtonGroupComponent } from '../../components/button-group/button-group
             <div>
               <h3 class="text-lg font-medium text-gray-900 dark:text-gray-100 mb-3">Loading with Different Spinners</h3>
               <div class="flex flex-wrap gap-3">
-                <app-button variant="primary" [loading]="true" spinnerType="circle">Circle</app-button>
-                <app-button variant="secondary" [loading]="true" spinnerType="dots">Dots</app-button>
-                <app-button variant="tertiary" [loading]="true" spinnerType="bars">Bars</app-button>
+                <pst-button variant="primary" [loading]="true" spinnerType="circle">Circle</pst-button>
+                <pst-button variant="secondary" [loading]="true" spinnerType="dots">Dots</pst-button>
+                <pst-button variant="tertiary" [loading]="true" spinnerType="bars">Bars</pst-button>
               </div>
             </div>
             
@@ -355,7 +355,7 @@ import { ButtonGroupComponent } from '../../components/button-group/button-group
             <div>
               <h3 class="text-lg font-medium text-gray-900 dark:text-gray-100 mb-3">Interactive Demo</h3>
               <div class="space-y-3">
-                <app-button 
+                <pst-button 
                   variant="primary" 
                   [loading]="isButtonLoading"
                   [disabled]="isButtonDisabled"
@@ -363,7 +363,7 @@ import { ButtonGroupComponent } from '../../components/button-group/button-group
                   (clicked)="handleButtonClick()"
                 >
                   Click Me
-                </app-button>
+                </pst-button>
                 
                 <div class="flex gap-3">
                   <label class="flex items-center">
@@ -402,48 +402,48 @@ import { ButtonGroupComponent } from '../../components/button-group/button-group
               <h3 class="text-lg font-medium text-gray-900 dark:text-gray-100 mb-3">Horizontal Groups</h3>
               <div class="space-y-4">
                 <!-- Primary Group -->
-                <app-button-group>
-                  <app-button variant="primary" size="sm">Left</app-button>
-                  <app-button variant="primary" size="sm">Center</app-button>
-                  <app-button variant="primary" size="sm">Right</app-button>
-                </app-button-group>
+                <pst-button-group>
+                  <pst-button variant="primary" size="sm">Left</pst-button>
+                  <pst-button variant="primary" size="sm">Center</pst-button>
+                  <pst-button variant="primary" size="sm">Right</pst-button>
+                </pst-button-group>
                 
                 <!-- Secondary Group -->
-                <app-button-group>
-                  <app-button variant="secondary">First</app-button>
-                  <app-button variant="secondary">Second</app-button>
-                  <app-button variant="secondary">Third</app-button>
-                  <app-button variant="secondary">Fourth</app-button>
-                </app-button-group>
+                <pst-button-group>
+                  <pst-button variant="secondary">First</pst-button>
+                  <pst-button variant="secondary">Second</pst-button>
+                  <pst-button variant="secondary">Third</pst-button>
+                  <pst-button variant="secondary">Fourth</pst-button>
+                </pst-button-group>
                 
                 <!-- Outline Group -->
-                <app-button-group>
-                  <app-button variant="outline-primary" icon="list" [iconOnly]="true" ariaLabel="List view"></app-button>
-                  <app-button variant="outline-primary" icon="grid" [iconOnly]="true" ariaLabel="Grid view"></app-button>
-                  <app-button variant="outline-primary" icon="calendar" [iconOnly]="true" ariaLabel="Calendar view"></app-button>
-                </app-button-group>
+                <pst-button-group>
+                  <pst-button variant="outline-primary" icon="list" [iconOnly]="true" ariaLabel="List view"></pst-button>
+                  <pst-button variant="outline-primary" icon="grid" [iconOnly]="true" ariaLabel="Grid view"></pst-button>
+                  <pst-button variant="outline-primary" icon="calendar" [iconOnly]="true" ariaLabel="Calendar view"></pst-button>
+                </pst-button-group>
               </div>
             </div>
             
             <!-- Vertical Button Groups -->
             <div>
               <h3 class="text-lg font-medium text-gray-900 dark:text-gray-100 mb-3">Vertical Groups</h3>
-              <app-button-group orientation="vertical">
-                <app-button variant="tertiary" icon="home" iconPosition="left">Home</app-button>
-                <app-button variant="tertiary" icon="users" iconPosition="left">Users</app-button>
-                <app-button variant="tertiary" icon="settings" iconPosition="left">Settings</app-button>
-                <app-button variant="tertiary" icon="logout" iconPosition="left">Logout</app-button>
-              </app-button-group>
+              <pst-button-group orientation="vertical">
+                <pst-button variant="tertiary" icon="home" iconPosition="left">Home</pst-button>
+                <pst-button variant="tertiary" icon="users" iconPosition="left">Users</pst-button>
+                <pst-button variant="tertiary" icon="settings" iconPosition="left">Settings</pst-button>
+                <pst-button variant="tertiary" icon="logout" iconPosition="left">Logout</pst-button>
+              </pst-button-group>
             </div>
             
             <!-- Mixed Sizes (Not Recommended) -->
             <div>
               <h3 class="text-lg font-medium text-gray-900 dark:text-gray-100 mb-3">Different Variants in Group</h3>
-              <app-button-group>
-                <app-button variant="primary">Save</app-button>
-                <app-button variant="outline-primary">Save As</app-button>
-                <app-button variant="danger" icon="trash" [iconOnly]="true" ariaLabel="Delete"></app-button>
-              </app-button-group>
+              <pst-button-group>
+                <pst-button variant="primary">Save</pst-button>
+                <pst-button variant="outline-primary">Save As</pst-button>
+                <pst-button variant="danger" icon="trash" [iconOnly]="true" ariaLabel="Delete"></pst-button>
+              </pst-button-group>
             </div>
           </div>
         </section>
@@ -457,36 +457,36 @@ import { ButtonGroupComponent } from '../../components/button-group/button-group
             <div>
               <h3 class="text-lg font-medium text-gray-900 dark:text-gray-100 mb-3">Filled Variants</h3>
               <div class="flex flex-wrap gap-3">
-                <app-badge color="gray">Gray</app-badge>
-                <app-badge color="primary">Primary</app-badge>
-                <app-badge color="success">Success</app-badge>
-                <app-badge color="error">Error</app-badge>
-                <app-badge color="warning">Warning</app-badge>
-                <app-badge color="info">Info</app-badge>
+                <pst-badge color="gray">Gray</pst-badge>
+                <pst-badge color="primary">Primary</pst-badge>
+                <pst-badge color="success">Success</pst-badge>
+                <pst-badge color="error">Error</pst-badge>
+                <pst-badge color="warning">Warning</pst-badge>
+                <pst-badge color="info">Info</pst-badge>
               </div>
             </div>
             
             <div>
               <h3 class="text-lg font-medium text-gray-900 dark:text-gray-100 mb-3">Outline Variants</h3>
               <div class="flex flex-wrap gap-3">
-                <app-badge variant="outline" color="gray">Gray</app-badge>
-                <app-badge variant="outline" color="primary">Primary</app-badge>
-                <app-badge variant="outline" color="success">Success</app-badge>
-                <app-badge variant="outline" color="error">Error</app-badge>
-                <app-badge variant="outline" color="warning">Warning</app-badge>
-                <app-badge variant="outline" color="info">Info</app-badge>
+                <pst-badge variant="outline" color="gray">Gray</pst-badge>
+                <pst-badge variant="outline" color="primary">Primary</pst-badge>
+                <pst-badge variant="outline" color="success">Success</pst-badge>
+                <pst-badge variant="outline" color="error">Error</pst-badge>
+                <pst-badge variant="outline" color="warning">Warning</pst-badge>
+                <pst-badge variant="outline" color="info">Info</pst-badge>
               </div>
             </div>
             
             <div>
               <h3 class="text-lg font-medium text-gray-900 dark:text-gray-100 mb-3">Subtle Variants</h3>
               <div class="flex flex-wrap gap-3">
-                <app-badge variant="subtle" color="gray">Gray</app-badge>
-                <app-badge variant="subtle" color="primary">Primary</app-badge>
-                <app-badge variant="subtle" color="success">Success</app-badge>
-                <app-badge variant="subtle" color="error">Error</app-badge>
-                <app-badge variant="subtle" color="warning">Warning</app-badge>
-                <app-badge variant="subtle" color="info">Info</app-badge>
+                <pst-badge variant="subtle" color="gray">Gray</pst-badge>
+                <pst-badge variant="subtle" color="primary">Primary</pst-badge>
+                <pst-badge variant="subtle" color="success">Success</pst-badge>
+                <pst-badge variant="subtle" color="error">Error</pst-badge>
+                <pst-badge variant="subtle" color="warning">Warning</pst-badge>
+                <pst-badge variant="subtle" color="info">Info</pst-badge>
               </div>
             </div>
             
@@ -494,10 +494,10 @@ import { ButtonGroupComponent } from '../../components/button-group/button-group
             <div>
               <h3 class="text-lg font-medium text-gray-900 dark:text-gray-100 mb-3">Sizes</h3>
               <div class="flex items-center gap-3">
-                <app-badge size="xs" color="primary">XS</app-badge>
-                <app-badge size="sm" color="primary">Small</app-badge>
-                <app-badge size="md" color="primary">Medium</app-badge>
-                <app-badge size="lg" color="primary">Large</app-badge>
+                <pst-badge size="xs" color="primary">XS</pst-badge>
+                <pst-badge size="sm" color="primary">Small</pst-badge>
+                <pst-badge size="md" color="primary">Medium</pst-badge>
+                <pst-badge size="lg" color="primary">Large</pst-badge>
               </div>
             </div>
             
@@ -505,9 +505,9 @@ import { ButtonGroupComponent } from '../../components/button-group/button-group
             <div>
               <h3 class="text-lg font-medium text-gray-900 dark:text-gray-100 mb-3">Shapes</h3>
               <div class="flex gap-3">
-                <app-badge shape="square" color="primary">Square</app-badge>
-                <app-badge shape="rounded" color="primary">Rounded</app-badge>
-                <app-badge shape="pill" color="primary">Pill</app-badge>
+                <pst-badge shape="square" color="primary">Square</pst-badge>
+                <pst-badge shape="rounded" color="primary">Rounded</pst-badge>
+                <pst-badge shape="pill" color="primary">Pill</pst-badge>
               </div>
             </div>
             
@@ -515,8 +515,8 @@ import { ButtonGroupComponent } from '../../components/button-group/button-group
             <div>
               <h3 class="text-lg font-medium text-gray-900 dark:text-gray-100 mb-3">With Icons</h3>
               <div class="flex flex-wrap gap-3">
-                <app-badge color="success" leadingIcon="fa fa-check">Active</app-badge>
-                <app-badge color="error" trailingIcon="fa fa-exclamation-triangle">Urgent</app-badge>
+                <pst-badge color="success" leadingIcon="fa fa-check">Active</pst-badge>
+                <pst-badge color="error" trailingIcon="fa fa-exclamation-triangle">Urgent</pst-badge>
               </div>
             </div>
             
@@ -524,14 +524,14 @@ import { ButtonGroupComponent } from '../../components/button-group/button-group
             <div>
               <h3 class="text-lg font-medium text-gray-900 dark:text-gray-100 mb-3">Removable</h3>
               <div class="flex flex-wrap gap-3">
-                <app-badge 
+                <pst-badge 
                   *ngFor="let tag of tags" 
                   [removable]="true"
                   (remove)="removeTag(tag)"
                   color="primary"
                 >
                   {{ tag }}
-                </app-badge>
+                </pst-badge>
               </div>
             </div>
           </div>
@@ -546,11 +546,11 @@ import { ButtonGroupComponent } from '../../components/button-group/button-group
             <div>
               <h3 class="text-lg font-medium text-gray-900 dark:text-gray-100 mb-3">Sizes</h3>
               <div class="flex items-center gap-4">
-                <app-avatar size="xs" name="John Doe" />
-                <app-avatar size="sm" name="John Doe" />
-                <app-avatar size="md" name="John Doe" />
-                <app-avatar size="lg" name="John Doe" />
-                <app-avatar size="xl" name="John Doe" />
+                <pst-avatar size="xs" name="John Doe" />
+                <pst-avatar size="sm" name="John Doe" />
+                <pst-avatar size="md" name="John Doe" />
+                <pst-avatar size="lg" name="John Doe" />
+                <pst-avatar size="xl" name="John Doe" />
               </div>
             </div>
             
@@ -558,17 +558,17 @@ import { ButtonGroupComponent } from '../../components/button-group/button-group
             <div>
               <h3 class="text-lg font-medium text-gray-900 dark:text-gray-100 mb-3">With Images</h3>
               <div class="flex items-center gap-4">
-                <app-avatar 
+                <pst-avatar 
                   size="md" 
                   src="https://i.pravatar.cc/150?img=1"
                   alt="User 1"
                 />
-                <app-avatar 
+                <pst-avatar 
                   size="md" 
                   src="https://i.pravatar.cc/150?img=2"
                   alt="User 2"
                 />
-                <app-avatar 
+                <pst-avatar 
                   size="md" 
                   src="https://i.pravatar.cc/150?img=3"
                   alt="User 3"
@@ -580,8 +580,8 @@ import { ButtonGroupComponent } from '../../components/button-group/button-group
             <div>
               <h3 class="text-lg font-medium text-gray-900 dark:text-gray-100 mb-3">Shapes</h3>
               <div class="flex items-center gap-4">
-                <app-avatar shape="circle" name="Circle Shape" />
-                <app-avatar shape="square" name="Square Shape" />
+                <pst-avatar shape="circle" name="Circle Shape" />
+                <pst-avatar shape="square" name="Square Shape" />
               </div>
             </div>
             
@@ -589,10 +589,10 @@ import { ButtonGroupComponent } from '../../components/button-group/button-group
             <div>
               <h3 class="text-lg font-medium text-gray-900 dark:text-gray-100 mb-3">With Status</h3>
               <div class="flex items-center gap-4">
-                <app-avatar name="Online" status="online" />
-                <app-avatar name="Away" status="away" />
-                <app-avatar name="Busy" status="busy" />
-                <app-avatar name="Offline" status="offline" />
+                <pst-avatar name="Online" status="online" />
+                <pst-avatar name="Away" status="away" />
+                <pst-avatar name="Busy" status="busy" />
+                <pst-avatar name="Offline" status="offline" />
               </div>
             </div>
             
@@ -600,10 +600,10 @@ import { ButtonGroupComponent } from '../../components/button-group/button-group
             <div>
               <h3 class="text-lg font-medium text-gray-900 dark:text-gray-100 mb-3">Custom Colors</h3>
               <div class="flex items-center gap-4">
-                <app-avatar name="Purple" bgColor="bg-purple-500" />
-                <app-avatar name="Green" bgColor="bg-green-500" />
-                <app-avatar name="Blue" bgColor="bg-blue-500" />
-                <app-avatar name="Red" bgColor="bg-red-500" />
+                <pst-avatar name="Purple" bgColor="bg-purple-500" />
+                <pst-avatar name="Green" bgColor="bg-green-500" />
+                <pst-avatar name="Blue" bgColor="bg-blue-500" />
+                <pst-avatar name="Red" bgColor="bg-red-500" />
               </div>
             </div>
           </div>

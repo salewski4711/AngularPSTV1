@@ -4,7 +4,7 @@ import { AvatarComponent } from '../../../../../shared/components/avatar/avatar.
 import { CodeBlockComponent } from '../../../shared/components/code-block.component';
 
 @Component({
-  selector: 'app-avatar-showcase',
+  selector: 'pst-avatar-showcase',
   standalone: true,
   imports: [
     CommonModule, 
@@ -29,10 +29,10 @@ import { CodeBlockComponent } from '../../../shared/components/code-block.compon
         <h2 class="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-4">
           Import
         </h2>
-        <app-code-block
+        <pst-code-block
           [code]="importCode"
           language="typescript"
-        ></app-code-block>
+        ></pst-code-block>
       </section>
 
       <!-- Examples -->
@@ -48,16 +48,16 @@ import { CodeBlockComponent } from '../../../shared/components/code-block.compon
           </h3>
           <div class="bg-gray-50 dark:bg-gray-900 p-8 rounded-lg mb-4">
             <div class="flex items-center gap-4">
-              <app-avatar name="John Doe"></app-avatar>
-              <app-avatar name="Jane Smith"></app-avatar>
-              <app-avatar name="Robert Johnson"></app-avatar>
-              <app-avatar name="Emily Davis"></app-avatar>
+              <pst-avatar name="John Doe"></pst-avatar>
+              <pst-avatar name="Jane Smith"></pst-avatar>
+              <pst-avatar name="Robert Johnson"></pst-avatar>
+              <pst-avatar name="Emily Davis"></pst-avatar>
             </div>
           </div>
-          <app-code-block
+          <pst-code-block
             [code]="basicCode"
             language="html"
-          ></app-code-block>
+          ></pst-code-block>
         </div>
 
         <!-- Sizes -->
@@ -67,17 +67,17 @@ import { CodeBlockComponent } from '../../../shared/components/code-block.compon
           </h3>
           <div class="bg-gray-50 dark:bg-gray-900 p-8 rounded-lg mb-4">
             <div class="flex items-center gap-4">
-              <app-avatar name="John Doe" size="xs"></app-avatar>
-              <app-avatar name="John Doe" size="sm"></app-avatar>
-              <app-avatar name="John Doe" size="md"></app-avatar>
-              <app-avatar name="John Doe" size="lg"></app-avatar>
-              <app-avatar name="John Doe" size="xl"></app-avatar>
+              <pst-avatar name="John Doe" size="xs"></pst-avatar>
+              <pst-avatar name="John Doe" size="sm"></pst-avatar>
+              <pst-avatar name="John Doe" size="md"></pst-avatar>
+              <pst-avatar name="John Doe" size="lg"></pst-avatar>
+              <pst-avatar name="John Doe" size="xl"></pst-avatar>
             </div>
           </div>
-          <app-code-block
+          <pst-code-block
             [code]="sizesCode"
             language="html"
-          ></app-code-block>
+          ></pst-code-block>
         </div>
 
         <!-- With Images -->
@@ -87,30 +87,30 @@ import { CodeBlockComponent } from '../../../shared/components/code-block.compon
           </h3>
           <div class="bg-gray-50 dark:bg-gray-900 p-8 rounded-lg mb-4">
             <div class="flex items-center gap-4">
-              <app-avatar 
+              <pst-avatar 
                 name="User 1" 
                 image="https://i.pravatar.cc/150?img=1"
-              ></app-avatar>
-              <app-avatar 
+              ></pst-avatar>
+              <pst-avatar 
                 name="User 2" 
                 image="https://i.pravatar.cc/150?img=2"
                 size="lg"
-              ></app-avatar>
-              <app-avatar 
+              ></pst-avatar>
+              <pst-avatar 
                 name="User 3" 
                 image="https://i.pravatar.cc/150?img=3"
                 size="xl"
-              ></app-avatar>
-              <app-avatar 
+              ></pst-avatar>
+              <pst-avatar 
                 name="Invalid Image" 
                 image="https://invalid-url.com/image.jpg"
-              ></app-avatar>
+              ></pst-avatar>
             </div>
           </div>
-          <app-code-block
+          <pst-code-block
             [code]="imagesCode"
             language="html"
-          ></app-code-block>
+          ></pst-code-block>
         </div>
 
         <!-- Shapes -->
@@ -120,19 +120,19 @@ import { CodeBlockComponent } from '../../../shared/components/code-block.compon
           </h3>
           <div class="bg-gray-50 dark:bg-gray-900 p-8 rounded-lg mb-4">
             <div class="flex items-center gap-4">
-              <app-avatar name="Circle Shape" shape="circle"></app-avatar>
-              <app-avatar name="Square Shape" shape="square"></app-avatar>
-              <app-avatar 
+              <pst-avatar name="Circle Shape" shape="circle"></pst-avatar>
+              <pst-avatar name="Square Shape" shape="square"></pst-avatar>
+              <pst-avatar 
                 name="With Image" 
                 shape="square"
                 image="https://i.pravatar.cc/150?img=4"
-              ></app-avatar>
+              ></pst-avatar>
             </div>
           </div>
-          <app-code-block
+          <pst-code-block
             [code]="shapesCode"
             language="html"
-          ></app-code-block>
+          ></pst-code-block>
         </div>
 
         <!-- With Status Indicator -->
@@ -142,21 +142,21 @@ import { CodeBlockComponent } from '../../../shared/components/code-block.compon
           </h3>
           <div class="bg-gray-50 dark:bg-gray-900 p-8 rounded-lg mb-4">
             <div class="flex items-center gap-4">
-              <app-avatar name="Online" status="online"></app-avatar>
-              <app-avatar name="Away" status="away"></app-avatar>
-              <app-avatar name="Busy" status="busy"></app-avatar>
-              <app-avatar name="Offline" status="offline"></app-avatar>
-              <app-avatar 
+              <pst-avatar name="Online" status="online"></pst-avatar>
+              <pst-avatar name="Away" status="away"></pst-avatar>
+              <pst-avatar name="Busy" status="busy"></pst-avatar>
+              <pst-avatar name="Offline" status="offline"></pst-avatar>
+              <pst-avatar 
                 name="With Image" 
                 status="online"
                 image="https://i.pravatar.cc/150?img=5"
-              ></app-avatar>
+              ></pst-avatar>
             </div>
           </div>
-          <app-code-block
+          <pst-code-block
             [code]="statusCode"
             language="html"
-          ></app-code-block>
+          ></pst-code-block>
         </div>
 
         <!-- Custom Colors -->
@@ -166,18 +166,18 @@ import { CodeBlockComponent } from '../../../shared/components/code-block.compon
           </h3>
           <div class="bg-gray-50 dark:bg-gray-900 p-8 rounded-lg mb-4">
             <div class="flex items-center gap-4">
-              <app-avatar name="Primary" color="primary"></app-avatar>
-              <app-avatar name="Secondary" color="secondary"></app-avatar>
-              <app-avatar name="Success" color="success"></app-avatar>
-              <app-avatar name="Warning" color="warning"></app-avatar>
-              <app-avatar name="Danger" color="danger"></app-avatar>
-              <app-avatar name="Info" color="info"></app-avatar>
+              <pst-avatar name="Primary" color="primary"></pst-avatar>
+              <pst-avatar name="Secondary" color="secondary"></pst-avatar>
+              <pst-avatar name="Success" color="success"></pst-avatar>
+              <pst-avatar name="Warning" color="warning"></pst-avatar>
+              <pst-avatar name="Danger" color="danger"></pst-avatar>
+              <pst-avatar name="Info" color="info"></pst-avatar>
             </div>
           </div>
-          <app-code-block
+          <pst-code-block
             [code]="colorsCode"
             language="html"
-          ></app-code-block>
+          ></pst-code-block>
         </div>
 
         <!-- Icon Fallback -->
@@ -187,15 +187,15 @@ import { CodeBlockComponent } from '../../../shared/components/code-block.compon
           </h3>
           <div class="bg-gray-50 dark:bg-gray-900 p-8 rounded-lg mb-4">
             <div class="flex items-center gap-4">
-              <app-avatar></app-avatar>
-              <app-avatar size="lg"></app-avatar>
-              <app-avatar size="xl" color="primary"></app-avatar>
+              <pst-avatar></pst-avatar>
+              <pst-avatar size="lg"></pst-avatar>
+              <pst-avatar size="xl" color="primary"></pst-avatar>
             </div>
           </div>
-          <app-code-block
+          <pst-code-block
             [code]="iconFallbackCode"
             language="html"
-          ></app-code-block>
+          ></pst-code-block>
         </div>
 
         <!-- Avatar Groups -->
@@ -206,20 +206,20 @@ import { CodeBlockComponent } from '../../../shared/components/code-block.compon
           <div class="bg-gray-50 dark:bg-gray-900 p-8 rounded-lg mb-4">
             <div class="space-y-4">
               <div class="flex -space-x-2">
-                <app-avatar name="User 1" image="https://i.pravatar.cc/150?img=1" class="ring-2 ring-white dark:ring-gray-900"></app-avatar>
-                <app-avatar name="User 2" image="https://i.pravatar.cc/150?img=2" class="ring-2 ring-white dark:ring-gray-900"></app-avatar>
-                <app-avatar name="User 3" image="https://i.pravatar.cc/150?img=3" class="ring-2 ring-white dark:ring-gray-900"></app-avatar>
-                <app-avatar name="User 4" image="https://i.pravatar.cc/150?img=4" class="ring-2 ring-white dark:ring-gray-900"></app-avatar>
+                <pst-avatar name="User 1" image="https://i.pravatar.cc/150?img=1" class="ring-2 ring-white dark:ring-gray-900"></pst-avatar>
+                <pst-avatar name="User 2" image="https://i.pravatar.cc/150?img=2" class="ring-2 ring-white dark:ring-gray-900"></pst-avatar>
+                <pst-avatar name="User 3" image="https://i.pravatar.cc/150?img=3" class="ring-2 ring-white dark:ring-gray-900"></pst-avatar>
+                <pst-avatar name="User 4" image="https://i.pravatar.cc/150?img=4" class="ring-2 ring-white dark:ring-gray-900"></pst-avatar>
                 <div class="relative z-10 flex h-10 w-10 items-center justify-center rounded-full bg-gray-300 text-xs font-medium text-gray-600 ring-2 ring-white dark:ring-gray-900">
                   +5
                 </div>
               </div>
             </div>
           </div>
-          <app-code-block
+          <pst-code-block
             [code]="groupCode"
             language="html"
-          ></app-code-block>
+          ></pst-code-block>
         </div>
 
         <!-- Real-world Examples -->
@@ -231,12 +231,12 @@ import { CodeBlockComponent } from '../../../shared/components/code-block.compon
             <div class="space-y-6">
               <!-- User Profile Card -->
               <div class="flex items-center gap-4 p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
-                <app-avatar 
+                <pst-avatar 
                   name="John Doe" 
                   image="https://i.pravatar.cc/150?img=8"
                   size="lg"
                   status="online"
-                ></app-avatar>
+                ></pst-avatar>
                 <div>
                   <h4 class="font-medium text-gray-900 dark:text-gray-100">John Doe</h4>
                   <p class="text-sm text-gray-600 dark:text-gray-400">john.doe&#64;example.com</p>
@@ -246,7 +246,7 @@ import { CodeBlockComponent } from '../../../shared/components/code-block.compon
               <!-- Comment Thread -->
               <div class="space-y-4">
                 <div class="flex gap-3">
-                  <app-avatar name="Alice Johnson" size="sm"></app-avatar>
+                  <pst-avatar name="Alice Johnson" size="sm"></pst-avatar>
                   <div class="flex-1">
                     <div class="bg-white dark:bg-gray-800 rounded-lg p-3">
                       <p class="text-sm font-medium text-gray-900 dark:text-gray-100">Alice Johnson</p>
@@ -255,7 +255,7 @@ import { CodeBlockComponent } from '../../../shared/components/code-block.compon
                   </div>
                 </div>
                 <div class="flex gap-3">
-                  <app-avatar name="Bob Smith" size="sm" color="secondary"></app-avatar>
+                  <pst-avatar name="Bob Smith" size="sm" color="secondary"></pst-avatar>
                   <div class="flex-1">
                     <div class="bg-white dark:bg-gray-800 rounded-lg p-3">
                       <p class="text-sm font-medium text-gray-900 dark:text-gray-100">Bob Smith</p>
@@ -284,69 +284,69 @@ export class AvatarShowcaseComponent {
   imports: [AvatarComponent]
 })`;
 
-  basicCode = `<app-avatar name="John Doe"></app-avatar>
-<app-avatar name="Jane Smith"></app-avatar>
-<app-avatar name="Robert Johnson"></app-avatar>
-<app-avatar name="Emily Davis"></app-avatar>`;
+  basicCode = `<pst-avatar name="John Doe"></pst-avatar>
+<pst-avatar name="Jane Smith"></pst-avatar>
+<pst-avatar name="Robert Johnson"></pst-avatar>
+<pst-avatar name="Emily Davis"></pst-avatar>`;
 
-  sizesCode = `<app-avatar name="John Doe" size="xs"></app-avatar>
-<app-avatar name="John Doe" size="sm"></app-avatar>
-<app-avatar name="John Doe" size="md"></app-avatar>
-<app-avatar name="John Doe" size="lg"></app-avatar>
-<app-avatar name="John Doe" size="xl"></app-avatar>`;
+  sizesCode = `<pst-avatar name="John Doe" size="xs"></pst-avatar>
+<pst-avatar name="John Doe" size="sm"></pst-avatar>
+<pst-avatar name="John Doe" size="md"></pst-avatar>
+<pst-avatar name="John Doe" size="lg"></pst-avatar>
+<pst-avatar name="John Doe" size="xl"></pst-avatar>`;
 
-  imagesCode = `<app-avatar 
+  imagesCode = `<pst-avatar 
   name="User 1" 
   image="https://i.pravatar.cc/150?img=1"
-></app-avatar>
+></pst-avatar>
 
-<app-avatar 
+<pst-avatar 
   name="User 2" 
   image="https://i.pravatar.cc/150?img=2"
   size="lg"
-></app-avatar>
+></pst-avatar>
 
 <!-- Falls back to initials when image fails to load -->
-<app-avatar 
+<pst-avatar 
   name="Invalid Image" 
   image="https://invalid-url.com/image.jpg"
-></app-avatar>`;
+></pst-avatar>`;
 
-  shapesCode = `<app-avatar name="Circle Shape" shape="circle"></app-avatar>
-<app-avatar name="Square Shape" shape="square"></app-avatar>
-<app-avatar 
+  shapesCode = `<pst-avatar name="Circle Shape" shape="circle"></pst-avatar>
+<pst-avatar name="Square Shape" shape="square"></pst-avatar>
+<pst-avatar 
   name="With Image" 
   shape="square"
   image="https://i.pravatar.cc/150?img=4"
-></app-avatar>`;
+></pst-avatar>`;
 
-  statusCode = `<app-avatar name="Online" status="online"></app-avatar>
-<app-avatar name="Away" status="away"></app-avatar>
-<app-avatar name="Busy" status="busy"></app-avatar>
-<app-avatar name="Offline" status="offline"></app-avatar>
-<app-avatar 
+  statusCode = `<pst-avatar name="Online" status="online"></pst-avatar>
+<pst-avatar name="Away" status="away"></pst-avatar>
+<pst-avatar name="Busy" status="busy"></pst-avatar>
+<pst-avatar name="Offline" status="offline"></pst-avatar>
+<pst-avatar 
   name="With Image" 
   status="online"
   image="https://i.pravatar.cc/150?img=5"
-></app-avatar>`;
+></pst-avatar>`;
 
-  colorsCode = `<app-avatar name="Primary" color="primary"></app-avatar>
-<app-avatar name="Secondary" color="secondary"></app-avatar>
-<app-avatar name="Success" color="success"></app-avatar>
-<app-avatar name="Warning" color="warning"></app-avatar>
-<app-avatar name="Danger" color="danger"></app-avatar>
-<app-avatar name="Info" color="info"></app-avatar>`;
+  colorsCode = `<pst-avatar name="Primary" color="primary"></pst-avatar>
+<pst-avatar name="Secondary" color="secondary"></pst-avatar>
+<pst-avatar name="Success" color="success"></pst-avatar>
+<pst-avatar name="Warning" color="warning"></pst-avatar>
+<pst-avatar name="Danger" color="danger"></pst-avatar>
+<pst-avatar name="Info" color="info"></pst-avatar>`;
 
   iconFallbackCode = `<!-- No name provided - shows user icon -->
-<app-avatar></app-avatar>
-<app-avatar size="lg"></app-avatar>
-<app-avatar size="xl" color="primary"></app-avatar>`;
+<pst-avatar></pst-avatar>
+<pst-avatar size="lg"></pst-avatar>
+<pst-avatar size="xl" color="primary"></pst-avatar>`;
 
   groupCode = `<div class="flex -space-x-2">
-  <app-avatar name="User 1" image="https://i.pravatar.cc/150?img=1" class="ring-2 ring-white dark:ring-gray-900"></app-avatar>
-  <app-avatar name="User 2" image="https://i.pravatar.cc/150?img=2" class="ring-2 ring-white dark:ring-gray-900"></app-avatar>
-  <app-avatar name="User 3" image="https://i.pravatar.cc/150?img=3" class="ring-2 ring-white dark:ring-gray-900"></app-avatar>
-  <app-avatar name="User 4" image="https://i.pravatar.cc/150?img=4" class="ring-2 ring-white dark:ring-gray-900"></app-avatar>
+  <pst-avatar name="User 1" image="https://i.pravatar.cc/150?img=1" class="ring-2 ring-white dark:ring-gray-900"></pst-avatar>
+  <pst-avatar name="User 2" image="https://i.pravatar.cc/150?img=2" class="ring-2 ring-white dark:ring-gray-900"></pst-avatar>
+  <pst-avatar name="User 3" image="https://i.pravatar.cc/150?img=3" class="ring-2 ring-white dark:ring-gray-900"></pst-avatar>
+  <pst-avatar name="User 4" image="https://i.pravatar.cc/150?img=4" class="ring-2 ring-white dark:ring-gray-900"></pst-avatar>
   <div class="relative z-10 flex h-10 w-10 items-center justify-center rounded-full bg-gray-300 text-xs font-medium text-gray-600 ring-2 ring-white dark:ring-gray-900">
     +5
   </div>

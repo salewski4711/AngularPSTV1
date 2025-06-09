@@ -357,7 +357,7 @@ export class ThemeService {
   [attr.aria-label]="ariaLabel || null"
 >
   <span [attr.aria-hidden]="loading">{{ text }}</span>
-  <app-spinner *ngIf="loading" aria-label="Loading"></app-spinner>
+  <pst-spinner *ngIf="loading" aria-label="Loading"></pst-spinner>
 </button>
 
 <!-- Form Field -->

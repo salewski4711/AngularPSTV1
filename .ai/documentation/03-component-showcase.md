@@ -34,12 +34,12 @@ components-showcase/
 
 ### 2. Code Block Component
 ```typescript
-<app-code-block
+<pst-code-block
   [code]="exampleCode"
   language="typescript"
   [showLineNumbers]="true"
   fileName="example.ts"
-></app-code-block>
+></pst-code-block>
 ```
 
 **Features:**
@@ -51,9 +51,9 @@ components-showcase/
 
 ### 3. Props Table Component
 ```typescript
-<app-props-table
+<pst-props-table
   [properties]="componentProperties"
-></app-props-table>
+></pst-props-table>
 ```
 
 **Features:**
@@ -66,9 +66,9 @@ components-showcase/
 
 ### 4. Playground Component
 ```typescript
-<app-playground
+<pst-playground
   [config]="playgroundConfig"
-></app-playground>
+></pst-playground>
 ```
 
 **Features:**
@@ -102,22 +102,22 @@ button-showcase/
 ### Beispiel
 ```html
 <!-- variants.example.html -->
-<app-button variant="primary">Primary</app-button>
-<app-button variant="secondary">Secondary</app-button>
+<pst-button variant="primary">Primary</pst-button>
+<pst-button variant="secondary">Secondary</pst-button>
 ```
 
 Wird zu:
 ```typescript
 // index.ts (auto-generiert)
-export const variantsExample = `<app-button variant="primary">Primary</app-button>
-<app-button variant="secondary">Secondary</app-button>`;
+export const variantsExample = `<pst-button variant="primary">Primary</pst-button>
+<pst-button variant="secondary">Secondary</pst-button>`;
 ```
 
 ## 🎨 Showcase Page Template
 
 ```typescript
 @Component({
-  selector: 'app-component-showcase',
+  selector: 'pst-component-showcase',
   template: `
     <div class="container mx-auto px-4 py-8">
       <!-- Header -->
@@ -133,22 +133,22 @@ export const variantsExample = `<app-button variant="primary">Primary</app-butto
       <div [ngSwitch]="activeTab">
         <!-- Overview -->
         <div *ngSwitchCase="'overview'">
-          <app-code-block [code]="importCode"></app-code-block>
+          <pst-code-block [code]="importCode"></pst-code-block>
         </div>
         
         <!-- Examples -->
         <div *ngSwitchCase="'examples'">
-          <app-code-block [code]="exampleCode"></app-code-block>
+          <pst-code-block [code]="exampleCode"></pst-code-block>
         </div>
         
         <!-- Playground -->
         <div *ngSwitchCase="'playground'">
-          <app-playground [config]="playgroundConfig"></app-playground>
+          <pst-playground [config]="playgroundConfig"></pst-playground>
         </div>
         
         <!-- API -->
         <div *ngSwitchCase="'api'">
-          <app-props-table [properties]="apiProperties"></app-props-table>
+          <pst-props-table [properties]="apiProperties"></pst-props-table>
         </div>
       </div>
     </div>

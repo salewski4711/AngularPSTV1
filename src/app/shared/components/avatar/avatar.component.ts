@@ -7,7 +7,7 @@ export type AvatarShape = 'circle' | 'square';
 export type AvatarStatus = 'online' | 'offline' | 'busy' | 'away';
 
 @Component({
-  selector: 'app-avatar',
+  selector: 'pst-avatar',
   standalone: true,
   imports: [CommonModule],
   template: `

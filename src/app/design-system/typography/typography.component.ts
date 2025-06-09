@@ -11,7 +11,7 @@ export type TypographyAlign = 'left' | 'center' | 'right' | 'justify';
 export type TypographyWeight = 'light' | 'normal' | 'medium' | 'semibold' | 'bold';
 
 @Component({
-  selector: 'app-typography',
+  selector: 'pst-typography',
   standalone: true,
   imports: [CommonModule],
   template: `

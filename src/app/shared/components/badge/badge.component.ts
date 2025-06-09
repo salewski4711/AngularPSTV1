@@ -9,7 +9,7 @@ export type BadgeShape = 'rounded' | 'pill' | 'square';
 export type BadgePosition = 'static' | 'absolute';
 
 @Component({
-  selector: 'app-badge',
+  selector: 'pst-badge',
   standalone: true,
   imports: [CommonModule],
   template: `

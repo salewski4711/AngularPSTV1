@@ -10,336 +10,336 @@ export class ExampleLoaderService {
   // Static map of all available examples
   private examples: Record<string, string> = {
     // Button examples
-    'button-showcase/basic': `<app-button>Click me</app-button>
-<app-button variant="primary">Primary Button</app-button>
-<app-button variant="secondary">Secondary Button</app-button>`,
+    'button-showcase/basic': `<pst-button>Click me</pst-button>
+<pst-button variant="primary">Primary Button</pst-button>
+<pst-button variant="secondary">Secondary Button</pst-button>`,
     
     'button-showcase/variants': `<!-- Primary variant (default) -->
-<app-button variant="primary">Primary Button</app-button>
+<pst-button variant="primary">Primary Button</pst-button>
 
 <!-- Secondary variant -->
-<app-button variant="secondary">Secondary Button</app-button>
+<pst-button variant="secondary">Secondary Button</pst-button>
 
 <!-- Outline Primary variant -->
-<app-button variant="outline-primary">Outline Primary</app-button>
+<pst-button variant="outline-primary">Outline Primary</pst-button>
 
 <!-- Tertiary variant -->
-<app-button variant="tertiary">Tertiary Button</app-button>
+<pst-button variant="tertiary">Tertiary Button</pst-button>
 
 <!-- Ghost variant -->
-<app-button variant="ghost">Ghost Button</app-button>
+<pst-button variant="ghost">Ghost Button</pst-button>
 
 <!-- Danger variant -->
-<app-button variant="danger">Danger Button</app-button>`,
+<pst-button variant="danger">Danger Button</pst-button>`,
     
     'button-showcase/sizes': `<!-- Extra Small -->
-<app-button size="xs">Extra Small</app-button>
+<pst-button size="xs">Extra Small</pst-button>
 
 <!-- Small -->
-<app-button size="sm">Small</app-button>
+<pst-button size="sm">Small</pst-button>
 
 <!-- Medium (default) -->
-<app-button size="md">Medium</app-button>
+<pst-button size="md">Medium</pst-button>
 
 <!-- Large -->
-<app-button size="lg">Large</app-button>
+<pst-button size="lg">Large</pst-button>
 
 <!-- Extra Large -->
-<app-button size="xl">Extra Large</app-button>`,
+<pst-button size="xl">Extra Large</pst-button>`,
     
     'button-showcase/states': `<!-- Normal state -->
-<app-button>Normal</app-button>
+<pst-button>Normal</pst-button>
 
 <!-- Disabled state -->
-<app-button [disabled]="true">Disabled</app-button>
+<pst-button [disabled]="true">Disabled</pst-button>
 
 <!-- Loading state -->
-<app-button [loading]="true">Loading</app-button>
+<pst-button [loading]="true">Loading</pst-button>
 
 <!-- Loading with custom text -->
-<app-button [loading]="true" loadingText="Saving...">Loading with Text</app-button>`,
+<pst-button [loading]="true" loadingText="Saving...">Loading with Text</pst-button>`,
     
     'button-showcase/with-icons': `<!-- Icon on the left (default) -->
-<app-button icon="save">Save</app-button>
+<pst-button icon="save">Save</pst-button>
 
 <!-- Icon on the right -->
-<app-button icon="download" iconPosition="right">Download</app-button>
+<pst-button icon="download" iconPosition="right">Download</pst-button>
 
 <!-- Icon with danger variant -->
-<app-button icon="trash" variant="danger">Delete</app-button>
+<pst-button icon="trash" variant="danger">Delete</pst-button>
 
 <!-- Icon only button -->
-<app-button icon="edit" [iconOnly]="true" variant="ghost"></app-button>
+<pst-button icon="edit" [iconOnly]="true" variant="ghost"></pst-button>
 
 <!-- Different icon sizes -->
-<app-button icon="settings" size="sm">Small with Icon</app-button>
-<app-button icon="settings" size="lg">Large with Icon</app-button>`,
+<pst-button icon="settings" size="sm">Small with Icon</pst-button>
+<pst-button icon="settings" size="lg">Large with Icon</pst-button>`,
 
     // Link examples
     'link-showcase/basic': `<!-- Basic link -->
-<app-link href="/dashboard">Dashboard Link</app-link>
+<pst-link href="/dashboard">Dashboard Link</pst-link>
 
 <!-- Link with external URL -->
-<app-link href="https://example.com" [external]="true">External Link</app-link>
+<pst-link href="https://example.com" [external]="true">External Link</pst-link>
 
 <!-- Router link -->
-<app-link routerLink="/profile">Profile Link</app-link>`,
+<pst-link routerLink="/profile">Profile Link</pst-link>`,
 
     'link-showcase/sizes': `<!-- Small -->
-<app-link size="sm" href="#">Small Link</app-link>
+<pst-link size="sm" href="#">Small Link</pst-link>
 
 <!-- Medium (default) -->
-<app-link size="md" href="#">Medium Link</app-link>
+<pst-link size="md" href="#">Medium Link</pst-link>
 
 <!-- Large -->
-<app-link size="lg" href="#">Large Link</app-link>`,
+<pst-link size="lg" href="#">Large Link</pst-link>`,
 
     'link-showcase/states': `<!-- Normal -->
-<app-link href="#">Normal Link</app-link>
+<pst-link href="#">Normal Link</pst-link>
 
 <!-- Disabled -->
-<app-link href="#" [disabled]="true">Disabled Link</app-link>
+<pst-link href="#" [disabled]="true">Disabled Link</pst-link>
 
 <!-- With hover effect -->
-<app-link href="#" class="hover:underline">Hover to Underline</app-link>`,
+<pst-link href="#" class="hover:underline">Hover to Underline</pst-link>`,
 
     'link-showcase/external': `<!-- External link with icon -->
-<app-link href="https://example.com" [external]="true" [showExternalIcon]="true">
+<pst-link href="https://example.com" [external]="true" [showExternalIcon]="true">
   External with Icon
-</app-link>
+</pst-link>
 
 <!-- External link opening in new tab -->
-<app-link href="https://example.com" [external]="true" target="_blank">
+<pst-link href="https://example.com" [external]="true" target="_blank">
   Opens in New Tab
-</app-link>`,
+</pst-link>`,
 
     'link-showcase/router': `<!-- Router link -->
-<app-link routerLink="/dashboard">Dashboard</app-link>
+<pst-link routerLink="/dashboard">Dashboard</pst-link>
 
 <!-- Router link with params -->
-<app-link [routerLink]="['/user', userId]">User Profile</app-link>
+<pst-link [routerLink]="['/user', userId]">User Profile</pst-link>
 
 <!-- Router link with active state -->
-<app-link routerLink="/settings" routerLinkActive="font-bold">Settings</app-link>`,
+<pst-link routerLink="/settings" routerLinkActive="font-bold">Settings</pst-link>`,
 
     'link-showcase/with-icons': `<!-- Link with leading icon -->
-<app-link href="#" leadingIcon="home">Home</app-link>
+<pst-link href="#" leadingIcon="home">Home</pst-link>
 
 <!-- Link with trailing icon -->
-<app-link href="#" trailingIcon="arrow-right">Continue</app-link>
+<pst-link href="#" trailingIcon="arrow-right">Continue</pst-link>
 
 <!-- External link with custom icon -->
-<app-link href="https://github.com" [external]="true" leadingIcon="github">
+<pst-link href="https://github.com" [external]="true" leadingIcon="github">
   GitHub
-</app-link>`,
+</pst-link>`,
 
     // Tag examples
     'tag-showcase/basic': `<!-- Basic tags -->
-<app-tag>Default Tag</app-tag>
-<app-tag color="blue">Blue Tag</app-tag>
-<app-tag color="green">Green Tag</app-tag>
-<app-tag color="red">Red Tag</app-tag>
-<app-tag color="yellow">Yellow Tag</app-tag>`,
+<pst-tag>Default Tag</pst-tag>
+<pst-tag color="blue">Blue Tag</pst-tag>
+<pst-tag color="green">Green Tag</pst-tag>
+<pst-tag color="red">Red Tag</pst-tag>
+<pst-tag color="yellow">Yellow Tag</pst-tag>`,
 
     'tag-showcase/variants': `<!-- Solid variant (default) -->
-<app-tag variant="solid" color="blue">Solid</app-tag>
+<pst-tag variant="solid" color="blue">Solid</pst-tag>
 
 <!-- Subtle variant -->
-<app-tag variant="subtle" color="blue">Subtle</app-tag>
+<pst-tag variant="subtle" color="blue">Subtle</pst-tag>
 
 <!-- Outline variant -->
-<app-tag variant="outline" color="blue">Outline</app-tag>`,
+<pst-tag variant="outline" color="blue">Outline</pst-tag>`,
 
     'tag-showcase/sizes': `<!-- Extra small -->
-<app-tag size="xs">XS Tag</app-tag>
+<pst-tag size="xs">XS Tag</pst-tag>
 
 <!-- Small -->
-<app-tag size="sm">Small Tag</app-tag>
+<pst-tag size="sm">Small Tag</pst-tag>
 
 <!-- Medium (default) -->
-<app-tag size="md">Medium Tag</app-tag>
+<pst-tag size="md">Medium Tag</pst-tag>
 
 <!-- Large -->
-<app-tag size="lg">Large Tag</app-tag>`,
+<pst-tag size="lg">Large Tag</pst-tag>`,
 
     'tag-showcase/shapes': `<!-- Rounded (default) -->
-<app-tag shape="rounded">Rounded</app-tag>
+<pst-tag shape="rounded">Rounded</pst-tag>
 
 <!-- Square -->
-<app-tag shape="square">Square</app-tag>
+<pst-tag shape="square">Square</pst-tag>
 
 <!-- Pill -->
-<app-tag shape="pill">Pill</app-tag>`,
+<pst-tag shape="pill">Pill</pst-tag>`,
 
     'tag-showcase/with-icons': `<!-- Leading icon -->
-<app-tag leadingIcon="star">Featured</app-tag>
+<pst-tag leadingIcon="star">Featured</pst-tag>
 
 <!-- Trailing icon -->
-<app-tag trailingIcon="check">Verified</app-tag>
+<pst-tag trailingIcon="check">Verified</pst-tag>
 
 <!-- Both icons -->
-<app-tag leadingIcon="lock" trailingIcon="arrow-right">Secure</app-tag>`,
+<pst-tag leadingIcon="lock" trailingIcon="arrow-right">Secure</pst-tag>`,
 
     'tag-showcase/removable': `<!-- Removable tags -->
-<app-tag [removable]="true" (remove)="onRemove()">Removable</app-tag>
-<app-tag [removable]="true" color="red" (remove)="onRemove()">Delete Me</app-tag>
-<app-tag [removable]="true" variant="outline" (remove)="onRemove()">Click X</app-tag>`,
+<pst-tag [removable]="true" (remove)="onRemove()">Removable</pst-tag>
+<pst-tag [removable]="true" color="red" (remove)="onRemove()">Delete Me</pst-tag>
+<pst-tag [removable]="true" variant="outline" (remove)="onRemove()">Click X</pst-tag>`,
 
     'tag-showcase/use-cases': `<!-- Status tags -->
-<app-tag color="green" leadingIcon="check-circle">Active</app-tag>
-<app-tag color="yellow" leadingIcon="clock">Pending</app-tag>
-<app-tag color="red" leadingIcon="x-circle">Inactive</app-tag>
+<pst-tag color="green" leadingIcon="check-circle">Active</pst-tag>
+<pst-tag color="yellow" leadingIcon="clock">Pending</pst-tag>
+<pst-tag color="red" leadingIcon="x-circle">Inactive</pst-tag>
 
 <!-- Category tags -->
-<app-tag variant="subtle" color="purple">Technology</app-tag>
-<app-tag variant="subtle" color="blue">Design</app-tag>
-<app-tag variant="subtle" color="green">Marketing</app-tag>
+<pst-tag variant="subtle" color="purple">Technology</pst-tag>
+<pst-tag variant="subtle" color="blue">Design</pst-tag>
+<pst-tag variant="subtle" color="green">Marketing</pst-tag>
 
 <!-- Filter tags -->
-<app-tag variant="outline" [removable]="true">Price: $0-$100</app-tag>
-<app-tag variant="outline" [removable]="true">Brand: Apple</app-tag>
-<app-tag variant="outline" [removable]="true">Color: Black</app-tag>`,
+<pst-tag variant="outline" [removable]="true">Price: $0-$100</pst-tag>
+<pst-tag variant="outline" [removable]="true">Brand: Apple</pst-tag>
+<pst-tag variant="outline" [removable]="true">Color: Black</pst-tag>`,
 
     // Divider examples  
     'divider-showcase/basic': `<!-- Basic horizontal divider -->
-<app-divider></app-divider>
+<pst-divider></pst-divider>
 
 <!-- With custom margin -->
-<app-divider class="my-8"></app-divider>`,
+<pst-divider class="my-8"></pst-divider>`,
 
     'divider-showcase/orientations': `<!-- Horizontal (default) -->
-<app-divider orientation="horizontal"></app-divider>
+<pst-divider orientation="horizontal"></pst-divider>
 
 <!-- Vertical -->
 <div class="flex items-center h-10">
   <span>Left</span>
-  <app-divider orientation="vertical" class="mx-4"></app-divider>
+  <pst-divider orientation="vertical" class="mx-4"></pst-divider>
   <span>Right</span>
 </div>`,
 
     'divider-showcase/variants': `<!-- Solid (default) -->
-<app-divider variant="solid"></app-divider>
+<pst-divider variant="solid"></pst-divider>
 
 <!-- Dashed -->
-<app-divider variant="dashed"></app-divider>
+<pst-divider variant="dashed"></pst-divider>
 
 <!-- Dotted -->
-<app-divider variant="dotted"></app-divider>`,
+<pst-divider variant="dotted"></pst-divider>`,
 
     'divider-showcase/colors': `<!-- Default gray -->
-<app-divider></app-divider>
+<pst-divider></pst-divider>
 
 <!-- Primary color -->
-<app-divider color="primary"></app-divider>
+<pst-divider color="primary"></pst-divider>
 
 <!-- Secondary color -->
-<app-divider color="secondary"></app-divider>
+<pst-divider color="secondary"></pst-divider>
 
 <!-- Custom color -->
-<app-divider class="border-red-500"></app-divider>`,
+<pst-divider class="border-red-500"></pst-divider>`,
 
     'divider-showcase/thickness': `<!-- Thin -->
-<app-divider thickness="thin"></app-divider>
+<pst-divider thickness="thin"></pst-divider>
 
 <!-- Medium (default) -->
-<app-divider thickness="medium"></app-divider>
+<pst-divider thickness="medium"></pst-divider>
 
 <!-- Thick -->
-<app-divider thickness="thick"></app-divider>`,
+<pst-divider thickness="thick"></pst-divider>`,
 
     'divider-showcase/spacing': `<!-- Default spacing -->
-<app-divider></app-divider>
+<pst-divider></pst-divider>
 
 <!-- Tight spacing -->
-<app-divider spacing="tight"></app-divider>
+<pst-divider spacing="tight"></pst-divider>
 
 <!-- Normal spacing -->
-<app-divider spacing="normal"></app-divider>
+<pst-divider spacing="normal"></pst-divider>
 
 <!-- Loose spacing -->
-<app-divider spacing="loose"></app-divider>`,
+<pst-divider spacing="loose"></pst-divider>`,
 
     'divider-showcase/labels': `<!-- Divider with centered label -->
-<app-divider label="OR"></app-divider>
+<pst-divider label="OR"></pst-divider>
 
 <!-- Label aligned left -->
-<app-divider label="Section Start" labelPosition="left"></app-divider>
+<pst-divider label="Section Start" labelPosition="left"></pst-divider>
 
 <!-- Label aligned right -->
-<app-divider label="Section End" labelPosition="right"></app-divider>`,
+<pst-divider label="Section End" labelPosition="right"></pst-divider>`,
 
     'divider-showcase/with-label': `<!-- With text label -->
-<app-divider label="Continue with"></app-divider>
+<pst-divider label="Continue with"></pst-divider>
 
 <!-- With icon label -->
-<app-divider>
-  <app-icon name="star" [size]="16"></app-icon>
-</app-divider>
+<pst-divider>
+  <pst-icon name="star" [size]="16"></pst-icon>
+</pst-divider>
 
 <!-- Complex label -->
-<app-divider>
+<pst-divider>
   <span class="flex items-center gap-2 text-sm text-gray-500">
-    <app-icon name="calendar" [size]="16"></app-icon>
+    <pst-icon name="calendar" [size]="16"></pst-icon>
     Today
   </span>
-</app-divider>`,
+</pst-divider>`,
 
     'divider-showcase/vertical': `<!-- Vertical divider in flex container -->
 <div class="flex items-center gap-4">
   <button class="px-4 py-2">Edit</button>
-  <app-divider orientation="vertical" class="h-8"></app-divider>
+  <pst-divider orientation="vertical" class="h-8"></pst-divider>
   <button class="px-4 py-2">Delete</button>
-  <app-divider orientation="vertical" class="h-8"></app-divider>
+  <pst-divider orientation="vertical" class="h-8"></pst-divider>
   <button class="px-4 py-2">Share</button>
 </div>`,
 
     // Skeleton examples
     'skeleton-showcase/text-blocks': `<!-- Basic text skeleton -->
-<app-skeleton></app-skeleton>
+<pst-skeleton></pst-skeleton>
 
 <!-- Single line -->
-<app-skeleton [lines]="1"></app-skeleton>
+<pst-skeleton [lines]="1"></pst-skeleton>
 
 <!-- Multiple lines -->
-<app-skeleton [lines]="5"></app-skeleton>
+<pst-skeleton [lines]="5"></pst-skeleton>
 
 <!-- Custom width -->
-<app-skeleton [lines]="2" width="200px"></app-skeleton>`,
+<pst-skeleton [lines]="2" width="200px"></pst-skeleton>`,
 
     'skeleton-showcase/avatar-placeholders': `<!-- Small avatar -->
-<app-skeleton variant="circular" width="32px" height="32px"></app-skeleton>
+<pst-skeleton variant="circular" width="32px" height="32px"></pst-skeleton>
 
 <!-- Medium avatar -->
-<app-skeleton variant="circular" width="48px" height="48px"></app-skeleton>
+<pst-skeleton variant="circular" width="48px" height="48px"></pst-skeleton>
 
 <!-- Large avatar -->
-<app-skeleton variant="circular" width="64px" height="64px"></app-skeleton>
+<pst-skeleton variant="circular" width="64px" height="64px"></pst-skeleton>
 
 <!-- Avatar with text -->
 <div class="flex items-center space-x-3">
-  <app-skeleton variant="circular" width="40px" height="40px"></app-skeleton>
+  <pst-skeleton variant="circular" width="40px" height="40px"></pst-skeleton>
   <div>
-    <app-skeleton [lines]="1" width="120px"></app-skeleton>
-    <app-skeleton [lines]="1" width="80px" class="mt-1"></app-skeleton>
+    <pst-skeleton [lines]="1" width="120px"></pst-skeleton>
+    <pst-skeleton [lines]="1" width="80px" class="mt-1"></pst-skeleton>
   </div>
 </div>`,
 
     'skeleton-showcase/card-skeletons': `<!-- Basic card skeleton -->
 <div class="border rounded-lg p-4 space-y-3">
-  <app-skeleton variant="rectangular" height="200px"></app-skeleton>
-  <app-skeleton [lines]="2"></app-skeleton>
-  <app-skeleton variant="button" width="100px"></app-skeleton>
+  <pst-skeleton variant="rectangular" height="200px"></pst-skeleton>
+  <pst-skeleton [lines]="2"></pst-skeleton>
+  <pst-skeleton variant="button" width="100px"></pst-skeleton>
 </div>
 
 <!-- Card with header -->
 <div class="border rounded-lg overflow-hidden">
-  <app-skeleton variant="rectangular" height="150px"></app-skeleton>
+  <pst-skeleton variant="rectangular" height="150px"></pst-skeleton>
   <div class="p-4 space-y-3">
-    <app-skeleton [lines]="1" width="60%"></app-skeleton>
-    <app-skeleton [lines]="3"></app-skeleton>
+    <pst-skeleton [lines]="1" width="60%"></pst-skeleton>
+    <pst-skeleton [lines]="3"></pst-skeleton>
     <div class="flex space-x-2">
-      <app-skeleton variant="button" width="80px"></app-skeleton>
-      <app-skeleton variant="button" width="80px"></app-skeleton>
+      <pst-skeleton variant="button" width="80px"></pst-skeleton>
+      <pst-skeleton variant="button" width="80px"></pst-skeleton>
     </div>
   </div>
 </div>`,
@@ -347,18 +347,18 @@ export class ExampleLoaderService {
     'skeleton-showcase/form-skeletons': `<!-- Form field skeleton -->
 <div class="space-y-4 max-w-sm">
   <div>
-    <app-skeleton [lines]="1" width="80px" class="mb-2"></app-skeleton>
-    <app-skeleton variant="rectangular" height="40px"></app-skeleton>
+    <pst-skeleton [lines]="1" width="80px" class="mb-2"></pst-skeleton>
+    <pst-skeleton variant="rectangular" height="40px"></pst-skeleton>
   </div>
   <div>
-    <app-skeleton [lines]="1" width="100px" class="mb-2"></app-skeleton>
-    <app-skeleton variant="rectangular" height="40px"></app-skeleton>
+    <pst-skeleton [lines]="1" width="100px" class="mb-2"></pst-skeleton>
+    <pst-skeleton variant="rectangular" height="40px"></pst-skeleton>
   </div>
   <div>
-    <app-skeleton [lines]="1" width="120px" class="mb-2"></app-skeleton>
-    <app-skeleton variant="rectangular" height="80px"></app-skeleton>
+    <pst-skeleton [lines]="1" width="120px" class="mb-2"></pst-skeleton>
+    <pst-skeleton variant="rectangular" height="80px"></pst-skeleton>
   </div>
-  <app-skeleton variant="button" width="100%" height="44px"></app-skeleton>
+  <pst-skeleton variant="button" width="100%" height="44px"></pst-skeleton>
 </div>`,
 
     // Typography examples

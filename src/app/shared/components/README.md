@@ -13,10 +13,10 @@ Standard-UI-Komponenten sind die **Bausteine** Ihrer Anwendung. Sie sorgen für:
 
 ### 1. **Button** 🚧 (In Beta-Entwicklung)
 ```html
-<app-button-beta variant="primary">Primary</app-button-beta>
-<app-button-beta variant="secondary">Secondary</app-button-beta>
-<app-button-beta variant="outline-primary">Outline</app-button-beta>
-<app-button-beta variant="tertiary">Tertiary</app-button-beta>
+<pst-button-beta variant="primary">Primary</pst-button-beta>
+<pst-button-beta variant="secondary">Secondary</pst-button-beta>
+<pst-button-beta variant="outline-primary">Outline</pst-button-beta>
+<pst-button-beta variant="tertiary">Tertiary</pst-button-beta>
 ```
 - **Varianten**: 
   - `primary` - Orange (#F99600) - Hauptaktionen
@@ -31,25 +31,25 @@ Standard-UI-Komponenten sind die **Bausteine** Ihrer Anwendung. Sie sorgen für:
 
 ### 2. **Card** (Geplant)
 ```html
-<app-card>
-  <app-card-header>
+<pst-card>
+  <pst-card-header>
     <h3>Kundendaten</h3>
-  </app-card-header>
-  <app-card-body>
+  </pst-card-header>
+  <pst-card-body>
     <!-- Inhalt -->
-  </app-card-body>
-</app-card>
+  </pst-card-body>
+</pst-card>
 ```
 - Container für zusammengehörige Inhalte
 - Mit Header, Body, Footer Bereichen
 
 ### 3. **Input/Form Fields** (Geplant)
 ```html
-<app-form-field>
+<pst-form-field>
   <label>E-Mail</label>
-  <app-input type="email" [(ngModel)]="email" [error]="emailError">
-  <app-error *ngIf="emailError">Ungültige E-Mail</app-error>
-</app-form-field>
+  <pst-input type="email" [(ngModel)]="email" [error]="emailError">
+  <pst-error *ngIf="emailError">Ungültige E-Mail</pst-error>
+</pst-form-field>
 ```
 - Einheitliche Formularfelder
 - Integrierte Validierung
@@ -57,11 +57,11 @@ Standard-UI-Komponenten sind die **Bausteine** Ihrer Anwendung. Sie sorgen für:
 
 ### 4. **Table** (Geplant)
 ```html
-<app-table [data]="customers" [columns]="columns">
+<pst-table [data]="customers" [columns]="columns">
   <ng-template #actions let-row>
-    <app-button size="sm" (click)="edit(row)">Bearbeiten</app-button>
+    <pst-button size="sm" (click)="edit(row)">Bearbeiten</pst-button>
   </ng-template>
-</app-table>
+</pst-table>
 ```
 - Sortierbar
 - Filterbar
@@ -70,20 +70,20 @@ Standard-UI-Komponenten sind die **Bausteine** Ihrer Anwendung. Sie sorgen für:
 
 ### 5. **Modal/Dialog** (Geplant)
 ```html
-<app-modal [(visible)]="showModal" title="Kunde löschen?">
+<pst-modal [(visible)]="showModal" title="Kunde löschen?">
   <p>Möchten Sie diesen Kunden wirklich löschen?</p>
-  <app-modal-footer>
-    <app-button variant="ghost" (click)="cancel()">Abbrechen</app-button>
-    <app-button variant="danger" (click)="delete()">Löschen</app-button>
-  </app-modal-footer>
-</app-modal>
+  <pst-modal-footer>
+    <pst-button variant="ghost" (click)="cancel()">Abbrechen</pst-button>
+    <pst-button variant="danger" (click)="delete()">Löschen</pst-button>
+  </pst-modal-footer>
+</pst-modal>
 ```
 
 ### 6. **Alert/Notification** (Geplant)
 ```html
-<app-alert type="success" [dismissible]="true">
+<pst-alert type="success" [dismissible]="true">
   Kunde wurde erfolgreich gespeichert!
-</app-alert>
+</pst-alert>
 ```
 - Typen: success, info, warning, error
 - Auto-dismiss Option
@@ -91,9 +91,9 @@ Standard-UI-Komponenten sind die **Bausteine** Ihrer Anwendung. Sie sorgen für:
 
 ### 7. **Badge** (Geplant)
 ```html
-<app-badge variant="success">Aktiv</app-badge>
-<app-badge variant="warning">Ausstehend</app-badge>
-<app-badge variant="danger">3</app-badge>
+<pst-badge variant="success">Aktiv</pst-badge>
+<pst-badge variant="warning">Ausstehend</pst-badge>
+<pst-badge variant="danger">3</pst-badge>
 ```
 - Status-Anzeigen
 - Zähler
@@ -101,29 +101,29 @@ Standard-UI-Komponenten sind die **Bausteine** Ihrer Anwendung. Sie sorgen für:
 
 ### 8. **Loading/Spinner** (Geplant)
 ```html
-<app-loading [show]="isLoading" text="Daten werden geladen...">
+<pst-loading [show]="isLoading" text="Daten werden geladen...">
   <!-- Content hier wird während loading versteckt -->
-</app-loading>
+</pst-loading>
 ```
 
 ### 9. **Tabs** (Geplant)
 ```html
-<app-tabs>
-  <app-tab label="Übersicht">
+<pst-tabs>
+  <pst-tab label="Übersicht">
     <!-- Tab 1 Content -->
-  </app-tab>
-  <app-tab label="Details">
+  </pst-tab>
+  <pst-tab label="Details">
     <!-- Tab 2 Content -->
-  </app-tab>
-</app-tabs>
+  </pst-tab>
+</pst-tabs>
 ```
 
 ### 10. **Select/Dropdown** (Geplant)
 ```html
-<app-select [(ngModel)]="selectedStatus" placeholder="Status wählen">
-  <app-option value="active">Aktiv</app-option>
-  <app-option value="inactive">Inaktiv</app-option>
-</app-select>
+<pst-select [(ngModel)]="selectedStatus" placeholder="Status wählen">
+  <pst-option value="active">Aktiv</pst-option>
+  <pst-option value="inactive">Inaktiv</pst-option>
+</pst-select>
 ```
 
 ## 🏗️ Architektur-Prinzipien
@@ -131,14 +131,14 @@ Standard-UI-Komponenten sind die **Bausteine** Ihrer Anwendung. Sie sorgen für:
 ### 1. **Komposition über Vererbung**
 ```typescript
 // Gut: Komponenten zusammensetzen
-<app-card>
-  <app-card-header>
-    <app-button>Action</app-button>
-  </app-card-header>
-</app-card>
+<pst-card>
+  <pst-card-header>
+    <pst-button>Action</pst-button>
+  </pst-card-header>
+</pst-card>
 
 // Nicht: Mega-Komponente mit 100 Props
-<app-mega-card [showButton]="true" [buttonText]="..." ...>
+<pst-mega-card [showButton]="true" [buttonText]="..." ...>
 ```
 
 ### 2. **Props für Konfiguration**
@@ -151,10 +151,10 @@ Standard-UI-Komponenten sind die **Bausteine** Ihrer Anwendung. Sie sorgen für:
 ### 3. **Content Projection**
 ```html
 <!-- ng-content für flexible Inhalte -->
-<app-button>
+<pst-button>
   <i class="icon"></i>
   Beliebiger Inhalt
-</app-button>
+</pst-button>
 ```
 
 ### 4. **Konsistente API**
@@ -172,14 +172,14 @@ Standard-UI-Komponenten sind die **Bausteine** Ihrer Anwendung. Sie sorgen für:
 import { ButtonBetaComponent } from '@shared/components-beta/button/button-beta.component';
 
 // 2. In Template verwenden
-<app-button-beta 
+<pst-button-beta 
   variant="primary"
   size="lg"
   [loading]="isSaving"
   (clicked)="save()"
 >
   Speichern
-</app-button-beta>
+</pst-button-beta>
 
 // 3. Fertig! Keine eigenen Styles nötig
 ```

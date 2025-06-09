@@ -27,9 +27,9 @@
         "950": { "value": "#111827", "description": "Tiefes Schwarz" }
       },
       "black": {
-        "base": { "value": "#1A1A1A", "description": "Dark Mode Haupthintergrund" },
-        "light": { "value": "#222222", "description": "Dark Mode Section" },
-        "lighter": { "value": "#2A2A2A", "description": "Dark Mode Card" }
+        "base": { "value": "#030712", "description": "Dark Mode Haupthintergrund" },
+        "light": { "value": "#111827", "description": "Dark Mode Section" },
+        "lighter": { "value": "#1f2937", "description": "Dark Mode Card" }
       },
       "white": {
         "base": { "value": "#FFFFFF", "description": "Reines Weiß" },

@@ -5,7 +5,7 @@ import { ButtonGroupComponent } from '../../../../../shared/components/button-gr
 import { CodeBlockComponent } from '../../../shared/components/code-block.component';
 
 @Component({
-  selector: 'app-button-group-showcase',
+  selector: 'pst-button-group-showcase',
   standalone: true,
   imports: [
     CommonModule, 
@@ -91,10 +91,10 @@ import { CodeBlockComponent } from '../../../shared/components/code-block.compon
                 <h3 class="text-lg font-medium text-gray-900 dark:text-gray-100 mb-4">
                   Import
                 </h3>
-                <app-code-block
+                <pst-code-block
                   [code]="importCode"
                   language="typescript"
-                ></app-code-block>
+                ></pst-code-block>
               </div>
             </section>
           }
@@ -119,28 +119,28 @@ import { CodeBlockComponent } from '../../../shared/components/code-block.compon
                   <div class="space-y-6">
                     <div>
                       <p class="text-sm text-gray-600 dark:text-gray-400 mb-3">Horizontal Group:</p>
-                      <app-button-group ariaLabel="Text formatting">
-                        <app-button variant="tertiary" icon="bold" size="sm">Bold</app-button>
-                        <app-button variant="tertiary" icon="italic" size="sm">Italic</app-button>
-                        <app-button variant="tertiary" icon="underline" size="sm">Underline</app-button>
-                      </app-button-group>
+                      <pst-button-group ariaLabel="Text formatting">
+                        <pst-button variant="tertiary" icon="bold" size="sm">Bold</pst-button>
+                        <pst-button variant="tertiary" icon="italic" size="sm">Italic</pst-button>
+                        <pst-button variant="tertiary" icon="underline" size="sm">Underline</pst-button>
+                      </pst-button-group>
                     </div>
                     
                     <div>
                       <p class="text-sm text-gray-600 dark:text-gray-400 mb-3">With Different Variants:</p>
-                      <app-button-group ariaLabel="Save actions">
-                        <app-button variant="primary">Save</app-button>
-                        <app-button variant="outline-primary">Save As</app-button>
-                        <app-button variant="ghost" icon="settings" [iconOnly]="true" ariaLabel="Settings"></app-button>
-                      </app-button-group>
+                      <pst-button-group ariaLabel="Save actions">
+                        <pst-button variant="primary">Save</pst-button>
+                        <pst-button variant="outline-primary">Save As</pst-button>
+                        <pst-button variant="ghost" icon="settings" [iconOnly]="true" ariaLabel="Settings"></pst-button>
+                      </pst-button-group>
                     </div>
                   </div>
                 </div>
                 
-                <app-code-block
+                <pst-code-block
                   [code]="basicCode"
                   language="html"
-                ></app-code-block>
+                ></pst-code-block>
               </div>
 
               <!-- Toggle Mode -->
@@ -156,15 +156,15 @@ import { CodeBlockComponent } from '../../../shared/components/code-block.compon
                   <div class="space-y-6">
                     <div>
                       <p class="text-sm text-gray-600 dark:text-gray-400 mb-3">View Switcher:</p>
-                      <app-button-group 
+                      <pst-button-group 
                         ariaLabel="View options" 
                         mode="toggle"
                         [(value)]="selectedView"
                       >
-                        <app-button icon="list" variant="tertiary" size="sm">List</app-button>
-                        <app-button icon="grid" variant="tertiary" size="sm">Grid</app-button>
-                        <app-button icon="calendar" variant="tertiary" size="sm">Calendar</app-button>
-                      </app-button-group>
+                        <pst-button icon="list" variant="tertiary" size="sm">List</pst-button>
+                        <pst-button icon="grid" variant="tertiary" size="sm">Grid</pst-button>
+                        <pst-button icon="calendar" variant="tertiary" size="sm">Calendar</pst-button>
+                      </pst-button-group>
                       <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">
                         Selected: {{ selectedView() || 'None' }}
                       </p>
@@ -172,16 +172,16 @@ import { CodeBlockComponent } from '../../../shared/components/code-block.compon
                     
                     <div>
                       <p class="text-sm text-gray-600 dark:text-gray-400 mb-3">Time Period:</p>
-                      <app-button-group 
+                      <pst-button-group 
                         ariaLabel="Time period" 
                         mode="toggle"
                         [(value)]="selectedPeriod"
                       >
-                        <app-button variant="outline-primary">Day</app-button>
-                        <app-button variant="outline-primary">Week</app-button>
-                        <app-button variant="outline-primary">Month</app-button>
-                        <app-button variant="outline-primary">Year</app-button>
-                      </app-button-group>
+                        <pst-button variant="outline-primary">Day</pst-button>
+                        <pst-button variant="outline-primary">Week</pst-button>
+                        <pst-button variant="outline-primary">Month</pst-button>
+                        <pst-button variant="outline-primary">Year</pst-button>
+                      </pst-button-group>
                       <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">
                         Selected: {{ selectedPeriod() || 'None' }}
                       </p>
@@ -189,10 +189,10 @@ import { CodeBlockComponent } from '../../../shared/components/code-block.compon
                   </div>
                 </div>
                 
-                <app-code-block
+                <pst-code-block
                   [code]="toggleCode"
                   language="html"
-                ></app-code-block>
+                ></pst-code-block>
               </div>
 
               <!-- Multiple Toggle -->
@@ -207,26 +207,26 @@ import { CodeBlockComponent } from '../../../shared/components/code-block.compon
                 <div class="bg-gray-50 dark:bg-gray-900 p-8 rounded-lg mb-4">
                   <div>
                     <p class="text-sm text-gray-600 dark:text-gray-400 mb-3">Filter Options:</p>
-                    <app-button-group 
+                    <pst-button-group 
                       ariaLabel="Filter options" 
                       mode="toggle-multiple"
                       [(value)]="selectedFilters"
                     >
-                      <app-button icon="check" variant="ghost" size="sm">Active</app-button>
-                      <app-button icon="clock" variant="ghost" size="sm">Pending</app-button>
-                      <app-button icon="folder" variant="ghost" size="sm">Archived</app-button>
-                      <app-button icon="star" variant="ghost" size="sm">Starred</app-button>
-                    </app-button-group>
+                      <pst-button icon="check" variant="ghost" size="sm">Active</pst-button>
+                      <pst-button icon="clock" variant="ghost" size="sm">Pending</pst-button>
+                      <pst-button icon="folder" variant="ghost" size="sm">Archived</pst-button>
+                      <pst-button icon="star" variant="ghost" size="sm">Starred</pst-button>
+                    </pst-button-group>
                     <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">
                       Selected: {{ formatSelectedFilters() }}
                     </p>
                   </div>
                 </div>
                 
-                <app-code-block
+                <pst-code-block
                   [code]="multiToggleCode"
                   language="html"
-                ></app-code-block>
+                ></pst-code-block>
               </div>
 
               <!-- Vertical Orientation -->
@@ -242,27 +242,27 @@ import { CodeBlockComponent } from '../../../shared/components/code-block.compon
                   <div class="flex gap-8">
                     <div>
                       <p class="text-sm text-gray-600 dark:text-gray-400 mb-3">Navigation Menu:</p>
-                      <app-button-group orientation="vertical" ariaLabel="Navigation">
-                        <app-button icon="home" variant="ghost">Home</app-button>
-                        <app-button icon="user" variant="ghost">Profile</app-button>
-                        <app-button icon="settings" variant="ghost">Settings</app-button>
-                        <app-button icon="logout" variant="ghost">Logout</app-button>
-                      </app-button-group>
+                      <pst-button-group orientation="vertical" ariaLabel="Navigation">
+                        <pst-button icon="home" variant="ghost">Home</pst-button>
+                        <pst-button icon="user" variant="ghost">Profile</pst-button>
+                        <pst-button icon="settings" variant="ghost">Settings</pst-button>
+                        <pst-button icon="logout" variant="ghost">Logout</pst-button>
+                      </pst-button-group>
                     </div>
                     
                     <div>
                       <p class="text-sm text-gray-600 dark:text-gray-400 mb-3">With Toggle:</p>
-                      <app-button-group 
+                      <pst-button-group 
                         orientation="vertical" 
                         ariaLabel="Actions"
                         mode="toggle"
                         [(value)]="selectedAction"
                       >
-                        <app-button icon="edit" variant="tertiary">Edit</app-button>
-                        <app-button icon="copy" variant="tertiary">Duplicate</app-button>
-                        <app-button icon="upload" variant="tertiary">Share</app-button>
-                        <app-button icon="trash" variant="tertiary">Delete</app-button>
-                      </app-button-group>
+                        <pst-button icon="edit" variant="tertiary">Edit</pst-button>
+                        <pst-button icon="copy" variant="tertiary">Duplicate</pst-button>
+                        <pst-button icon="upload" variant="tertiary">Share</pst-button>
+                        <pst-button icon="trash" variant="tertiary">Delete</pst-button>
+                      </pst-button-group>
                       <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">
                         Selected: {{ selectedAction() || 'None' }}
                       </p>
@@ -270,10 +270,10 @@ import { CodeBlockComponent } from '../../../shared/components/code-block.compon
                   </div>
                 </div>
                 
-                <app-code-block
+                <pst-code-block
                   [code]="verticalCode"
                   language="html"
-                ></app-code-block>
+                ></pst-code-block>
               </div>
 
               <!-- Real-world Examples -->
@@ -285,15 +285,15 @@ import { CodeBlockComponent } from '../../../shared/components/code-block.compon
                   <div>
                     <p class="text-sm text-gray-600 dark:text-gray-400 mb-3">Pagination:</p>
                     <div class="bg-gray-50 dark:bg-gray-900 p-8 rounded-lg">
-                      <app-button-group ariaLabel="Pagination">
-                        <app-button variant="outline-primary" icon="chevron-left" [iconOnly]="true" ariaLabel="Previous"></app-button>
-                        <app-button variant="outline-primary">1</app-button>
-                        <app-button variant="outline-primary">2</app-button>
-                        <app-button variant="outline-primary">3</app-button>
-                        <app-button variant="outline-primary">...</app-button>
-                        <app-button variant="outline-primary">10</app-button>
-                        <app-button variant="outline-primary" icon="chevron-right" [iconOnly]="true" ariaLabel="Next"></app-button>
-                      </app-button-group>
+                      <pst-button-group ariaLabel="Pagination">
+                        <pst-button variant="outline-primary" icon="chevron-left" [iconOnly]="true" ariaLabel="Previous"></pst-button>
+                        <pst-button variant="outline-primary">1</pst-button>
+                        <pst-button variant="outline-primary">2</pst-button>
+                        <pst-button variant="outline-primary">3</pst-button>
+                        <pst-button variant="outline-primary">...</pst-button>
+                        <pst-button variant="outline-primary">10</pst-button>
+                        <pst-button variant="outline-primary" icon="chevron-right" [iconOnly]="true" ariaLabel="Next"></pst-button>
+                      </pst-button-group>
                     </div>
                   </div>
                   
@@ -301,17 +301,17 @@ import { CodeBlockComponent } from '../../../shared/components/code-block.compon
                     <p class="text-sm text-gray-600 dark:text-gray-400 mb-3">Toolbar Actions:</p>
                     <div class="bg-gray-50 dark:bg-gray-900 p-8 rounded-lg">
                       <div class="flex gap-4">
-                        <app-button-group ariaLabel="Text alignment">
-                          <app-button variant="ghost" icon="align-left" [iconOnly]="true" size="sm" ariaLabel="Align left"></app-button>
-                          <app-button variant="ghost" icon="align-center" [iconOnly]="true" size="sm" ariaLabel="Align center"></app-button>
-                          <app-button variant="ghost" icon="align-right" [iconOnly]="true" size="sm" ariaLabel="Align right"></app-button>
-                          <app-button variant="ghost" icon="align-justify" [iconOnly]="true" size="sm" ariaLabel="Justify"></app-button>
-                        </app-button-group>
+                        <pst-button-group ariaLabel="Text alignment">
+                          <pst-button variant="ghost" icon="align-left" [iconOnly]="true" size="sm" ariaLabel="Align left"></pst-button>
+                          <pst-button variant="ghost" icon="align-center" [iconOnly]="true" size="sm" ariaLabel="Align center"></pst-button>
+                          <pst-button variant="ghost" icon="align-right" [iconOnly]="true" size="sm" ariaLabel="Align right"></pst-button>
+                          <pst-button variant="ghost" icon="align-justify" [iconOnly]="true" size="sm" ariaLabel="Justify"></pst-button>
+                        </pst-button-group>
                         
-                        <app-button-group ariaLabel="List formatting">
-                          <app-button variant="ghost" icon="list" [iconOnly]="true" size="sm" ariaLabel="Bullet list"></app-button>
-                          <app-button variant="ghost" icon="list-ordered" [iconOnly]="true" size="sm" ariaLabel="Numbered list"></app-button>
-                        </app-button-group>
+                        <pst-button-group ariaLabel="List formatting">
+                          <pst-button variant="ghost" icon="list" [iconOnly]="true" size="sm" ariaLabel="Bullet list"></pst-button>
+                          <pst-button variant="ghost" icon="list-ordered" [iconOnly]="true" size="sm" ariaLabel="Numbered list"></pst-button>
+                        </pst-button-group>
                       </div>
                     </div>
                   </div>
@@ -417,10 +417,10 @@ import { CodeBlockComponent } from '../../../shared/components/code-block.compon
                   Type Definitions
                 </h3>
                 
-                <app-code-block
+                <pst-code-block
                   [code]="typesCode"
                   language="typescript"
-                ></app-code-block>
+                ></pst-code-block>
               </div>
             </section>
           }
@@ -522,65 +522,65 @@ import { ButtonComponent } from '@app/shared/components/button/button.component'
 })`;
 
   basicCode = `<!-- Basic horizontal group -->
-<app-button-group ariaLabel="Text formatting">
-  <app-button variant="tertiary" icon="bold" size="sm">Bold</app-button>
-  <app-button variant="tertiary" icon="italic" size="sm">Italic</app-button>
-  <app-button variant="tertiary" icon="underline" size="sm">Underline</app-button>
-</app-button-group>
+<pst-button-group ariaLabel="Text formatting">
+  <pst-button variant="tertiary" icon="bold" size="sm">Bold</pst-button>
+  <pst-button variant="tertiary" icon="italic" size="sm">Italic</pst-button>
+  <pst-button variant="tertiary" icon="underline" size="sm">Underline</pst-button>
+</pst-button-group>
 
 <!-- Mixed variants -->
-<app-button-group ariaLabel="Save actions">
-  <app-button variant="primary">Save</app-button>
-  <app-button variant="outline-primary">Save As</app-button>
-  <app-button variant="ghost" icon="settings" [iconOnly]="true" ariaLabel="Settings"></app-button>
-</app-button-group>`;
+<pst-button-group ariaLabel="Save actions">
+  <pst-button variant="primary">Save</pst-button>
+  <pst-button variant="outline-primary">Save As</pst-button>
+  <pst-button variant="ghost" icon="settings" [iconOnly]="true" ariaLabel="Settings"></pst-button>
+</pst-button-group>`;
 
   toggleCode = `<!-- Toggle mode (single selection) -->
-<app-button-group 
+<pst-button-group 
   ariaLabel="View options" 
   mode="toggle"
   [(value)]="selectedView">
-  <app-button icon="list" variant="tertiary" size="sm">List</app-button>
-  <app-button icon="grid" variant="tertiary" size="sm">Grid</app-button>
-  <app-button icon="calendar" variant="tertiary" size="sm">Calendar</app-button>
-</app-button-group>
+  <pst-button icon="list" variant="tertiary" size="sm">List</pst-button>
+  <pst-button icon="grid" variant="tertiary" size="sm">Grid</pst-button>
+  <pst-button icon="calendar" variant="tertiary" size="sm">Calendar</pst-button>
+</pst-button-group>
 
 <!-- In component -->
 selectedView = signal<string | null>('List');`;
 
   multiToggleCode = `<!-- Toggle mode (multiple selection) -->
-<app-button-group 
+<pst-button-group 
   ariaLabel="Filter options" 
   mode="toggle-multiple"
   [(value)]="selectedFilters">
-  <app-button icon="check" variant="ghost" size="sm">Active</app-button>
-  <app-button icon="clock" variant="ghost" size="sm">Pending</app-button>
-  <app-button icon="folder" variant="ghost" size="sm">Archived</app-button>
-  <app-button icon="star" variant="ghost" size="sm">Starred</app-button>
-</app-button-group>
+  <pst-button icon="check" variant="ghost" size="sm">Active</pst-button>
+  <pst-button icon="clock" variant="ghost" size="sm">Pending</pst-button>
+  <pst-button icon="folder" variant="ghost" size="sm">Archived</pst-button>
+  <pst-button icon="star" variant="ghost" size="sm">Starred</pst-button>
+</pst-button-group>
 
 <!-- In component -->
 selectedFilters = signal<string[]>(['Active']);`;
 
   verticalCode = `<!-- Vertical orientation -->
-<app-button-group orientation="vertical" ariaLabel="Navigation">
-  <app-button icon="home" variant="ghost">Home</app-button>
-  <app-button icon="user" variant="ghost">Profile</app-button>
-  <app-button icon="settings" variant="ghost">Settings</app-button>
-  <app-button icon="logout" variant="ghost">Logout</app-button>
-</app-button-group>
+<pst-button-group orientation="vertical" ariaLabel="Navigation">
+  <pst-button icon="home" variant="ghost">Home</pst-button>
+  <pst-button icon="user" variant="ghost">Profile</pst-button>
+  <pst-button icon="settings" variant="ghost">Settings</pst-button>
+  <pst-button icon="logout" variant="ghost">Logout</pst-button>
+</pst-button-group>
 
 <!-- Vertical with toggle -->
-<app-button-group 
+<pst-button-group 
   orientation="vertical" 
   ariaLabel="Actions"
   mode="toggle"
   [(value)]="selectedAction">
-  <app-button icon="edit" variant="tertiary">Edit</app-button>
-  <app-button icon="copy" variant="tertiary">Duplicate</app-button>
-  <app-button icon="upload" variant="tertiary">Share</app-button>
-  <app-button icon="trash" variant="tertiary">Delete</app-button>
-</app-button-group>`;
+  <pst-button icon="edit" variant="tertiary">Edit</pst-button>
+  <pst-button icon="copy" variant="tertiary">Duplicate</pst-button>
+  <pst-button icon="upload" variant="tertiary">Share</pst-button>
+  <pst-button icon="trash" variant="tertiary">Delete</pst-button>
+</pst-button-group>`;
 
   typesCode = `export type ButtonGroupOrientation = 'horizontal' | 'vertical';
 export type ButtonGroupMode = 'default' | 'toggle' | 'toggle-multiple';`;

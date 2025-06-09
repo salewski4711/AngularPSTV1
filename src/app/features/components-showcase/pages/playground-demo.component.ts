@@ -4,7 +4,7 @@ import { PlaygroundComponent, PlaygroundConfig } from '../shared/components/play
 import { ButtonComponent } from '../../../shared/components/button/button.component';
 
 @Component({
-  selector: 'app-playground-demo',
+  selector: 'pst-playground-demo',
   standalone: true,
   imports: [CommonModule, PlaygroundComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -25,10 +25,10 @@ import { ButtonComponent } from '../../../shared/components/button/button.compon
           <h2 class="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-4">
             Button Component Playground
           </h2>
-          <app-playground 
+          <pst-playground 
             [config]="buttonPlaygroundConfig"
             (propsChange)="onButtonPropsChange($event)"
-          ></app-playground>
+          ></pst-playground>
         </section>
         
         <!-- Feature List -->
@@ -227,9 +227,9 @@ export class PlaygroundDemoComponent {
       
       const attributesStr = attributes.length > 0 ? '\n  ' + attributes.join('\n  ') : '';
       
-      return `<app-button${attributesStr}>
+      return `<pst-button${attributesStr}>
   ${props.iconOnly ? '' : 'Click me'}
-</app-button>`;
+</pst-button>`;
     }
   };
   

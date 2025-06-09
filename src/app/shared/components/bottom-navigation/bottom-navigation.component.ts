@@ -9,7 +9,7 @@ import { BadgeComponent } from '../badge/badge.component';
 import { cn } from '../../utils/tailwind.utils';
 
 @Component({
-  selector: 'app-bottom-navigation',
+  selector: 'pst-bottom-navigation',
   standalone: true,
   imports: [CommonModule, RouterLink, BadgeComponent],
   templateUrl: './bottom-navigation.component.html',

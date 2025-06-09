@@ -1,101 +1,24 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { LinkComponent } from '../../../../../shared/components/link/link.component';
-import { PropsTableComponent } from '../../../shared/components/props-table.component';
-import { PlaygroundComponent, PlaygroundProp } from '../../../shared/components/playground.component';
-import { CodeBlockComponent } from '../../../shared/components/code-block.component';
-import { BaseShowcaseComponent } from '../../../shared/base-showcase.component';
+import { ShowcaseTemplateComponent } from '../../../shared/showcase-template.component';
 
 @Component({
-  selector: 'app-link-showcase',
+  selector: 'pst-link-showcase',
   standalone: true,
-  imports: [
-    CommonModule,
-    PlaygroundComponent,
-    PropsTableComponent,
-    CodeBlockComponent
-  ],
+  imports: [ShowcaseTemplateComponent],
   template: `
-    <div class="space-y-12">
-      <!-- Header -->
-      <div>
-        <h2 class="text-3xl font-bold mb-4">{{ title }}</h2>
-        <p class="text-gray-600 dark:text-gray-400">
-          {{ description }}
-        </p>
-      </div>
-
-      <!-- Interactive Playground -->
-      <app-playground 
-        [config]="playgroundConfig">
-      </app-playground>
-
-      <!-- Props Table -->
-      <div>
-        <h3 class="text-2xl font-semibold mb-6">Props</h3>
-        <app-props-table [props]="props"></app-props-table>
-      </div>
-
-      <!-- Basic Examples -->
-      <div>
-        <h3 class="text-2xl font-semibold mb-6">Basic Links</h3>
-        <app-code-block 
-          [code]="examples['basic']"
-          language="html">
-        </app-code-block>
-      </div>
-
-      <!-- Sizes -->
-      <div>
-        <h3 class="text-2xl font-semibold mb-6">Link Sizes</h3>
-        <app-code-block 
-          [code]="examples['sizes']"
-          language="html">
-        </app-code-block>
-      </div>
-
-      <!-- External Links -->
-      <div>
-        <h3 class="text-2xl font-semibold mb-6">External Links</h3>
-        <app-code-block 
-          [code]="examples['external']"
-          language="html">
-        </app-code-block>
-      </div>
-
-      <!-- Router Links -->
-      <div>
-        <h3 class="text-2xl font-semibold mb-6">Router Links</h3>
-        <app-code-block 
-          [code]="examples['router']"
-          language="html">
-        </app-code-block>
-      </div>
-
-      <!-- States -->
-      <div>
-        <h3 class="text-2xl font-semibold mb-6">Link States</h3>
-        <app-code-block 
-          [code]="examples['states']"
-          language="html">
-        </app-code-block>
-      </div>
-
-      <!-- With Icons -->
-      <div>
-        <h3 class="text-2xl font-semibold mb-6">Links with Icons</h3>
-        <app-code-block 
-          [code]="examples['icons']"
-          language="html">
-        </app-code-block>
-      </div>
-    </div>
+    <pst-showcase-template
+      [title]="title"
+      [description]="description"
+      [sections]="sections"
+      [props]="props"
+      [bestPractices]="bestPractices">
+    </pst-showcase-template>
   `
 })
-export class LinkShowcaseComponent extends BaseShowcaseComponent {
-  component = LinkComponent;
+export class LinkShowcaseComponent {
   title = 'Link';
   description = 'Styled hyperlink component with router integration and external link support.';
+  
   props = [
     {
       name: 'href',
@@ -153,128 +76,110 @@ export class LinkShowcaseComponent extends BaseShowcaseComponent {
     }
   ];
 
-  // Override base class methods for custom behavior
-  protected override createPlaygroundProps(): PlaygroundProp[] {
-    const baseProps = super.createPlaygroundProps();
-    // Add content prop for link text
-    return [
-      {
-        name: 'content',
-        type: 'string' as const,
-        defaultValue: 'Click me',
-        description: 'Link text content'
-      },
-      ...baseProps
-    ];
-  }
-
-  protected override generateCode(props: any): string {
-    const attributes: string[] = ['href="#"'];
-    
-    if (props.variant && props.variant !== 'default') {
-      attributes.push(`variant="${props.variant}"`);
-    }
-    if (props.size && props.size !== 'md') {
-      attributes.push(`size="${props.size}"`);
-    }
-    if (props.external) {
-      attributes.push('[external]="true"');
-    }
-    if (props.underline === false) {
-      attributes.push('[underline]="false"');
-    }
-    if (props.disabled) {
-      attributes.push('[disabled]="true"');
-    }
-    
-    return `<app-link
-  ${attributes.join('\n  ')}>
-  ${props.content || 'Click me'}
-</app-link>`;
-  }
-
-  examples: Record<string, string> = {
-    basic: `<!-- Default link -->
-<app-link href="#">Default Link</app-link>
-
-<!-- Primary link -->
-<app-link href="#" variant="primary">Primary Link</app-link>
-
-<!-- Muted link -->
-<app-link href="#" variant="muted">Muted Link</app-link>`,
-
-    sizes: `<!-- Small link -->
-<app-link href="#" size="sm">Small Link</app-link>
-
-<!-- Medium link (default) -->
-<app-link href="#" size="md">Medium Link</app-link>
-
-<!-- Large link -->
-<app-link href="#" size="lg">Large Link</app-link>`,
-
-    external: `<!-- External link with auto icon -->
-<app-link 
-  href="https://prosolar-tec.de" 
-  [external]="true">
-  Visit ProSolarTec
-</app-link>
-
-<!-- External link opens in new tab -->
-<app-link 
-  href="https://angular.io/docs" 
-  [external]="true"
-  variant="primary">
+  sections = [
+    {
+      title: 'Basic Links',
+      description: 'Links come in different visual variants for various use cases.',
+      code: `<!-- Basic link variants -->
+<pst-link href="#">Default Link</pst-link>
+<pst-link href="#" variant="primary">Primary Link</pst-link>
+<pst-link href="#" variant="muted">Muted Link</pst-link>`
+    },
+    {
+      title: 'Link Sizes',
+      description: 'Links can be displayed in three different sizes to match your design needs.',
+      code: `<!-- Different link sizes -->
+<pst-link href="#" size="sm">Small Link</pst-link>
+<pst-link href="#" size="md">Medium Link (default)</pst-link>
+<pst-link href="#" size="lg">Large Link</pst-link>`
+    },
+    {
+      title: 'External Links',
+      description: 'External links automatically show an indicator icon and open in a new tab.',
+      code: `<!-- External links with indicator -->
+<pst-link href="https://angular.io" [external]="true">
   Angular Documentation
-</app-link>`,
+</pst-link>
 
-    router: `<!-- Simple router link -->
-<app-link routerLink="/dashboard">Dashboard</app-link>
+<!-- Auto-detection of external links -->
+<pst-link href="https://example.com">
+  External Site (auto-detected)
+</pst-link>`
+    },
+    {
+      title: 'Router Links',
+      description: 'Integrate seamlessly with Angular Router for internal navigation.',
+      code: `<!-- Basic router link -->
+<pst-link routerLink="/dashboard">Dashboard</pst-link>
 
 <!-- Router link with params -->
-<app-link 
-  routerLink="/customers/details"
-  [queryParams]="{ id: 123 }">
-  Customer Details
-</app-link>
+<pst-link 
+  [routerLink]="['/user', userId]" 
+  [queryParams]="{tab: 'profile'}">
+  User Profile
+</pst-link>
 
 <!-- Router link with fragment -->
-<app-link 
-  routerLink="/help"
-  fragment="getting-started">
-  Getting Started Guide
-</app-link>
+<pst-link 
+  routerLink="/docs" 
+  fragment="installation">
+  Installation Guide
+</pst-link>`
+    },
+    {
+      title: 'Link States',
+      description: 'Links support various states including disabled and no-underline options.',
+      code: `<!-- Disabled state -->
+<pst-link href="#" [disabled]="true">Disabled Link</pst-link>
 
-<!-- Router link as array -->
-<app-link 
-  [routerLink]="['/projects', projectId, 'edit']">
-  Edit Project
-</app-link>`,
+<!-- No underline on hover -->
+<pst-link href="#" [underline]="false">No Underline</pst-link>
 
-    states: `<!-- Normal link -->
-<app-link href="#">Normal Link</app-link>
-
-<!-- Link without underline -->
-<app-link href="#" [underline]="false">No Underline</app-link>
-
-<!-- Disabled link -->
-<app-link href="#" [disabled]="true">Disabled Link</app-link>`,
-
-    icons: `<!-- Link with custom icon -->
-<app-link href="/settings">
-  <app-icon name="settings" [size]="16" class="mr-1"></app-icon>
-  Settings
-</app-link>
-
-<!-- Download link -->
-<app-link href="/download" variant="primary">
-  <app-icon name="download" [size]="16" class="mr-1"></app-icon>
+<!-- Combined states -->
+<pst-link 
+  href="#" 
+  [disabled]="true" 
+  variant="primary">
+  Disabled Primary Link
+</pst-link>`
+    },
+    {
+      title: 'Links with Icons',
+      description: 'Combine links with icons for enhanced visual communication.',
+      code: `<!-- Link with icon -->
+<pst-link href="#">
+  <pst-icon name="download" size="sm"></pst-icon>
   Download Report
-</app-link>
+</pst-link>
 
-<!-- Mail link -->
-<app-link href="mailto:support@example.com" [external]="true">
-  <app-icon name="mail" [size]="16" class="mr-1"></app-icon>
-  Contact Support
-</app-link>`
+<!-- External link with custom icon -->
+<pst-link href="https://github.com" [external]="true">
+  <pst-icon name="github" size="sm"></pst-icon>
+  View on GitHub
+</pst-link>
+
+<!-- Icon after text -->
+<pst-link href="#" variant="primary">
+  Continue
+  <pst-icon name="arrow-right" size="sm"></pst-icon>
+</pst-link>`
+    }
+  ];
+
+  bestPractices = {
+    do: [
+      'Use descriptive link text that clearly indicates the destination',
+      'Use the primary variant for main call-to-action links',
+      'Use routerLink for internal navigation and href for external links',
+      'Include the external prop for links that leave your application',
+      'Provide appropriate context when disabling links'
+    ],
+    dont: [
+      'Use generic text like "click here" or "read more"',
+      'Mix href and routerLink on the same component',
+      'Disable links without providing alternative actions or explanations',
+      'Use links for actions that should be buttons (e.g., form submissions)',
+      'Forget to test keyboard navigation and screen reader accessibility'
+    ]
   };
 }
