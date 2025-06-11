@@ -22,6 +22,7 @@ import { IconSizeVariant, getIconSize } from '../utils/icon-size.utils';
         [class]="cssClasses"
         role="img"
         [attr.aria-label]="ariaLabel || name"
+        overflow="visible"
       >
         <path [attr.d]="iconPath()" />
       </svg>
@@ -32,6 +33,7 @@ import { IconSizeVariant, getIconSize } from '../utils/icon-size.utils';
       display: inline-flex;
       align-items: center;
       justify-content: center;
+      overflow: visible;
     }
   `]
 })

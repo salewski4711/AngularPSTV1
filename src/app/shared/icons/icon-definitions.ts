@@ -164,7 +164,7 @@ export const ICONS = {
   'users': {
     name: 'users',
     viewBox: '0 0 24 24',
-    path: 'M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 7a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75'
+    path: 'M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM23 21v-2a4 4 0 0 0-3-3.87M16 7.13a4 4 0 0 1 0 7.75'
   },
   'document-text': {
     name: 'document-text',
@@ -367,11 +367,6 @@ export const ICONS = {
     name: 'minus',
     viewBox: '0 0 24 24',
     path: 'M5 12h14'
-  },
-  'map-pin': {
-    name: 'map-pin',
-    viewBox: '0 0 24 24',
-    path: 'M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z M12 7a3 3 0 1 0 0 6 3 3 0 0 0 0-6z'
   },
   'dollar-sign': {
     name: 'dollar-sign',

@@ -4,6 +4,7 @@ import { IconComponent } from '../../icons/icon.component';
 import { IconName } from '../../icons/icon-definitions';
 import { RippleDirective } from '../../directives/ripple.directive';
 import { SpinnerComponent } from '../spinner/spinner.component';
+import { buttonClasses as buttonClassDefs } from '../../../core/design-system/component-classes';
 
 export type ButtonVariant = 'primary' | 'secondary' | 'outline-primary' | 'tertiary' | 'ghost' | 'danger';
 export type ButtonSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
@@ -75,68 +76,66 @@ export class ButtonComponent {
   }
 
   buttonClasses = computed(() => {
-    const base = 'inline-flex items-center justify-center font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-60 disabled:cursor-not-allowed';
+    const classes = [buttonClassDefs.base];
     
-    const sizes = this.iconOnly 
-      ? {
-          xs: 'p-1 rounded',
-          sm: 'p-1.5 rounded',
-          md: 'p-2 rounded-md',
-          lg: 'p-2.5 rounded-md',
-          xl: 'p-3 rounded-lg'
-        }
-      : {
-          xs: 'text-xs px-2.5 py-1.5 rounded',
-          sm: 'text-sm px-3 py-2 rounded-md',
-          md: 'text-base px-4 py-2.5 rounded-md',
-          lg: 'text-lg px-5 py-3 rounded-lg',
-          xl: 'text-xl px-6 py-3.5 rounded-lg'
-        };
+    // Variant
+    if (buttonClassDefs.variants[this.variant]) {
+      classes.push(buttonClassDefs.variants[this.variant]);
+    }
     
-    const variants = {
-      // Primary: ProSolarTec Orange
-      primary: 'bg-primary text-white hover:bg-primary-600 active:bg-primary-700 focus:ring-primary',
-      
-      // Secondary: ProSolarTec Blau
-      secondary: 'bg-secondary text-white hover:bg-secondary-600 active:bg-secondary-700 focus:ring-secondary',
-      
-      // Outline Primary: Transparent mit Orange Border
-      'outline-primary': 'bg-transparent border border-primary text-primary hover:bg-primary-50 dark:hover:bg-primary/10 active:bg-primary-100 dark:active:bg-primary/20 focus:ring-primary',
-      
-      // Tertiary: Grau/Transparent
-      tertiary: 'bg-transparent border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 active:bg-gray-200 dark:active:bg-gray-700 focus:ring-gray-500',
-      
-      // Ghost: Transparent ohne Border
-      ghost: 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 active:bg-gray-200 dark:active:bg-gray-700 focus:ring-gray-500',
-      
-      // Danger: Rot für kritische Aktionen
-      danger: 'bg-red-600 text-white hover:bg-red-700 active:bg-red-800 focus:ring-red-500'
-    };
+    // Size
+    if (buttonClassDefs.sizes[this.size]) {
+      classes.push(buttonClassDefs.sizes[this.size]);
+    }
     
-    const width = this.fullWidth ? 'w-full' : '';
+    // Full width
+    if (this.fullWidth) {
+      classes.push('w-full');
+    }
     
-    return `${base} ${sizes[this.size]} ${variants[this.variant]} ${width}`;
+    // Icon only adjustments
+    if (this.iconOnly) {
+      classes.push('!p-0');
+      // Adjust padding based on size for icon-only buttons
+      const iconPadding: Record<ButtonSize, string> = {
+        xs: 'p-1',
+        sm: 'p-1.5',
+        md: 'p-2',
+        lg: 'p-2.5',
+        xl: 'p-3'
+      };
+      classes.push(iconPadding[this.size]);
+    }
+    
+    // Disabled state
+    if (this.disabled || this.loading) {
+      classes.push('disabled:opacity-50 disabled:cursor-not-allowed');
+    }
+    
+    return classes.join(' ');
   });
 
   spinnerSize = computed(() => {
-    const sizes = {
-      xs: 'h-3 w-3',
-      sm: 'h-4 w-4',
-      md: 'h-5 w-5',
-      lg: 'h-6 w-6',
-      xl: 'h-7 w-7'
+    // Nutze Token-basierte Größen für Spinner
+    const sizeMap: Record<ButtonSize, string> = {
+      xs: `h-3 w-3`,
+      sm: `h-4 w-4`,
+      md: `h-5 w-5`,
+      lg: `h-6 w-6`,
+      xl: `h-7 w-7`
     };
-    return sizes[this.size];
+    return sizeMap[this.size];
   });
 
   iconSize = computed(() => {
-    const sizes = {
+    // Icon-Größen aus Token-System
+    const iconSizeMap: Record<ButtonSize, number> = {
       xs: 14,
       sm: 16,
       md: 20,
       lg: 24,
       xl: 28
     };
-    return sizes[this.size];
+    return iconSizeMap[this.size];
   });
 }

@@ -98,9 +98,9 @@ describe('SelectComponent', () => {
     it('should apply correct size classes', () => {
       const sizes = ['sm', 'md', 'lg'] as const;
       const expectedClasses = {
-        sm: 'h-8',
-        md: 'h-10',
-        lg: 'h-12'
+        sm: 'py-1.5',
+        md: 'py-2',
+        lg: 'py-3'
       };
       
       sizes.forEach(size => {
@@ -187,7 +187,7 @@ describe('SelectComponent', () => {
       fixture.detectChanges();
       
       const select = fixture.debugElement.query(By.css('select'));
-      expect(select.nativeElement.classList.toString()).toContain('border-red-500');
+      expect(select.nativeElement.classList.toString()).toContain('border-error-300');
     });
   });
 
@@ -196,7 +196,7 @@ describe('SelectComponent', () => {
       component.helperText = 'Select one option';
       fixture.detectChanges();
       
-      const helperText = fixture.debugElement.query(By.css('.text-gray-600'));
+      const helperText = fixture.debugElement.query(By.css('.text-neutral-600'));
       expect(helperText.nativeElement.textContent).toContain('Select one option');
     });
 
@@ -211,7 +211,7 @@ describe('SelectComponent', () => {
       
       fixture.detectChanges();
       
-      const errorText = fixture.debugElement.query(By.css('.text-red-500'));
+      const errorText = fixture.debugElement.query(By.css('.text-error-600'));
       expect(errorText.nativeElement.textContent).toContain('Selection is required');
     });
   });

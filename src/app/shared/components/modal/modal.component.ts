@@ -15,6 +15,7 @@ import {
 import { CommonModule } from '@angular/common';
 import { IconComponent } from '../../icons/icon.component';
 import { ModalSize } from './modal.types';
+import { modalClasses } from '../../../core/design-system/component-classes/molecules.classes.static';
 
 @Component({
   selector: 'pst-modal',
@@ -25,7 +26,7 @@ import { ModalSize } from './modal.types';
     @if (isOpen()) {
       <!-- Backdrop -->
       <div 
-        class="fixed inset-0 bg-black/50 z-40 transition-opacity duration-300"
+        [class]="backdropClass"
         [class.opacity-0]="!isVisible()"
         [class.opacity-100]="isVisible()"
         (click)="onBackdropClick()"
@@ -34,7 +35,7 @@ import { ModalSize } from './modal.types';
 
       <!-- Modal Container -->
       <div 
-        class="fixed inset-0 z-50 flex items-center justify-center p-4 transition-all duration-300"
+        [class]="wrapperClass"
         [class.opacity-0]="!isVisible()"
         [class.opacity-100]="isVisible()"
         [class.scale-95]="!isVisible()"
@@ -43,8 +44,7 @@ import { ModalSize } from './modal.types';
         <!-- Modal -->
         <div
           #modalElement
-          class="bg-white dark:bg-gray-800 rounded-lg shadow-xl w-full transition-all duration-300"
-          [class]="modalSizeClass()"
+          [class]="modalClass()"
           [@modalScale]="isVisible() ? 'visible' : 'hidden'"
           role="dialog"
           [attr.aria-labelledby]="titleId"
@@ -52,17 +52,17 @@ import { ModalSize } from './modal.types';
           (click)="$event.stopPropagation()"
         >
           <!-- Header -->
-          <div class="px-6 py-4 border-b dark:border-gray-700 flex items-center justify-between">
+          <div [class]="headerClass">
             <h2 
               [id]="titleId"
-              class="text-lg font-semibold text-gray-900 dark:text-white"
+              [class]="titleClass"
             >
               {{ title() || 'Modal' }}
             </h2>
             @if (showCloseButton()) {
               <button
                 type="button"
-                class="text-gray-400 hover:text-gray-500 dark:hover:text-gray-300 transition-colors"
+                [class]="closeButtonClass"
                 (click)="onClose()"
                 aria-label="Close modal"
               >
@@ -72,7 +72,7 @@ import { ModalSize } from './modal.types';
           </div>
 
           <!-- Body -->
-          <div class="px-6 py-4">
+          <div [class]="bodyClass">
             <ng-content select="[modal-body]"></ng-content>
           </div>
 
@@ -107,15 +107,29 @@ export class ModalComponent implements AfterViewInit, OnDestroy {
   isVisible = signal(false);
   titleId = `modal-title-${Math.random().toString(36).substr(2, 9)}`;
 
+  // Using static classes from molecules.classes.static.ts
+  readonly backdropClass = modalClasses.backdrop;
+  readonly wrapperClass = `${modalClasses.wrapper} transition-opacity transition-transform duration-300`;
+  readonly headerClass = modalClasses.header.base;
+  readonly titleClass = modalClasses.header.title;
+  readonly closeButtonClass = modalClasses.header.closeButton;
+  readonly bodyClass = modalClasses.body;
+
   // Computed modal size class
   modalSizeClass = computed(() => {
-    const sizeMap: Record<ModalSize, string> = {
-      sm: 'max-w-sm',
-      md: 'max-w-md',
-      lg: 'max-w-lg',
-      xl: 'max-w-xl'
+    // Map component size prop to static class size
+    const sizeMap: Record<ModalSize, keyof typeof modalClasses.modal.sizes> = {
+      sm: 'sm',
+      md: 'md',
+      lg: 'lg',
+      xl: 'xl'
     };
-    return sizeMap[this.size()];
+    return modalClasses.modal.sizes[sizeMap[this.size()]];
+  });
+
+  // Computed modal class
+  modalClass = computed(() => {
+    return `${modalClasses.modal.base} ${this.modalSizeClass()}`;
   });
 
   constructor() {

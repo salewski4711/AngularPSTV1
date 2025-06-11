@@ -1,58 +1,60 @@
+import { TokenUtils } from '../../core/design-system/token-utilities';
+
 export function cn(...classes: (string | undefined | null | false)[]): string {
   return classes.filter(Boolean).join(' ');
 }
 
 export const formClasses = {
   label: {
-    base: 'text-sm font-medium mb-1.5 block',
-    default: 'text-gray-900 dark:text-gray-100',
-    error: 'text-red-600 dark:text-red-400',
-    disabled: 'text-gray-500 dark:text-gray-500'
+    base: `${TokenUtils.getTextSizeClass('sm')} ${TokenUtils.getFontWeightClass('medium')} ${TokenUtils.getSpacingClass('mb', 'xs')} block`,
+    default: `${TokenUtils.getColorClass('text', 'neutral.900')} dark:${TokenUtils.getColorClass('text', 'neutral.100')}`,
+    error: `${TokenUtils.getColorClass('text', 'error.600')} dark:${TokenUtils.getColorClass('text', 'error.500')}`,
+    disabled: `${TokenUtils.getColorClass('text', 'neutral.500')} dark:${TokenUtils.getColorClass('text', 'neutral.500')}`
   },
   
   helperText: {
-    base: 'text-xs mt-1',
-    default: 'text-gray-600 dark:text-gray-400',
-    error: 'text-red-500',
-    success: 'text-green-600 dark:text-green-400'
+    base: `${TokenUtils.getTextSizeClass('xs')} ${TokenUtils.getSpacingClass('mt', 'xs')}`,
+    default: `${TokenUtils.getColorClass('text', 'neutral.600')} dark:${TokenUtils.getColorClass('text', 'neutral.400')}`,
+    error: TokenUtils.getColorClass('text', 'error.500'),
+    success: `${TokenUtils.getColorClass('text', 'success.600')} dark:${TokenUtils.getColorClass('text', 'success.500')}`
   },
   
   input: {
-    base: 'w-full text-sm rounded-md transition-colors focus:outline-none',
-    default: 'bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 hover:border-gray-400 dark:hover:border-gray-500 focus:border-primary focus:ring-2 focus:ring-primary focus:ring-opacity-25 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400',
-    error: 'bg-white dark:bg-gray-700 border border-red-500 focus:border-red-500 focus:ring-2 focus:ring-red-500 focus:ring-opacity-25 text-gray-900 dark:text-gray-100',
-    success: 'bg-white dark:bg-gray-700 border border-green-500 focus:border-green-500 focus:ring-2 focus:ring-green-500 focus:ring-opacity-25 text-gray-900 dark:text-gray-100',
-    disabled: 'bg-gray-100 dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-500 dark:text-gray-500 cursor-not-allowed',
-    readonly: 'bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 cursor-default'
+    base: `w-full ${TokenUtils.getTextSizeClass('sm')} ${TokenUtils.getRadiusClass('md')} transition-colors focus:outline-none`,
+    default: `${TokenUtils.getColorClass('bg', 'white')} dark:${TokenUtils.getColorClass('bg', 'neutral.700')} border ${TokenUtils.getColorClass('border', 'neutral.300')} dark:${TokenUtils.getColorClass('border', 'neutral.600')} hover:${TokenUtils.getColorClass('border', 'neutral.400')} dark:hover:${TokenUtils.getColorClass('border', 'neutral.500')} focus:${TokenUtils.getColorClass('border', 'primary')} focus:ring-2 focus:${TokenUtils.getColorClass('ring', 'primary')} focus:ring-opacity-25 ${TokenUtils.getColorClass('text', 'neutral.900')} dark:${TokenUtils.getColorClass('text', 'neutral.100')} placeholder-gray-500 dark:placeholder-gray-400`,
+    error: `${TokenUtils.getColorClass('bg', 'white')} dark:${TokenUtils.getColorClass('bg', 'neutral.700')} border ${TokenUtils.getColorClass('border', 'error.500')} focus:${TokenUtils.getColorClass('border', 'error.500')} focus:ring-2 focus:${TokenUtils.getColorClass('ring', 'error.500')} focus:ring-opacity-25 ${TokenUtils.getColorClass('text', 'neutral.900')} dark:${TokenUtils.getColorClass('text', 'neutral.100')}`,
+    success: `${TokenUtils.getColorClass('bg', 'white')} dark:${TokenUtils.getColorClass('bg', 'neutral.700')} border ${TokenUtils.getColorClass('border', 'success.500')} focus:${TokenUtils.getColorClass('border', 'success.500')} focus:ring-2 focus:${TokenUtils.getColorClass('ring', 'success.500')} focus:ring-opacity-25 ${TokenUtils.getColorClass('text', 'neutral.900')} dark:${TokenUtils.getColorClass('text', 'neutral.100')}`,
+    disabled: `${TokenUtils.getColorClass('bg', 'neutral.100')} dark:${TokenUtils.getColorClass('bg', 'neutral.800')} border ${TokenUtils.getColorClass('border', 'neutral.300')} dark:${TokenUtils.getColorClass('border', 'neutral.600')} ${TokenUtils.getColorClass('text', 'neutral.500')} dark:${TokenUtils.getColorClass('text', 'neutral.500')} cursor-not-allowed`,
+    readonly: `${TokenUtils.getColorClass('bg', 'neutral.50')} dark:${TokenUtils.getColorClass('bg', 'neutral.800')} border ${TokenUtils.getColorClass('border', 'neutral.300')} dark:${TokenUtils.getColorClass('border', 'neutral.600')} ${TokenUtils.getColorClass('text', 'neutral.900')} dark:${TokenUtils.getColorClass('text', 'neutral.100')} cursor-default`
   },
   
   sizes: {
-    sm: 'h-8 px-2.5 py-1.5',
-    md: 'h-10 px-3 py-2',
-    lg: 'h-12 px-4 py-3'
+    sm: `h-8 ${TokenUtils.getSpacingClass('px', 'sm')} ${TokenUtils.getSpacingClass('py', 'xs')}`,
+    md: `h-10 ${TokenUtils.getSpacingClass('px', 'sm')} ${TokenUtils.getSpacingClass('py', 'sm')}`,
+    lg: `h-12 ${TokenUtils.getSpacingClass('px', 'md')} ${TokenUtils.getSpacingClass('py', 'sm')}`
   },
   
   checkbox: {
-    base: 'text-primary border-gray-300 dark:border-gray-600 rounded focus:ring-2 focus:ring-primary focus:ring-opacity-25',
+    base: `${TokenUtils.getColorClass('text', 'primary')} ${TokenUtils.getColorClass('border', 'neutral.300')} dark:${TokenUtils.getColorClass('border', 'neutral.600')} ${TokenUtils.getRadiusClass('base')} focus:ring-2 focus:${TokenUtils.getColorClass('ring', 'primary')} focus:ring-opacity-25`,
     sizes: {
-      sm: 'w-4 h-4',
-      md: 'w-5 h-5',
-      lg: 'w-6 h-6'
+      sm: `w-4 h-4`,
+      md: `w-5 h-5`,
+      lg: `w-6 h-6`
     }
   },
   
   radio: {
-    base: 'text-primary border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-primary focus:ring-opacity-25'
+    base: `${TokenUtils.getColorClass('text', 'primary')} ${TokenUtils.getColorClass('border', 'neutral.300')} dark:${TokenUtils.getColorClass('border', 'neutral.600')} focus:ring-2 focus:${TokenUtils.getColorClass('ring', 'primary')} focus:ring-opacity-25`
   },
   
   toggle: {
     container: {
-      base: 'relative inline-flex items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2',
-      on: 'bg-primary',
-      off: 'bg-gray-300 dark:bg-gray-600'
+      base: `relative inline-flex items-center ${TokenUtils.getRadiusClass('full')} transition-colors focus:outline-none focus:ring-2 focus:${TokenUtils.getColorClass('ring', 'primary')} focus:ring-offset-2`,
+      on: TokenUtils.getColorClass('bg', 'primary'),
+      off: `${TokenUtils.getColorClass('bg', 'neutral.300')} dark:${TokenUtils.getColorClass('bg', 'neutral.600')}`
     },
     handle: {
-      base: 'inline-block transform rounded-full bg-white transition-transform',
+      base: `inline-block transform ${TokenUtils.getRadiusClass('full')} ${TokenUtils.getColorClass('bg', 'white')} transition-transform`,
       sizes: {
         sm: { container: 'h-5 w-9', handle: 'h-4 w-4', translate: { on: 'translate-x-4', off: 'translate-x-1' } },
         md: { container: 'h-6 w-11', handle: 'h-5 w-5', translate: { on: 'translate-x-5', off: 'translate-x-1' } },

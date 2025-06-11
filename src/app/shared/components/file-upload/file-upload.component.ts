@@ -4,6 +4,7 @@ import { UploadedFile, FileUploadError } from './file-upload.types';
 import { FileUploadService } from './file-upload.service';
 import { IconComponent } from '../../icons/icon.component';
 import { ProgressBarComponent } from '../progress-bar/progress-bar.component';
+import { fileUploadClasses } from '../../../core/design-system/component-classes/molecules.classes.static';
 
 @Component({
   selector: 'pst-file-upload',
@@ -20,8 +21,7 @@ import { ProgressBarComponent } from '../progress-bar/progress-bar.component';
         (dragover)="onDragOver($event)"
         (dragleave)="onDragLeave($event)"
         (drop)="onDrop($event)"
-        class="relative border-2 border-dashed rounded-lg p-8 text-center cursor-pointer transition-all duration-200"
-        [class]="dropZoneClasses()"
+        [class]="dropZoneClass()"
         [class.opacity-50]="disabled"
         [class.cursor-not-allowed]="disabled"
       >
@@ -39,14 +39,14 @@ import { ProgressBarComponent } from '../progress-bar/progress-bar.component';
           <pst-icon 
             [name]="isDragging() ? 'download' : 'upload-cloud'" 
             size="xl" 
-            class="text-gray-400 dark:text-gray-600"
+            [class]="fileUploadClasses.icon.upload"
           />
           
           <div>
-            <p class="text-lg font-medium text-gray-700 dark:text-gray-300">
+            <p [class]="fileUploadClasses.text.title">
               {{ isDragging() ? 'Drop files here' : 'Click to upload or drag and drop' }}
             </p>
-            <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">
+            <p [class]="fileUploadClasses.text.description">
               {{ getAcceptText() }}
               @if (maxSize) {
                 <span class="block">Max file size: {{ formatFileSize(maxSize) }}</span>
@@ -63,7 +63,7 @@ import { ProgressBarComponent } from '../progress-bar/progress-bar.component';
       @if (errors().length > 0) {
         <div class="mt-4 space-y-2">
           @for (error of errors(); track error.message) {
-            <div class="flex items-start space-x-2 text-sm text-red-600 dark:text-red-400">
+            <div [class]="fileUploadClasses.error.message">
               <pst-icon name="alert-circle" size="xs" class="mt-0.5" />
               <span>{{ error.message }}</span>
             </div>
@@ -74,12 +74,12 @@ import { ProgressBarComponent } from '../progress-bar/progress-bar.component';
       <!-- File List -->
       @if (files().length > 0) {
         <div class="mt-6 space-y-3">
-          <h3 class="text-sm font-medium text-gray-700 dark:text-gray-300">
+          <h3 [class]="fileUploadClasses.fileList.header">
             Uploaded Files ({{ files().length }})
           </h3>
           
           @for (file of files(); track file.id) {
-            <div class="bg-gray-50 dark:bg-gray-800 rounded-lg p-4">
+            <div [class]="fileUploadClasses.fileList.item.container">
               <div class="flex items-start space-x-3">
                 <!-- Preview or Icon -->
                 @if (showPreview && file.previewUrl) {
@@ -89,8 +89,8 @@ import { ProgressBarComponent } from '../progress-bar/progress-bar.component';
                     class="w-16 h-16 object-cover rounded"
                   />
                 } @else {
-                  <div class="w-16 h-16 bg-gray-200 dark:bg-gray-700 rounded flex items-center justify-center">
-                    <pst-icon [name]="getFileIcon(file.type)" size="lg" class="text-gray-500 dark:text-gray-400" />
+                  <div [class]="fileUploadClasses.fileList.item.iconContainer">
+                    <pst-icon [name]="getFileIcon(file.type)" size="lg" [class]="fileUploadClasses.icon.file" />
                   </div>
                 }
                 
@@ -98,10 +98,10 @@ import { ProgressBarComponent } from '../progress-bar/progress-bar.component';
                 <div class="flex-1 min-w-0">
                   <div class="flex items-start justify-between">
                     <div class="min-w-0">
-                      <p class="text-sm font-medium text-gray-900 dark:text-gray-100 truncate">
+                      <p [class]="fileUploadClasses.fileList.item.fileName">
                         {{ file.name }}
                       </p>
-                      <p class="text-xs text-gray-500 dark:text-gray-400">
+                      <p [class]="fileUploadClasses.fileList.item.fileSize">
                         {{ formatFileSize(file.size) }}
                       </p>
                     </div>
@@ -111,7 +111,7 @@ import { ProgressBarComponent } from '../progress-bar/progress-bar.component';
                       <button
                         type="button"
                         (click)="removeFile(file)"
-                        class="ml-4 p-1 text-gray-400 hover:text-red-600 dark:hover:text-red-400 transition-colors"
+                        [class]="fileUploadClasses.fileList.item.removeButton"
                         [attr.aria-label]="'Remove ' + file.name"
                       >
                         <pst-icon name="x" size="xs" />
@@ -132,14 +132,14 @@ import { ProgressBarComponent } from '../progress-bar/progress-bar.component';
                   
                   <!-- Status -->
                   @if (file.status === 'success') {
-                    <div class="flex items-center space-x-1 mt-2 text-green-600 dark:text-green-400">
+                    <div [class]="fileUploadClasses.fileList.status.success">
                       <pst-icon name="check-circle" size="xs" />
                       <span class="text-xs">Upload complete</span>
                     </div>
                   }
                   
                   @if (file.status === 'error') {
-                    <div class="flex items-center space-x-1 mt-2 text-red-600 dark:text-red-400">
+                    <div [class]="fileUploadClasses.fileList.status.error">
                       <pst-icon name="x-circle" size="xs" />
                       <span class="text-xs">{{ file.error || 'Upload failed' }}</span>
                     </div>
@@ -174,6 +174,16 @@ export class FileUploadComponent implements OnDestroy {
 
   private dragCounter = 0;
 
+  // Static class references
+  readonly fileUploadClasses = fileUploadClasses;
+
+  // Computed class for drop zone (combines base with conditional dragging state)
+  dropZoneClass = computed(() => {
+    const base = fileUploadClasses.dropZone.base;
+    const dragging = this.isDragging() ? fileUploadClasses.dropZone.dragging : '';
+    return `${base} ${dragging}`.trim();
+  });
+
   constructor(private fileUploadService: FileUploadService) {}
 
   ngOnDestroy(): void {
@@ -184,16 +194,6 @@ export class FileUploadComponent implements OnDestroy {
       }
     });
   }
-
-  dropZoneClasses = computed(() => {
-    const base = 'border-gray-300 dark:border-gray-600';
-    const hover = 'hover:border-primary-500 dark:hover:border-primary-400';
-    const dragging = this.isDragging() 
-      ? 'border-primary-500 bg-primary-50 dark:bg-primary-900/20 dark:border-primary-400' 
-      : '';
-    
-    return `${base} ${hover} ${dragging}`;
-  });
 
   formatFileSize(bytes: number): string {
     return this.fileUploadService.formatFileSize(bytes);

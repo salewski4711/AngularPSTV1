@@ -16,6 +16,7 @@ import { CommonModule } from '@angular/common';
 import { Tab, TabVariant, TabChangeEvent, TabsConfig } from './tabs.types';
 import { TabPanelComponent } from './tab-panel.component';
 import { IconComponent } from '../../icons/icon.component';
+import { tabClasses } from '../../../core/design-system/component-classes/molecules.classes.static';
 
 @Component({
   selector: 'pst-tabs',
@@ -151,9 +152,9 @@ export class TabsComponent implements OnInit, AfterViewInit {
   getWrapperClasses(): string {
     const baseClasses = 'relative';
     const variantClasses = {
-      'line': 'border-b border-gray-200 dark:border-gray-700',
-      'pills': 'bg-gray-100 dark:bg-gray-800 p-1 rounded-lg inline-flex',
-      'bordered': 'bg-gray-50 dark:bg-gray-800/50 px-6'
+      'line': tabClasses.container.default,
+      'pills': tabClasses.container.pills,
+      'bordered': 'bg-neutral-50 dark:bg-neutral-800/50 px-6 border-b border-neutral-200 dark:border-neutral-700'
     };
     
     return `${baseClasses} ${variantClasses[this.variant]}`;
@@ -161,7 +162,9 @@ export class TabsComponent implements OnInit, AfterViewInit {
 
   getTabButtonClasses(tab: Tab): string {
     const isActive = this.activeTabId === tab.id;
-    const baseClasses = 'flex items-center px-4 py-2.5 text-sm font-medium transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap';
+    const baseClasses = this.variant === 'pills' 
+      ? 'flex items-center px-3 py-1.5 text-sm font-medium transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap'
+      : 'flex items-center px-4 py-2.5 text-sm font-medium transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap';
     
     const variantClasses = this.getTabVariantClasses(isActive);
     const spacingClasses = this.variant === 'bordered' && !this.isFirstTab(tab) ? 'ml-px' : '';
@@ -174,17 +177,17 @@ export class TabsComponent implements OnInit, AfterViewInit {
       'line': {
         base: 'border-b-2 -mb-px',
         active: 'border-primary-500 text-primary-600 dark:text-primary-400',
-        inactive: 'border-transparent text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 hover:border-gray-300 dark:hover:border-gray-600'
+        inactive: 'border-transparent text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-200 hover:border-neutral-300 dark:hover:border-neutral-600'
       },
       'pills': {
         base: 'rounded-md',
-        active: 'bg-primary-500 text-white',
-        inactive: 'text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-gray-200'
+        active: 'bg-white dark:bg-neutral-900 text-neutral-900 dark:text-white shadow-sm',
+        inactive: 'text-neutral-600 dark:text-neutral-400 hover:bg-neutral-200 dark:hover:bg-neutral-700'
       },
       'bordered': {
         base: 'border border-b-0 rounded-t-lg',
         active: 'bg-primary-500 text-white border-primary-500',
-        inactive: 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 border-gray-300 dark:border-gray-600 hover:text-primary-600 dark:hover:text-primary-400 hover:border-primary-500'
+        inactive: 'bg-neutral-100 dark:bg-neutral-700 text-neutral-600 dark:text-neutral-300 border-neutral-300 dark:border-neutral-600 hover:text-primary-600 dark:hover:text-primary-400 hover:border-primary-500'
       }
     };
 
@@ -197,17 +200,17 @@ export class TabsComponent implements OnInit, AfterViewInit {
     const baseClasses = 'ml-2 text-xs px-1.5 py-0.5 rounded transition-colors';
     const stateClasses = isActive 
       ? 'bg-white/20 text-white/90' 
-      : 'bg-gray-200 dark:bg-gray-600 text-gray-600 dark:text-gray-300';
+      : 'bg-neutral-200 dark:bg-neutral-600 text-neutral-600 dark:text-neutral-300';
     
     return `${baseClasses} ${stateClasses}`;
   }
 
   getContentWrapperClasses(): string {
-    const baseClasses = 'bg-white dark:bg-gray-800 rounded-b-lg';
+    const baseClasses = 'bg-white dark:bg-neutral-800 rounded-b-lg';
     const variantClasses = {
       'line': 'pt-6',
       'pills': 'mt-4',
-      'bordered': 'border border-gray-300 dark:border-gray-600 border-t-0 p-6'
+      'bordered': 'border border-neutral-300 dark:border-neutral-600 border-t-0 p-6'
     };
     
     return `${baseClasses} ${variantClasses[this.variant]}`;
@@ -218,8 +221,8 @@ export class TabsComponent implements OnInit, AfterViewInit {
     const baseClasses = 'absolute top-0 bottom-0 flex items-center justify-center w-8 bg-gradient-to-r transition-opacity cursor-pointer';
     const visibilityClasses = isVisible ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none';
     const sideClasses = side === 'left' 
-      ? 'left-0 from-white dark:from-gray-800 to-transparent'
-      : 'right-0 from-transparent to-white dark:to-gray-800';
+      ? `left-0 from-white dark:from-gray-800 to-transparent`
+      : `right-0 from-transparent to-white dark:to-gray-800`;
     
     return `${baseClasses} ${visibilityClasses} ${sideClasses}`;
   }
@@ -360,4 +363,5 @@ export class TabsComponent implements OnInit, AfterViewInit {
       this.checkScrollIndicators();
     }
   }
+
 }

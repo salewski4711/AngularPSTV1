@@ -1,58 +1,57 @@
 <!-- Backdrop -->
 <div 
-  class="absolute inset-0 bg-black/50 dark:bg-black/70 pointer-events-auto"
+  [class]="backdropClasses"
   [@fadeIn]="isOpen ? 'open' : 'closed'"
-  (click)="closeMenu()"
-  [class.pointer-events-none]="!isOpen">
+  (click)="closeMenu()">
 </div>
 
 <!-- Menu Container -->
 <div 
-  class="absolute top-0 left-0 w-4/5 max-w-xs h-full bg-white dark:bg-gray-900 shadow-2xl flex flex-col pointer-events-auto"
+  [class]="classes.container"
   [@slideIn]="isOpen ? 'open' : 'closed'"
   [attr.aria-hidden]="!isOpen">
   
   <!-- Header -->
-  <div class="flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-700">
+  <div [class]="classes.header.base">
     <div class="flex-1">
-      <img src="/logos/pst_weiss.svg" alt="ProSolarTec" class="h-8 w-auto filter brightness-0 saturate-100 dark:filter-none">
+      <img src="/logos/pst_weiss.svg" alt="ProSolarTec" [class]="classes.header.logo">
     </div>
     <button 
       type="button"
-      class="flex items-center justify-center w-10 h-10 text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800 rounded-lg transition-colors"
+      [class]="classes.header.closeButton"
       (click)="closeMenu()"
       [attr.aria-label]="'Menü schließen'">
-      <pst-icon name="x" [size]="24"></pst-icon>
+      <pst-icon name="x" [size]="iconSizes.large"></pst-icon>
     </button>
   </div>
 
   <!-- Search -->
-  <div class="p-4 border-b border-gray-200 dark:border-gray-700">
+  <div [class]="classes.search.section">
     <button 
       type="button"
-      class="flex items-center gap-2 w-full p-2 px-4 border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors"
+      [class]="classes.search.button"
       (click)="onMobileSearch()">
-      <pst-icon name="search" [size]="20"></pst-icon>
+      <pst-icon name="search" [size]="iconSizes.medium"></pst-icon>
       <span>Suchen...</span>
     </button>
   </div>
 
   <!-- Navigation -->
-  <nav class="flex-1 overflow-y-auto py-4 scrollbar-thin">
-    <ul class="list-none">
-      <li *ngFor="let item of menuItems; let i = index" class="mb-1">
+  <nav [class]="classes.nav.wrapper">
+    <ul [class]="classes.nav.list">
+      <li *ngFor="let item of menuItems; let i = index" [class]="classes.nav.listItem">
         <button
           type="button"
-          class="flex items-center justify-between w-full px-4 py-2 text-gray-900 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+          [class]="classes.nav.menuItem.base"
           [class.font-semibold]="!!item.children"
           (click)="navigate(item)">
           
-          <span class="flex items-center gap-2 flex-1">
+          <span [class]="classes.nav.menuItem.iconWrapper">
             <pst-icon 
               *ngIf="item.icon" 
               [name]="item.icon" 
-              [size]="20"
-              class="text-gray-600 dark:text-gray-400">
+              [size]="iconSizes.medium"
+              [class]="classes.nav.menuItem.icon">
             </pst-icon>
             <span class="flex-1">{{ item.label }}</span>
             <pst-badge 
@@ -68,8 +67,8 @@
           <pst-icon 
             *ngIf="item.children"
             name="chevron-down"
-            [size]="16"
-            class="transition-transform text-gray-600 dark:text-gray-400"
+            [size]="iconSizes.small"
+            [class]="classes.nav.menuItem.chevron"
             [class.rotate-180]="isExpanded(i)">
           </pst-icon>
         </button>
@@ -77,12 +76,12 @@
         <!-- Submenu -->
         <ul 
           *ngIf="item.children"
-          class="bg-gray-50 dark:bg-black/20"
+          [class]="classes.nav.submenu.wrapper"
           [@expandCollapse]="isExpanded(i) ? 'expanded' : 'collapsed'">
-          <li *ngFor="let child of item.children" class="border-l-4 border-gray-200 hover:border-orange-500">
+          <li *ngFor="let child of item.children" [class]="classes.nav.submenu.borderLeft">
             <a
               [routerLink]="child.route"
-              class="block py-2 px-4 pl-12 text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+              [class]="classes.nav.submenu.item"
               (click)="closeMenu()">
               {{ child.label }}
             </a>
@@ -93,36 +92,36 @@
   </nav>
 
   <!-- Footer -->
-  <div class="mt-auto p-4 border-t border-gray-200 dark:border-gray-700" *ngIf="user">
-    <div class="flex items-center gap-3 mb-4">
+  <div [class]="classes.footer.base" *ngIf="user">
+    <div [class]="classes.footer.userInfo.wrapper">
       <pst-avatar 
         [name]="user.name"
         [src]="user.avatar"
         size="sm">
       </pst-avatar>
       <div class="flex-1">
-        <div class="font-semibold text-gray-900 dark:text-gray-100 text-sm">{{ user.name }}</div>
-        <div class="text-gray-600 dark:text-gray-400 text-xs">{{ user.email }}</div>
+        <div [class]="classes.footer.userInfo.name">{{ user.name }}</div>
+        <div [class]="classes.footer.userInfo.email">{{ user.email }}</div>
       </div>
     </div>
     
-    <div class="flex items-center gap-2">
+    <div [class]="classes.footer.actions.wrapper">
       <button 
         type="button"
-        class="flex items-center justify-center w-10 h-10 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-lg transition-colors"
+        [class]="classes.footer.actions.themeToggle"
         (click)="themeService.toggleTheme()"
         [attr.aria-label]="'Theme wechseln'">
         <pst-icon 
           [name]="themeService.isDarkMode() ? 'sun' : 'moon'" 
-          [size]="20">
+          [size]="iconSizes.medium">
         </pst-icon>
       </button>
       
       <button 
         type="button"
-        class="flex items-center gap-2 flex-1 px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 font-medium hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors"
+        [class]="classes.footer.actions.logout"
         (click)="logout()">
-        <pst-icon name="logout" [size]="20"></pst-icon>
+        <pst-icon name="logout" [size]="iconSizes.medium"></pst-icon>
         <span>Abmelden</span>
       </button>
     </div>

@@ -5,13 +5,14 @@ import { BadgeComponent } from '../badge/badge.component';
 import { IconComponent } from '../../icons/icon.component';
 import { NotificationsService, Notification, NotificationType } from '../../services/notifications.service';
 import { cn } from '../../utils/tailwind.utils';
+import { TokenUtils } from '../../../core/design-system/token-utilities';
 
 @Component({
   selector: 'pst-notifications',
   standalone: true,
   imports: [CommonModule, BadgeComponent, IconComponent],
   templateUrl: './notifications.component.html',
-  styleUrls: ['./notifications.component.scss'],
+  styleUrl: './notifications.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [
     trigger('dropdown', [
@@ -33,6 +34,13 @@ export class NotificationsComponent {
   unreadCount = computed(() => this.notificationsService.unreadCount());
   hasNotifications = computed(() => this.notifications().length > 0);
   
+  // Icon sizes
+  readonly iconSizes = {
+    small: 16,
+    medium: 20,
+    large: 48
+  };
+  
   notificationIcons: Record<NotificationType, string> = {
     info: 'info',
     success: 'check-circle',
@@ -46,6 +54,71 @@ export class NotificationsComponent {
     warning: 'text-amber-600 bg-amber-100',
     error: 'text-red-600 bg-red-100'
   };
+
+  // Dynamic class getters
+  get bellButtonClasses(): string {
+    return cn(
+      'relative',
+      TokenUtils.getSpacingClass('p', '2'),
+      'text-gray-600 hover:text-gray-900',
+      'dark:text-gray-300 dark:hover:text-white',
+      'transition-colors'
+    );
+  }
+
+  get dropdownClasses(): string {
+    return cn(
+      'absolute right-0',
+      TokenUtils.getSpacingClass('mt', '2'),
+      'w-96 bg-white dark:bg-gray-800',
+      'rounded-lg shadow-lg',
+      'ring-1 ring-black ring-opacity-5',
+      'z-50'
+    );
+  }
+
+  get dropdownHeaderClasses(): string {
+    return cn(
+      TokenUtils.getSpacingClass('px', '4'),
+      TokenUtils.getSpacingClass('py', '3'),
+      'border-b border-gray-200 dark:border-gray-700'
+    );
+  }
+
+  get notificationListClasses(): string {
+    return 'max-h-96 overflow-y-auto';
+  }
+
+  get notificationIconContainerClasses(): string {
+    return cn(
+      'flex-shrink-0 w-10 h-10',
+      'rounded-full flex items-center justify-center'
+    );
+  }
+
+  get emptyStateContainerClasses(): string {
+    return cn(
+      TokenUtils.getSpacingClass('px', '4'),
+      TokenUtils.getSpacingClass('py', '12'),
+      'text-center'
+    );
+  }
+
+  get footerClasses(): string {
+    return cn(
+      TokenUtils.getSpacingClass('px', '4'),
+      TokenUtils.getSpacingClass('py', '3'),
+      'border-t border-gray-200 dark:border-gray-700'
+    );
+  }
+
+  get badgeClasses(): string {
+    return cn(
+      'absolute -top-1 -right-1',
+      'min-w-[20px] h-5',
+      'flex items-center justify-center'
+    );
+  }
 
   constructor(
     private notificationsService: NotificationsService,
@@ -116,9 +189,28 @@ export class NotificationsComponent {
 
   notificationClasses(notification: Notification): string {
     return cn(
-      'px-4 py-3 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors cursor-pointer',
+      TokenUtils.getSpacingClass('px', '4'),
+      TokenUtils.getSpacingClass('py', '3'),
+      'hover:bg-gray-50 dark:hover:bg-gray-700',
+      'transition-colors cursor-pointer',
       'border-b border-gray-200 dark:border-gray-700 last:border-b-0',
       !notification.read && 'bg-blue-50 dark:bg-blue-900/20'
+    );
+  }
+
+  getNotificationContentClasses(): string {
+    return cn(
+      'flex items-start gap-3'
+    );
+  }
+
+  getDismissButtonClasses(): string {
+    return cn(
+      'flex-shrink-0',
+      TokenUtils.getSpacingClass('p', '1'),
+      'text-gray-400 hover:text-gray-600',
+      'dark:text-gray-500 dark:hover:text-gray-300',
+      'transition-colors'
     );
   }
 }

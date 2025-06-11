@@ -7,6 +7,7 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { NavigationItem, NavigationConfig } from './bottom-navigation.types';
 import { BadgeComponent } from '../badge/badge.component';
 import { cn } from '../../utils/tailwind.utils';
+import { bottomNavigationClasses } from '../../../core/design-system/component-classes/organisms.classes.static';
 
 @Component({
   selector: 'pst-bottom-navigation',
@@ -146,20 +147,54 @@ export class BottomNavigationComponent implements OnInit {
   }
 
   getNavigationClasses(): string {
-    const baseClasses = 'bottom-navigation z-50';
-    
-    const positionClasses = {
-      fixed: 'fixed bottom-0 inset-x-0',
-      sticky: 'sticky bottom-0',
-      relative: 'relative'
-    };
-    
-    const mobileClass = this.config.mobileOnly ? 'md:hidden' : '';
-    
     return cn(
-      baseClasses,
-      positionClasses[this.config.position],
-      mobileClass
+      bottomNavigationClasses.navigation.base,
+      bottomNavigationClasses.navigation.positions[this.config.position],
+      this.config.mobileOnly && bottomNavigationClasses.navigation.mobileOnly
     );
+  }
+
+  getContainerClasses(): string {
+    return bottomNavigationClasses.container;
+  }
+
+  getInnerContainerClasses(): string {
+    return bottomNavigationClasses.innerContainer;
+  }
+
+  getGridClasses(): string {
+    return bottomNavigationClasses.grid.base;
+  }
+
+  getGridStyle(): string {
+    return `grid-template-columns: repeat(${this.activeItems().length}, 1fr)`;
+  }
+
+  getNavItemClasses(item: NavigationItem): string {
+    return cn(
+      bottomNavigationClasses.navItem.base,
+      item.isActive ? bottomNavigationClasses.navItem.active : bottomNavigationClasses.navItem.inactive
+    );
+  }
+
+  getActiveIndicatorClasses(): string {
+    return bottomNavigationClasses.activeIndicator;
+  }
+
+  getIconClasses(): string {
+    return bottomNavigationClasses.icon.base;
+  }
+
+  getInactiveIconClasses(): string {
+    return bottomNavigationClasses.icon.inactive;
+  }
+
+  getLabelClasses(): string {
+    return bottomNavigationClasses.label;
+  }
+
+  // Badge configuration
+  getBadgeConfig() {
+    return bottomNavigationClasses.badge;
   }
 }

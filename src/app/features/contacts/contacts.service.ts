@@ -13,10 +13,18 @@ export interface Contact {
   company: string;
   position: string;
   address: string;
+  street: string;
   city: string;
   postalCode: string;
   status: 'active' | 'inactive' | 'pending';
   type: 'private' | 'business';
+  customerType: string; // 'Kunde' | 'Interessent' | 'Lead' | etc.
+  interests: string[]; // ['WP', 'PV', 'Klima', 'PV & WP']
+  customerStatus: {
+    id: string;
+    name: string;
+    tokenKey: string; // 'success' | 'warning' | 'info' | 'neutral'
+  };
   tags: string[];
   notes: string;
   score: number;
@@ -45,6 +53,10 @@ export interface ContactsQueryParams {
   search?: string;
   status?: string;
   type?: string;
+  customerTypes?: string[];
+  interests?: string[];
+  cities?: string[];
+  filterMode?: 'AND' | 'OR';
   sortBy?: string;
   sortOrder?: 'asc' | 'desc';
 }

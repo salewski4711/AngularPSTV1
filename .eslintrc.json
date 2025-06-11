@@ -5,8 +5,10 @@
     "dist/**/*",
     "node_modules/**/*",
     "coverage/**/*",
-    "*.js"
+    "*.js",
+    "eslint-plugin-design-tokens/**/*"
   ],
+  "plugins": ["design-tokens"],
   "overrides": [
     {
       "files": [
@@ -35,6 +37,11 @@
             "style": "kebab-case"
           }
         ],
+        
+        "design-tokens/no-hardcoded-colors": "error",
+        "design-tokens/no-hardcoded-spacing": "error",
+        "design-tokens/no-tailwind-colors": "error",
+        "design-tokens/use-token-utils": "warn",
         "@typescript-eslint/no-explicit-any": "warn",
         "@typescript-eslint/no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],
         "@typescript-eslint/explicit-function-return-type": ["warn", {
@@ -61,7 +68,15 @@
       "rules": {
         "@angular-eslint/template/no-negated-async": "error",
         "@angular-eslint/template/click-events-have-key-events": "warn",
-        "@angular-eslint/template/interactive-supports-focus": "warn"
+        "@angular-eslint/template/interactive-supports-focus": "warn",
+        
+        "// ========== TEMPLATE TOKEN ENFORCEMENT ==========": "off",
+        "@angular-eslint/template/no-inline-styles": [
+          "error",
+          {
+            "allowBindToStyle": false
+          }
+        ]
       }
     },
     {

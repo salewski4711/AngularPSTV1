@@ -3,7 +3,8 @@ import { CommonModule } from '@angular/common';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { FormControlBase } from '../../utils/form-control.base';
 import { RadioOption } from './radio.types';
-import { cn, formClasses } from '../../utils/tailwind.utils';
+import { cn } from '../../utils/tailwind.utils';
+import { radioClasses as radioStaticClasses, inputClasses } from '../../../core/design-system/component-classes/atoms.classes';
 
 type RadioSize = 'sm' | 'md' | 'lg';
 type RadioOrientation = 'horizontal' | 'vertical';
@@ -27,14 +28,14 @@ type RadioOrientation = 'horizontal' | 'vertical';
         [class]="legendClasses()"
       >
         {{ label }}
-        <span *ngIf="required" class="text-red-500 ml-1">*</span>
+        <span *ngIf="required" [class]="requiredAsteriskClasses">*</span>
       </legend>
       
       <!-- Radio Options -->
       <div [class]="containerClasses()">
         <label 
           *ngFor="let option of options; let i = index"
-          [class]="optionContainerClasses()"
+          [class]="optionContainerClasses(option.disabled)"
         >
           <input
             type="radio"
@@ -43,18 +44,18 @@ type RadioOrientation = 'horizontal' | 'vertical';
             [checked]="isChecked(option.value)"
             [disabled]="disabled || option.disabled"
             [required]="required"
-            [class]="radioClasses()"
+            [class]="radioClasses(option.disabled)"
             (change)="handleChange(option.value)"
             (focus)="handleFocus()"
             (blur)="handleBlur()"
           />
-          <div class="ml-2.5">
+          <div [class]="labelContainerClasses">
             <span [class]="labelTextClasses(option.disabled)">
               {{ option.label }}
             </span>
             <p 
               *ngIf="option.helperText" 
-              class="text-xs text-gray-600 dark:text-gray-400 mt-0.5"
+              [class]="optionHelperTextClasses"
             >
               {{ option.helperText }}
             </p>
@@ -73,7 +74,7 @@ type RadioOrientation = 'horizontal' | 'vertical';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class RadioGroupComponent<T = any> extends FormControlBase {
+export class RadioGroupComponent<T = unknown> extends FormControlBase {
   @Input() options: RadioOption<T>[] = [];
   @Input() size: RadioSize = 'md';
   @Input() orientation: RadioOrientation = 'vertical';
@@ -85,58 +86,61 @@ export class RadioGroupComponent<T = any> extends FormControlBase {
   }
   
   legendClasses = computed(() => {
-    const base = 'text-sm font-medium mb-3';
-    const color = this.disabled 
-      ? 'text-gray-500 dark:text-gray-500' 
+    const base = radioStaticClasses.legend.base;
+    const state = this.disabled 
+      ? radioStaticClasses.legend.disabled
       : this.hasError() 
-        ? 'text-red-600 dark:text-red-400'
-        : 'text-gray-900 dark:text-gray-100';
+        ? radioStaticClasses.legend.error
+        : radioStaticClasses.legend.default;
     
-    return cn(base, color);
+    return cn(base, state);
   });
   
   containerClasses = computed(() => {
-    const base = 'flex';
-    const direction = this.orientation === 'horizontal' 
-      ? 'flex-row flex-wrap gap-4' 
-      : 'flex-col gap-3';
-    
-    return cn(base, direction);
+    return this.orientation === 'horizontal' 
+      ? radioStaticClasses.group.horizontal 
+      : radioStaticClasses.group.vertical;
   });
   
-  optionContainerClasses = computed(() => {
-    const base = 'flex items-start';
-    const cursor = this.disabled ? 'cursor-not-allowed' : 'cursor-pointer';
-    
-    return cn(base, cursor);
-  });
-  
-  radioClasses = computed(() => {
-    const base = formClasses.radio.base;
-    const sizeClass = formClasses.checkbox.sizes[this.size]; // Reuse checkbox sizes
-    const marginTop = 'mt-0.5';
-    const cursor = this.disabled ? 'cursor-not-allowed' : 'cursor-pointer';
-    const opacity = this.disabled ? 'opacity-50' : '';
-    
-    return cn(base, sizeClass, marginTop, cursor, opacity);
-  });
-  
-  labelTextClasses(optionDisabled?: boolean): string {
-    const base = 'text-sm';
+  optionContainerClasses = (optionDisabled?: boolean): string => {
     const isDisabled = this.disabled || optionDisabled;
-    const color = isDisabled 
-      ? 'text-gray-500 dark:text-gray-500' 
-      : 'text-gray-600 dark:text-gray-400';
-    const cursor = isDisabled ? 'cursor-not-allowed' : 'cursor-pointer';
+    const cursor = isDisabled 
+      ? radioStaticClasses.optionContainer.disabled 
+      : radioStaticClasses.optionContainer.enabled;
     
-    return cn(base, color, cursor);
-  }
+    return cn(radioStaticClasses.optionContainer.base, cursor);
+  };
+  
+  radioClasses = (optionDisabled?: boolean): string => {
+    const isDisabled = this.disabled || optionDisabled;
+    const base = radioStaticClasses.input.base;
+    const sizeClass = radioStaticClasses.input.sizes[this.size];
+    const spacing = radioStaticClasses.input.spacing;
+    const state = isDisabled 
+      ? radioStaticClasses.input.disabled 
+      : radioStaticClasses.input.enabled;
+    
+    return cn(base, sizeClass, spacing, state);
+  };
+  
+  labelTextClasses = (optionDisabled?: boolean): string => {
+    const isDisabled = this.disabled || optionDisabled;
+    const base = radioStaticClasses.label.base;
+    const state = isDisabled 
+      ? radioStaticClasses.label.disabled
+      : radioStaticClasses.label.default;
+    const cursor = isDisabled 
+      ? radioStaticClasses.label.disabledCursor 
+      : radioStaticClasses.label.enabled;
+    
+    return cn(base, state, cursor);
+  };
   
   helperTextClasses = computed(() => {
-    const base = cn(formClasses.helperText.base, 'mt-3');
+    const base = cn(inputClasses.helperText.base, 'mt-2');
     const state = this.hasError() 
-      ? formClasses.helperText.error 
-      : formClasses.helperText.default;
+      ? inputClasses.helperText.error 
+      : inputClasses.helperText.default;
     
     return cn(base, state);
   });
@@ -157,4 +161,9 @@ export class RadioGroupComponent<T = any> extends FormControlBase {
       this.updateValue(value);
     }
   }
+
+  // Static properties for template binding
+  requiredAsteriskClasses = radioStaticClasses.requiredAsterisk;
+  labelContainerClasses = radioStaticClasses.labelContainer;
+  optionHelperTextClasses = radioStaticClasses.optionHelperText;
 }

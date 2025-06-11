@@ -18,6 +18,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { CdkVirtualScrollViewport, ScrollingModule } from '@angular/cdk/scrolling';
 import { Subject, takeUntil, debounceTime, distinctUntilChanged, fromEvent } from 'rxjs';
+import { entityListViewClasses } from '../../../core/design-system/component-classes/organisms.classes';
 
 import { InputComponent } from '../input/input.component';
 import { SelectComponent } from '../select/select.component';
@@ -90,10 +91,10 @@ export interface EntityListEvent<T> {
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <div class="entity-list-view bg-white dark:bg-gray-800 rounded-lg shadow-sm">
+    <div [class]="containerClass">
       <!-- Header with Search and Filters -->
       @if (config.searchable || config.filterable) {
-        <div class="p-4 border-b border-gray-200 dark:border-gray-700">
+        <div [class]="headerClass">
           <div class="flex flex-col sm:flex-row gap-4">
             <!-- Search -->
             @if (config.searchable) {
@@ -105,7 +106,7 @@ export interface EntityListEvent<T> {
                   (ngModelChange)="onSearchChange($event)"
                   size="md"
                   class="w-full">
-                  <pst-icon name="search" [size]="16" class="text-gray-400" />
+                  <pst-icon name="search" [size]="16" [class]="searchIconClass" />
                 </pst-input>
               </div>
             }
@@ -130,30 +131,18 @@ export interface EntityListEvent<T> {
             
             <!-- View Toggle -->
             @if (config.enableViewToggle) {
-              <div class="flex items-center bg-gray-100 dark:bg-gray-700 rounded-md p-1">
+              <div [class]="viewToggleContainerClass">
                 <button
                   type="button"
                   (click)="currentView.set('list')"
-                  [class.bg-white]="currentView() === 'list'"
-                  [class.dark:bg-gray-800]="currentView() === 'list'"
-                  [class.text-gray-900]="currentView() === 'list'"
-                  [class.dark:text-white]="currentView() === 'list'"
-                  [class.text-gray-500]="currentView() !== 'list'"
-                  [class.dark:text-gray-400]="currentView() !== 'list'"
-                  class="px-3 py-1.5 rounded text-sm font-medium transition-colors">
+                  [class]="getViewToggleButtonClass('list')">
                   <pst-icon name="list" [size]="16" class="inline-block mr-1" />
                   Liste
                 </button>
                 <button
                   type="button"
                   (click)="currentView.set('grid')"
-                  [class.bg-white]="currentView() === 'grid'"
-                  [class.dark:bg-gray-800]="currentView() === 'grid'"
-                  [class.text-gray-900]="currentView() === 'grid'"
-                  [class.dark:text-white]="currentView() === 'grid'"
-                  [class.text-gray-500]="currentView() !== 'grid'"
-                  [class.dark:text-gray-400]="currentView() !== 'grid'"
-                  class="px-3 py-1.5 rounded text-sm font-medium transition-colors">
+                  [class]="getViewToggleButtonClass('grid')">
                   <pst-icon name="grid" [size]="16" class="inline-block mr-1" />
                   Karten
                 </button>
@@ -165,11 +154,11 @@ export interface EntityListEvent<T> {
       
       <!-- List View -->
       @if (currentView() === 'list') {
-        <!-- Table Header -->
-        <div class="overflow-hidden">
-          <div class="min-w-full">
-          <div class="bg-gray-50 dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700">
-            <div class="flex items-center px-4 py-3">
+        <div class="flex flex-col h-full">
+          <!-- Table Header (Fixed) -->
+          <div class="flex-shrink-0">
+            <div [class]="tableHeaderClass">
+              <div class="flex items-center px-4 py-3">
               <!-- Select All Checkbox -->
               @if (config.selectable && config.multiSelect) {
                 <div class="w-10 mr-3">
@@ -185,7 +174,7 @@ export interface EntityListEvent<T> {
               <div class="flex flex-1 items-center">
                 @for (column of config.columns; track column.key) {
                   <div 
-                    class="px-3 py-1 text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider cursor-pointer hover:text-gray-700 dark:hover:text-gray-200 transition-colors"
+                    [class]="columnHeaderClass"
                     [class.text-left]="column.align === 'left' || !column.align"
                     [class.text-center]="column.align === 'center'"
                     [class.text-right]="column.align === 'right'"
@@ -205,19 +194,20 @@ export interface EntityListEvent<T> {
                   </div>
                 }
               </div>
+              </div>
             </div>
           </div>
           
-          <!-- Virtual Scroll Container -->
+          <!-- Scrollable Table Body -->
           @if (config.performance?.virtualScrolling && !loading()) {
             <cdk-virtual-scroll-viewport 
               #scrollViewport
               [itemSize]="config.performance?.itemHeight || 60"
-              class="entity-list-viewport"
+              class="entity-list-viewport flex-1"
               (scrolledIndexChange)="onScroll()">
               <div 
                 *cdkVirtualFor="let item of displayedItems(); trackBy: trackByFn"
-                class="flex items-center px-4 py-3 hover:bg-gray-50 dark:hover:bg-gray-700 border-b border-gray-100 dark:border-gray-800 transition-colors">
+                [class]="rowClass">
                 <!-- Select Checkbox -->
                 @if (config.selectable) {
                   <div class="w-10 mr-3">
@@ -241,7 +231,7 @@ export interface EntityListEvent<T> {
                       @if (column.render) {
                         <span [innerHTML]="column.render(item)"></span>
                       } @else {
-                        <span class="text-sm text-gray-900 dark:text-gray-100">
+                        <span [class]="cellTextClass">
                           {{ getColumnValue(item, column.key.toString()) }}
                         </span>
                       }
@@ -252,20 +242,20 @@ export interface EntityListEvent<T> {
             </cdk-virtual-scroll-viewport>
           } @else {
             <!-- Regular Scrolling -->
-            <div class="max-h-[600px] overflow-y-auto">
+            <div class="flex-1 overflow-y-auto">
               @if (loading()) {
                 <!-- Loading State -->
                 <div class="flex flex-col items-center justify-center py-12">
                   <pst-spinner size="lg" />
-                  <p class="mt-4 text-sm text-gray-500 dark:text-gray-400">
+                  <p [class]="loadingTextClass">
                     {{ config.loadingMessage || 'Daten werden geladen...' }}
                   </p>
                 </div>
               } @else if (displayedItems().length === 0) {
                 <!-- Empty State -->
                 <div class="flex flex-col items-center justify-center py-12">
-                  <pst-icon name="inbox" [size]="48" class="text-gray-300 dark:text-gray-600 mb-4" />
-                  <p class="text-sm text-gray-500 dark:text-gray-400">
+                  <pst-icon name="inbox" [size]="48" [class]="emptyIconClass" />
+                  <p [class]="emptyTextClass">
                     {{ config.emptyMessage || 'Keine Einträge gefunden' }}
                   </p>
                 </div>
@@ -273,7 +263,7 @@ export interface EntityListEvent<T> {
                 <!-- Data Rows -->
                 @for (item of displayedItems(); track trackByFn(0, item)) {
                   <div 
-                    class="flex items-center px-4 py-3 hover:bg-gray-50 dark:hover:bg-gray-700 border-b border-gray-100 dark:border-gray-800 transition-colors">
+                    [class]="rowClass">
                     <!-- Select Checkbox -->
                     @if (config.selectable) {
                       <div class="w-10 mr-3">
@@ -297,7 +287,7 @@ export interface EntityListEvent<T> {
                           @if (column.render) {
                             <span [innerHTML]="column.render(item)"></span>
                           } @else {
-                            <span class="text-sm text-gray-900 dark:text-gray-100">
+                            <span [class]="cellTextClass">
                               {{ getColumnValue(item, column.key.toString()) }}
                             </span>
                           }
@@ -310,7 +300,6 @@ export interface EntityListEvent<T> {
             </div>
           }
         </div>
-      </div>
       }
       
       <!-- Grid View -->
@@ -320,24 +309,24 @@ export interface EntityListEvent<T> {
             <!-- Loading State -->
             <div class="flex flex-col items-center justify-center py-12">
               <pst-spinner size="lg" />
-              <p class="mt-4 text-sm text-gray-500 dark:text-gray-400">
+              <p [class]="loadingTextClass">
                 {{ config.loadingMessage || 'Daten werden geladen...' }}
               </p>
             </div>
           } @else if (displayedItems().length === 0) {
             <!-- Empty State -->
             <div class="flex flex-col items-center justify-center py-12">
-              <pst-icon name="inbox" [size]="48" class="text-gray-300 dark:text-gray-600 mb-4" />
-              <p class="text-sm text-gray-500 dark:text-gray-400">
+              <pst-icon name="inbox" [size]="48" [class]="emptyIconClass" />
+              <p [class]="emptyTextClass">
                 {{ config.emptyMessage || 'Keine Einträge gefunden' }}
               </p>
             </div>
           } @else {
             <!-- Grid Cards -->
-            <div [class]="getGridClasses()">
+            <div [class]="getGridClass()">
               @for (item of displayedItems(); track trackByFn(0, item)) {
                 <div 
-                  class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-4 hover:shadow-lg transition-shadow cursor-pointer"
+                  [class]="gridCardClass"
                   (click)="toggleSelect(item)">
                   <!-- Selection Checkbox -->
                   @if (config.selectable) {
@@ -357,8 +346,8 @@ export interface EntityListEvent<T> {
                     <div class="space-y-2">
                       @for (column of getMainColumns(); track column.key) {
                         <div>
-                          <span class="text-xs text-gray-500 dark:text-gray-400">{{ column.label }}:</span>
-                          <span class="block text-sm font-medium text-gray-900 dark:text-white">
+                          <span [class]="gridLabelClass">{{ column.label }}:</span>
+                          <span [class]="gridValueClass">
                             {{ getColumnValue(item, column.key.toString()) }}
                           </span>
                         </div>
@@ -374,9 +363,9 @@ export interface EntityListEvent<T> {
       
       <!-- Footer with Pagination Info -->
       @if (pagination && !config.performance?.infiniteScroll) {
-        <div class="px-4 py-3 border-t border-gray-200 dark:border-gray-700">
+        <div [class]="footerClass">
           <div class="flex items-center justify-between">
-            <div class="text-sm text-gray-700 dark:text-gray-300">
+            <div [class]="paginationTextClass">
               Zeige {{ getStartIndex() + 1 }} bis {{ getEndIndex() }} von {{ pagination.totalItems }} Einträgen
             </div>
             <div class="flex gap-2">
@@ -403,9 +392,9 @@ export interface EntityListEvent<T> {
       
       <!-- Selected Items Bar -->
       @if (config.selectable && selectedItems().length > 0) {
-        <div class="px-4 py-2 bg-blue-50 dark:bg-blue-900/20 border-t border-blue-200 dark:border-blue-800">
+        <div [class]="selectedBarClass">
           <div class="flex items-center justify-between">
-            <span class="text-sm text-blue-700 dark:text-blue-300">
+            <span [class]="selectedTextClass">
               {{ selectedItems().length }} {{ selectedItems().length === 1 ? 'Eintrag' : 'Einträge' }} ausgewählt
             </span>
             <pst-button
@@ -422,10 +411,15 @@ export interface EntityListEvent<T> {
   styles: [`
     :host {
       display: block;
+      height: calc(100vh - 200px);
+    }
+    
+    .entity-list-view {
+      height: 100%;
     }
     
     .entity-list-viewport {
-      height: 600px;
+      height: 100%;
     }
     
     cdk-virtual-scroll-viewport {
@@ -709,13 +703,54 @@ export class EntityListViewComponent<T extends { id: string }> implements OnInit
   }
   
   // Grid view helpers
-  getGridClasses(): string {
+  getGridClass(): string {
     const cols = this.config.gridConfig?.cols || 3;
-    return `grid grid-cols-1 md:grid-cols-2 lg:grid-cols-${cols} gap-4`;
+    // Fixe Grid-Klassen für Tailwind-Kompilierung
+    const gridColsMap: Record<number, string> = {
+      1: 'lg:grid-cols-1',
+      2: 'lg:grid-cols-2',
+      3: 'lg:grid-cols-3',
+      4: 'lg:grid-cols-4',
+      5: 'lg:grid-cols-5',
+      6: 'lg:grid-cols-6'
+    };
+    const lgCols = gridColsMap[cols] || 'lg:grid-cols-3';
+    return ['grid', 'grid-cols-1', 'md:grid-cols-2', lgCols, 'gap-4'].join(' ');
   }
   
   getMainColumns(): EntityListColumn<T>[] {
     // Return first 3-4 columns for card view
     return this.config.columns.slice(0, 4).filter(col => col.key !== 'actions');
   }
-}
+  
+  // Helper methods for view toggle button classes
+  getViewToggleButtonClass(view: 'list' | 'grid'): string {
+    const isActive = this.currentView() === view;
+    const base = entityListViewClasses.viewToggle.button.base;
+    
+    if (isActive) {
+      return `${base} ${entityListViewClasses.viewToggle.button.active}`;
+    } else {
+      return `${base} ${entityListViewClasses.viewToggle.button.inactive}`;
+    }
+  }
+
+  // Static class bindings
+  protected containerClass = entityListViewClasses.container;
+  protected headerClass = entityListViewClasses.header;
+  protected searchIconClass = entityListViewClasses.searchIcon;
+  protected viewToggleContainerClass = entityListViewClasses.viewToggle.container;
+  protected tableHeaderClass = entityListViewClasses.table.header;
+  protected columnHeaderClass = entityListViewClasses.table.columnHeader;
+  protected rowClass = entityListViewClasses.table.row;
+  protected cellTextClass = entityListViewClasses.table.cellText;
+  protected loadingTextClass = entityListViewClasses.loading.text;
+  protected emptyIconClass = entityListViewClasses.empty.icon;
+  protected emptyTextClass = entityListViewClasses.empty.text;
+  protected gridCardClass = entityListViewClasses.grid.card;
+  protected gridLabelClass = entityListViewClasses.grid.label;
+  protected gridValueClass = entityListViewClasses.grid.value;
+  protected footerClass = entityListViewClasses.footer;
+  protected paginationTextClass = entityListViewClasses.pagination.text;
+  protected selectedBarClass = entityListViewClasses.selectedBar.base;
+  protected selectedTextClass = entityListViewClasses.selectedBar.text;}

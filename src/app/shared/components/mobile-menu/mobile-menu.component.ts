@@ -5,8 +5,8 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 import { IconComponent } from '../../icons/icon.component';
 import { AvatarComponent } from '../avatar/avatar.component';
 import { BadgeComponent } from '../badge/badge.component';
-// import { SearchComponent } from '../search/search.component';
 import { ThemeService } from '../../../core/services/theme.service';
+import { mobileMenuClasses } from '../../../core/design-system/component-classes/organisms.classes.static';
 
 interface MenuItem {
   label: string;
@@ -64,7 +64,7 @@ interface MenuItem {
   ]
 })
 export class MobileMenuComponent implements OnInit, OnDestroy, OnChanges {
-  @HostBinding('class') hostClass = 'fixed inset-0 z-[9999] pointer-events-none';
+  @HostBinding('class') hostClass = mobileMenuClasses.hostClass;
   
   @Input() isOpen = false;
   @Input() user: any = null;
@@ -75,6 +75,23 @@ export class MobileMenuComponent implements OnInit, OnDestroy, OnChanges {
   @Output() searchSubmit = new EventEmitter<string>();
   @Output() notificationClick = new EventEmitter<any>();
   @Output() userMenuAction = new EventEmitter<string>();
+
+  // Icon sizes
+  readonly iconSizes = {
+    small: 16,
+    medium: 20,
+    large: 24
+  };
+
+  // Static class references
+  readonly classes = mobileMenuClasses;
+
+  // Dynamic class getters
+  get backdropClasses(): string {
+    return !this.isOpen 
+      ? `${this.classes.backdrop.base} ${this.classes.backdrop.hidden}`
+      : this.classes.backdrop.base;
+  }
 
   menuItems: MenuItem[] = [
     {

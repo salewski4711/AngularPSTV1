@@ -1,35 +1,36 @@
 import { Component, Input, ChangeDetectionStrategy, ContentChild, ElementRef, AfterContentInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { cn } from '../../utils/tailwind.utils';
+import { formFieldClasses } from '../../../core/design-system/component-classes/molecules.classes.static';
 
 @Component({
   selector: 'pst-form-field',
   standalone: true,
   imports: [CommonModule],
   template: `
-    <div class="w-full">
+    <div [class]="formFieldClasses.container">
       <!-- Label -->
       <label 
         *ngIf="label"
         [for]="inputId"
-        [class]="computedLabelClass()"
+        [class]="getLabelClasses()"
       >
         {{ label }}
-        <span *ngIf="required" class="text-red-500 ml-0.5">*</span>
+        <span *ngIf="required" [class]="formFieldClasses.required">*</span>
       </label>
       
       <!-- Input Container -->
-      <div class="relative">
+      <div [class]="formFieldClasses.inputContainer">
         <ng-content></ng-content>
       </div>
       
       <!-- Error Message -->
       <p 
         *ngIf="error && !helpText" 
-        [class]="computedErrorClass()"
+        [class]="getErrorClasses()"
       >
         <svg 
-          class="w-3.5 h-3.5 mr-1 inline-flex flex-shrink-0" 
+          [class]="formFieldClasses.error.icon" 
           fill="currentColor" 
           viewBox="0 0 20 20"
         >
@@ -41,7 +42,7 @@ import { cn } from '../../utils/tailwind.utils';
       <!-- Help Text (only shown when no error) -->
       <p 
         *ngIf="helpText && !error" 
-        [class]="computedHelpTextClass()"
+        [class]="getHelpTextClasses()"
       >
         {{ helpText }}
       </p>
@@ -50,6 +51,7 @@ import { cn } from '../../utils/tailwind.utils';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FormFieldComponent implements AfterContentInit {
+  // Input properties
   @Input() label?: string;
   @Input() name?: string;
   @Input() required = false;
@@ -63,7 +65,26 @@ export class FormFieldComponent implements AfterContentInit {
   @ContentChild('select', { read: ElementRef }) selectElement?: ElementRef;
   @ContentChild('textarea', { read: ElementRef }) textareaElement?: ElementRef;
   
+  readonly formFieldClasses = formFieldClasses;
   inputId = `form-field-${Math.random().toString(36).substr(2, 9)}`;
+  
+  // Class getter methods
+  getLabelClasses(): string {
+    const baseClasses = formFieldClasses.label.base;
+    const stateClasses = this.error 
+      ? formFieldClasses.label.error 
+      : formFieldClasses.label.default;
+    
+    return cn(baseClasses, stateClasses, this.labelClass);
+  }
+  
+  getErrorClasses(): string {
+    return cn(formFieldClasses.error.container, this.errorClass);
+  }
+  
+  getHelpTextClasses(): string {
+    return cn(formFieldClasses.helpText, this.helpTextClass);
+  }
   
   ngAfterContentInit(): void {
     // Set the ID on the projected input/select/textarea element
@@ -76,24 +97,5 @@ export class FormFieldComponent implements AfterContentInit {
         element.nativeElement.name = this.name;
       }
     }
-  }
-  
-  computedLabelClass(): string {
-    const defaultClasses = 'text-sm font-medium mb-1.5 block';
-    const colorClasses = this.error 
-      ? 'text-red-600 dark:text-red-400' 
-      : 'text-gray-700 dark:text-gray-300';
-    
-    return cn(defaultClasses, colorClasses, this.labelClass);
-  }
-  
-  computedErrorClass(): string {
-    const defaultClasses = 'text-xs mt-1 text-red-500 dark:text-red-400 flex items-start';
-    return cn(defaultClasses, this.errorClass);
-  }
-  
-  computedHelpTextClass(): string {
-    const defaultClasses = 'text-xs mt-1 text-gray-500 dark:text-gray-400';
-    return cn(defaultClasses, this.helpTextClass);
   }
 }

@@ -22,9 +22,7 @@ export abstract class FormControlBase implements ControlValueAccessor {
   protected onChange: (value: any) => void = () => {};
   protected onTouched: () => void = () => {};
   
-  constructor(
-    @Optional() @Self() protected injector: Injector
-  ) {
+  constructor(protected injector: Injector) {
     // Delay the injection to avoid circular dependency
     setTimeout(() => {
       try {

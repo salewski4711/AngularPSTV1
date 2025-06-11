@@ -1,5 +1,6 @@
-import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { cardClasses } from '../../../core/design-system/component-classes/molecules.classes.static';
 
 @Component({
   selector: 'pst-card-beta',
@@ -7,22 +8,22 @@ import { CommonModule } from '@angular/common';
   imports: [CommonModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <div [class]="cardClasses">
+    <div [class]="cardClasses()">
       <!-- Header -->
       @if (showHeader) {
-        <div class="px-6 py-4 border-b border-gray-200 dark:border-gray-700">
+        <div [class]="headerClasses">
           <ng-content select="[card-header]"></ng-content>
         </div>
       }
       
       <!-- Body -->
-      <div [class]="bodyClasses">
+      <div [class]="bodyClasses()">
         <ng-content></ng-content>
       </div>
       
       <!-- Footer -->
       @if (showFooter) {
-        <div class="px-6 py-4 border-t border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50">
+        <div [class]="footerClasses">
           <ng-content select="[card-footer]"></ng-content>
         </div>
       }
@@ -42,7 +43,7 @@ import { CommonModule } from '@angular/common';
   `]
 })
 export class CardBetaComponent {
-  @Input() variant: 'default' | 'bordered' | 'elevated' | 'outlined' | 'flat' = 'default';
+  @Input() variant: 'default' | 'elevated' | 'flat' | 'outlined' = 'default';
   @Input() padding: 'none' | 'sm' | 'md' | 'lg' = 'md';
   @Input() showHeader = false;
   @Input() showFooter = false;
@@ -50,36 +51,37 @@ export class CardBetaComponent {
   @Input() hoverable = false;
   @Input() clickable = false;
   
-  get cardClasses(): string {
-    const base = 'bg-white dark:bg-black-lighter rounded-lg overflow-hidden transition-all duration-200';
+  // Using static classes from molecules.classes.static.ts
+  readonly headerClasses = cardClasses.header.base;
+  readonly footerClasses = cardClasses.footer;
+  
+  cardClasses = computed(() => {
+    const classes: string[] = [cardClasses.base];
     
-    const variants = {
-      default: 'shadow-md',
-      bordered: 'border-2 border-gray-300 dark:border-gray-600',
-      elevated: 'shadow-xl hover:shadow-2xl',
-      outlined: 'border border-gray-300 dark:border-gray-600',
-      flat: 'shadow-sm bg-gray-50 dark:bg-gray-900'
-    };
+    // Add variant classes
+    if (this.variant !== 'default') {
+      classes.push(cardClasses.variants[this.variant]);
+    }
     
-    const interactiveClasses = [];
+    // Add interactive classes
     if (this.hoverable) {
-      interactiveClasses.push('hover:shadow-lg hover:scale-[1.02]');
+      classes.push('hover:shadow-lg hover:scale-[1.02]');
     }
     if (this.clickable) {
-      interactiveClasses.push('cursor-pointer active:scale-[0.98]');
+      classes.push('cursor-pointer active:scale-[0.98]');
     }
     
-    return `${base} ${variants[this.variant]} ${interactiveClasses.join(' ')}`;
-  }
+    return classes.join(' ');
+  });
   
-  get bodyClasses(): string {
+  bodyClasses = computed(() => {
     const paddings = {
       none: '',
       sm: 'p-4',
-      md: 'p-6',
+      md: cardClasses.body,
       lg: 'p-8'
     };
     
     return paddings[this.padding];
-  }
+  });
 }

@@ -1,5 +1,7 @@
 import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { cn } from '../../utils/tailwind.utils';
+import { skeletonClasses as staticSkeletonClasses } from '../../../core/design-system/component-classes/atoms.classes';
 
 export type SkeletonVariant = 'text' | 'circular' | 'rectangular' | 'button';
 export type SkeletonAnimation = 'pulse' | 'wave' | 'none';
@@ -10,7 +12,7 @@ export type SkeletonAnimation = 'pulse' | 'wave' | 'none';
   imports: [CommonModule],
   template: `
     <!-- Text Skeleton -->
-    <div *ngIf="variant === 'text'" class="space-y-2">
+    <div *ngIf="variant === 'text'" [style.gap.rem]="0.5" class="flex flex-col">
       <div 
         *ngFor="let line of textLines; let i = index"
         [class]="getTextClasses(i)"
@@ -124,32 +126,38 @@ export class SkeletonComponent {
   }
 
   private get baseClasses(): string {
-    const classes = ['bg-gray-200 dark:bg-gray-700'];
-    
-    if (this.animation === 'pulse') {
-      classes.push('skeleton-pulse');
-    } else if (this.animation === 'wave') {
-      classes.push('skeleton-wave');
-    }
-    
-    return classes.join(' ');
+    return cn(
+      staticSkeletonClasses.base,
+      staticSkeletonClasses.animations[this.animation]
+    );
   }
 
   getTextClasses(index: number): string {
-    return `${this.baseClasses} h-4 rounded`;
+    return cn(
+      this.baseClasses,
+      staticSkeletonClasses.variants.text.base
+    );
   }
 
   get circularClasses(): string {
-    return `${this.baseClasses} rounded-full`;
+    return cn(
+      this.baseClasses,
+      staticSkeletonClasses.variants.circular
+    );
   }
 
   get rectangularClasses(): string {
-    const classes = [this.baseClasses];
-    classes.push(this.rounded ? 'rounded-lg' : 'rounded');
-    return classes.join(' ');
+    return cn(
+      this.baseClasses,
+      staticSkeletonClasses.variants.rectangular.base,
+      this.rounded && staticSkeletonClasses.variants.rectangular.rounded
+    );
   }
 
   get buttonClasses(): string {
-    return `${this.baseClasses} rounded-md`;
+    return cn(
+      this.baseClasses,
+      staticSkeletonClasses.variants.button
+    );
   }
 }

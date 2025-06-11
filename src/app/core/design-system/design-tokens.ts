@@ -15,12 +15,21 @@ export interface ColorScale {
   700: string;
   800: string;
   900: string;
+  950?: string; // Extra dark
 }
 
 export interface ColorScalePartial {
+  50?: string;
+  100?: string;
+  200?: string;
+  300?: string;
   400: string;
   500: string;
   600: string;
+  700?: string;
+  800?: string;
+  900?: string;
+  950?: string;
 }
 
 export interface ColorTokens {
@@ -30,6 +39,7 @@ export interface ColorTokens {
   success: ColorScalePartial;
   warning: ColorScalePartial;
   danger: ColorScalePartial;
+  error: ColorScalePartial; // Alias for danger
   info: ColorScalePartial;
 }
 
@@ -156,6 +166,7 @@ export const DESIGN_TOKENS = {
       700: '#C2410C',
       800: '#9A3412',
       900: '#7C2D12',
+      950: '#431407', // Extra dark for opacity variants
     },
     secondary: {
       50: '#EFF6FF',
@@ -182,24 +193,65 @@ export const DESIGN_TOKENS = {
       900: '#171717',
     },
     success: {
+      50: '#F0FDF4',
+      100: '#DCFCE7',
+      200: '#BBF7D0',
+      300: '#86EFAC',
       400: '#4ADE80',
       500: '#22C55E',
       600: '#16A34A',
+      700: '#15803D',
+      800: '#166534',
+      900: '#14532D',
     },
     warning: {
+      50: '#FEFCE8',
+      100: '#FEF3C7',
+      200: '#FDE68A',
+      300: '#FCD34D',
       400: '#FBBF24',
       500: '#F59E0B',
       600: '#D97706',
+      700: '#B45309',
+      800: '#92400E',
+      900: '#78350F',
     },
     danger: {
+      50: '#FEF2F2',
+      100: '#FEE2E2',
+      200: '#FECACA',
+      300: '#FCA5A5',
       400: '#F87171',
       500: '#EF4444',
       600: '#DC2626',
+      700: '#B91C1C',
+      800: '#991B1B',
+      900: '#7F1D1D',
     },
     info: {
+      50: '#EFF6FF',
+      100: '#DBEAFE',
+      200: '#BFDBFE',
+      300: '#93C5FD',
       400: '#60A5FA',
       500: '#3B82F6',
       600: '#2563EB',
+      700: '#1D4ED8',
+      800: '#1E40AF',
+      900: '#1E3A8A',
+    },
+    // Alias for consistency - error is same as danger
+    error: {
+      50: '#FEF2F2',
+      100: '#FEE2E2',
+      200: '#FECACA',
+      300: '#FCA5A5',
+      400: '#F87171',
+      500: '#EF4444',
+      600: '#DC2626',
+      700: '#B91C1C',
+      800: '#991B1B',
+      900: '#7F1D1D',
     },
   },
   spacing: {

@@ -4,6 +4,7 @@ import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { filter, map } from 'rxjs/operators';
 import { BreadcrumbItem } from './breadcrumb.types';
 import { IconComponent } from '../../icons/icon.component';
+import { breadcrumbClasses } from '../../../core/design-system/component-classes/molecules.classes.static';
 
 @Component({
   selector: 'pst-breadcrumb',
@@ -12,12 +13,12 @@ import { IconComponent } from '../../icons/icon.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <nav aria-label="Breadcrumb" class="flex">
-      <ol class="flex items-center space-x-2 text-sm">
+      <ol [class]="breadcrumbClasses.list">
         @for (item of displayItems(); track item.label; let i = $index) {
-          <li class="flex items-center">
+          <li [class]="breadcrumbClasses.item">
             @if (i > 0) {
               <span 
-                class="mx-2 text-gray-400 dark:text-gray-600" 
+                [class]="breadcrumbClasses.separator" 
                 [innerHTML]="getSeparator()"
                 aria-hidden="true"
               ></span>
@@ -61,11 +62,11 @@ import { IconComponent } from '../../icons/icon.component';
         
         @if (hasCollapsedItems()) {
           <li class="flex items-center">
-            <span class="mx-2 text-gray-400 dark:text-gray-600" aria-hidden="true">{{ separatorSignal() }}</span>
+            <span [class]="breadcrumbClasses.separator" aria-hidden="true">{{ separatorSignal() }}</span>
             <button
               type="button"
               (click)="toggleCollapsed()"
-              class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 px-1"
+              class="text-neutral-500 hover:text-neutral-700 dark:text-neutral-400 dark:hover:text-neutral-200 px-1"
               aria-label="Show all breadcrumb items"
             >
               ...
@@ -124,6 +125,9 @@ export class BreadcrumbComponent implements OnInit {
   shouldTruncate = computed(() => {
     return this.maxItemsSignal() > 0 && this.maxItemsSignal() < 5;
   });
+  
+  // Static classes reference
+  breadcrumbClasses = breadcrumbClasses;
 
   ngOnInit(): void {
     // Update signals from inputs
@@ -214,16 +218,14 @@ export class BreadcrumbComponent implements OnInit {
   }
 
   getLinkClasses(item: BreadcrumbItem): string {
-    if (item.active) {
-      return 'text-gray-900 dark:text-white font-medium cursor-default pointer-events-none';
-    }
-    return 'text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200';
+    return item.active 
+      ? breadcrumbClasses.link.active
+      : `${breadcrumbClasses.link.base} ${breadcrumbClasses.link.inactive}`;
   }
 
   getTextClasses(item: BreadcrumbItem): string {
-    if (item.active) {
-      return 'text-gray-900 dark:text-white font-medium';
-    }
-    return 'text-gray-500 dark:text-gray-400';
+    return item.active 
+      ? breadcrumbClasses.link.active
+      : 'text-neutral-500 dark:text-neutral-400';
   }
 }

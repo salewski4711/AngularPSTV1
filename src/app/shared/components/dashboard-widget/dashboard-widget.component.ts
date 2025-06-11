@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 import { IconComponent } from '../../icons/icon.component';
 import { BadgeComponent } from '../badge/badge.component';
 import { DashboardWidgetConfig, DashboardWidgetClickEvent, DashboardWidgetVariant, DashboardWidgetSize } from './dashboard-widget.types';
+import { dashboardWidgetClasses } from '../../../core/design-system/component-classes/dashboard-widget.classes';
 
 @Component({
   selector: 'pst-dashboard-widget',
@@ -21,13 +22,13 @@ import { DashboardWidgetConfig, DashboardWidgetClickEvent, DashboardWidgetVarian
       <!-- Back Button Variant -->
       @if (config.isBackButton) {
         <div class="flex items-center gap-3 py-2">
-          <div class="p-2 rounded-lg bg-gray-100 dark:bg-gray-800">
+          <div [class]="backButtonIconContainerClasses()">
             <pst-icon 
               [name]="config.icon" 
               [size]="20"
-              class="text-gray-700 dark:text-gray-300" />
+              [class]="backButtonIconClasses()" />
           </div>
-          <span class="text-base font-medium text-gray-700 dark:text-gray-300">
+          <span [class]="backButtonTextClasses()">
             {{ config.title }}
           </span>
         </div>
@@ -43,14 +44,15 @@ import { DashboardWidgetConfig, DashboardWidgetClickEvent, DashboardWidgetVarian
                     <pst-icon 
                       [name]="config.icon" 
                       [size]="iconSize()"
-                      class="text-white" />
+                      [class]="whiteTextClass()" />
                   </div>
                   @if (config.badgeCount) {
                     <div class="absolute -top-2 -right-2 z-10">
                       <pst-badge 
                         variant="filled"
+                        color="error"
                         size="sm"
-                        class="bg-red-500 text-white">{{ config.badgeCount }}</pst-badge>
+                        shape="pill">{{ config.badgeCount }}</pst-badge>
                     </div>
                   }
                 </div>
@@ -58,11 +60,11 @@ import { DashboardWidgetConfig, DashboardWidgetClickEvent, DashboardWidgetVarian
               
               <!-- Center: Content -->
               <div class="flex-1">
-                <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-1">
+                <h3 [class]="categoryTitleClasses()">
                   {{ config.title }}
                 </h3>
                 @if (config.description) {
-                  <p class="text-base text-gray-600 dark:text-gray-400">
+                  <p [class]="categoryDescriptionClasses()">
                     {{ config.description }}
                   </p>
                 }
@@ -73,32 +75,35 @@ import { DashboardWidgetConfig, DashboardWidgetClickEvent, DashboardWidgetVarian
                 <pst-icon 
                   name="arrow-right" 
                   [size]="24"
-                  class="text-gray-400 dark:text-gray-600 transition-transform group-hover:translate-x-1" />
+                  [class]="categoryArrowClasses()" />
               </div>
             </div>
           }
           
           <!-- Section Widget (Theme-Section Widgets) -->
           @case ('section-widget') {
-            <div class="flex flex-col items-center justify-center h-full py-8 px-6">
-              <!-- Icon -->
-              <div class="relative mb-4">
-                <pst-icon 
-                  [name]="config.icon" 
-                  [size]="28"
-                  [class]="sectionWidgetIconClasses()" />
+            <div class="flex flex-col items-center justify-center h-full py-6 px-4 overflow-visible">
+              <!-- Icon Container with Badge -->
+              <div class="relative mb-3 overflow-visible">
+                <div class="relative overflow-visible p-1">
+                  <pst-icon 
+                    [name]="config.icon" 
+                    [size]="32"
+                    [class]="sectionWidgetIconClasses()" />
+                </div>
                 @if (config.badgeCount) {
-                  <div class="absolute -top-2 -right-2 z-10">
+                  <div class="absolute -top-2 -right-3 z-10">
                     <pst-badge 
                       variant="filled"
+                      color="error"
                       size="sm"
-                      class="bg-red-500 text-white">{{ config.badgeCount }}</pst-badge>
+                      shape="pill">{{ config.badgeCount }}</pst-badge>
                   </div>
                 }
               </div>
               
               <!-- Label -->
-              <div class="text-base font-bold text-gray-900 dark:text-white text-center">
+              <div [class]="sectionWidgetTitleClasses()">
                 {{ config.title }}
               </div>
             </div>
@@ -115,7 +120,7 @@ import { DashboardWidgetConfig, DashboardWidgetClickEvent, DashboardWidgetVarian
                     [size]="20"
                     [class]="statIconColorClasses()" />
                 </div>
-                <h4 class="text-sm font-medium text-gray-700 dark:text-gray-300">
+                <h4 [class]="statTitleClasses()">
                   {{ config.title }}
                 </h4>
               </div>
@@ -123,17 +128,17 @@ import { DashboardWidgetConfig, DashboardWidgetClickEvent, DashboardWidgetVarian
               <!-- Value and Trend -->
               <div class="flex items-end justify-between mt-auto">
                 <div>
-                  <span class="text-2xl font-bold text-gray-900 dark:text-white">
+                  <span [class]="statValueClasses()">
                     {{ config.statValue }}
                   </span>
                   @if (config.statUnit) {
-                    <span class="text-lg text-gray-600 dark:text-gray-400 ml-1">
+                    <span [class]="statUnitClasses()">
                       {{ config.statUnit }}
                     </span>
                   }
                 </div>
                 @if (config.trend) {
-                  <div class="flex items-center gap-1 text-sm">
+                  <div [class]="trendContainerClasses()">
                     <pst-icon 
                       [name]="config.trend.direction === 'up' ? 'trending-up' : 'trending-down'"
                       [size]="16"
@@ -158,11 +163,11 @@ import { DashboardWidgetConfig, DashboardWidgetClickEvent, DashboardWidgetVarian
                     [class]="actionIconColorClasses()" />
                 </div>
                 <div>
-                  <h3 class="text-base font-semibold text-gray-900 dark:text-white group-hover:text-orange-600 dark:group-hover:text-orange-400 transition-colors">
+                  <h3 [class]="actionTitleClasses()">
                     {{ config.title }}
                   </h3>
                   @if (config.description) {
-                    <p class="text-sm text-gray-600 dark:text-gray-400 mt-0.5">
+                    <p [class]="actionDescriptionClasses()">
                       {{ config.description }}
                     </p>
                   }
@@ -171,7 +176,7 @@ import { DashboardWidgetConfig, DashboardWidgetClickEvent, DashboardWidgetVarian
               <pst-icon 
                 name="chevron-right" 
                 [size]="20"
-                class="text-gray-400 dark:text-gray-600 group-hover:text-orange-600 dark:group-hover:text-orange-400 transition-all group-hover:translate-x-1" />
+                [class]="actionArrowClasses()" />
             </div>
           }
           
@@ -179,13 +184,13 @@ import { DashboardWidgetConfig, DashboardWidgetClickEvent, DashboardWidgetVarian
           @case ('navigation') {
             <div class="group flex items-center justify-between h-full">
               <div class="flex items-center gap-3">
-                <div class="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 group-hover:bg-gray-200 dark:group-hover:bg-gray-700 transition-colors">
+                <div [class]="navigationIconContainerClasses()">
                   <pst-icon 
                     [name]="config.icon" 
                     [size]="20"
-                    class="text-gray-700 dark:text-gray-300" />
+                    [class]="navigationIconClasses()" />
                 </div>
-                <span class="text-base font-medium text-gray-700 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-white transition-colors">
+                <span [class]="navigationTitleClasses()">
                   {{ config.title }}
                 </span>
               </div>
@@ -210,153 +215,41 @@ export class DashboardWidgetComponent {
   
   // Computed Signals für optimale Performance
   protected widgetClasses = computed(() => {
-    const baseClasses = ['relative', 'h-full', 'transition-all', 'duration-200', 'group'];
+    const classes: string[] = [dashboardWidgetClasses.base.common];
     
     // Type-specific base styles
-    switch (this.config.type) {
-      case 'category':
-        baseClasses.push(
-          'p-6',
-          'bg-gradient-to-br',
-          'from-white',
-          'to-gray-50',
-          'dark:from-gray-900',
-          'dark:to-gray-800',
-          'rounded-xl',
-          'shadow-lg',
-          'border',
-          'border-gray-200',
-          'dark:border-gray-700'
-        );
-        break;
-      case 'section-widget':
-        baseClasses.push(
-          'bg-gray-50',
-          'dark:bg-[#1f2937]',
-          'rounded-lg',
-          'border',
-          this.config.isHighlighted 
-            ? 'border-2 border-primary bg-white dark:bg-[#1f2937]' 
-            : 'border-gray-200 dark:border-gray-700'
-        );
-        break;
-      case 'stat':
-        baseClasses.push(
-          'p-4',
-          'bg-white',
-          'dark:bg-gray-900',
-          'rounded-lg',
-          'shadow-sm',
-          'border',
-          'border-gray-200',
-          'dark:border-gray-800'
-        );
-        break;
-      case 'action':
-      case 'navigation':
-        baseClasses.push(
-          'p-4',
-          'bg-white',
-          'dark:bg-gray-900',
-          'rounded-lg',
-          'shadow-sm',
-          'border',
-          'border-gray-200',
-          'dark:border-gray-800'
-        );
-        break;
+    if (this.config.type === 'section-widget' && this.config.isHighlighted) {
+      classes.push(dashboardWidgetClasses.base.types['section-widget']);
+      classes.push(dashboardWidgetClasses.base.types['section-widget-highlighted']);
+    } else if (this.config.type === 'section-widget') {
+      classes.push(dashboardWidgetClasses.base.types['section-widget']);
+      classes.push(dashboardWidgetClasses.base.types['section-widget-normal']);
+    } else {
+      classes.push(dashboardWidgetClasses.base.types[this.config.type]);
     }
     
     // Hover effects for clickable widgets
-    if (this.config.route) {
-      switch (this.config.type) {
-        case 'category':
-          baseClasses.push(
-            'hover:shadow-xl',
-            'hover:border-orange-200',
-            'dark:hover:border-orange-800',
-            'hover:scale-[1.02]',
-            'active:scale-[1.01]'
-          );
-          break;
-        case 'section-widget':
-          baseClasses.push(
-            'hover:border-primary',
-            'hover:bg-white',
-            'dark:hover:bg-gray-800',
-            'hover:shadow-sm',
-            'hover:-translate-y-0.5',
-            'cursor-pointer'
-          );
-          break;
-        case 'action':
-          baseClasses.push(
-            'hover:shadow-md',
-            'hover:border-orange-200',
-            'dark:hover:border-orange-800',
-            'hover:bg-orange-50',
-            'dark:hover:bg-orange-950/20'
-          );
-          break;
-        case 'navigation':
-          baseClasses.push(
-            'hover:shadow-sm',
-            'hover:border-gray-300',
-            'dark:hover:border-gray-700'
-          );
-          break;
-        case 'stat':
-          if (this.config.route) {
-            baseClasses.push(
-              'hover:shadow-md',
-              'hover:border-gray-300',
-              'dark:hover:border-gray-700',
-              'cursor-pointer'
-            );
-          }
-          break;
-      }
+    if (this.config.route && dashboardWidgetClasses.base.hover[this.config.type]) {
+      classes.push(dashboardWidgetClasses.base.hover[this.config.type]);
     }
     
     // Back Button specific styles
     if (this.config.isBackButton) {
-      baseClasses.push(
-        'bg-gray-50',
-        'dark:bg-gray-800/50',
-        'hover:bg-gray-100',
-        'dark:hover:bg-gray-800',
-        'border-transparent',
-        'shadow-none'
-      );
+      classes.push(dashboardWidgetClasses.base.backButton);
     }
     
     // Size-specific classes
-    const sizeClasses = {
-      small: 'min-h-[100px]',
-      medium: 'min-h-[120px]',
-      large: 'min-h-[160px]',
-      full: 'min-h-[200px]'
-    };
+    classes.push(dashboardWidgetClasses.base.sizes[this.size]);
     
-    baseClasses.push(sizeClasses[this.size]);
-    
-    return baseClasses.join(' ');
+    return classes.join(' ');
   });
   
   protected iconContainerClasses = computed(() => {
-    const colorClasses = {
-      primary: 'bg-gradient-to-br from-orange-400 to-orange-600 dark:from-orange-500 dark:to-orange-700',
-      secondary: 'bg-gradient-to-br from-pst-blue to-pst-blue-dark dark:from-pst-blue-dark dark:to-pst-blue-darker',
-      success: 'bg-gradient-to-br from-green-400 to-green-600 dark:from-green-500 dark:to-green-700',
-      warning: 'bg-gradient-to-br from-yellow-400 to-yellow-600 dark:from-yellow-500 dark:to-yellow-700',
-      danger: 'bg-gradient-to-br from-red-400 to-red-600 dark:from-red-500 dark:to-red-700',
-      info: 'bg-gradient-to-br from-blue-400 to-blue-600 dark:from-blue-500 dark:to-blue-700'
-    };
-    
     const color = this.config.color || 'primary';
-    const sizeClass = this.config.type === 'category' ? 'w-14 h-14' : 'w-12 h-12';
+    const baseClass = dashboardWidgetClasses.iconContainer.base.category;
+    const gradientClass = dashboardWidgetClasses.iconContainer.gradients[color] || dashboardWidgetClasses.iconContainer.gradients.primary;
     
-    return `${sizeClass} rounded-xl ${colorClasses[color]} flex items-center justify-center shadow-lg`;
+    return `${baseClass} ${gradientClass}`;
   });
   
   protected iconSize = computed(() => {
@@ -372,59 +265,36 @@ export class DashboardWidgetComponent {
     if (!this.config.trend) return '';
     
     return this.config.trend.direction === 'up' 
-      ? 'text-green-600 dark:text-green-400'
-      : 'text-red-600 dark:text-red-400';
+      ? dashboardWidgetClasses.trend.up
+      : dashboardWidgetClasses.trend.down;
   });
   
   // New computed properties for enhanced styling
   protected statIconClasses = computed(() => {
-    return 'w-10 h-10 rounded-lg bg-gray-100 dark:bg-gray-800 flex items-center justify-center';
+    return dashboardWidgetClasses.iconContainer.base.stat;
   });
   
   protected statIconColorClasses = computed(() => {
-    const colorClasses = {
-      primary: 'text-orange-600 dark:text-orange-400',
-      secondary: 'text-pst-blue dark:text-pst-blue-light',
-      success: 'text-green-600 dark:text-green-400',
-      warning: 'text-yellow-600 dark:text-yellow-400',
-      danger: 'text-red-600 dark:text-red-400',
-      info: 'text-blue-600 dark:text-blue-400'
-    };
-    return colorClasses[this.config.color || 'primary'];
+    const color = this.config.color || 'primary';
+    return dashboardWidgetClasses.icon.colors[color] || dashboardWidgetClasses.icon.colors.primary;
   });
   
   protected actionIconClasses = computed(() => {
-    return 'w-12 h-12 rounded-lg bg-gray-100 dark:bg-gray-800 group-hover:bg-orange-100 dark:group-hover:bg-orange-900/30 flex items-center justify-center transition-colors';
+    return dashboardWidgetClasses.iconContainer.base.action;
   });
   
   protected actionIconColorClasses = computed(() => {
-    const colorClasses = {
-      primary: 'text-orange-600 dark:text-orange-400 group-hover:text-orange-700 dark:group-hover:text-orange-300',
-      secondary: 'text-pst-blue dark:text-pst-blue-light group-hover:text-pst-blue-dark dark:group-hover:text-pst-blue',
-      success: 'text-green-600 dark:text-green-400',
-      warning: 'text-yellow-600 dark:text-yellow-400',
-      danger: 'text-red-600 dark:text-red-400',
-      info: 'text-blue-600 dark:text-blue-400'
-    };
-    return colorClasses[this.config.color || 'primary'];
+    const color = this.config.color || 'primary';
+    return dashboardWidgetClasses.icon.colors[color] || dashboardWidgetClasses.icon.colors.primary;
   });
   
   // Computed property for section widget icon classes
   protected sectionWidgetIconClasses = computed(() => {
-    const colorClasses = {
-      primary: 'text-gray-700 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-white',
-      secondary: 'text-gray-700 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-white',
-      success: 'text-gray-700 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-white',
-      warning: 'text-gray-700 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-white',
-      danger: 'text-gray-700 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-white',
-      info: 'text-gray-700 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-white'
-    };
-    
     if (this.config.isHighlighted) {
-      return 'text-primary dark:text-primary';
+      return dashboardWidgetClasses.icon.sectionWidget.highlighted;
     }
     
-    return colorClasses[this.config.color || 'primary'];
+    return dashboardWidgetClasses.icon.sectionWidget.default;
   });
   
   handleClick(event: MouseEvent): void {
@@ -436,4 +306,78 @@ export class DashboardWidgetComponent {
       });
     }
   }
+
+  // Computed classes for back button
+  protected backButtonIconContainerClasses = computed(() => {
+    return dashboardWidgetClasses.iconContainer.base.backButton;
+  });
+
+  protected backButtonIconClasses = computed(() => {
+    return dashboardWidgetClasses.icon.colors.neutral;
+  });
+
+  protected backButtonTextClasses = computed(() => {
+    return dashboardWidgetClasses.text.backButton.text;
+  });
+
+  // Computed properties for template string replacements
+  protected categoryTitleClasses = computed(() => {
+    return dashboardWidgetClasses.text.category.title;
+  });
+
+  protected categoryDescriptionClasses = computed(() => {
+    return dashboardWidgetClasses.text.category.description;
+  });
+
+  protected categoryArrowClasses = computed(() => {
+    return dashboardWidgetClasses.text.category.arrow;
+  });
+
+  protected sectionWidgetTitleClasses = computed(() => {
+    return dashboardWidgetClasses.text.sectionWidget.title;
+  });
+
+  protected statTitleClasses = computed(() => {
+    return dashboardWidgetClasses.text.stat.title;
+  });
+
+  protected statValueClasses = computed(() => {
+    return dashboardWidgetClasses.text.stat.value;
+  });
+
+  protected statUnitClasses = computed(() => {
+    return dashboardWidgetClasses.text.stat.unit;
+  });
+
+  protected trendContainerClasses = computed(() => {
+    return dashboardWidgetClasses.trend.container;
+  });
+
+  protected actionTitleClasses = computed(() => {
+    return dashboardWidgetClasses.text.action.title;
+  });
+
+  protected actionDescriptionClasses = computed(() => {
+    return dashboardWidgetClasses.text.action.description;
+  });
+
+  protected actionArrowClasses = computed(() => {
+    return dashboardWidgetClasses.text.action.arrow;
+  });
+
+  protected navigationIconContainerClasses = computed(() => {
+    return dashboardWidgetClasses.iconContainer.base.navigation;
+  });
+
+  protected navigationTitleClasses = computed(() => {
+    return dashboardWidgetClasses.text.navigation.title;
+  });
+
+  protected navigationIconClasses = computed(() => {
+    return dashboardWidgetClasses.icon.colors.gray;
+  });
+
+  protected whiteTextClass = computed(() => {
+    return dashboardWidgetClasses.icon.colors.white;
+  });
 }

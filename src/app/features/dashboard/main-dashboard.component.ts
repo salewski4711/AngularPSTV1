@@ -21,7 +21,7 @@ import { IconName } from '../../shared/icons/icon-definitions';
   animations: [widgetListAnimation],
   template: `
     <div class="min-h-screen bg-gray-50 dark:bg-[var(--color-background)]">
-      <div class="px-4 sm:px-6 lg:px-8 py-6 lg:py-8">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-6 lg:py-8 max-w-7xl">
         <!-- Breadcrumb Navigation -->
         @if (dashboardService.currentLevel() === 2) {
           <nav class="mb-6">

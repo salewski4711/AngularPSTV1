@@ -5,6 +5,8 @@ import { SearchComponent } from '../search/search.component';
 import { NotificationsComponent } from '../notifications/notifications.component';
 import { UserMenuComponent } from '../user-menu/user-menu.component';
 import { MobileMenuComponent } from '../mobile-menu/mobile-menu.component';
+import { topNavigationClasses } from '../../../core/design-system/component-classes/organisms.classes.static';
+import { cn } from '../../utils/tailwind.utils';
 
 export interface HeaderConfig {
   showLogo?: boolean;
@@ -55,43 +57,43 @@ export class TopNavigationComponent {
   mobileMenuOpen = false;
 
   get headerClasses(): string {
-    const classes = ['w-full', 'bg-gray-50', 'dark:bg-black', 'transition-colors', 'duration-300'];
-    
-    if (this.config.sticky) {
-      classes.push('sticky', 'top-0', 'z-50');
-    }
-    
-    return classes.join(' ');
+    return cn(
+      topNavigationClasses.wrapper.base,
+      this.config.sticky && topNavigationClasses.wrapper.sticky
+    );
   }
 
   get getInnerContainerClasses(): string {
-    const classes = [
-      'bg-white', 
-      'dark:bg-gray-800', 
-      'border-b',
-      'sm:border',
-      'border-gray-200',
-      'dark:border-gray-700',
-      'sm:rounded-b-lg',
-      'md:rounded-b-xl',
-      'max-w-7xl',
-      'w-full',
-      'sm:shadow-2xl',
-      'transition-colors',
-      'duration-300'
-    ];
-    
-    if (this.config.transparent) {
-      classes.push('bg-transparent', 'shadow-none', 'border-transparent');
-    }
-    if (this.config.elevated && !this.config.transparent) {
-      classes.push('shadow-lg');
-    }
-    if (this.config.customClass) {
-      classes.push(this.config.customClass);
-    }
-    
-    return classes.join(' ');
+    return cn(
+      topNavigationClasses.innerContainer.base,
+      this.config.transparent && topNavigationClasses.innerContainer.transparent,
+      this.config.elevated && !this.config.transparent && topNavigationClasses.innerContainer.elevated,
+      this.config.customClass
+    );
+  }
+
+  get containerClasses(): string {
+    return topNavigationClasses.container;
+  }
+
+  get innerFlexClasses(): string {
+    return topNavigationClasses.innerFlex;
+  }
+
+  get desktopNavClasses(): string {
+    return topNavigationClasses.desktopNav;
+  }
+
+  get searchContainerClasses(): string {
+    return topNavigationClasses.searchContainer;
+  }
+
+  get rightSectionClasses(): string {
+    return topNavigationClasses.rightSection;
+  }
+
+  get mobileMenuButtonClasses(): string {
+    return topNavigationClasses.mobileMenuButton;
   }
 
 

@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { IconComponent } from '../../icons/icon.component';
 import { showcaseNavigation, ShowcaseComponent } from '../../../features/components-showcase/showcase-navigation';
+import { TokenUtils } from '../../../core/design-system/token-utilities';
 
 interface SearchResult extends ShowcaseComponent {
   category: string;
@@ -21,20 +22,20 @@ interface SearchResult extends ShowcaseComponent {
       
       <!-- Modal -->
       <div class="relative flex items-start justify-center pt-[10vh] px-4">
-        <div class="w-full max-w-2xl bg-white dark:bg-gray-800 rounded-lg shadow-2xl overflow-hidden" (click)="$event.stopPropagation()">
+        <div [ngClass]="modalContainerClasses()" (click)="$event.stopPropagation()">
           <!-- Search Input -->
-          <div class="flex items-center px-4 border-b border-gray-200 dark:border-gray-700">
-            <pst-icon name="search" class="text-gray-400" [size]="20"></pst-icon>
+          <div [ngClass]="searchInputContainerClasses()">
+            <pst-icon name="search" [class]="textNeutral400Class()" [size]="20"></pst-icon>
             <input
               #searchInput
               type="text"
               [(ngModel)]="searchQuery"
               (ngModelChange)="onSearchChange($event)"
               placeholder="Search components..."
-              class="flex-1 px-4 py-4 text-base bg-transparent outline-none text-gray-900 dark:text-gray-100 placeholder-gray-500"
+              [ngClass]="searchInputClasses()"
               autocomplete="off"
             >
-            <kbd class="hidden sm:inline-flex px-2 py-1 text-xs text-gray-500 bg-gray-100 dark:bg-gray-700 dark:text-gray-400 rounded">
+            <kbd [ngClass]="escKeyClasses()">
               ESC
             </kbd>
           </div>
@@ -42,14 +43,14 @@ interface SearchResult extends ShowcaseComponent {
           <!-- Results -->
           <div class="max-h-[60vh] overflow-y-auto">
             @if (searchQuery() && filteredResults().length === 0) {
-              <div class="px-6 py-8 text-center text-gray-500 dark:text-gray-400">
+              <div [ngClass]="noResultsClasses()">
                 No components found for "{{ searchQuery() }}"
               </div>
             } @else if (searchQuery()) {
               <!-- Grouped Results -->
               @for (group of groupedResults(); track group.category) {
                 <div class="px-2 py-2">
-                  <h3 class="px-4 py-2 text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                  <h3 [ngClass]="groupHeaderClasses()">
                     {{ group.category }}
                   </h3>
                   <ul>
@@ -59,18 +60,16 @@ interface SearchResult extends ShowcaseComponent {
                           type="button"
                           (click)="selectResult(result)"
                           (mouseenter)="highlightedIndex.set(getGlobalIndex(group.category, i))"
-                          [class.bg-gray-100]="highlightedIndex() === getGlobalIndex(group.category, i)"
-                          [class.dark:bg-gray-700]="highlightedIndex() === getGlobalIndex(group.category, i)"
-                          class="w-full px-4 py-3 flex items-center justify-between hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors rounded"
+                          [ngClass]="resultButtonClasses(highlightedIndex() === getGlobalIndex(group.category, i))"
                         >
                           <div class="flex items-center gap-3">
-                            <pst-icon name="package" class="text-gray-400" [size]="16"></pst-icon>
+                            <pst-icon name="package" [class]="textNeutral400Class()" [size]="16"></pst-icon>
                             <div class="text-left">
-                              <div class="text-sm font-medium text-gray-900 dark:text-gray-100">
+                              <div [ngClass]="resultNameClasses()">
                                 {{ result.name }}
                               </div>
                               @if (result.description) {
-                                <div class="text-xs text-gray-500 dark:text-gray-400">
+                                <div [ngClass]="resultDescriptionClasses()">
                                   {{ result.description }}
                                 </div>
                               }
@@ -95,7 +94,7 @@ interface SearchResult extends ShowcaseComponent {
             } @else {
               <!-- Recent/Popular when no search -->
               <div class="px-6 py-4">
-                <h3 class="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-2">
+                <h3 [ngClass]="popularHeaderClasses()">
                   Popular Components
                 </h3>
                 <ul class="space-y-1">
@@ -104,7 +103,7 @@ interface SearchResult extends ShowcaseComponent {
                       <button
                         type="button"
                         (click)="selectResult(component)"
-                        class="w-full px-3 py-2 text-left text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded transition-colors"
+                        [ngClass]="popularButtonClasses()"
                       >
                         {{ component.name }}
                       </button>
@@ -116,21 +115,21 @@ interface SearchResult extends ShowcaseComponent {
           </div>
           
           <!-- Footer -->
-          <div class="px-4 py-3 border-t border-gray-200 dark:border-gray-700 flex items-center justify-between text-xs text-gray-500 dark:text-gray-400">
+          <div [ngClass]="footerClasses()">
             <div class="flex items-center gap-4">
               <span class="flex items-center gap-1">
-                <kbd class="px-1.5 py-0.5 bg-gray-100 dark:bg-gray-700 rounded">↑</kbd>
-                <kbd class="px-1.5 py-0.5 bg-gray-100 dark:bg-gray-700 rounded">↓</kbd>
+                <kbd [ngClass]="kbdClasses()">↑</kbd>
+                <kbd [ngClass]="kbdClasses()">↓</kbd>
                 Navigate
               </span>
               <span class="flex items-center gap-1">
-                <kbd class="px-1.5 py-0.5 bg-gray-100 dark:bg-gray-700 rounded">↵</kbd>
+                <kbd [ngClass]="kbdClasses()">↵</kbd>
                 Select
               </span>
             </div>
             <div class="flex items-center gap-1">
-              <kbd class="px-1.5 py-0.5 bg-gray-100 dark:bg-gray-700 rounded">⌘</kbd>
-              <kbd class="px-1.5 py-0.5 bg-gray-100 dark:bg-gray-700 rounded">K</kbd>
+              <kbd [ngClass]="kbdClasses()">⌘</kbd>
+              <kbd [ngClass]="kbdClasses()">K</kbd>
             </div>
           </div>
         </div>
@@ -154,6 +153,161 @@ export class SearchModalComponent implements AfterViewInit {
     { name: 'Select', path: '/components/atoms/select', status: 'stable', category: 'Atoms' },
     { name: 'Card', path: '/components/molecules/card', status: 'beta', category: 'Molecules' },
   ];
+
+  // Computed properties for TokenUtils classes
+  bgWhiteClass = computed(() => TokenUtils.getColorClass('bg', 'white'));
+  bgNeutral800Class = computed(() => TokenUtils.getColorClass('bg', 'neutral.800'));
+  borderNeutral200Class = computed(() => TokenUtils.getColorClass('border', 'neutral.200'));
+  borderNeutral700Class = computed(() => TokenUtils.getColorClass('border', 'neutral.700'));
+  textNeutral400Class = computed(() => TokenUtils.getColorClass('text', 'neutral.400'));
+  textNeutral900Class = computed(() => TokenUtils.getColorClass('text', 'neutral.900'));
+  textNeutral100Class = computed(() => TokenUtils.getColorClass('text', 'neutral.100'));
+  textNeutral500Class = computed(() => TokenUtils.getColorClass('text', 'neutral.500'));
+  bgNeutral100Class = computed(() => TokenUtils.getColorClass('bg', 'neutral.100'));
+  bgNeutral700Class = computed(() => TokenUtils.getColorClass('bg', 'neutral.700'));
+  textNeutral700Class = computed(() => TokenUtils.getColorClass('text', 'neutral.700'));
+  textNeutral300Class = computed(() => TokenUtils.getColorClass('text', 'neutral.300'));
+  textSizeSmClass = computed(() => TokenUtils.getTextSizeClass('sm'));
+
+  // Computed properties for combined classes
+  modalContainerClasses = computed(() => [
+    'w-full',
+    'max-w-2xl',
+    this.bgWhiteClass(),
+    `dark:${this.bgNeutral800Class()}`,
+    'rounded-lg',
+    'shadow-2xl',
+    'overflow-hidden'
+  ]);
+
+  searchInputContainerClasses = computed(() => [
+    'flex',
+    'items-center',
+    'px-4',
+    'border-b',
+    this.borderNeutral200Class(),
+    `dark:${this.borderNeutral700Class()}`
+  ]);
+
+  searchInputClasses = computed(() => [
+    'flex-1',
+    'px-4',
+    'py-4',
+    'text-base',
+    'bg-transparent',
+    'outline-none',
+    this.textNeutral900Class(),
+    `dark:${this.textNeutral100Class()}`,
+    'placeholder-gray-500'
+  ]);
+
+  escKeyClasses = computed(() => [
+    'hidden',
+    'sm:inline-flex',
+    'px-2',
+    'py-1',
+    'text-xs',
+    this.textNeutral500Class(),
+    this.bgNeutral100Class(),
+    `dark:${this.bgNeutral700Class()}`,
+    `dark:${this.textNeutral400Class()}`,
+    'rounded'
+  ]);
+
+  noResultsClasses = computed(() => [
+    'px-6',
+    'py-8',
+    'text-center',
+    this.textNeutral500Class(),
+    `dark:${this.textNeutral400Class()}`
+  ]);
+
+  groupHeaderClasses = computed(() => [
+    'px-4',
+    'py-2',
+    'text-xs',
+    'font-semibold',
+    this.textNeutral500Class(),
+    `dark:${this.textNeutral400Class()}`,
+    'uppercase',
+    'tracking-wider'
+  ]);
+
+  resultButtonClasses(isHighlighted: boolean) {
+    return {
+      'w-full': true,
+      'px-4': true,
+      'py-3': true,
+      'flex': true,
+      'items-center': true,
+      'justify-between': true,
+      'transition-colors': true,
+      'rounded': true,
+      [this.bgNeutral100Class()]: isHighlighted,
+      [`dark:${this.bgNeutral700Class()}`]: isHighlighted,
+      [`hover:${this.bgNeutral100Class()}`]: true,
+      [`dark:hover:${this.bgNeutral700Class()}`]: true
+    };
+  }
+
+  resultNameClasses = computed(() => [
+    this.textSizeSmClass(),
+    'font-medium',
+    this.textNeutral900Class(),
+    `dark:${this.textNeutral100Class()}`
+  ]);
+
+  resultDescriptionClasses = computed(() => [
+    'text-xs',
+    this.textNeutral500Class(),
+    `dark:${this.textNeutral400Class()}`
+  ]);
+
+  popularHeaderClasses = computed(() => [
+    'text-xs',
+    'font-semibold',
+    this.textNeutral500Class(),
+    `dark:${this.textNeutral400Class()}`,
+    'uppercase',
+    'tracking-wider',
+    'mb-2'
+  ]);
+
+  popularButtonClasses = computed(() => [
+    'w-full',
+    'px-3',
+    'py-2',
+    'text-left',
+    this.textSizeSmClass(),
+    this.textNeutral700Class(),
+    `dark:${this.textNeutral300Class()}`,
+    `hover:${this.bgNeutral100Class()}`,
+    `dark:hover:${this.bgNeutral700Class()}`,
+    'rounded',
+    'transition-colors'
+  ]);
+
+  footerClasses = computed(() => [
+    'px-4',
+    'py-3',
+    'border-t',
+    this.borderNeutral200Class(),
+    `dark:${this.borderNeutral700Class()}`,
+    'flex',
+    'items-center',
+    'justify-between',
+    'text-xs',
+    this.textNeutral500Class(),
+    `dark:${this.textNeutral400Class()}`
+  ]);
+
+  kbdClasses = computed(() => [
+    'px-1.5',
+    'py-0.5',
+    this.bgNeutral100Class(),
+    `dark:${this.bgNeutral700Class()}`,
+    'rounded'
+  ]);
 
   filteredResults = computed(() => {
     const query = this.searchQuery().toLowerCase().trim();

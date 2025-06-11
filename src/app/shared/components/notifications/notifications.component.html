@@ -3,11 +3,11 @@
   <button
     type="button"
     (click)="toggleDropdown()"
-    class="relative p-2 text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white transition-colors"
+    [class]="bellButtonClasses"
     [attr.aria-label]="'Benachrichtigungen (' + unreadCount() + ' ungelesen)'"
     [attr.aria-expanded]="isOpen()"
   >
-    <pst-icon name="bell" [size]="20"></pst-icon>
+    <pst-icon name="bell" [size]="iconSizes.medium"></pst-icon>
     
     <!-- Badge for unread count -->
     @if (unreadCount() > 0) {
@@ -17,7 +17,7 @@
         size="xs"
         shape="pill"
         position="absolute"
-        class="absolute -top-1 -right-1 min-w-[20px] h-5 flex items-center justify-center"
+        [class]="badgeClasses"
       >
         {{ unreadCount() > 99 ? '99+' : unreadCount() }}
       </pst-badge>
@@ -29,13 +29,13 @@
     <div
       @dropdown
       #dropdownRef
-      class="absolute right-0 mt-2 w-96 bg-white dark:bg-gray-800 rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 z-50"
+      [class]="dropdownClasses"
       role="menu"
       aria-orientation="vertical"
       aria-labelledby="notifications-menu"
     >
       <!-- Header -->
-      <div class="px-4 py-3 border-b border-gray-200 dark:border-gray-700">
+      <div [class]="dropdownHeaderClasses">
         <div class="flex items-center justify-between">
           <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
             Benachrichtigungen
@@ -55,7 +55,7 @@
       </div>
 
       <!-- Notifications List -->
-      <div class="max-h-96 overflow-y-auto">
+      <div [class]="notificationListClasses">
         @if (hasNotifications()) {
           @for (notification of notifications(); track notification.id) {
             <div
@@ -63,12 +63,12 @@
               (click)="markAsRead(notification)"
               role="menuitem"
             >
-              <div class="flex items-start gap-3">
+              <div [class]="getNotificationContentClasses()">
                 <!-- Icon -->
-                <div [class]="'flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center ' + getNotificationStyles(notification.type)">
+                <div [class]="notificationIconContainerClasses + ' ' + getNotificationStyles(notification.type)">
                   <pst-icon 
                     [name]="getNotificationIcon(notification.type)" 
-                    [size]="20"
+                    [size]="iconSizes.medium"
                   ></pst-icon>
                 </div>
 
@@ -108,10 +108,10 @@
                     <button
                       type="button"
                       (click)="dismissNotification($event, notification.id)"
-                      class="flex-shrink-0 p-1 text-gray-400 hover:text-gray-600 dark:text-gray-500 dark:hover:text-gray-300 transition-colors"
+                      [class]="getDismissButtonClasses()"
                       aria-label="Benachrichtigung entfernen"
                     >
-                      <pst-icon name="x" [size]="16"></pst-icon>
+                      <pst-icon name="x" [size]="iconSizes.small"></pst-icon>
                     </button>
                   </div>
                 </div>
@@ -119,10 +119,10 @@
             </div>
           }
         } @else {
-          <div class="px-4 py-12 text-center">
+          <div [class]="emptyStateContainerClasses">
             <pst-icon 
               name="bell" 
-              [size]="48" 
+              [size]="iconSizes.large" 
               cssClasses="mx-auto text-gray-300 dark:text-gray-600 mb-3"
             ></pst-icon>
             <p class="text-sm text-gray-500 dark:text-gray-400">
@@ -134,7 +134,7 @@
 
       <!-- Footer -->
       @if (hasNotifications()) {
-        <div class="px-4 py-3 border-t border-gray-200 dark:border-gray-700">
+        <div [class]="footerClasses">
           <button
             type="button"
             (click)="clearAll()"

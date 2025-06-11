@@ -1,0 +1,5 @@
+
+> angular-crm-app@0.0.0 lint
+> ng lint --ext .ts src/app/shared/components/button/button.component.ts --format json
+
+Error: Unknown arguments: ext, format

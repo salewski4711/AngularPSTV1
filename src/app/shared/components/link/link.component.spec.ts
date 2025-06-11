@@ -100,8 +100,8 @@ describe('LinkComponent', () => {
     });
 
     it('should apply default variant classes', () => {
-      expect(linkElement.nativeElement.className).toContain('text-blue-600');
-      expect(linkElement.nativeElement.className).toContain('hover:text-blue-800');
+      expect(linkElement.nativeElement.className).toContain('text-info-600');
+      expect(linkElement.nativeElement.className).toContain('hover:text-info-700');
     });
 
     it('should apply primary variant classes', () => {
@@ -109,15 +109,15 @@ describe('LinkComponent', () => {
       fixture.detectChanges();
       
       expect(linkElement.nativeElement.className).toContain('text-primary');
-      expect(linkElement.nativeElement.className).toContain('hover:text-primary-dark');
+      expect(linkElement.nativeElement.className).toContain('hover:text-primary-600');
     });
 
     it('should apply muted variant classes', () => {
       component.variant = 'muted';
       fixture.detectChanges();
       
-      expect(linkElement.nativeElement.className).toContain('text-gray-600');
-      expect(linkElement.nativeElement.className).toContain('hover:text-gray-900');
+      expect(linkElement.nativeElement.className).toContain('text-neutral-600');
+      expect(linkElement.nativeElement.className).toContain('hover:text-neutral-900');
     });
   });
 

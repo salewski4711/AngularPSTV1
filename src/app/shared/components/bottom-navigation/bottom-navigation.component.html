@@ -5,26 +5,23 @@
   <!-- Äußerer Container mit Hintergrund -->
   <div class="w-full bg-gray-50 dark:bg-black">
     <!-- Container für Zentrierung und max-width -->
-    <div class="w-full flex justify-center sm:px-4 md:px-6 lg:px-8">
+    <div [class]="getContainerClasses()">
       <!-- Innerer Container mit Menü-Background -->
-      <div class="bg-white dark:bg-gray-800 border-t sm:border border-gray-200 dark:border-gray-700 sm:rounded-t-lg md:rounded-t-xl max-w-7xl w-full sm:shadow-2xl">
+      <div [class]="getInnerContainerClasses()">
       <!-- Navigation Grid -->
-      <div class="grid h-16 px-4" [style.grid-template-columns]="'repeat(' + activeItems().length + ', 1fr)'">
+      <div [class]="getGridClasses()" [style]="getGridStyle()">
       
       @for (item of activeItems(); track trackByItemId($index, item)) {
         <a
           [routerLink]="item.route"
-          class="nav-item relative flex flex-col items-center justify-center py-2 px-3 transition-all duration-200 group md:rounded-lg"
-          [class.text-primary]="item.isActive"
-          [class.text-gray-500]="!item.isActive"
-          [class.dark:text-gray-400]="!item.isActive"
+          [class]="getNavItemClasses(item)"
           (click)="onItemClick(item)"
           [attr.aria-label]="item.label"
           [attr.aria-current]="item.isActive ? 'page' : null">
           
           <!-- Active State Indicator -->
           @if (item.isActive) {
-            <div class="absolute top-0 left-1/2 transform -translate-x-1/2 w-8 h-1 bg-primary rounded-b-md"></div>
+            <div [class]="getActiveIndicatorClasses()"></div>
           }
           
           <!-- Icon Container -->
@@ -32,7 +29,7 @@
             <!-- Filled Icon (Active) -->
             @if (item.isActive) {
               <svg 
-                class="w-6 h-6"
+                [class]="getIconClasses()"
                 fill="currentColor"
                 viewBox="0 0 20 20">
                 <path [attr.d]="item.icon.filled"></path>
@@ -40,7 +37,7 @@
             } @else {
               <!-- Outline Icon (Inactive) -->
               <svg 
-                class="w-6 h-6 transition-colors duration-200 group-hover:text-primary dark:group-hover:text-primary"
+                [class]="getInactiveIconClasses()"
                 fill="none"
                 stroke="currentColor"
                 stroke-width="2"
@@ -58,8 +55,8 @@
                 shape="pill"
                 position="absolute"
                 [maxCount]="99"
-                [topPosition]="-20"
-                [rightPosition]="-18">
+                [topPosition]="getBadgeConfig().topPosition"
+                [rightPosition]="getBadgeConfig().rightPosition">
                 {{ item.badge.count }}
               </pst-badge>
             }
@@ -67,7 +64,7 @@
           
           <!-- Label -->
           @if (config.showLabels) {
-            <span class="text-xs mt-1 font-medium transition-colors duration-200 group-hover:text-primary">
+            <span [class]="getLabelClasses()">
               {{ item.label }}
             </span>
           }

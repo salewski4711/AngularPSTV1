@@ -12,7 +12,14 @@
     "test:ci": "jest --ci --coverage --maxWorkers=2",
     "lint": "ng lint",
     "lint:fix": "ng lint --fix",
-    "sync:examples": "node src/app/features/components-showcase/utils/sync-examples.js"
+    "lint:tokens": "eslint src/app/shared/components/**/*.ts --plugin ./eslint-plugin-design-tokens",
+    "lint:tokens:fix": "eslint src/app/shared/components/**/*.ts --plugin ./eslint-plugin-design-tokens --fix",
+    "test:token-rules": "node scripts/test-eslint-tokens.js",
+    "validate:tokens": "npm run lint:tokens -- --max-warnings 0",
+    "validate": "tsx validate-with-ai.ts",
+    "validate:all": "find src -name '*.component.ts' -exec npx tsx validate-with-ai.ts {} \\;",
+    "sync:examples": "node src/app/features/components-showcase/utils/sync-examples.js",
+    "prepare": "husky"
   },
   "private": true,
   "dependencies": {
@@ -45,10 +52,12 @@
     "@upstash/context7-mcp": "^1.0.12",
     "autoprefixer": "^10.4.21",
     "eslint": "^8.57.0",
+    "husky": "^9.1.7",
     "jest": "^29.7.0",
     "msw": "^2.8.6",
     "playwright": "^1.52.0",
     "postcss": "^8.5.4",
+    "puppeteer": "^24.10.0",
     "tailwindcss": "^3.4.0",
     "typescript": "~5.8.2"
   },

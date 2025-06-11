@@ -3,7 +3,8 @@ import { CommonModule } from '@angular/common';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { FormControlBase } from '../../utils/form-control.base';
 import { SelectOption, SelectSize } from './select.types';
-import { cn, formClasses } from '../../utils/tailwind.utils';
+import { cn } from '../../utils/tailwind.utils';
+import { selectClasses } from '../../../core/design-system/component-classes/atoms.classes';
 
 @Component({
   selector: 'pst-select',
@@ -17,7 +18,7 @@ import { cn, formClasses } from '../../utils/tailwind.utils';
     }
   ],
   template: `
-    <div class="w-full">
+    <div [class]="staticSelectClasses.container">
       <!-- Label -->
       <label 
         *ngIf="label"
@@ -25,17 +26,17 @@ import { cn, formClasses } from '../../utils/tailwind.utils';
         [class]="labelClasses()"
       >
         {{ label }}
-        <span *ngIf="required" class="text-red-500 ml-1">*</span>
+        <span *ngIf="required" [class]="staticSelectClasses.requiredAsterisk">*</span>
       </label>
       
       <!-- Select Container -->
-      <div class="relative">
+      <div [class]="staticSelectClasses.selectWrapper">
         <select
           [id]="selectId"
           [value]="value()"
           [disabled]="disabled"
           [required]="required"
-          [class]="selectClasses()"
+          [class]="selectClass()"
           (change)="handleChange($event)"
           (focus)="handleFocus()"
           (blur)="handleBlur()"
@@ -74,9 +75,9 @@ import { cn, formClasses } from '../../utils/tailwind.utils';
         </select>
         
         <!-- Dropdown Icon -->
-        <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+        <div [class]="staticSelectClasses.dropdownIcon.container">
           <svg 
-            class="h-5 w-5 text-gray-600 dark:text-gray-400" 
+            [class]="staticSelectClasses.dropdownIcon.icon" 
             fill="none" 
             stroke="currentColor" 
             viewBox="0 0 24 24"
@@ -93,7 +94,7 @@ import { cn, formClasses } from '../../utils/tailwind.utils';
       >
         <svg 
           *ngIf="hasError()" 
-          class="w-4 h-4 mr-1 inline-flex" 
+          [class]="staticSelectClasses.errorIcon" 
           fill="currentColor" 
           viewBox="0 0 20 20"
         >
@@ -111,6 +112,7 @@ export class SelectComponent<T = any> extends FormControlBase {
   @Input() allowEmpty = false;
   
   selectId = `select-${Math.random().toString(36).substr(2, 9)}`;
+  readonly staticSelectClasses = selectClasses;
   
   constructor(injector: Injector) {
     super(injector);
@@ -140,40 +142,39 @@ export class SelectComponent<T = any> extends FormControlBase {
   });
   
   labelClasses = computed(() => {
-    const base = formClasses.label.base;
+    const base = this.staticSelectClasses.label.base;
     const state = this.disabled 
-      ? formClasses.label.disabled 
+      ? this.staticSelectClasses.label.disabled 
       : this.hasError() 
-        ? formClasses.label.error 
-        : formClasses.label.default;
+        ? this.staticSelectClasses.label.error 
+        : this.staticSelectClasses.label.default;
     
     return cn(base, state);
   });
   
-  selectClasses = computed(() => {
-    const base = formClasses.input.base;
-    const sizeClass = formClasses.sizes[this.size];
-    const selectSpecific = 'appearance-none pr-10 cursor-pointer';
+  selectClass = computed(() => {
+    const base = this.staticSelectClasses.select.base;
+    const sizeClass = this.staticSelectClasses.select.sizes[this.size];
     
-    let stateClass = formClasses.input.default;
+    let stateClass = this.staticSelectClasses.select.states.default;
     if (this.disabled) {
-      stateClass = formClasses.input.disabled;
+      stateClass = this.staticSelectClasses.select.states.disabled;
     } else if (this.hasError()) {
-      stateClass = formClasses.input.error;
+      stateClass = this.staticSelectClasses.select.states.error;
     } else if (this.hasSuccess()) {
-      stateClass = formClasses.input.success;
+      stateClass = this.staticSelectClasses.select.states.success;
     }
     
-    return cn(base, sizeClass, stateClass, selectSpecific);
+    return cn(base, sizeClass, stateClass);
   });
   
   helperTextClasses = computed(() => {
-    const base = formClasses.helperText.base;
+    const base = this.staticSelectClasses.helperText.base;
     const state = this.hasError() 
-      ? formClasses.helperText.error 
+      ? this.staticSelectClasses.helperText.error 
       : this.hasSuccess() && this.successMessage
-        ? formClasses.helperText.success
-        : formClasses.helperText.default;
+        ? this.staticSelectClasses.helperText.success
+        : this.staticSelectClasses.helperText.default;
     
     return cn(base, state);
   });

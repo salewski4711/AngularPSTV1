@@ -14,13 +14,14 @@ import {
 import { CommonModule } from '@angular/common';
 import { AccordionPanelComponent } from './accordion-panel.component';
 import { AccordionPanel, AccordionConfig, PanelToggleEvent } from './accordion.types';
+import { accordionClasses } from '../../../core/design-system/component-classes/molecules.classes.static';
 
 @Component({
   selector: 'pst-accordion',
   standalone: true,
   imports: [CommonModule, AccordionPanelComponent],
   template: `
-    <div class="space-y-2">
+    <div [class]="accordionClasses.container">
       <!-- Using @for for panels array -->
       @for (panel of panels(); track panel.id) {
         <pst-accordion-panel
@@ -47,6 +48,9 @@ export class AccordionComponent implements AfterContentInit {
   @Input() multiple = signal(false);
   @Input() animated = signal(true);
   @Input() iconPosition = signal<'left' | 'right'>('right');
+  
+  // Reference to static classes for template use
+  readonly accordionClasses = accordionClasses;
   @Output() panelToggle = new EventEmitter<PanelToggleEvent>();
 
   @ContentChildren(AccordionPanelComponent) contentPanels!: QueryList<AccordionPanelComponent>;

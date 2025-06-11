@@ -4,6 +4,7 @@ import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 import { Time, TimeFormat, MinuteInterval } from './time-picker.types';
 import { IconComponent } from '../../icons/icon.component';
 import { ClickOutsideDirective } from '../../directives/click-outside.directive';
+import { timePickerClasses } from '../../../core/design-system/component-classes/molecules.classes.static';
 
 @Component({
   selector: 'pst-time-picker',
@@ -32,7 +33,7 @@ import { ClickOutsideDirective } from '../../directives/click-outside.directive'
           (input)="handleInput($event)"
           (keydown)="handleKeydown($event)"
           class="w-full px-3 py-2 pr-10 border rounded-md transition-colors duration-200"
-          [class]="inputClasses()"
+          [class]="inputClasses"
           [attr.aria-label]="placeholder || 'Select time'"
           [attr.aria-expanded]="isOpen()"
           [attr.aria-haspopup]="true"
@@ -44,7 +45,7 @@ import { ClickOutsideDirective } from '../../directives/click-outside.directive'
           (click)="toggle()"
           [disabled]="disabled"
           class="absolute right-0 top-0 h-full px-3 flex items-center justify-center"
-          [class]="buttonClasses()"
+          [class]="buttonClasses"
           [attr.aria-label]="isOpen() ? 'Close time picker' : 'Open time picker'"
         >
           <pst-icon name="clock" size="sm" />
@@ -54,11 +55,7 @@ import { ClickOutsideDirective } from '../../directives/click-outside.directive'
       <!-- Time Picker Dropdown -->
       @if (isOpen()) {
         <div 
-          class="absolute z-50 mt-2 bg-white dark:bg-gray-800 rounded-lg shadow-lg p-4 w-64"
-          [class.opacity-0]="!menuVisible()"
-          [class.opacity-100]="menuVisible()"
-          [class.scale-95]="!menuVisible()"
-          [class.scale-100]="menuVisible()"
+          [class]="dropdownClasses()"
           style="transition: all 200ms ease-out"
         >
           <div class="flex items-center justify-center space-x-2">
@@ -67,10 +64,8 @@ import { ClickOutsideDirective } from '../../directives/click-outside.directive'
               <button
                 type="button"
                 (click)="incrementHour()"
-                class="p-1 hover:bg-gray-100 dark:hover:bg-gray-700 rounded transition-colors"
+                [class]="getIncrementButtonClasses(!canIncrementHour())"
                 [disabled]="!canIncrementHour()"
-                [class.opacity-50]="!canIncrementHour()"
-                [class.cursor-not-allowed]="!canIncrementHour()"
               >
                 <pst-icon name="chevron-up" size="xs" />
               </button>
@@ -81,7 +76,7 @@ import { ClickOutsideDirective } from '../../directives/click-outside.directive'
                 (input)="handleHourInput($event)"
                 (blur)="validateHourInput()"
                 class="w-16 px-2 py-1 text-center text-2xl font-mono border rounded-md"
-                [class]="timeInputClasses()"
+                [class]="getTimeInputClasses()"
                 maxlength="2"
                 placeholder="00"
               />
@@ -89,27 +84,23 @@ import { ClickOutsideDirective } from '../../directives/click-outside.directive'
               <button
                 type="button"
                 (click)="decrementHour()"
-                class="p-1 hover:bg-gray-100 dark:hover:bg-gray-700 rounded transition-colors"
+                [class]="getIncrementButtonClasses(!canDecrementHour())"
                 [disabled]="!canDecrementHour()"
-                [class.opacity-50]="!canDecrementHour()"
-                [class.cursor-not-allowed]="!canDecrementHour()"
               >
                 <pst-icon name="chevron-down" size="xs" />
               </button>
             </div>
             
             <!-- Separator -->
-            <span class="text-2xl font-mono text-gray-500 dark:text-gray-400">:</span>
+            <span [class]="timePickerClasses.timeControl.separator">:</span>
             
             <!-- Minute Selector -->
             <div class="flex flex-col items-center">
               <button
                 type="button"
                 (click)="incrementMinute()"
-                class="p-1 hover:bg-gray-100 dark:hover:bg-gray-700 rounded transition-colors"
+                [class]="getIncrementButtonClasses(!canIncrementMinute())"
                 [disabled]="!canIncrementMinute()"
-                [class.opacity-50]="!canIncrementMinute()"
-                [class.cursor-not-allowed]="!canIncrementMinute()"
               >
                 <pst-icon name="chevron-up" size="xs" />
               </button>
@@ -120,7 +111,7 @@ import { ClickOutsideDirective } from '../../directives/click-outside.directive'
                 (input)="handleMinuteInput($event)"
                 (blur)="validateMinuteInput()"
                 class="w-16 px-2 py-1 text-center text-2xl font-mono border rounded-md"
-                [class]="timeInputClasses()"
+                [class]="getTimeInputClasses()"
                 maxlength="2"
                 placeholder="00"
               />
@@ -128,10 +119,8 @@ import { ClickOutsideDirective } from '../../directives/click-outside.directive'
               <button
                 type="button"
                 (click)="decrementMinute()"
-                class="p-1 hover:bg-gray-100 dark:hover:bg-gray-700 rounded transition-colors"
+                [class]="getIncrementButtonClasses(!canDecrementMinute())"
                 [disabled]="!canDecrementMinute()"
-                [class.opacity-50]="!canDecrementMinute()"
-                [class.cursor-not-allowed]="!canDecrementMinute()"
               >
                 <pst-icon name="chevron-down" size="xs" />
               </button>
@@ -161,11 +150,11 @@ import { ClickOutsideDirective } from '../../directives/click-outside.directive'
           </div>
           
           <!-- Now Button -->
-          <div class="mt-4 pt-4 border-t dark:border-gray-700">
+          <div [class]="timePickerClasses.nowButton.container">
             <button
               type="button"
               (click)="selectNow()"
-              class="w-full px-4 py-2 text-sm font-medium text-primary-600 dark:text-primary-400 hover:bg-primary-50 dark:hover:bg-primary-900/20 rounded-lg transition-colors"
+              [class]="timePickerClasses.nowButton.button"
             >
               Now
             </button>
@@ -196,6 +185,9 @@ export class TimePickerComponent implements ControlValueAccessor {
   minutes = signal(0);
   amPm = signal<'AM' | 'PM'>('AM');
 
+  // Reference to static classes for use in template
+  timePickerClasses = timePickerClasses;
+
   private onChange: (value: Time | null) => void = () => {};
   private onTouched: () => void = () => {};
 
@@ -218,32 +210,67 @@ export class TimePickerComponent implements ControlValueAccessor {
     return this.minutes().toString().padStart(2, '0');
   });
 
-  inputClasses = computed(() => {
-    const base = 'border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100';
-    const focus = 'focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 focus:outline-none';
-    const disabled = this.disabled ? 'opacity-50 cursor-not-allowed' : '';
-    const invalid = this.isInvalid() ? 'border-red-500 dark:border-red-400' : '';
+  // Computed class properties
+  get inputClasses(): string {
+    const baseClasses: string[] = [timePickerClasses.input.base, timePickerClasses.input.focus];
     
-    return `${base} ${focus} ${disabled} ${invalid}`;
+    if (this.disabled) {
+      baseClasses.push(timePickerClasses.input.disabled);
+    }
+    
+    if (this.isInvalid()) {
+      baseClasses.push(timePickerClasses.input.invalid);
+    }
+    
+    return baseClasses.join(' ');
+  }
+
+  get buttonClasses(): string {
+    const baseClasses: string[] = [timePickerClasses.button.base];
+    
+    if (this.disabled) {
+      baseClasses.push(timePickerClasses.button.disabled);
+    }
+    
+    return baseClasses.join(' ');
+  }
+
+  dropdownClasses = computed(() => {
+    const baseClasses: string[] = [timePickerClasses.dropdown.base];
+    
+    if (this.menuVisible()) {
+      baseClasses.push(timePickerClasses.dropdown.transition.visible);
+    } else {
+      baseClasses.push(timePickerClasses.dropdown.transition.invisible);
+    }
+    
+    return baseClasses.join(' ');
   });
 
-  buttonClasses = computed(() => {
-    const base = 'text-gray-400 hover:text-gray-600 dark:text-gray-500 dark:hover:text-gray-300';
-    const disabled = this.disabled ? 'opacity-50 cursor-not-allowed' : '';
+  getIncrementButtonClasses(disabled: boolean): string {
+    const baseClasses: string[] = [timePickerClasses.timeControl.incrementButton];
     
-    return `${base} ${disabled}`;
-  });
+    if (disabled) {
+      baseClasses.push(timePickerClasses.timeControl.incrementButtonDisabled);
+    }
+    
+    return baseClasses.join(' ');
+  }
 
-  timeInputClasses = computed(() => {
-    return 'border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 focus:outline-none';
-  });
+  getTimeInputClasses(): string {
+    const baseClasses: string[] = [timePickerClasses.timeControl.timeInput];
+    
+    if (this.isInvalid()) {
+      baseClasses.push(timePickerClasses.timeControl.timeInputInvalid);
+    }
+    
+    return baseClasses.join(' ');
+  }
 
   getAmPmClasses(period: 'AM' | 'PM'): string {
-    const isActive = this.amPm() === period;
-    if (isActive) {
-      return 'bg-primary-500 text-white hover:bg-primary-600';
-    }
-    return 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600';
+    return this.amPm() === period 
+      ? timePickerClasses.amPm.active 
+      : timePickerClasses.amPm.inactive;
   }
 
   // ControlValueAccessor implementation

@@ -1,6 +1,7 @@
 import { Component, Input, HostBinding, ElementRef, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TooltipPosition } from './tooltip.service';
+import { TokenUtils } from '../../../core/design-system/token-utilities';
 
 @Component({
   selector: 'pst-tooltip',
@@ -38,9 +39,9 @@ import { TooltipPosition } from './tooltip.service';
     .tooltip-content {
       background-color: rgba(0, 0, 0, 0.9);
       color: white;
-      padding: 8px 12px;
-      border-radius: 4px;
-      font-size: 14px;
+      padding: 0.5rem 0.75rem; /* spacing.2 spacing.3 */
+      border-radius: 0.25rem; /* spacing.1 */
+      font-size: 0.875rem; /* text-sm */
       line-height: 1.4;
       word-wrap: break-word;
     }
@@ -53,29 +54,29 @@ import { TooltipPosition } from './tooltip.service';
     }
 
     .arrow-top {
-      border-width: 0 6px 6px 6px;
+      border-width: 0 0.375rem 0.375rem 0.375rem; /* spacing.1.5 */
       border-color: transparent transparent rgba(0, 0, 0, 0.9) transparent;
     }
 
     .arrow-bottom {
-      border-width: 6px 6px 0 6px;
+      border-width: 0.375rem 0.375rem 0 0.375rem; /* spacing.1.5 */
       border-color: rgba(0, 0, 0, 0.9) transparent transparent transparent;
     }
 
     .arrow-left {
-      border-width: 6px 6px 6px 0;
+      border-width: 0.375rem 0.375rem 0.375rem 0; /* spacing.1.5 */
       border-color: transparent rgba(0, 0, 0, 0.9) transparent transparent;
     }
 
     .arrow-right {
-      border-width: 6px 0 6px 6px;
+      border-width: 0.375rem 0 0.375rem 0.375rem; /* spacing.1.5 */
       border-color: transparent transparent transparent rgba(0, 0, 0, 0.9);
     }
 
     /* Dark theme adjustments */
     :host-context(.dark) .tooltip-content {
       background-color: rgba(255, 255, 255, 0.95);
-      color: #1a202c;
+      color: #171717; /* neutral.900 */
     }
 
     :host-context(.dark) .arrow-top {

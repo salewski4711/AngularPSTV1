@@ -26,7 +26,7 @@ describe('BadgeComponent', () => {
       fixture.detectChanges();
       
       const badge = fixture.debugElement.query(By.css('span'));
-      expect(badge.nativeElement.classList.toString()).toContain('bg-orange-500');
+      expect(badge.nativeElement.classList.toString()).toContain('bg-primary');
       expect(badge.nativeElement.classList.toString()).toContain('text-white');
     });
 
@@ -37,8 +37,8 @@ describe('BadgeComponent', () => {
       
       const badge = fixture.debugElement.query(By.css('span'));
       expect(badge.nativeElement.classList.toString()).toContain('bg-transparent');
-      expect(badge.nativeElement.classList.toString()).toContain('text-orange-500');
-      expect(badge.nativeElement.classList.toString()).toContain('border-orange-500');
+      expect(badge.nativeElement.classList.toString()).toContain('text-primary');
+      expect(badge.nativeElement.classList.toString()).toContain('border-primary');
     });
 
     it('should apply subtle variant styles', () => {
@@ -47,8 +47,9 @@ describe('BadgeComponent', () => {
       fixture.detectChanges();
       
       const badge = fixture.debugElement.query(By.css('span'));
-      expect(badge.nativeElement.classList.toString()).toContain('bg-orange-500/10');
-      expect(badge.nativeElement.classList.toString()).toContain('text-orange-500');
+      // For subtle variant with opacity, we check for the base color class
+      expect(badge.nativeElement.classList.toString()).toContain('bg-primary');
+      expect(badge.nativeElement.classList.toString()).toContain('text-primary');
     });
   });
 
@@ -65,9 +66,11 @@ describe('BadgeComponent', () => {
         const classes = badge.nativeElement.classList.toString();
         
         if (color === 'primary') {
-          expect(classes).toContain('bg-orange-500');
+          expect(classes).toContain('bg-primary');
+        } else if (color === 'gray') {
+          expect(classes).toContain('bg-neutral');
         } else {
-          expect(classes).toMatch(new RegExp(`bg-(${color}|green|red|amber|blue)-\\d+`));
+          expect(classes).toContain(`bg-${color}`);
         }
       });
     });

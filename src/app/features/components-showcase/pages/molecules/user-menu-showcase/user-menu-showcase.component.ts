@@ -1,13 +1,15 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ShowcaseTemplateComponent } from '../../../shared/showcase-template.component';
+import { UserMenuComponent } from '../../../../../shared/components/user-menu/user-menu.component';
 
 @Component({
   selector: 'pst-user-menu-showcase',
   standalone: true,
   imports: [
     CommonModule,
-    ShowcaseTemplateComponent
+    ShowcaseTemplateComponent,
+    UserMenuComponent // Used in section templates
   ],
   template: `
     <pst-showcase-template

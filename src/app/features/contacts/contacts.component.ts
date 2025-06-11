@@ -1,5 +1,6 @@
 import { Component, OnInit, inject, signal, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { 
   EntityListViewComponent, 
@@ -10,18 +11,22 @@ import {
 import { ButtonComponent } from '../../shared/components/button/button.component';
 import { IconComponent } from '../../shared/icons/icon.component';
 import { ContactsService, Contact } from './contacts.service';
+import { ContactCardComponent } from './contact-card.component';
+import { availableCities, availableCustomerTypes, availableInterests } from '../../../mocks/data/contacts.mock';
 
 @Component({
   selector: 'pst-contacts',
   standalone: true,
   imports: [
     CommonModule,
+    FormsModule,
     EntityListViewComponent,
     ButtonComponent,
-    IconComponent
+    IconComponent,
+    ContactCardComponent
   ],
   template: `
-    <div class="contacts-page py-4 md:py-6 lg:py-8">
+    <div class="contacts-page container mx-auto px-4 sm:px-6 lg:px-8 py-4 md:py-6 lg:py-8 max-w-7xl">
       <!-- Page Header -->
       <div class="mb-6">
         <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
@@ -30,40 +35,19 @@ import { ContactsService, Contact } from './contacts.service';
               Kontakte
             </h1>
             <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
-              Verwalten Sie Ihre {{ contactsService.totalContacts().toLocaleString('de-DE') }} Kontakte
+              Verwalten Sie Ihre Kontakte
             </p>
           </div>
           
           <div class="flex items-center gap-3">
             <!-- View Toggle -->
-            <div class="flex items-center bg-gray-100 dark:bg-gray-700 rounded-md p-1">
-              <button
-                type="button"
-                (click)="onViewChange('list')"
-                [class.bg-white]="currentView() === 'list'"
-                [class.dark:bg-gray-800]="currentView() === 'list'"
-                [class.text-gray-900]="currentView() === 'list'"
-                [class.dark:text-white]="currentView() === 'list'"
-                [class.text-gray-500]="currentView() !== 'list'"
-                [class.dark:text-gray-400]="currentView() !== 'list'"
-                class="px-3 py-1.5 rounded text-sm font-medium transition-colors">
-                <pst-icon name="list" [size]="16" class="inline-block mr-1" />
-                Liste
-              </button>
-              <button
-                type="button"
-                (click)="onViewChange('grid')"
-                [class.bg-white]="currentView() === 'grid'"
-                [class.dark:bg-gray-800]="currentView() === 'grid'"
-                [class.text-gray-900]="currentView() === 'grid'"
-                [class.dark:text-white]="currentView() === 'grid'"
-                [class.text-gray-500]="currentView() !== 'grid'"
-                [class.dark:text-gray-400]="currentView() !== 'grid'"
-                class="px-3 py-1.5 rounded text-sm font-medium transition-colors">
-                <pst-icon name="grid" [size]="16" class="inline-block mr-1" />
-                Karten
-              </button>
-            </div>
+            <pst-button
+              variant="secondary"
+              size="md"
+              (click)="toggleView()">
+              <pst-icon [name]="currentView() === 'list' ? 'grid' : 'list'" [size]="16" />
+              {{ currentView() === 'list' ? 'Karten' : 'Liste' }}
+            </pst-button>
             
             <!-- New Contact Button -->
             <pst-button
@@ -77,15 +61,211 @@ import { ContactsService, Contact } from './contacts.service';
         </div>
       </div>
       
-      <!-- Entity List View -->
-      <pst-entity-list-view
-        [config]="listConfig"
-        [items]="contactsService.contacts"
-        [loading]="contactsService.loading"
-        [pagination]="contactsService.pagination() || undefined"
-        [filters]="filters"
-        [view]="currentView()"
-        (listEvent)="handleListEvent($event)" />
+      <!-- Custom Grid View für Contacts -->
+      @if (currentView() === 'grid') {
+        <!-- Search and Filters -->
+        <div class="mb-6 space-y-4">
+          <!-- Search Bar -->
+          <div class="relative">
+            <pst-icon 
+              name="search" 
+              [size]="20" 
+              class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+            <input
+              type="search"
+              [ngModel]="searchTerm()"
+              (ngModelChange)="searchTerm.set($event)"
+              placeholder="Name, E-Mail, Telefon oder Stadt suchen..."
+              class="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+            />
+          </div>
+          
+          <!-- Filter Toggle -->
+          <div>
+            <button
+              type="button"
+              (click)="showFilters.set(!showFilters())"
+              class="text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white flex items-center gap-2">
+              <pst-icon name="filter" [size]="16" />
+              Erweiterte Filter
+              <pst-icon 
+                [name]="showFilters() ? 'chevron-up' : 'chevron-down'" 
+                [size]="16" />
+            </button>
+          </div>
+          
+          <!-- Filter Panel -->
+          @if (showFilters()) {
+            <div class="bg-gray-50 dark:bg-gray-900 rounded-lg p-4 space-y-4">
+              <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                <!-- PLZ Filter -->
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                    PLZ
+                  </label>
+                  <input
+                    type="text"
+                    [value]="filterValues().postalCode"
+                    (input)="onPostalCodeInput($event)"
+                    placeholder="z.B. 10115"
+                    maxlength="5"
+                    pattern="[0-9]*"
+                    class="w-full h-9 px-3 text-sm border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent">
+                </div>
+                
+                <!-- Stadt Filter -->
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                    Stadt
+                  </label>
+                  <select
+                    [ngModel]="filterValues().city"
+                    (ngModelChange)="updateFilterValue('city', $event)"
+                    class="w-full h-9 px-3 text-sm border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white">
+                    <option value="">Alle Städte</option>
+                    @for (city of availableCities; track city) {
+                      <option [value]="city">{{ city }}</option>
+                    }
+                  </select>
+                </div>
+                
+                <!-- Kundentyp Filter -->
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                    Kundentyp
+                  </label>
+                  <select
+                    [ngModel]="filterValues().customerType"
+                    (ngModelChange)="updateFilterValue('customerType', $event)"
+                    class="w-full h-9 px-3 text-sm border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white">
+                    <option value="">Alle Typen</option>
+                    @for (type of availableCustomerTypes; track type) {
+                      <option [value]="type">{{ type }}</option>
+                    }
+                  </select>
+                </div>
+                
+                <!-- Filter Mode -->
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                    Filter-Verknüpfung
+                  </label>
+                  <select
+                    [ngModel]="filterMode()"
+                    (ngModelChange)="filterMode.set($event)"
+                    class="w-full h-9 px-3 text-sm border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white">
+                    <option value="AND">UND (alle Kriterien)</option>
+                    <option value="OR">ODER (mindestens ein Kriterium)</option>
+                  </select>
+                </div>
+              </div>
+              
+              <!-- Interessen Filter -->
+              <div>
+                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  Interessen
+                </label>
+                <div class="flex flex-wrap gap-2">
+                  @for (interest of availableInterests; track interest) {
+                    <label class="inline-flex items-center">
+                      <input
+                        type="checkbox"
+                        [checked]="selectedInterests().includes(interest)"
+                        (change)="toggleInterest(interest)"
+                        class="rounded border-gray-300 text-primary-600 focus:ring-primary-500"
+                      />
+                      <span class="ml-2 text-sm text-gray-700 dark:text-gray-300">{{ interest }}</span>
+                    </label>
+                  }
+                </div>
+              </div>
+              
+              <!-- Active Filters -->
+              @if (hasActiveFilters()) {
+                <div class="flex items-center gap-2">
+                  <span class="text-sm text-gray-600 dark:text-gray-400">Aktive Filter:</span>
+                  <div class="flex flex-wrap gap-2">
+                    @if (filterValues().postalCode) {
+                      <span class="inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium bg-purple-100 text-purple-800 dark:bg-purple-900/20 dark:text-purple-400">
+                        PLZ: {{ filterValues().postalCode }}
+                        <button (click)="updateFilterValue('postalCode', '')" class="hover:text-purple-600">
+                          <pst-icon name="x" [size]="12" />
+                        </button>
+                      </span>
+                    }
+                    @if (filterValues().city) {
+                      <span class="inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-900/20 dark:text-blue-400">
+                        Stadt: {{ filterValues().city }}
+                        <button (click)="updateFilterValue('city', '')" class="hover:text-blue-600">
+                          <pst-icon name="x" [size]="12" />
+                        </button>
+                      </span>
+                    }
+                    @if (filterValues().customerType) {
+                      <span class="inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900/20 dark:text-green-400">
+                        Typ: {{ filterValues().customerType }}
+                        <button (click)="updateFilterValue('customerType', '')" class="hover:text-green-600">
+                          <pst-icon name="x" [size]="12" />
+                        </button>
+                      </span>
+                    }
+                    @for (interest of selectedInterests(); track interest) {
+                      <span class="inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium bg-orange-100 text-orange-800 dark:bg-orange-900/20 dark:text-orange-400">
+                        {{ interest }}
+                        <button (click)="toggleInterest(interest)" class="hover:text-orange-600">
+                          <pst-icon name="x" [size]="12" />
+                        </button>
+                      </span>
+                    }
+                  </div>
+                  <button
+                    (click)="clearFilters()"
+                    class="text-sm text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
+                    Alle zurücksetzen
+                  </button>
+                </div>
+              }
+            </div>
+          }
+        </div>
+        
+        <!-- Contact Cards Grid -->
+        @if (contactsService.loading()) {
+          <div class="flex justify-center py-12">
+            <pst-icon name="refresh" [size]="32" class="animate-spin text-gray-400" />
+          </div>
+        } @else if (filteredContacts().length === 0) {
+          <div class="text-center py-12">
+            <pst-icon name="inbox" [size]="48" class="mx-auto text-gray-400 dark:text-gray-600 mb-4" />
+            <p class="text-gray-500 dark:text-gray-400">
+              Keine Kontakte gefunden
+            </p>
+          </div>
+        } @else {
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            @for (contact of filteredContacts(); track contact.id) {
+              <pst-contact-card
+                [contact]="contact"
+                (cardClick)="onContactClick($event)"
+                (phoneClick)="onPhoneClick($event)"
+                (emailClick)="onEmailClick($event)"
+              />
+            }
+          </div>
+        }
+      }
+      
+      <!-- Legacy List View -->
+      @if (currentView() === 'list') {
+        <pst-entity-list-view
+          [config]="listConfig"
+          [items]="contactsService.contacts"
+          [loading]="contactsService.loading"
+          [pagination]="contactsService.pagination() || undefined"
+          [filters]="filters"
+          [view]="'list'"
+          (listEvent)="handleListEvent($event)" />
+      }
       
       <!-- Selected Actions -->
       @if (selectedContacts().length > 0) {
@@ -116,13 +296,93 @@ export class ContactsComponent implements OnInit {
   protected contactsService = inject(ContactsService);
   private router = inject(Router);
   
+  // View state
+  protected currentView = signal<'list' | 'grid'>('grid'); // Grid als Standard
+  protected showFilters = signal(false);
+  
+  // Filter state as signals for reactivity
+  protected searchTerm = signal('');
+  protected filterValues = signal({
+    city: '',
+    customerType: '',
+    postalCode: ''
+  });
+  protected selectedInterests = signal<string[]>([]);
+  protected filterMode = signal<'AND' | 'OR'>('AND');
+  
+  // Available filter options
+  protected availableCities = availableCities;
+  protected availableCustomerTypes = availableCustomerTypes;
+  protected availableInterests = availableInterests;
+  
   // Selected contacts
   protected selectedContacts = signal<Contact[]>([]);
   
-  // View state
-  protected currentView = signal<'list' | 'grid'>('list');
+  // Filtered contacts for grid view
+  protected filteredContacts = computed(() => {
+    let contacts = this.contactsService.contacts();
+    const searchValue = this.searchTerm();
+    const filters = this.filterValues();
+    const interests = this.selectedInterests();
+    const mode = this.filterMode();
+    
+    
+    // Search filter
+    if (searchValue) {
+      const search = searchValue.toLowerCase();
+      contacts = contacts.filter(contact => 
+        contact.name.toLowerCase().includes(search) ||
+        contact.email.toLowerCase().includes(search) ||
+        contact.phone.includes(search) ||
+        contact.city.toLowerCase().includes(search)
+      );
+    }
+    
+    // Apply filters based on mode
+    if (mode === 'AND') {
+      // PLZ Filter
+      if (filters.postalCode) {
+        contacts = contacts.filter(c => c.postalCode.startsWith(filters.postalCode));
+      }
+      
+      // Stadt Filter
+      if (filters.city) {
+        contacts = contacts.filter(c => c.city === filters.city);
+      }
+      
+      // Kundentyp Filter
+      if (filters.customerType) {
+        contacts = contacts.filter(c => c.customerType === filters.customerType);
+      }
+      
+      // Interessen Filter
+      if (interests.length > 0) {
+        contacts = contacts.filter(c => 
+          interests.every(interest => c.interests.includes(interest))
+        );
+      }
+    } else {
+      // OR mode
+      if (filters.postalCode || filters.city || filters.customerType || interests.length > 0) {
+        contacts = contacts.filter(c => {
+          const plzMatch = !filters.postalCode || c.postalCode.startsWith(filters.postalCode);
+          const cityMatch = !filters.city || c.city === filters.city;
+          const typeMatch = !filters.customerType || c.customerType === filters.customerType;
+          const interestMatch = interests.length === 0 || 
+            interests.some(interest => c.interests.includes(interest));
+          
+          return (filters.postalCode && plzMatch) ||
+                 (filters.city && cityMatch) ||
+                 (filters.customerType && typeMatch) ||
+                 (interests.length > 0 && interestMatch);
+        });
+      }
+    }
+    
+    return contacts;
+  });
   
-  // List configuration
+  // List configuration for legacy view
   protected listConfig: EntityListConfig<Contact> = {
     columns: this.getColumns(),
     searchable: true,
@@ -133,74 +393,10 @@ export class ContactsComponent implements OnInit {
     emptyMessage: 'Keine Kontakte gefunden. Erstellen Sie Ihren ersten Kontakt!',
     loadingMessage: 'Kontakte werden geladen...',
     enableViewToggle: false,
-    defaultView: 'list',
-    gridConfig: {
-      cols: 4,
-      cardRenderer: (contact) => `
-        <div class="space-y-3">
-          <div class="flex items-start justify-between">
-            <div>
-              <h3 class="font-semibold text-gray-900 dark:text-white">${contact.name}</h3>
-              ${contact.company ? `<p class="text-sm text-gray-500 dark:text-gray-400">${contact.company}</p>` : ''}
-            </div>
-            <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${
-              contact.status === 'active' ? 'bg-green-100 text-green-800 dark:bg-green-900/20 dark:text-green-400' :
-              contact.status === 'inactive' ? 'bg-gray-100 text-gray-800 dark:bg-gray-900/20 dark:text-gray-400' :
-              'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/20 dark:text-yellow-400'
-            }">
-              ${contact.status === 'active' ? 'Aktiv' : contact.status === 'inactive' ? 'Inaktiv' : 'Ausstehend'}
-            </span>
-          </div>
-          <div class="space-y-1 text-sm">
-            <p class="text-gray-600 dark:text-gray-400">
-              <svg class="inline-block w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
-              </svg>
-              ${contact.email}
-            </p>
-            <p class="text-gray-600 dark:text-gray-400">
-              <svg class="inline-block w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
-              </svg>
-              ${contact.phone}
-            </p>
-            <p class="text-gray-600 dark:text-gray-400">
-              <svg class="inline-block w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
-              </svg>
-              ${contact.city}
-            </p>
-          </div>
-          <div class="pt-2 border-t border-gray-200 dark:border-gray-700 flex items-center justify-between">
-            <span class="text-xs text-gray-500 dark:text-gray-400">Score: ${contact.score}</span>
-            <div class="flex gap-1">
-              <button class="p-1 hover:bg-gray-100 dark:hover:bg-gray-700 rounded" title="Bearbeiten" onclick="event.stopPropagation()">
-                <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
-                </svg>
-              </button>
-              <button class="p-1 hover:bg-gray-100 dark:hover:bg-gray-700 rounded" title="Details" onclick="event.stopPropagation()">
-                <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
-                </svg>
-              </button>
-            </div>
-          </div>
-        </div>
-      `
-    },
-    performance: {
-      virtualScrolling: true,
-      infiniteScroll: true,
-      pageSize: 50,
-      itemHeight: 60,
-      searchDebounce: 300
-    }
+    defaultView: 'list'
   };
   
-  // Filters configuration
+  // Legacy filters for list view
   protected filters = signal([
     {
       key: 'status',
@@ -233,22 +429,7 @@ export class ContactsComponent implements OnInit {
         key: 'name',
         label: 'Name',
         sortable: true,
-        width: '200px',
-        render: (contact) => `
-          <div class="flex items-center gap-3">
-            <div class="w-8 h-8 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center">
-              <span class="text-xs font-medium text-gray-600 dark:text-gray-400">
-                ${contact.firstName.charAt(0)}${contact.lastName.charAt(0)}
-              </span>
-            </div>
-            <div>
-              <div class="font-medium text-gray-900 dark:text-white">
-                ${contact.name}
-              </div>
-              ${contact.company ? `<div class="text-xs text-gray-500 dark:text-gray-400">${contact.company}</div>` : ''}
-            </div>
-          </div>
-        `
+        width: '200px'
       },
       {
         key: 'email',
@@ -263,138 +444,114 @@ export class ContactsComponent implements OnInit {
         width: '150px'
       },
       {
-        key: 'status',
-        label: 'Status',
+        key: 'customerType',
+        label: 'Kundentyp',
         sortable: true,
-        width: '120px',
-        align: 'center',
-        render: (contact) => {
-          const statusConfig = {
-            active: { label: 'Aktiv', color: 'success' },
-            inactive: { label: 'Inaktiv', color: 'gray' },
-            pending: { label: 'Ausstehend', color: 'warning' }
-          };
-          const config = statusConfig[contact.status];
-          return `<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-${config.color}-100 text-${config.color}-800 dark:bg-${config.color}-900/20 dark:text-${config.color}-400">
-            ${config.label}
-          </span>`;
-        }
+        width: '120px'
       },
       {
-        key: 'type',
-        label: 'Typ',
+        key: 'city',
+        label: 'Stadt',
         sortable: true,
-        width: '120px',
-        align: 'center',
-        render: (contact) => {
-          const icon = contact.type === 'business' ? 'building' : 'user';
-          const label = contact.type === 'business' ? 'Geschäftlich' : 'Privat';
-          return `<div class="flex items-center justify-center gap-1">
-            <svg class="w-3 h-3 text-gray-500" fill="currentColor" viewBox="0 0 20 20">
-              <path d="M10 2a8 8 0 100 16 8 8 0 000-16z"/>
-            </svg>
-            <span class="text-sm">${label}</span>
-          </div>`;
-        }
+        width: '120px'
       },
       {
         key: 'score',
         label: 'Score',
         sortable: true,
         width: '100px',
-        align: 'center',
-        render: (contact) => {
-          const color = contact.score >= 80 ? 'text-green-600' : 
-                       contact.score >= 50 ? 'text-yellow-600' : 'text-red-600';
-          return `<span class="font-semibold ${color}">${contact.score}</span>`;
-        }
-      },
-      {
-        key: 'lastActivity',
-        label: 'Letzte Aktivität',
-        sortable: true,
-        width: '150px',
-        render: (contact) => {
-          const date = new Date(contact.lastActivity);
-          const days = Math.floor((Date.now() - date.getTime()) / (1000 * 60 * 60 * 24));
-          
-          if (days === 0) return 'Heute';
-          if (days === 1) return 'Gestern';
-          if (days < 7) return `vor ${days} Tagen`;
-          if (days < 30) return `vor ${Math.floor(days / 7)} Wochen`;
-          return `vor ${Math.floor(days / 30)} Monaten`;
-        }
-      },
-      {
-        key: 'actions',
-        label: '',
-        width: '100px',
-        align: 'right',
-        render: (contact) => `
-          <div class="flex items-center justify-end gap-1">
-            <button class="p-1 hover:bg-gray-100 dark:hover:bg-gray-700 rounded" title="Bearbeiten">
-              <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
-              </svg>
-            </button>
-            <button class="p-1 hover:bg-gray-100 dark:hover:bg-gray-700 rounded" title="Details">
-              <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
-              </svg>
-            </button>
-          </div>
-        `
+        align: 'center'
       }
     ];
   }
   
-  handleListEvent(event: EntityListEvent<Contact>): void {
-    switch (event.type) {
-      case 'select':
-        this.selectedContacts.set(event.items || []);
-        break;
-        
-      case 'search':
-        this.contactsService.search((event.data as any).search);
-        break;
-        
-      case 'filter':
-        this.contactsService.applyFilters((event.data as any).filters);
-        break;
-        
-      case 'sort':
-        this.contactsService.sort((event.data as any).sortBy, (event.data as any).sortOrder);
-        break;
-        
-      case 'page':
-        this.contactsService.goToPage((event.data as any).page);
-        break;
-        
-      case 'infinite-scroll':
-        this.contactsService.loadNextPage();
-        break;
+  // View methods
+  onViewChange(view: 'list' | 'grid'): void {
+    this.currentView.set(view);
+  }
+  
+  toggleView(): void {
+    this.currentView.set(this.currentView() === 'list' ? 'grid' : 'list');
+  }
+  
+  // Search and filter methods
+  onSearchChange(value: string): void {
+    // Lokale Filterung für Grid View
+    // Für List View würde das über EntityListView laufen
+  }
+  
+  toggleInterest(interest: string): void {
+    const current = this.selectedInterests();
+    const index = current.indexOf(interest);
+    if (index > -1) {
+      this.selectedInterests.set(current.filter(i => i !== interest));
+    } else {
+      this.selectedInterests.set([...current, interest]);
     }
+  }
+  
+  onPostalCodeInput(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    // Remove non-numeric characters and limit to 5
+    const cleanValue = input.value.replace(/[^0-9]/g, '').slice(0, 5);
+    input.value = cleanValue;
+    // Update the filter value
+    this.updateFilterValue('postalCode', cleanValue);
+  }
+  
+  onPostalCodeChange(value: string): void {
+    // Ensure only numbers and max 5 characters
+    const cleanValue = value.replace(/[^0-9]/g, '').slice(0, 5);
+    this.updateFilterValue('postalCode', cleanValue);
+  }
+  
+  updateFilterValue(key: 'city' | 'customerType' | 'postalCode', value: string): void {
+    this.filterValues.update(current => ({
+      ...current,
+      [key]: value
+    }));
+  }
+  
+  applyFilters(): void {
+    // Filters werden über computed property angewendet - nothing to do here
+  }
+  
+  hasActiveFilters(): boolean {
+    const filters = this.filterValues();
+    return !!filters.postalCode ||
+           !!filters.city || 
+           !!filters.customerType || 
+           this.selectedInterests().length > 0;
+  }
+  
+  clearFilters(): void {
+    this.filterValues.set({
+      postalCode: '',
+      city: '',
+      customerType: ''
+    });
+    this.selectedInterests.set([]);
+  }
+  
+  // Contact actions
+  onContactClick(contact: Contact): void {
+    this.router.navigate(['/contacts', contact.id]);
+  }
+  
+  onPhoneClick(contact: Contact): void {
+    console.log('Phone clicked for:', contact.name);
+  }
+  
+  onEmailClick(contact: Contact): void {
+    console.log('Email clicked for:', contact.name);
   }
   
   createContact(): void {
     this.router.navigate(['/contacts/new']);
   }
   
-  exportContacts(): void {
-    this.contactsService.exportContacts('xlsx').subscribe(blob => {
-      const url = window.URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = `kontakte_${new Date().toISOString().split('T')[0]}.xlsx`;
-      a.click();
-      window.URL.revokeObjectURL(url);
-    });
-  }
-  
   bulkEdit(): void {
     console.log('Bulk edit:', this.selectedContacts());
-    // Implement bulk edit logic
   }
   
   bulkDelete(): void {
@@ -406,9 +563,24 @@ export class ContactsComponent implements OnInit {
     }
   }
   
-  onViewChange(view: 'list' | 'grid'): void {
-    this.currentView.set(view);
-    // Update list config to reflect current view
-    this.listConfig = { ...this.listConfig, defaultView: view };
+  // Legacy list event handler
+  handleListEvent(event: EntityListEvent<Contact>): void {
+    switch (event.type) {
+      case 'select':
+        this.selectedContacts.set(event.items || []);
+        break;
+      case 'search':
+        this.contactsService.search((event.data as any).search);
+        break;
+      case 'filter':
+        this.contactsService.applyFilters((event.data as any).filters);
+        break;
+      case 'sort':
+        this.contactsService.sort((event.data as any).sortBy, (event.data as any).sortOrder);
+        break;
+      case 'page':
+        this.contactsService.goToPage((event.data as any).page);
+        break;
+    }
   }
 }

@@ -5,7 +5,7 @@ import { IconComponent } from '../../icons/icon.component';
 import { SelectComponent } from '../select/select.component';
 import { SelectOption } from '../select/select.types';
 import { PaginationConfig, PaginationInfo } from './pagination.types';
-import { cn } from '../../utils/tailwind.utils';
+import { paginationClasses } from '../../../core/design-system/component-classes/molecules.classes.static';
 
 @Component({
   selector: 'pst-pagination',
@@ -13,20 +13,20 @@ import { cn } from '../../utils/tailwind.utils';
   imports: [CommonModule, FormsModule, IconComponent, SelectComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <div [class]="containerClasses()">
+    <div [ngClass]="getContainerClasses()">
       <!-- Info Section (left side) -->
       @if (showInfo && !compact) {
-        <div class="text-sm text-gray-600 dark:text-gray-400">
+        <div [ngClass]="paginationClasses.info">
           Zeige {{ paginationInfo().startItem }}-{{ paginationInfo().endItem }} von {{ totalItems }}
         </div>
       }
       
       <!-- Navigation Section (center/right) -->
-      <div [class]="navigationClasses()">
+      <div [ngClass]="getNavigationClasses()">
         <!-- Page Size Selector -->
         @if (showPageSize && !compact) {
           <div class="flex items-center gap-2">
-            <span class="text-sm text-gray-600 dark:text-gray-400">Pro Seite:</span>
+            <span [ngClass]="paginationClasses.info">Pro Seite:</span>
             <pst-select
               [options]="pageSizeSelectOptions()"
               [ngModel]="selectedPageSize()"
@@ -38,14 +38,14 @@ import { cn } from '../../utils/tailwind.utils';
         }
         
         <!-- Pagination Controls -->
-        <nav class="flex items-center gap-1" aria-label="Pagination">
+        <nav [ngClass]="paginationClasses.nav" aria-label="Pagination">
           <!-- First Page Button -->
           @if (showFirstLast && !compact) {
             <button
               type="button"
               [disabled]="!paginationInfo().hasPrevious"
               (click)="goToPage(1)"
-              [class]="pageButtonClasses()"
+              [ngClass]="getPageButtonClasses(!paginationInfo().hasPrevious)"
               aria-label="Erste Seite"
             >
               <pst-icon name="chevron-left" [size]="16"></pst-icon>
@@ -58,7 +58,7 @@ import { cn } from '../../utils/tailwind.utils';
             type="button"
             [disabled]="!paginationInfo().hasPrevious"
             (click)="goToPage(currentPage - 1)"
-            [class]="pageButtonClasses()"
+            [ngClass]="getPageButtonClasses(!paginationInfo().hasPrevious)"
             aria-label="Vorherige Seite"
           >
             <pst-icon name="chevron-left" [size]="16"></pst-icon>
@@ -75,19 +75,19 @@ import { cn } from '../../utils/tailwind.utils';
                   <button
                     type="button"
                     (click)="goToPage(page.value)"
-                    [class]="pageNumberClasses(page.value === currentPage)"
+                    [ngClass]="getPageNumberClasses(page.value === currentPage)"
                     [attr.aria-current]="page.value === currentPage ? 'page' : null"
                   >
                     {{ page.value }}
                   </button>
                 } @else {
-                  <span class="px-2 text-gray-400">...</span>
+                  <span class="px-2 text-neutral-400">...</span>
                 }
               }
             </div>
           } @else {
             <!-- Compact Mode: Show current page of total -->
-            <span class="px-3 text-sm text-gray-600 dark:text-gray-400">
+            <span [ngClass]="getCompactInfoClasses()">
               {{ currentPage }} / {{ paginationInfo().totalPages }}
             </span>
           }
@@ -97,7 +97,7 @@ import { cn } from '../../utils/tailwind.utils';
             type="button"
             [disabled]="!paginationInfo().hasNext"
             (click)="goToPage(currentPage + 1)"
-            [class]="pageButtonClasses()"
+            [ngClass]="getPageButtonClasses(!paginationInfo().hasNext)"
             aria-label="Nächste Seite"
           >
             @if (!compact) {
@@ -112,7 +112,7 @@ import { cn } from '../../utils/tailwind.utils';
               type="button"
               [disabled]="!paginationInfo().hasNext"
               (click)="goToPage(paginationInfo().totalPages)"
-              [class]="pageButtonClasses()"
+              [ngClass]="getPageButtonClasses(!paginationInfo().hasNext)"
               aria-label="Letzte Seite"
             >
               <pst-icon name="chevron-right" [size]="16" class="-mr-2"></pst-icon>
@@ -145,6 +145,9 @@ export class PaginationComponent implements OnChanges {
   
   // Internal property for ngModel binding
   selectedPageSize = signal(this.itemsPerPage.toString());
+  
+  // Expose static classes for template
+  paginationClasses = paginationClasses;
   
   constructor() {
     // Watch for selectedPageSize changes and emit pageSizeChange
@@ -237,59 +240,44 @@ export class PaginationComponent implements OnChanges {
     return pages;
   });
   
-  containerClasses = computed(() => {
-    const base = 'flex items-center';
-    const layout = this.compact 
+  getContainerClasses(): string {
+    const base = this.paginationClasses.container;
+    const compactClasses = this.compact 
       ? 'justify-center gap-2' 
-      : 'justify-between gap-4 flex-wrap';
+      : 'gap-4 flex-wrap';
     
-    return cn(base, layout);
-  });
+    return `${base} ${compactClasses}`;
+  }
   
-  navigationClasses = computed(() => {
+  getNavigationClasses(): string {
     const base = 'flex items-center';
     const gap = this.compact ? 'gap-2' : 'gap-4';
     
-    return cn(base, gap);
-  });
+    return `${base} ${gap}`;
+  }
   
-  pageButtonClasses = computed(() => {
-    return cn(
-      'inline-flex items-center justify-center',
-      'px-3 py-2 text-sm font-medium',
-      'border rounded transition-colors duration-200',
-      'hover:bg-gray-50 dark:hover:bg-gray-800',
-      'focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2',
-      'disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-transparent',
-      'border-gray-300 dark:border-gray-600',
-      'text-gray-700 dark:text-gray-300'
-    );
-  });
-  
-  pageNumberClasses(isActive: boolean): string {
-    const base = cn(
-      'min-w-[40px] px-3 py-2',
-      'text-sm font-medium rounded',
-      'transition-colors duration-200',
-      'focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2'
-    );
+  getPageButtonClasses(isDisabled: boolean): string {
+    const base = `${this.paginationClasses.button.base} ${this.paginationClasses.button.default} rounded`;
     
-    if (isActive) {
-      return cn(
-        base,
-        'bg-primary text-white',
-        'hover:bg-primary-600',
-        'border border-primary'
-      );
+    if (isDisabled) {
+      return `${base} ${this.paginationClasses.button.disabled}`;
     }
     
-    return cn(
-      base,
-      'bg-white dark:bg-gray-900',
-      'border border-gray-300 dark:border-gray-600',
-      'text-gray-700 dark:text-gray-300',
-      'hover:bg-gray-50 dark:hover:bg-gray-800'
-    );
+    return base;
+  }
+  
+  getPageNumberClasses(isActive: boolean): string {
+    const base = `${this.paginationClasses.button.base} min-w-[40px] rounded`;
+    
+    if (isActive) {
+      return `${base} ${this.paginationClasses.button.active}`;
+    }
+    
+    return `${base} ${this.paginationClasses.button.default}`;
+  }
+  
+  getCompactInfoClasses(): string {
+    return `px-3 ${this.paginationClasses.info}`;
   }
   
   goToPage(page: number): void {

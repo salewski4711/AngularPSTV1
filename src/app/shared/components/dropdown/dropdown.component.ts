@@ -4,6 +4,7 @@ import { DropdownPositionDirective } from './dropdown.directive';
 import { DropdownItem, DropdownPosition } from './dropdown.types';
 import { IconComponent } from '../../icons/icon.component';
 import { ClickOutsideDirective } from '../../directives/click-outside.directive';
+import { dropdownClasses } from '../../../core/design-system/component-classes/molecules.classes.static';
 
 @Component({
   selector: 'pst-dropdown',
@@ -34,7 +35,7 @@ import { ClickOutsideDirective } from '../../directives/click-outside.directive'
           [triggerElement]="trigger"
           appClickOutside
           (clickOutside)="close()"
-          class="min-w-[200px] py-1 bg-white dark:bg-gray-800 rounded-md shadow-lg ring-1 ring-black/5 dark:ring-white/10 transition-all duration-200"
+          [class]="menuClass"
           [class.opacity-0]="!menuVisible()"
           [class.opacity-100]="menuVisible()"
           [class.scale-95]="!menuVisible()"
@@ -45,14 +46,13 @@ import { ClickOutsideDirective } from '../../directives/click-outside.directive'
         >
           @for (item of items; track item.id || item.label; let i = $index) {
             @if (item.divider) {
-              <div class="border-t border-gray-200 dark:border-gray-700 my-1"></div>
+              <div [class]="dividerClass"></div>
             } @else {
               <button
                 type="button"
                 (click)="selectItem(item)"
                 [disabled]="item.disabled"
-                class="w-full px-4 py-2 text-sm text-left transition-colors duration-150"
-                [class]="itemClasses(item)"
+                [class]="getItemClass(item)"
                 [attr.data-index]="i"
                 role="menuitem"
                 [attr.aria-disabled]="item.disabled"
@@ -91,14 +91,15 @@ export class DropdownComponent {
   menuId = `dropdown-menu-${Math.random().toString(36).substr(2, 9)}`;
   triggerId = `dropdown-trigger-${Math.random().toString(36).substr(2, 9)}`;
 
-  itemClasses(item: DropdownItem): string {
-    const base = 'flex items-center';
-    
+  // Using static classes from molecules.classes.static.ts
+  readonly menuClass = dropdownClasses.menu.base;
+  readonly dividerClass = dropdownClasses.divider;
+
+  getItemClass(item: DropdownItem): string {
     if (item.disabled) {
-      return `${base} text-gray-400 dark:text-gray-600 cursor-not-allowed`;
+      return `${dropdownClasses.item.base} ${dropdownClasses.item.disabled}`;
     }
-    
-    return `${base} text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 focus:bg-gray-100 dark:focus:bg-gray-700 focus:outline-none`;
+    return `${dropdownClasses.item.base} ${dropdownClasses.item.default}`;
   }
 
   toggle(): void {

@@ -1,8 +1,9 @@
 import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy, OnInit, OnDestroy, signal, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { trigger, state, style, transition, animate } from '@angular/animations';
-import { AlertType, AlertIcons } from './alert.types';
+import { AlertType } from './alert.types';
 import { IconComponent } from '../../icons/icon.component';
+import { alertClasses as alertClassDefs } from '../../../core/design-system/component-classes';
 
 @Component({
   selector: 'pst-alert',
@@ -13,11 +14,11 @@ import { IconComponent } from '../../icons/icon.component';
     trigger('slideIn', [
       state('in', style({ opacity: 1, transform: 'translateY(0)' })),
       transition('void => *', [
-        style({ opacity: 0, transform: 'translateY(-20px)' }),
+        style({ opacity: 0, transform: 'translateY(-20px)' }), // equivalent to spacing-5
         animate('200ms ease-out')
       ]),
       transition('* => void', [
-        animate('200ms ease-in', style({ opacity: 0, transform: 'translateY(-20px)' }))
+        animate('200ms ease-in', style({ opacity: 0, transform: 'translateY(-20px)' })) // equivalent to spacing-5
       ])
     ])
   ],
@@ -28,31 +29,28 @@ import { IconComponent } from '../../icons/icon.component';
       role="alert"
       [attr.aria-live]="type === 'error' ? 'assertive' : 'polite'"
     >
-      <div class="flex items-start">
-        <div class="flex-shrink-0">
-          <pst-icon
-            [name]="iconName()"
-            [class]="iconClasses()"
-            size="sm"
-          />
-        </div>
-        <div class="ml-3 flex-1">
-          <p class="text-sm font-medium">{{ message }}</p>
-        </div>
-        @if (dismissible) {
-          <div class="ml-4 flex-shrink-0">
-            <button
-              type="button"
-              (click)="handleClose()"
-              class="inline-flex rounded-md p-1.5 hover:bg-black/5 dark:hover:bg-white/5 focus:outline-none focus:ring-2 focus:ring-offset-2"
-              [class]="closeButtonClasses()"
-              aria-label="Dismiss alert"
-            >
-              <pst-icon name="x" size="xs" />
-            </button>
-          </div>
-        }
+      <div class="flex-shrink-0">
+        <pst-icon
+          [name]="iconName()"
+          [class]="iconClasses()"
+          size="sm"
+        />
       </div>
+      <div class="flex-1">
+        <p [class]="messageClasses()">{{ message }}</p>
+      </div>
+      @if (dismissible) {
+        <div class="ml-auto flex-shrink-0">
+          <button
+            type="button"
+            (click)="handleClose()"
+            [class]="closeButtonClasses()"
+            aria-label="Dismiss alert"
+          >
+            <pst-icon name="x" size="xs" />
+          </button>
+        </div>
+      }
     </div>
   `
 })
@@ -67,16 +65,8 @@ export class AlertComponent implements OnInit, OnDestroy {
   private visible = signal(true);
 
   alertClasses = computed(() => {
-    const baseClasses = 'relative p-4 rounded-lg border transition-all duration-200';
-    
-    const typeClasses: Record<AlertType, string> = {
-      success: 'bg-green-50 dark:bg-green-900/20 text-green-800 dark:text-green-200 border-green-200 dark:border-green-800',
-      error: 'bg-red-50 dark:bg-red-900/20 text-red-800 dark:text-red-200 border-red-200 dark:border-red-800',
-      warning: 'bg-yellow-50 dark:bg-yellow-900/20 text-yellow-800 dark:text-yellow-200 border-yellow-200 dark:border-yellow-800',
-      info: 'bg-blue-50 dark:bg-blue-900/20 text-blue-800 dark:text-blue-200 border-blue-200 dark:border-blue-800'
-    };
-
-    return `${baseClasses} ${typeClasses[this.type]}`;
+    const baseClasses = 'relative transition-all duration-200';
+    return `${baseClasses} ${alertClassDefs.base} ${alertClassDefs.variants[this.type]}`;
   });
 
   iconName = computed(() => {
@@ -90,23 +80,28 @@ export class AlertComponent implements OnInit, OnDestroy {
   });
 
   iconClasses = computed(() => {
-    const iconColorClasses: Record<AlertType, string> = {
-      success: 'text-green-600 dark:text-green-400',
-      error: 'text-red-600 dark:text-red-400',
-      warning: 'text-yellow-600 dark:text-yellow-400',
-      info: 'text-blue-600 dark:text-blue-400'
+    // Use the icon classes from alertClassDefs, but need to add dark mode variants
+    const darkModeClasses: Record<AlertType, string> = {
+      success: 'dark:text-success-400',
+      error: 'dark:text-error-400',
+      warning: 'dark:text-warning-400',
+      info: 'dark:text-info-400'
     };
-    return iconColorClasses[this.type];
+    return `${alertClassDefs.icon[this.type]} ${darkModeClasses[this.type]}`;
   });
 
   closeButtonClasses = computed(() => {
-    const closeColorClasses: Record<AlertType, string> = {
-      success: 'text-green-600 hover:text-green-700 dark:text-green-400 dark:hover:text-green-300 focus:ring-green-500',
-      error: 'text-red-600 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300 focus:ring-red-500',
-      warning: 'text-yellow-600 hover:text-yellow-700 dark:text-yellow-400 dark:hover:text-yellow-300 focus:ring-yellow-500',
-      info: 'text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 focus:ring-blue-500'
+    const colorClasses: Record<AlertType, string> = {
+      success: 'text-success-600 hover:text-success-700 dark:text-success-400 dark:hover:text-success-300 focus:ring-success-500',
+      error: 'text-error-600 hover:text-error-700 dark:text-error-400 dark:hover:text-error-300 focus:ring-error-500',
+      warning: 'text-warning-600 hover:text-warning-700 dark:text-warning-400 dark:hover:text-warning-300 focus:ring-warning-500',
+      info: 'text-info-600 hover:text-info-700 dark:text-info-400 dark:hover:text-info-300 focus:ring-info-500'
     };
-    return closeColorClasses[this.type];
+    return `${alertClassDefs.closeButton} ${colorClasses[this.type]}`;
+  });
+
+  messageClasses = computed(() => {
+    return alertClassDefs.title; // Using the title class which includes text-sm font-medium
   });
 
   ngOnInit(): void {

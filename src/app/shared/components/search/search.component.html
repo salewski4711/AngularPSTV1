@@ -1,11 +1,11 @@
 <div class="relative w-full" (keydown)="onKeyDown($event)">
   <div class="relative">
-    <pst-icon name="search" class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 pointer-events-none"></pst-icon>
+    <pst-icon name="search" [class]="iconLeftClasses"></pst-icon>
     
     <input
       #searchInput
       type="text"
-      class="w-full pl-10 pr-10 py-2 bg-gray-100 dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-lg text-sm placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+      [class]="inputClasses"
       [(ngModel)]="searchQuery"
       (ngModelChange)="onSearch($event)"
       (focus)="onFocus()"
@@ -20,15 +20,15 @@
     
     <button
       *ngIf="searchQuery"
-      class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
+      [class]="clearButtonClasses"
       (click)="clearSearch()"
       type="button"
       aria-label="Clear search"
     >
-      <pst-icon name="x" [size]="16"></pst-icon>
+      <pst-icon name="x" [size]="iconSizes.small"></pst-icon>
     </button>
     
-    <div *ngIf="isLoading" class="absolute right-3 top-1/2 transform -translate-y-1/2">
+    <div *ngIf="isLoading" [class]="clearButtonClasses">
       <pst-icon name="loader-2" class="animate-spin text-gray-400"></pst-icon>
     </div>
   </div>
@@ -36,15 +36,15 @@
   <div
     *ngIf="showDropdown"
     id="search-results"
-    class="absolute top-full left-0 right-0 mt-1 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 max-h-96 overflow-y-auto z-50"
+    [class]="dropdownClasses"
     role="listbox"
   >
     <div *ngIf="!searchQuery && recentSearches.length > 0" class="py-2">
-      <h3 class="px-3 py-2 text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Recent Searches</h3>
+      <h3 [class]="recentSearchHeaderClasses">Recent Searches</h3>
     </div>
     
-    <div *ngIf="searchResults.length === 0 && searchQuery && !isLoading" class="py-8 text-center">
-      <pst-icon name="search" [size]="24" class="mx-auto h-12 w-12 text-gray-400"></pst-icon>
+    <div *ngIf="searchResults.length === 0 && searchQuery && !isLoading" [class]="emptyStateClasses">
+      <pst-icon name="search" [size]="iconSizes.large" [class]="noResultsIconClasses"></pst-icon>
       <p class="mt-2 text-sm text-gray-500 dark:text-gray-400">No results found for "{{ searchQuery }}"</p>
     </div>
     
@@ -52,16 +52,14 @@
       <li
         *ngFor="let result of searchResults; let i = index"
         [id]="'result-' + i"
-        class="block px-3 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer transition-colors"
-        [class.bg-gray-100]="selectedIndex === i"
-        [class.dark:bg-gray-700]="selectedIndex === i"
+        [class]="getResultItemClasses(selectedIndex === i)"
         (click)="selectResult(result)"
         role="option"
         [attr.aria-selected]="selectedIndex === i"
       >
         <div class="flex items-center">
-          <div class="flex-shrink-0 h-10 w-10 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center mr-3">
-            <pst-icon [name]="getResultIcon(result.type)" class="h-5 w-5 text-gray-600 dark:text-gray-400"></pst-icon>
+          <div [class]="resultIconContainerClasses">
+            <pst-icon [name]="getResultIcon(result.type)" [class]="resultIconClasses"></pst-icon>
           </div>
           <div class="flex-1 min-w-0">
             <div class="text-sm font-medium text-gray-900 dark:text-gray-100 truncate">{{ result.title }}</div>

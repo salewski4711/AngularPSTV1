@@ -1,9 +1,9 @@
 <header [class]="headerClasses">
   <!-- Container für Zentrierung und max-width -->
-  <div class="w-full flex justify-center px-4 sm:px-6 lg:px-8">
+  <div [class]="containerClasses">
     <!-- Innerer Container mit Menü-Background -->
     <div [class]="getInnerContainerClasses" [class.max-w-full]="config.fullWidth">
-      <div class="flex items-center justify-between h-16 px-4">
+      <div [class]="innerFlexClasses">
         <!-- Logo Section -->
         <div class="flex-shrink-0 flex items-center" *ngIf="config.showLogo">
           <pst-logo
@@ -15,9 +15,9 @@
         </div>
 
         <!-- Desktop Navigation -->
-        <div class="hidden md:flex items-center space-x-8 ml-10">
+        <div [class]="desktopNavClasses">
           <!-- Search -->
-          <div class="hidden lg:flex items-center flex-1 max-w-md mx-8" *ngIf="config.showSearch">
+          <div [class]="searchContainerClasses" *ngIf="config.showSearch">
             <pst-search
               (searchSubmit)="onSearchSubmit($event)"
               placeholder="Suchen..."
@@ -26,11 +26,11 @@
         </div>
 
         <!-- Right Section -->
-        <div class="flex items-center space-x-4">
+        <div [class]="rightSectionClasses">
           <!-- Mobile Menu Button -->
           <button
             type="button"
-            class="md:hidden p-2 rounded-lg text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800"
+            [class]="mobileMenuButtonClasses"
             (click)="toggleMobileMenu()"
             [attr.aria-label]="mobileMenuOpen ? 'Menü schließen' : 'Menü öffnen'"
           >

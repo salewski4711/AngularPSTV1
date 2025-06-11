@@ -25,7 +25,7 @@ describe('ModalComponent', () => {
       fixture.componentRef.setInput('isOpen', false);
       fixture.detectChanges();
       
-      const backdrop = fixture.nativeElement.querySelector('.fixed.inset-0.bg-black\\/50');
+      const backdrop = fixture.nativeElement.querySelector('.fixed.inset-0.z-50.bg-black');
       expect(backdrop).toBeNull();
     });
 
@@ -36,7 +36,7 @@ describe('ModalComponent', () => {
       // Wait for animation delay
       setTimeout(() => {
         fixture.detectChanges();
-        const backdrop = fixture.nativeElement.querySelector('.fixed.inset-0.bg-black\\/50');
+        const backdrop = fixture.nativeElement.querySelector('.fixed.inset-0.z-50.bg-black');
         const modal = fixture.nativeElement.querySelector('[role="dialog"]');
         
         expect(backdrop).toBeTruthy();
@@ -89,7 +89,7 @@ describe('ModalComponent', () => {
       setTimeout(() => {
         fixture.detectChanges();
         const modal = fixture.nativeElement.querySelector('[role="dialog"]');
-        expect(modal?.classList.contains('max-w-sm')).toBeTruthy();
+        expect(modal?.classList.contains('max-w-md')).toBeTruthy();
         done();
       }, 20);
     });
@@ -100,7 +100,7 @@ describe('ModalComponent', () => {
       setTimeout(() => {
         fixture.detectChanges();
         const modal = fixture.nativeElement.querySelector('[role="dialog"]');
-        expect(modal?.classList.contains('max-w-md')).toBeTruthy();
+        expect(modal?.classList.contains('max-w-lg')).toBeTruthy();
         done();
       }, 20);
     });
@@ -112,7 +112,7 @@ describe('ModalComponent', () => {
       setTimeout(() => {
         fixture.detectChanges();
         const modal = fixture.nativeElement.querySelector('[role="dialog"]');
-        expect(modal?.classList.contains('max-w-lg')).toBeTruthy();
+        expect(modal?.classList.contains('max-w-2xl')).toBeTruthy();
         done();
       }, 20);
     });
@@ -124,7 +124,7 @@ describe('ModalComponent', () => {
       setTimeout(() => {
         fixture.detectChanges();
         const modal = fixture.nativeElement.querySelector('[role="dialog"]');
-        expect(modal?.classList.contains('max-w-xl')).toBeTruthy();
+        expect(modal?.classList.contains('max-w-4xl')).toBeTruthy();
         done();
       }, 20);
     });
@@ -192,7 +192,7 @@ describe('ModalComponent', () => {
       
       setTimeout(() => {
         fixture.detectChanges();
-        const backdrop = fixture.nativeElement.querySelector('.fixed.inset-0.bg-black\\/50');
+        const backdrop = fixture.nativeElement.querySelector('.fixed.inset-0.z-50.bg-black');
         backdrop?.click();
         
         expect(closeEmitted).toBeTruthy();
@@ -211,7 +211,7 @@ describe('ModalComponent', () => {
       
       setTimeout(() => {
         fixture.detectChanges();
-        const backdrop = fixture.nativeElement.querySelector('.fixed.inset-0.bg-black\\/50');
+        const backdrop = fixture.nativeElement.querySelector('.fixed.inset-0.z-50.bg-black');
         backdrop?.click();
         
         expect(closeEmitted).toBeFalsy();

@@ -1,5 +1,6 @@
 import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { dividerClasses } from '../../../core/design-system/component-classes/atoms.classes';
 
 export type DividerOrientation = 'horizontal' | 'vertical';
 export type DividerVariant = 'solid' | 'dashed' | 'dotted';
@@ -28,66 +29,42 @@ export class DividerComponent {
   @Input() label?: string;
   @Input() color?: string;
 
-  private readonly spacingClasses: Record<DividerSpacing, { horizontal: string; vertical: string }> = {
-    sm: {
-      horizontal: 'my-2',
-      vertical: 'mx-2'
-    },
-    md: {
-      horizontal: 'my-4',
-      vertical: 'mx-4'
-    },
-    lg: {
-      horizontal: 'my-8',
-      vertical: 'mx-8'
-    }
-  };
-
-  private readonly variantClasses: Record<DividerVariant, string> = {
-    solid: 'border-solid',
-    dashed: 'border-dashed',
-    dotted: 'border-dotted'
-  };
-
   get dividerClasses(): string {
-    const classes = ['relative'];
+    const classes: string[] = [dividerClasses.base];
     
+    // Orientation classes
     if (this.orientation === 'horizontal') {
       classes.push(
-        'w-full',
-        this.spacingClasses[this.spacing].horizontal,
-        'border-t',
-        this.label ? 'flex items-center' : ''
+        dividerClasses.orientation.horizontal.base,
+        dividerClasses.spacing.horizontal[this.spacing],
+        this.label ? dividerClasses.orientation.horizontal.withLabel : ''
       );
     } else {
       classes.push(
-        'h-full inline-block',
-        this.spacingClasses[this.spacing].vertical,
-        'border-l',
-        this.label ? 'flex flex-col items-center justify-center' : ''
+        dividerClasses.orientation.vertical.base,
+        dividerClasses.spacing.vertical[this.spacing],
+        this.label ? dividerClasses.orientation.vertical.withLabel : ''
       );
     }
 
-    classes.push(
-      this.variantClasses[this.variant],
-      this.color || 'border-gray-300 dark:border-gray-600'
-    );
+    // Variant classes
+    classes.push(dividerClasses.variants[this.variant]);
+    
+    // Color classes
+    classes.push(this.color || dividerClasses.colors.default);
 
     return classes.filter(Boolean).join(' ');
   }
 
   get labelClasses(): string {
-    const baseClasses = [
-      'bg-white dark:bg-gray-900',
-      'text-sm text-gray-600 dark:text-gray-400'
-    ];
+    const classes: string[] = [dividerClasses.label.base];
 
     if (this.orientation === 'horizontal') {
-      baseClasses.push('px-4', 'absolute', 'left-1/2', '-translate-x-1/2', '-top-3');
+      classes.push(dividerClasses.label.horizontal);
     } else {
-      baseClasses.push('py-2', 'absolute', 'top-1/2', '-translate-y-1/2', 'whitespace-nowrap');
+      classes.push(dividerClasses.label.vertical);
     }
 
-    return baseClasses.join(' ');
+    return classes.join(' ');
   }
 }

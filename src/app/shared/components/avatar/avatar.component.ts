@@ -1,6 +1,6 @@
 import { Component, Input, computed, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { cn } from '../../utils/tailwind.utils';
+import { avatarClasses as avatarClassDefs } from '../../../core/design-system/component-classes';
 
 export type AvatarSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 export type AvatarShape = 'circle' | 'square';
@@ -48,53 +48,42 @@ export class AvatarComponent {
   @Input() size: AvatarSize = 'md';
   @Input() shape: AvatarShape = 'circle';
   @Input() status?: AvatarStatus;
-  @Input() bgColor = 'bg-primary';
-  @Input() textColor = 'text-white';
+  @Input() colorScheme: 'primary' | 'secondary' = 'primary';
   
   imageError = false;
   
-  private sizeConfig = {
-    xs: { avatar: 'h-6 w-6', text: 'text-xs', status: 'h-1.5 w-1.5', statusPosition: '-bottom-0 -right-0' },
-    sm: { avatar: 'h-8 w-8', text: 'text-sm', status: 'h-2 w-2', statusPosition: '-bottom-0 -right-0' },
-    md: { avatar: 'h-10 w-10', text: 'text-base', status: 'h-2.5 w-2.5', statusPosition: '-bottom-0.5 -right-0.5' },
-    lg: { avatar: 'h-12 w-12', text: 'text-lg', status: 'h-3 w-3', statusPosition: '-bottom-0.5 -right-0.5' },
-    xl: { avatar: 'h-16 w-16', text: 'text-xl', status: 'h-3.5 w-3.5', statusPosition: '-bottom-1 -right-1' }
-  };
-  
-  private statusColors = {
-    online: 'bg-green-500',
-    offline: 'bg-gray-400',
-    busy: 'bg-red-500',
-    away: 'bg-amber-500'
-  };
-  
   avatarClasses = computed(() => {
-    const base = 'inline-flex items-center justify-center font-medium';
-    const sizeClass = this.sizeConfig[this.size].avatar;
-    const shapeClass = this.shape === 'circle' ? 'rounded-full' : 'rounded-lg';
-    const colorClasses = (!this.src || this.imageError) 
-      ? cn(this.bgColor, this.textColor) 
-      : '';
+    const classes = [
+      avatarClassDefs.base,
+      avatarClassDefs.sizes[this.size],
+      avatarClassDefs.shapes[this.shape]
+    ];
     
-    return cn(base, sizeClass, shapeClass, colorClasses);
+    // Only add color classes if showing initials
+    if (!this.src || this.imageError) {
+      classes.push(avatarClassDefs.colors[this.colorScheme]);
+    }
+    
+    return classes.join(' ');
   });
   
   initialsClasses = computed(() => {
-    return this.sizeConfig[this.size].text;
+    return avatarClassDefs.textSizes[this.size];
   });
   
   statusClasses = computed(() => {
-    if (!this.status) {return '';}
+    if (!this.status) return '';
     
-    const config = this.sizeConfig[this.size];
-    const base = 'absolute block rounded-full ring-2 ring-white dark:ring-gray-800';
-    const colorClass = this.statusColors[this.status];
-    
-    return cn(base, config.status, config.statusPosition, colorClass);
+    return [
+      avatarClassDefs.status.base,
+      avatarClassDefs.status.sizes[this.size],
+      avatarClassDefs.status.positions[this.size],
+      avatarClassDefs.status.colors[this.status]
+    ].join(' ');
   });
   
   displayInitials(): string {
-    if (!this.name) {return '?';}
+    if (!this.name) return '?';
     
     const parts = this.name.trim().split(' ');
     if (parts.length === 1) {

@@ -2,7 +2,8 @@ import { Component, Input, computed, ChangeDetectionStrategy, forwardRef, Inject
 import { CommonModule } from '@angular/common';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { FormControlBase } from '../../utils/form-control.base';
-import { cn, formClasses } from '../../utils/tailwind.utils';
+import { cn } from '../../utils/tailwind.utils';
+import { toggleClasses, inputClasses } from '../../../core/design-system/component-classes/atoms.classes';
 
 type ToggleSize = 'sm' | 'md' | 'lg';
 type LabelPosition = 'left' | 'right';
@@ -26,7 +27,7 @@ type LabelPosition = 'left' | 'right';
         [class]="labelClasses()"
       >
         {{ label }}
-        <span *ngIf="required" class="text-red-500 ml-1">*</span>
+        <span *ngIf="required" [class]="requiredAsteriskClasses">*</span>
       </span>
       
       <!-- Toggle Button -->
@@ -36,7 +37,7 @@ type LabelPosition = 'left' | 'right';
         [attr.aria-checked]="value()"
         [attr.aria-label]="ariaLabel || label"
         [disabled]="disabled"
-        [class]="toggleClasses()"
+        [class]="toggleButtonClasses()"
         (click)="toggle()"
         (focus)="handleFocus()"
         (blur)="handleBlur()"
@@ -53,7 +54,7 @@ type LabelPosition = 'left' | 'right';
         [class]="labelClasses()"
       >
         {{ label }}
-        <span *ngIf="required" class="text-red-500 ml-1">*</span>
+        <span *ngIf="required" [class]="requiredAsteriskClasses">*</span>
       </span>
     </div>
     
@@ -77,6 +78,8 @@ export class ToggleComponent extends FormControlBase {
     super(injector);
   }
   
+  requiredAsteriskClasses = toggleClasses.requiredAsterisk;
+  
   containerClasses = computed(() => {
     const base = 'flex items-center';
     const justify = this.label && this.labelPosition === 'left' 
@@ -86,16 +89,16 @@ export class ToggleComponent extends FormControlBase {
     return cn(base, justify);
   });
   
-  toggleClasses = computed(() => {
-    const sizeConfig = formClasses.toggle.handle.sizes[this.size];
+  toggleButtonClasses = computed(() => {
+    const sizeConfig = toggleClasses.handle.sizes[this.size];
     const base = cn(
-      formClasses.toggle.container.base,
+      toggleClasses.container.base,
       sizeConfig.container
     );
     
     const state = this.value() 
-      ? formClasses.toggle.container.on 
-      : formClasses.toggle.container.off;
+      ? toggleClasses.container.on 
+      : toggleClasses.container.off;
     
     const disabled = this.disabled 
       ? 'opacity-50 cursor-not-allowed' 
@@ -105,9 +108,9 @@ export class ToggleComponent extends FormControlBase {
   });
   
   handleClasses = computed(() => {
-    const sizeConfig = formClasses.toggle.handle.sizes[this.size];
+    const sizeConfig = toggleClasses.handle.sizes[this.size];
     const base = cn(
-      formClasses.toggle.handle.base,
+      toggleClasses.handle.base,
       sizeConfig.handle
     );
     
@@ -119,20 +122,20 @@ export class ToggleComponent extends FormControlBase {
   });
   
   labelClasses = computed(() => {
-    const base = 'text-sm font-medium';
-    const margin = this.labelPosition === 'left' ? 'mr-3' : 'ml-3';
+    const base = toggleClasses.label.base;
+    const position = toggleClasses.label.position[this.labelPosition];
     const color = this.disabled 
-      ? 'text-gray-500 dark:text-gray-500' 
-      : 'text-gray-900 dark:text-gray-100';
+      ? toggleClasses.label.disabled 
+      : toggleClasses.label.default;
     
-    return cn(base, margin, color);
+    return cn(base, position, color);
   });
   
   helperTextClasses = computed(() => {
-    const base = cn(formClasses.helperText.base, 'mt-2');
+    const base = cn(inputClasses.helperText.base, 'mt-2');
     const state = this.hasError() 
-      ? formClasses.helperText.error 
-      : formClasses.helperText.default;
+      ? inputClasses.helperText.error 
+      : inputClasses.helperText.default;
     
     return cn(base, state);
   });

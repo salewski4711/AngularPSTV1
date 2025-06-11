@@ -1,0 +1,19 @@
+{
+  "file": "/mnt/c/Code/AngularPSTV1/src/app/shared/components/test-ai-validation.component.ts",
+  "eslintPassed": true,
+  "aiValidation": {
+    "score": 80,
+    "issues": [
+      "Hardcodierte Klassen im Template trotz TokenUtils-Import",
+      "Fehlende Accessibility-Attribute für Button"
+    ],
+    "suggestions": [
+      "Nutze [class] oder [ngClass] Binding mit TokenUtils",
+      "Füge aria-label oder aria-describedby hinzu"
+    ],
+    "tokenUsage": {
+      "correct": [],
+      "questionable": []
+    }
+  }
+}

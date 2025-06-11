@@ -7,9 +7,10 @@ import { RouterLink } from '@angular/router';
   standalone: true,
   imports: [CommonModule, RouterLink],
   template: `
-    <div class="flex items-center justify-center py-16">
-      <div class="w-full">
-        <div class="text-center">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-6 lg:py-8 max-w-7xl">
+      <div class="flex items-center justify-center min-h-[70vh]">
+        <div class="w-full">
+          <div class="text-center">
           <h1 class="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">
             Welcome to Angular CRM
           </h1>
@@ -68,6 +69,7 @@ import { RouterLink } from '@angular/router';
               </p>
             </div>
           </div>
+        </div>
         </div>
       </div>
     </div>

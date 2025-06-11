@@ -5,6 +5,7 @@ import { CalendarComponent } from './calendar.component';
 import { DateFormat } from './date-picker.types';
 import { IconComponent } from '../../icons/icon.component';
 import { ClickOutsideDirective } from '../../directives/click-outside.directive';
+import { datePickerClasses } from '../../../core/design-system/component-classes/molecules.classes.static';
 
 @Component({
   selector: 'pst-date-picker',
@@ -32,8 +33,7 @@ import { ClickOutsideDirective } from '../../directives/click-outside.directive'
           (focus)="onTouched()"
           (input)="handleInput($event)"
           (keydown)="handleKeydown($event)"
-          class="w-full px-3 py-2 pr-10 border rounded-md transition-colors duration-200"
-          [class]="inputClasses()"
+          [class]="getInputClasses()"
           [attr.aria-label]="placeholder || 'Select date'"
           [attr.aria-expanded]="isOpen()"
           [attr.aria-haspopup]="true"
@@ -44,8 +44,7 @@ import { ClickOutsideDirective } from '../../directives/click-outside.directive'
           type="button"
           (click)="toggle()"
           [disabled]="disabled"
-          class="absolute right-0 top-0 h-full px-3 flex items-center justify-center"
-          [class]="buttonClasses()"
+          [class]="getButtonClasses()"
           [attr.aria-label]="isOpen() ? 'Close calendar' : 'Open calendar'"
         >
           <pst-icon name="calendar" size="sm" />
@@ -55,11 +54,7 @@ import { ClickOutsideDirective } from '../../directives/click-outside.directive'
       <!-- Calendar Dropdown -->
       @if (isOpen()) {
         <div 
-          class="absolute z-50 mt-2"
-          [class.opacity-0]="!menuVisible()"
-          [class.opacity-100]="menuVisible()"
-          [class.scale-95]="!menuVisible()"
-          [class.scale-100]="menuVisible()"
+          [class]="getDropdownClasses()"
           style="transition: all 200ms ease-out"
         >
           <pst-calendar
@@ -106,21 +101,41 @@ export class DatePickerComponent implements ControlValueAccessor {
     return this.formatDate(date, this.format());
   });
 
-  inputClasses = computed(() => {
-    const base = 'border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100';
-    const focus = 'focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 focus:outline-none';
-    const disabled = this.disabled ? 'opacity-50 cursor-not-allowed' : '';
-    const invalid = this.isInvalid() ? 'border-red-500 dark:border-red-400' : '';
+  getInputClasses(): string {
+    const classes: string[] = [datePickerClasses.input.base, datePickerClasses.input.focus];
     
-    return `${base} ${focus} ${disabled} ${invalid}`;
-  });
+    if (this.disabled) {
+      classes.push(datePickerClasses.input.disabled);
+    }
+    
+    if (this.isInvalid()) {
+      classes.push(datePickerClasses.input.invalid);
+    }
+    
+    return classes.join(' ');
+  }
 
-  buttonClasses = computed(() => {
-    const base = 'text-gray-400 hover:text-gray-600 dark:text-gray-500 dark:hover:text-gray-300';
-    const disabled = this.disabled ? 'opacity-50 cursor-not-allowed' : '';
+  getButtonClasses(): string {
+    const classes: string[] = [datePickerClasses.button.base];
     
-    return `${base} ${disabled}`;
-  });
+    if (this.disabled) {
+      classes.push(datePickerClasses.button.disabled);
+    }
+    
+    return classes.join(' ');
+  }
+
+  getDropdownClasses(): string {
+    const classes: string[] = [datePickerClasses.dropdown.wrapper];
+    
+    if (this.menuVisible()) {
+      classes.push(datePickerClasses.dropdown.transition.visible);
+    } else {
+      classes.push(datePickerClasses.dropdown.transition.invisible);
+    }
+    
+    return classes.join(' ');
+  }
 
   // ControlValueAccessor implementation
   writeValue(value: Date | null): void {

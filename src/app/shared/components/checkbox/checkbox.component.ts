@@ -2,7 +2,8 @@ import { Component, Input, Output, EventEmitter, computed, ChangeDetectionStrate
 import { CommonModule } from '@angular/common';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { FormControlBase } from '../../utils/form-control.base';
-import { cn, formClasses } from '../../utils/tailwind.utils';
+import { cn } from '../../utils/tailwind.utils';
+import { checkboxClasses as checkboxStaticClasses, inputClasses } from '../../../core/design-system/component-classes/atoms.classes';
 
 type CheckboxSize = 'sm' | 'md' | 'lg';
 
@@ -33,10 +34,10 @@ type CheckboxSize = 'sm' | 'md' | 'lg';
       />
       <span 
         *ngIf="label" 
-        [class]="labelTextClasses()"
+        [class]="labelClasses()"
       >
         {{ label }}
-        <span *ngIf="required" class="text-red-500 ml-1">*</span>
+        <span *ngIf="required" [class]="requiredAsteriskClasses">*</span>
       </span>
     </label>
     
@@ -70,37 +71,35 @@ export class CheckboxComponent extends FormControlBase {
   }
   
   containerClasses = computed(() => {
-    const base = 'flex items-start';
     const cursor = this.disabled ? 'cursor-not-allowed' : 'cursor-pointer';
-    
-    return cn(base, cursor);
+    return cn(checkboxStaticClasses.container, cursor);
   });
   
   checkboxClasses = computed(() => {
-    const base = formClasses.checkbox.base;
-    const sizeClass = formClasses.checkbox.sizes[this.size];
-    const marginTop = this.size === 'sm' ? 'mt-0.5' : 'mt-0.5';
+    const base = checkboxStaticClasses.input.base;
+    const sizeClass = checkboxStaticClasses.input.sizes[this.size];
+    const marginTop = 'mt-0.5';
     const cursor = this.disabled ? 'cursor-not-allowed' : 'cursor-pointer';
     const opacity = this.disabled ? 'opacity-50' : '';
+    const state = this.value() ? checkboxStaticClasses.input.checked : checkboxStaticClasses.input.unchecked;
     
-    return cn(base, sizeClass, marginTop, cursor, opacity);
+    return cn(base, sizeClass, marginTop, cursor, opacity, state);
   });
   
-  labelTextClasses = computed(() => {
-    const base = 'ml-2.5 text-sm';
-    const color = this.disabled 
-      ? 'text-gray-500 dark:text-gray-500' 
-      : 'text-gray-600 dark:text-gray-400';
+  labelClasses = computed(() => {
+    const state = this.disabled 
+      ? checkboxStaticClasses.label.disabled
+      : checkboxStaticClasses.label.default;
     const cursor = this.disabled ? 'cursor-not-allowed' : 'cursor-pointer';
     
-    return cn(base, color, cursor);
+    return cn(checkboxStaticClasses.label.base, state, cursor);
   });
   
   helperTextClasses = computed(() => {
-    const base = cn(formClasses.helperText.base, 'ml-7');
+    const base = cn(inputClasses.helperText.base, 'ml-7');
     const state = this.hasError() 
-      ? formClasses.helperText.error 
-      : formClasses.helperText.default;
+      ? inputClasses.helperText.error 
+      : inputClasses.helperText.default;
     
     return cn(base, state);
   });
@@ -111,6 +110,9 @@ export class CheckboxComponent extends FormControlBase {
     }
     return this.helperText;
   });
+  
+  // Static property for required asterisk
+  requiredAsteriskClasses = checkboxStaticClasses.requiredAsterisk;
   
   handleChange(event: Event): void {
     const checkbox = event.target as HTMLInputElement;

@@ -6,6 +6,7 @@ import { IconComponent } from '../../icons/icon.component';
 import { IconName } from '../../icons/icon-definitions';
 import { ThemeService } from '../../../core/services/theme.service';
 import { cn } from '../../utils/tailwind.utils';
+import { userMenuClasses } from '../../../core/design-system/component-classes/organisms.classes.static';
 
 export interface User {
   id: string;
@@ -29,7 +30,6 @@ export interface MenuItem {
   standalone: true,
   imports: [CommonModule, AvatarComponent, IconComponent],
   templateUrl: './user-menu.component.html',
-  styleUrls: ['./user-menu.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class UserMenuComponent {
@@ -50,6 +50,15 @@ export class UserMenuComponent {
   };
   
   isDarkMode = computed(() => this.themeService.isDarkMode());
+
+  // Icon sizes
+  readonly iconSizes = {
+    small: 16,
+    medium: 20
+  };
+
+  // Static classes from design system
+  readonly classes = userMenuClasses;
   
   menuItems: MenuItem[] = [
     {
@@ -169,17 +178,26 @@ export class UserMenuComponent {
   }
   
   getMenuItemClasses(item: MenuItem, index: number): string {
-    const base = 'w-full flex items-center px-4 py-2 text-sm transition-colors duration-150';
-    const hover = 'hover:bg-gray-100 dark:hover:bg-gray-700';
-    const focus = this.focusedIndex() === index ? 'bg-gray-100 dark:bg-gray-700' : '';
-    const danger = item.danger 
-      ? 'text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20' 
-      : 'text-gray-700 dark:text-gray-200';
+    const isFocused = this.focusedIndex() === index;
     
-    return cn(base, hover, focus, danger);
+    return cn(
+      this.classes.menuItem.base,
+      item.danger ? this.classes.menuItem.danger : this.classes.menuItem.default,
+      isFocused && this.classes.menuItem.focused
+    );
   }
   
-  getDividerClasses(): string {
-    return 'my-1 h-px bg-gray-200 dark:bg-gray-700';
+  getDarkModeToggleClasses(): string {
+    return cn(
+      this.classes.sections.darkMode.toggle.base,
+      this.isDarkMode() ? this.classes.sections.darkMode.toggle.on : this.classes.sections.darkMode.toggle.off
+    );
+  }
+  
+  getDarkModeKnobClasses(): string {
+    return cn(
+      this.classes.sections.darkMode.toggle.knob.base,
+      this.isDarkMode() ? this.classes.sections.darkMode.toggle.knob.on : this.classes.sections.darkMode.toggle.knob.off
+    );
   }
 }

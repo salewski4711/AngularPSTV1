@@ -4,6 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { Subject, debounceTime, distinctUntilChanged, switchMap, takeUntil } from 'rxjs';
 import { SearchService } from '../../services/search.service';
 import { IconComponent } from '../../icons/icon.component';
+import { searchClasses } from '../../../core/design-system/component-classes/organisms.classes';
+import { cn } from '../../utils/tailwind.utils';
 
 export interface SearchResult {
   id: string;
@@ -35,6 +37,32 @@ export class SearchComponent implements OnInit, OnDestroy {
   private searchSubject = new Subject<string>();
   private destroy$ = new Subject<void>();
   private blurTimeout?: number;
+
+  // Icon sizes
+  readonly iconSizes = {
+    small: 16,
+    medium: 20,
+    large: 24
+  };
+
+  // Static class references
+  readonly inputClasses = searchClasses.input;
+  readonly iconLeftClasses = searchClasses.iconLeft;
+  readonly clearButtonClasses = searchClasses.clearButton;
+  readonly dropdownClasses = searchClasses.dropdown;
+  readonly recentSearchHeaderClasses = searchClasses.recentSearchHeader;
+  readonly emptyStateClasses = searchClasses.emptyState;
+  readonly resultIconContainerClasses = searchClasses.results.iconContainer;
+  readonly resultIconClasses = searchClasses.results.icon;
+  readonly noResultsIconClasses = searchClasses.noResultsIcon;
+
+  // Method to get result item classes based on selection state
+  getResultItemClasses(isSelected: boolean): string {
+    return cn(
+      searchClasses.results.item.base,
+      isSelected && searchClasses.results.item.selected
+    );
+  }
   
   constructor(private searchService: SearchService) {}
   

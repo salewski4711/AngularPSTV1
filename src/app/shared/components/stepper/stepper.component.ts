@@ -22,6 +22,7 @@ import {
 } from './stepper.types';
 import { IconComponent } from '../../icons/icon.component';
 import { ButtonComponent } from '../button/button.component';
+import { stepperClasses } from '../../../core/design-system/component-classes/organisms.classes';
 
 @Component({
   selector: 'pst-stepper',
@@ -33,16 +34,16 @@ import { ButtonComponent } from '../button/button.component';
       <div [class]="getHeaderClasses()">
         @if (orientation === 'horizontal') {
           <!-- Horizontal layout with background line approach -->
-          <div class="stepper-horizontal">
+          <div [class]="horizontalWrapperClasses">
             <!-- Background line that spans the full width -->
-            <div class="stepper-line-background"></div>
+            <div [class]="lineBackgroundClasses"></div>
             
             <!-- Progress line showing completion status -->
-            <div class="stepper-line-progress" [style.width.%]="getProgressWidth()"></div>
+            <div [class]="lineProgressClasses" [style.width.%]="getProgressWidth()"></div>
             
             <!-- Step indicators positioned on top -->
             @for (step of steps; track step.id; let i = $index; let isLast = $last; let isFirst = $first) {
-              <div class="stepper-step" [class.stepper-step-first]="isFirst" [class.stepper-step-last]="isLast">
+              <div [class]="getStepContainerClass(isFirst, isLast)">
                 <!-- Step Indicator -->
                 <button
                   type="button"
@@ -53,7 +54,7 @@ import { ButtonComponent } from '../button/button.component';
                   [attr.aria-current]="currentStepIndex() === i ? 'step' : null">
                   
                   <!-- Step Number or Icon -->
-                  <span class="step-indicator-content">
+                  <span [class]="stepIndicatorContentClasses">
                     @if (step.completed && !step.error) {
                       <pst-icon name="check" size="sm" />
                     } @else if (step.error) {
@@ -68,14 +69,14 @@ import { ButtonComponent } from '../button/button.component';
                 
                 <!-- Step Label -->
                 <div [class]="getLabelContainerClasses()">
-                  <div class="step-label text-sm font-medium">
+                  <div [class]="stepLabelClasses">
                     {{ step.label }}
                     @if (step.optional) {
-                      <span class="text-xs text-gray-500 dark:text-gray-400">(Optional)</span>
+                      <span [class]="optionalTextClasses">(Optional)</span>
                     }
                   </div>
                   @if (step.description) {
-                    <div class="step-description text-xs text-gray-500 dark:text-gray-400">{{ step.description }}</div>
+                    <div [class]="stepDescriptionClasses">{{ step.description }}</div>
                   }
                 </div>
               </div>
@@ -84,7 +85,7 @@ import { ButtonComponent } from '../button/button.component';
         } @else {
           <!-- Vertical layout -->
           @for (step of steps; track step.id; let i = $index; let isLast = $last) {
-            <div class="stepper-step-wrapper">
+            <div [class]="verticalStepWrapperClasses">
               <div 
                 class="stepper-step-container"
                 [class]="getStepContainerClasses(i)">
@@ -99,7 +100,7 @@ import { ButtonComponent } from '../button/button.component';
                   [attr.aria-current]="currentStepIndex() === i ? 'step' : null">
                   
                   <!-- Step Number or Icon -->
-                  <span class="step-indicator-content">
+                  <span [class]="stepIndicatorContentClasses">
                     @if (step.completed && !step.error) {
                       <pst-icon name="check" size="sm" />
                     } @else if (step.error) {
@@ -114,14 +115,14 @@ import { ButtonComponent } from '../button/button.component';
                 
                 <!-- Step Label -->
                 <div [class]="getLabelContainerClasses()">
-                  <div class="step-label text-sm font-medium">
+                  <div [class]="stepLabelClasses">
                     {{ step.label }}
                     @if (step.optional) {
-                      <span class="text-xs text-gray-500 dark:text-gray-400">(Optional)</span>
+                      <span [class]="optionalTextClasses">(Optional)</span>
                     }
                   </div>
                   @if (step.description) {
-                    <div class="step-description text-xs text-gray-500 dark:text-gray-400">{{ step.description }}</div>
+                    <div [class]="stepDescriptionClasses">{{ step.description }}</div>
                   }
                 </div>
               </div>
@@ -136,14 +137,14 @@ import { ButtonComponent } from '../button/button.component';
       </div>
       
       <!-- Step Content -->
-      <div class="stepper-content">
-        <div class="stepper-panel">
+      <div [class]="contentClasses">
+        <div [class]="panelClasses">
           <ng-content></ng-content>
         </div>
         
         <!-- Navigation Buttons -->
         @if (enableNavigation) {
-          <div class="stepper-navigation flex justify-between items-center mt-6">
+          <div [class]="navigationClasses">
             <pst-button
               variant="secondary"
               [disabled]="!canGoPrevious()"
@@ -168,78 +169,6 @@ import { ButtonComponent } from '../button/button.component';
     :host {
       display: block;
     }
-    
-    /* Horizontal stepper layout with background line approach */
-    .stepper-horizontal {
-      position: relative;
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      width: 100%;
-      padding: 20px 0;
-    }
-    
-    /* Background line that spans full width */
-    .stepper-line-background {
-      position: absolute;
-      top: 40px;
-      left: 20px;
-      right: 20px;
-      height: 2px;
-      background-color: rgb(209 213 219);
-      z-index: 0;
-    }
-    
-    :host-context(.dark) .stepper-line-background {
-      background-color: rgb(75 85 99);
-    }
-    
-    /* Progress line showing completion */
-    .stepper-line-progress {
-      position: absolute;
-      top: 40px;
-      left: 20px;
-      height: 2px;
-      background-color: rgb(34 197 94);
-      z-index: 1;
-      transition: width 0.3s ease;
-    }
-    
-    /* Step container */
-    .stepper-step {
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      flex: 1;
-      z-index: 2;
-    }
-    
-    /* First and last step don't expand */
-    .stepper-step.stepper-step-first,
-    .stepper-step.stepper-step-last {
-      flex: 0 0 auto;
-    }
-    
-    /* Ensure button is above lines */
-    .step-indicator {
-      position: relative;
-      z-index: 10;
-      background-color: white;
-    }
-    
-    :host-context(.dark) .step-indicator {
-      background-color: rgb(31 41 55);
-    }
-    
-    /* Step indicator content - ensure numbers are visible */
-    .step-indicator-content {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 100%;
-      height: 100%;
-    }
   `],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -258,12 +187,18 @@ export class StepperComponent implements AfterContentInit {
   currentStepIndex = signal(0);
   steps: StepperStep[] = [];
   
-  private animationClasses = {
-    none: '',
-    fast: 'transition-all duration-150',
-    normal: 'transition-all duration-300',
-    slow: 'transition-all duration-500'
-  };
+  // Static class getters
+  readonly optionalTextClasses = stepperClasses.optionalText;
+  readonly stepDescriptionClasses = stepperClasses.stepDescription;
+  readonly horizontalWrapperClasses = stepperClasses.horizontalWrapper;
+  readonly lineBackgroundClasses = stepperClasses.lineBackground;
+  readonly lineProgressClasses = stepperClasses.lineProgress;
+  readonly stepIndicatorContentClasses = stepperClasses.stepIndicatorContent;
+  readonly stepLabelClasses = stepperClasses.stepLabel;
+  readonly navigationClasses = stepperClasses.navigation;
+  readonly contentClasses = stepperClasses.content;
+  readonly panelClasses = stepperClasses.panel;
+  readonly verticalStepWrapperClasses = stepperClasses.verticalStepWrapper;
   
   ngAfterContentInit() {
     this.initializeSteps();
@@ -381,79 +316,90 @@ export class StepperComponent implements AfterContentInit {
   
   // Style utility methods
   getContainerClasses(): string {
-    return `${this.orientation === 'vertical' ? 'flex' : 'block'}`;
+    return this.orientation === 'vertical' 
+      ? stepperClasses.container.vertical 
+      : stepperClasses.container.horizontal;
   }
   
   getHeaderClasses(): string {
-    const base = 'stepper-header';
+    const base = stepperClasses.header.base;
     const orientation = this.orientation === 'horizontal' 
-      ? 'flex items-start w-full' 
-      : 'flex flex-col';
-    const padding = this.orientation === 'horizontal' ? 'pb-8 mb-8' : 'pr-8 mr-8';
+      ? stepperClasses.header.horizontal 
+      : stepperClasses.header.vertical;
     
-    return `${base} ${orientation} ${padding} relative`;
+    return `${base} ${orientation}`;
   }
   
   getStepContainerClasses(index: number): string {
-    const base = 'relative flex items-center';
-    const orientation = this.orientation === 'horizontal' ? 'flex-col' : 'flex-row w-full';
+    const base = stepperClasses.verticalStepContainer.base;
+    const orientation = this.orientation === 'horizontal' 
+      ? stepperClasses.verticalStepContainer.horizontal 
+      : stepperClasses.verticalStepContainer.vertical;
     const active = this.currentStepIndex() === index ? 'stepper-active' : '';
     
     return `${base} ${orientation} ${active}`;
   }
   
   getStepButtonClasses(index: number): string {
-    const base = 'step-indicator relative z-10 rounded-full flex items-center justify-center font-medium focus:outline-none focus:ring-2 focus:ring-offset-2';
-    const size = 'w-10 h-10 text-sm';
-    const animation = this.animationClasses[this.animationDuration];
+    const base = stepperClasses.stepButton.base;
+    const animation = stepperClasses.animation[this.animationDuration];
     
     const isActive = this.currentStepIndex() === index;
     const isCompleted = this.steps[index]?.completed;
     const isError = this.steps[index]?.error;
     const isDisabled = this.steps[index]?.disabled || !this.canNavigateToStep(index);
     
-    let colorClasses = '';
+    let stateClasses = '';
     if (isError) {
-      colorClasses = 'bg-red-500 text-white ring-red-500';
+      stateClasses = stepperClasses.stepButton.states.error;
     } else if (isActive) {
-      colorClasses = 'bg-primary text-white ring-primary';
+      stateClasses = stepperClasses.stepButton.states.active;
     } else if (isCompleted) {
-      colorClasses = 'bg-green-500 text-white ring-green-500';
+      stateClasses = stepperClasses.stepButton.states.completed;
     } else if (isDisabled) {
-      colorClasses = 'bg-gray-200 text-gray-400 cursor-not-allowed dark:bg-gray-700 dark:text-gray-500';
+      stateClasses = stepperClasses.stepButton.states.disabled;
     } else {
-      colorClasses = 'bg-gray-300 text-gray-600 hover:bg-gray-400 cursor-pointer dark:bg-gray-600 dark:text-gray-300 dark:hover:bg-gray-500';
+      stateClasses = stepperClasses.stepButton.states.default;
     }
     
-    return `${base} ${size} ${colorClasses} ${animation}`;
+    return [base, stateClasses, animation].join(' ');
   }
   
   getLabelContainerClasses(): string {
-    const base = 'mt-3';
-    const position = this.labelPosition === 'bottom' ? 'text-center' : 'text-left ml-4';
+    const base = stepperClasses.labelContainer.base;
+    const position = this.labelPosition === 'bottom' 
+      ? stepperClasses.labelContainer.bottom 
+      : stepperClasses.labelContainer.side;
     
     return `${base} ${position}`;
   }
   
   getConnectorColorClass(index: number): string {
     const isCompleted = this.steps[index]?.completed;
-    const animation = this.animationClasses[this.animationDuration];
+    const animation = stepperClasses.animation[this.animationDuration];
     return `${isCompleted ? 'connector-completed' : 'connector-pending'} ${animation}`;
   }
   
   getConnectorClasses(index: number): string {
-    const base = 'step-connector';
-    const animation = this.animationClasses[this.animationDuration];
-    
+    const base = stepperClasses.verticalConnector.base;
     const isCompleted = this.steps[index]?.completed;
-    const color = isCompleted ? 'bg-green-500' : 'bg-gray-300 dark:bg-gray-600';
     
     if (this.orientation === 'horizontal') {
-      // Horizontal connector line - positioned to connect step indicators
-      return `${base} ${color} ${animation} h-0.5`;
+      // Horizontal connectors are handled by background line
+      return '';
     } else {
-      // Vertical connector line
-      return `${base} ${color} ${animation} w-0.5 h-12 ml-5`;
+      // Vertical connector
+      return isCompleted 
+        ? `${base} ${stepperClasses.verticalConnector.completed}`
+        : `${base} ${stepperClasses.verticalConnector.pending}`;
     }
+  }
+  
+  getStepContainerClass(isFirst: boolean, isLast: boolean): string {
+    const base = stepperClasses.stepContainer.base;
+    const firstClass = isFirst ? stepperClasses.stepContainer.first : '';
+    const lastClass = isLast ? stepperClasses.stepContainer.last : '';
+    
+    return [base, firstClass, lastClass].filter(Boolean).join(' ');
   }
 }

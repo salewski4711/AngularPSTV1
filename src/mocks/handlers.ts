@@ -1,5 +1,6 @@
 import { http, HttpResponse, delay } from 'msw';
 import { mockCustomers, generateMockCustomer } from './data/customers.mock';
+import { mockContacts, generateMockContact } from './data/contacts.mock';
 import { mockDashboardStats } from './data/dashboard.mock';
 import { mockProjects } from './data/projects.mock';
 import { mockUsers, authResponses } from './data/auth.mock';
@@ -40,30 +41,14 @@ export const handlers = [
     const sortBy = url.searchParams.get('sortBy') || 'name';
     const sortOrder = url.searchParams.get('sortOrder') || 'asc';
     
-    // Generate a large dataset (simulate 100k+ contacts)
-    const totalItems = 100000;
+    // Use our real mock contacts data
+    const allContacts = mockContacts;
+    const totalItems = allContacts.length;
     const startIndex = (page - 1) * pageSize;
-    const endIndex = startIndex + pageSize;
+    const endIndex = Math.min(startIndex + pageSize, totalItems);
     
-    // Generate contacts for current page
-    const contacts = Array.from({ length: pageSize }, (_, i) => {
-      const id = startIndex + i + 1;
-      const contact = generateMockCustomer(id);
-      
-      // Add more realistic data for contacts
-      return {
-        ...contact,
-        id: id.toString(),
-        firstName: contact.name.split(' ')[0],
-        lastName: contact.name.split(' ')[1] || '',
-        company: contact.type === 'business' ? contact.name : '',
-        position: contact.type === 'business' ? 'Geschäftsführer' : '',
-        tags: ['Solar', 'Neukunde', 'Premium'][id % 3] ? [['Solar', 'Neukunde', 'Premium'][id % 3]] : [],
-        notes: `Notiz für Kontakt ${id}`,
-        lastActivity: new Date(Date.now() - Math.random() * 30 * 24 * 60 * 60 * 1000).toISOString(),
-        score: Math.floor(Math.random() * 100),
-      };
-    });
+    // Get contacts for current page
+    const contacts = allContacts.slice(startIndex, endIndex);
     
     // Apply search filter
     let filteredContacts = contacts;
@@ -104,9 +89,9 @@ export const handlers = [
       pagination: {
         page,
         pageSize,
-        totalItems,
-        totalPages: Math.ceil(totalItems / pageSize),
-        hasNextPage: endIndex < totalItems,
+        totalItems: allContacts.length, // Total number of all contacts
+        totalPages: Math.ceil(allContacts.length / pageSize),
+        hasNextPage: endIndex < allContacts.length,
         hasPreviousPage: page > 1
       },
       meta: {

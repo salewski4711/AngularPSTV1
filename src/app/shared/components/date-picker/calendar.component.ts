@@ -2,6 +2,7 @@ import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy, signal
 import { CommonModule } from '@angular/common';
 import { CalendarDay, CalendarWeek } from './date-picker.types';
 import { IconComponent } from '../../icons/icon.component';
+import { datePickerClasses } from '../../../core/design-system/component-classes/molecules.classes.static';
 
 @Component({
   selector: 'pst-calendar',
@@ -9,13 +10,13 @@ import { IconComponent } from '../../icons/icon.component';
   imports: [CommonModule, IconComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-4 w-80">
+    <div [class]="datePickerClasses.calendar.container">
       <!-- Month/Year Navigation -->
       <div class="flex items-center justify-between mb-4">
         <button
           type="button"
           (click)="previousMonth()"
-          class="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors"
+          [class]="datePickerClasses.calendar.navigation.button"
           [attr.aria-label]="'Previous month'"
         >
           <pst-icon name="chevron-left" size="xs" />
@@ -25,7 +26,7 @@ import { IconComponent } from '../../icons/icon.component';
           <select
             [value]="currentMonth()"
             (change)="changeMonth($event)"
-            class="px-3 py-1 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-sm font-medium"
+            [class]="datePickerClasses.calendar.navigation.select"
           >
             @for (month of monthNames; track $index) {
               <option [value]="$index">{{ month }}</option>
@@ -35,7 +36,7 @@ import { IconComponent } from '../../icons/icon.component';
           <select
             [value]="currentYear()"
             (change)="changeYear($event)"
-            class="px-3 py-1 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-sm font-medium"
+            [class]="datePickerClasses.calendar.navigation.select"
           >
             @for (year of yearOptions(); track year) {
               <option [value]="year">{{ year }}</option>
@@ -46,7 +47,7 @@ import { IconComponent } from '../../icons/icon.component';
         <button
           type="button"
           (click)="nextMonth()"
-          class="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors"
+          [class]="datePickerClasses.calendar.navigation.button"
           [attr.aria-label]="'Next month'"
         >
           <pst-icon name="chevron-right" size="xs" />
@@ -56,7 +57,7 @@ import { IconComponent } from '../../icons/icon.component';
       <!-- Weekday Headers -->
       <div class="grid grid-cols-7 gap-1 mb-2">
         @for (day of weekDays; track day) {
-          <div class="text-center text-xs font-medium text-gray-500 dark:text-gray-400 py-2">
+          <div [class]="datePickerClasses.calendar.weekdayHeader">
             {{ day }}
           </div>
         }
@@ -70,7 +71,6 @@ import { IconComponent } from '../../icons/icon.component';
               type="button"
               (click)="selectDate(day)"
               [disabled]="day.isDisabled"
-              class="p-2 text-sm rounded-lg transition-all duration-200"
               [class]="getDayClasses(day)"
               [attr.aria-label]="getDateAriaLabel(day)"
               [attr.aria-selected]="day.isSelected"
@@ -83,11 +83,11 @@ import { IconComponent } from '../../icons/icon.component';
       </div>
       
       <!-- Today Button -->
-      <div class="mt-4 pt-4 border-t dark:border-gray-700">
+      <div [class]="datePickerClasses.calendar.todayButton.container">
         <button
           type="button"
           (click)="selectToday()"
-          class="w-full px-4 py-2 text-sm font-medium text-primary-600 dark:text-primary-400 hover:bg-primary-50 dark:hover:bg-primary-900/20 rounded-lg transition-colors"
+          [class]="datePickerClasses.calendar.todayButton.button"
         >
           Today
         </button>
@@ -121,6 +121,9 @@ export class CalendarComponent {
     }
     return years;
   });
+
+  // Make datePickerClasses available to template
+  datePickerClasses = datePickerClasses;
 
   calendarWeeks = computed((): CalendarWeek[] => {
     const year = this.currentYear();
@@ -223,20 +226,20 @@ export class CalendarComponent {
   }
 
   getDayClasses(day: CalendarDay): string {
-    const classes: string[] = [];
+    const classes: string[] = [datePickerClasses.calendar.day.base];
 
     if (!day.isCurrentMonth) {
-      classes.push('text-gray-400 dark:text-gray-600');
+      classes.push(datePickerClasses.calendar.day.states.notCurrentMonth);
     } else if (day.isDisabled) {
-      classes.push('text-gray-300 dark:text-gray-700 cursor-not-allowed');
+      classes.push(datePickerClasses.calendar.day.states.disabled);
     } else if (day.isSelected) {
-      classes.push('bg-primary-500 text-white hover:bg-primary-600');
+      classes.push(datePickerClasses.calendar.day.states.selected);
     } else if (day.isToday) {
-      classes.push('bg-primary-100 dark:bg-primary-900/30 text-primary-800 dark:text-primary-200 font-semibold hover:bg-primary-200 dark:hover:bg-primary-900/50');
+      classes.push(datePickerClasses.calendar.day.states.today);
     } else if (day.isWeekend) {
-      classes.push('text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700');
+      classes.push(datePickerClasses.calendar.day.states.weekend);
     } else {
-      classes.push('text-gray-900 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700');
+      classes.push(datePickerClasses.calendar.day.states.default);
     }
 
     return classes.join(' ');
@@ -275,4 +278,5 @@ export class CalendarComponent {
     
     return false;
   }
+
 }

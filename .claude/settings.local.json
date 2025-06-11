@@ -45,7 +45,16 @@
       "WebFetch(domain:dev.prosolartec.com)",
       "Bash(npx:*)",
       "Bash(npm search:*)",
-      "Bash(playwright --version)"
+      "Bash(playwright --version)",
+      "Bash(npm link)",
+      "Bash(rg:*)",
+      "Bash(sed:*)",
+      "Bash(pkill:*)",
+      "Bash(true)",
+      "Bash(git checkout:*)",
+      "Bash(npm run test:ci:*)",
+      "Bash(node:*)",
+      "WebFetch(domain:localhost)"
     ],
     "deny": []
   }

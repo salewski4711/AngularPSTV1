@@ -14,17 +14,18 @@ import {
 import { CommonModule } from '@angular/common';
 import { IconComponent } from '../../icons/icon.component';
 import { AccordionPanel } from './accordion.types';
+import { accordionClasses } from '../../../core/design-system/component-classes/molecules.classes.static';
 
 @Component({
   selector: 'pst-accordion-panel',
   standalone: true,
   imports: [CommonModule, IconComponent],
   template: `
-    <div class="border rounded-lg overflow-hidden" [class.opacity-50]="panel()?.disabled">
+    <div [class]="panelClasses()">
       <!-- Header -->
       <button
         type="button"
-        class="w-full px-4 py-3 flex items-center justify-between text-left transition-colors hover:bg-gray-50 dark:hover:bg-gray-800 disabled:cursor-not-allowed"
+        [class]="headerButtonClasses()"
         [disabled]="panel()?.disabled"
         (click)="toggle()"
         [attr.aria-expanded]="isExpanded()"
@@ -35,20 +36,18 @@ import { AccordionPanel } from './accordion.types';
           *ngIf="iconPosition() === 'left'"
           name="chevron-right"
           [size]="20"
-          class="transition-transform duration-200 mr-3"
-          [class.rotate-90]="isExpanded()"
+          [class]="iconLeftClasses()"
         />
         
         <!-- Header Text -->
-        <span class="flex-1 font-medium">{{ panel()?.header }}</span>
+        <span [class]="accordionClasses.header.text">{{ panel()?.header }}</span>
         
         <!-- Icon Right -->
         <pst-icon
           *ngIf="iconPosition() === 'right'"
           name="chevron-down"
           [size]="20"
-          class="transition-transform duration-200 ml-3"
-          [class.rotate-180]="isExpanded()"
+          [class]="iconRightClasses()"
         />
       </button>
 
@@ -56,11 +55,10 @@ import { AccordionPanel } from './accordion.types';
       <div
         #contentWrapper
         [id]="contentId"
-        class="overflow-hidden transition-all"
-        [class.duration-300]="animated()"
+        [class]="contentWrapperClasses()"
         [style.max-height.px]="isExpanded() ? contentHeight() : 0"
       >
-        <div #content class="px-4 py-3 border-t dark:border-gray-700">
+        <div #content [class]="accordionClasses.content.inner">
           <ng-content></ng-content>
           <span *ngIf="panel()?.content">{{ panel()?.content }}</span>
         </div>
@@ -81,6 +79,9 @@ export class AccordionPanelComponent implements AfterViewInit {
   contentHeight = signal(0);
   isExpanded = computed(() => this.panel()?.expanded || false);
   contentId = `accordion-content-${Math.random().toString(36).substr(2, 9)}`;
+  
+  // Reference to static classes for template use
+  readonly accordionClasses = accordionClasses;
 
   constructor() {
     // Update content height when expanded state changes
@@ -120,4 +121,39 @@ export class AccordionPanelComponent implements AfterViewInit {
       this.contentHeight.set(height);
     }
   }
+  
+  // Computed class properties
+  panelClasses = computed(() => {
+    const classes: string[] = [accordionClasses.panel.base];
+    if (this.panel()?.disabled) {
+      classes.push(accordionClasses.panel.disabled);
+    }
+    return classes.join(' ');
+  });
+
+  headerButtonClasses = computed(() => accordionClasses.header.button);
+
+  contentWrapperClasses = computed(() => {
+    const classes: string[] = [accordionClasses.content.wrapper];
+    if (this.animated()) {
+      classes.push(accordionClasses.content.animated);
+    }
+    return classes.join(' ');
+  });
+
+  iconLeftClasses = computed(() => {
+    const classes: string[] = [accordionClasses.icon.base, accordionClasses.icon.left];
+    if (this.isExpanded()) {
+      classes.push(accordionClasses.icon.expanded.left);
+    }
+    return classes.join(' ');
+  });
+
+  iconRightClasses = computed(() => {
+    const classes: string[] = [accordionClasses.icon.base, accordionClasses.icon.right];
+    if (this.isExpanded()) {
+      classes.push(accordionClasses.icon.expanded.right);
+    }
+    return classes.join(' ');
+  });
 }
