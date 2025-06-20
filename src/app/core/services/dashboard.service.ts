@@ -28,7 +28,9 @@ export class DashboardService {
   // Computed Signal für sichtbare Widgets (mit Berechtigungsfilterung)
   public visibleWidgets = computed(() => {
     const dashboard = this._currentDashboard();
-    if (!dashboard) return [];
+    if (!dashboard) {
+      return [];
+    }
     
     return dashboard.widgets
       .filter(widget => this.hasPermission(widget.permission))
@@ -44,7 +46,9 @@ export class DashboardService {
   // Computed Signal für Breadcrumb Items
   public breadcrumbItems = computed(() => {
     const current = this._currentDashboard();
-    if (!current) return [];
+    if (!current) {
+      return [];
+    }
     
     const items = [
       { label: 'Dashboard', route: '/dashboard', icon: 'home' }

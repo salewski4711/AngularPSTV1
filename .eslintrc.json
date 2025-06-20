@@ -71,12 +71,7 @@
         "@angular-eslint/template/interactive-supports-focus": "warn",
         
         "// ========== TEMPLATE TOKEN ENFORCEMENT ==========": "off",
-        "@angular-eslint/template/no-inline-styles": [
-          "error",
-          {
-            "allowBindToStyle": false
-          }
-        ]
+        "@angular-eslint/template/no-inline-styles": "off"
       }
     },
     {

@@ -1,4 +1,4 @@
-import { Injectable, isDevMode } from '@angular/core';
+import { Injectable, isDevMode, inject } from '@angular/core';
 import { NavigationEnd, NavigationStart, Router } from '@angular/router';
 import { filter } from 'rxjs/operators';
 
@@ -7,8 +7,9 @@ import { filter } from 'rxjs/operators';
 })
 export class PerformanceService {
   private navigationStartTime = 0;
+  private router = inject(Router);
 
-  constructor(private router: Router) {
+  constructor() {
     if (!isDevMode()) {
       this.initializePerformanceMonitoring();
     }
@@ -91,7 +92,7 @@ export class PerformanceService {
         if (measure && measure.duration > 100) {
           console.warn(`[Performance] Slow operation "${name}": ${measure.duration.toFixed(2)}ms`);
         }
-      } catch (_e) {
+      } catch {
         // Ignore errors from invalid marks
       }
     }

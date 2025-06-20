@@ -152,7 +152,9 @@ export class TokenUtils {
    * @returns Tailwind-Klasse z.B. 'rounded-lg'
    */
   static getRadiusClass(size: string): string {
-    if (size === 'base') return 'rounded';
+    if (size === 'base') {
+      return 'rounded';
+    }
     return `rounded-${size}`;
   }
   
@@ -162,7 +164,9 @@ export class TokenUtils {
    * @returns Tailwind-Klasse z.B. 'shadow-lg'
    */
   static getShadowClass(size: string): string {
-    if (size === 'base') return 'shadow';
+    if (size === 'base') {
+      return 'shadow';
+    }
     return `shadow-${size}`;
   }
   
