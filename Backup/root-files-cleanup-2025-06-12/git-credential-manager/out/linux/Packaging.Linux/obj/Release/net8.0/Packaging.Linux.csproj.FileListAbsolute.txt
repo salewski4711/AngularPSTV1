@@ -1,0 +1,4 @@
+/mnt/c/Code/AngularPSTV1/git-credential-manager/out/linux/Packaging.Linux/obj/Release/net8.0/app.manifest
+/mnt/c/Code/AngularPSTV1/git-credential-manager/out/linux/Packaging.Linux/obj/Release/net8.0/Packaging.Linux.GeneratedMSBuildEditorConfig.editorconfig
+/mnt/c/Code/AngularPSTV1/git-credential-manager/out/linux/Packaging.Linux/obj/Release/net8.0/Packaging.Linux.csproj.CoreCompileInputs.cache
+/mnt/c/Code/AngularPSTV1/git-credential-manager/out/linux/Packaging.Linux/obj/Release/net8.0/Packaging.Linux.sourcelink.json

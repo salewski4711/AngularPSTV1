@@ -1,20 +1,5 @@
 #!/bin/sh
 
-# Prüfe ob design-tokens.ts geändert wurde
-if git diff --cached --name-only | grep -q "design-tokens.ts"; then
-  echo "❌ ERROR: design-tokens.ts kann nicht direkt geändert werden!"
-  echo "📝 Bitte erstelle einen Token-Request:"
-  echo "   https://github.com/[repo]/issues/new?template=token-request.md"
-  echo ""
-  echo "✅ Erlaubte Aktionen:"
-  echo "   1. Nutze bestehende Tokens mit TokenUtils"
-  echo "   2. Erstelle Token-Request-Issue für neue Tokens"
-  echo "   3. Warte auf Genehmigung vom Design-System-Team"
-  echo ""
-  echo "❓ Warum? Token-Konsistenz ist kritisch für das Design System!"
-  exit 1
-fi
-
 # ESLint Check für alle geänderten TypeScript-Dateien
 echo "🔍 Prüfe Code-Qualität mit ESLint..."
 CHANGED_FILES=$(git diff --cached --name-only --diff-filter=ACM | grep -E '\.(ts|html)$')

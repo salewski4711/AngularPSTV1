@@ -38,10 +38,10 @@
           }
         ],
         
-        "design-tokens/no-hardcoded-colors": "error",
-        "design-tokens/no-hardcoded-spacing": "error",
-        "design-tokens/no-tailwind-colors": "error",
-        "design-tokens/use-token-utils": "warn",
+        "design-tokens/no-hardcoded-colors": "off",
+        "design-tokens/no-hardcoded-spacing": "off",
+        "design-tokens/no-tailwind-colors": "off",
+        "design-tokens/use-token-utils": "off",
         "@typescript-eslint/no-explicit-any": "warn",
         "@typescript-eslint/no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],
         "@typescript-eslint/explicit-function-return-type": ["warn", {

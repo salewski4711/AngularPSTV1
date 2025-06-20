@@ -1,0 +1,10 @@
+/mnt/c/Code/AngularPSTV1/git-credential-manager/out/linux/Packaging.Linux/Release/payload/git-credential-manager.pdb
+/mnt/c/Code/AngularPSTV1/git-credential-manager/out/linux/Packaging.Linux/Release/payload/NOTICE
+/mnt/c/Code/AngularPSTV1/git-credential-manager/out/linux/Packaging.Linux/Release/payload/libHarfBuzzSharp.so
+/mnt/c/Code/AngularPSTV1/git-credential-manager/out/linux/Packaging.Linux/Release/payload/libSkiaSharp.so
+/mnt/c/Code/AngularPSTV1/git-credential-manager/out/linux/Packaging.Linux/Release/payload/Atlassian.Bitbucket.pdb
+/mnt/c/Code/AngularPSTV1/git-credential-manager/out/linux/Packaging.Linux/Release/payload/GitHub.pdb
+/mnt/c/Code/AngularPSTV1/git-credential-manager/out/linux/Packaging.Linux/Release/payload/GitLab.pdb
+/mnt/c/Code/AngularPSTV1/git-credential-manager/out/linux/Packaging.Linux/Release/payload/Microsoft.AzureRepos.pdb
+/mnt/c/Code/AngularPSTV1/git-credential-manager/out/linux/Packaging.Linux/Release/payload/gcmcore.pdb
+/mnt/c/Code/AngularPSTV1/git-credential-manager/out/linux/Packaging.Linux/Release/payload/git-credential-manager

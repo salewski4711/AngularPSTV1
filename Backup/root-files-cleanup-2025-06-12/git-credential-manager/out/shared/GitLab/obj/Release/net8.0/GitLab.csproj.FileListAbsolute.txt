@@ -1,0 +1,17 @@
+/mnt/c/Code/AngularPSTV1/git-credential-manager/out/shared/GitLab/bin/Release/net8.0/GitLab.deps.json
+/mnt/c/Code/AngularPSTV1/git-credential-manager/out/shared/GitLab/bin/Release/net8.0/GitLab.dll
+/mnt/c/Code/AngularPSTV1/git-credential-manager/out/shared/GitLab/bin/Release/net8.0/GitLab.pdb
+/mnt/c/Code/AngularPSTV1/git-credential-manager/out/shared/GitLab/obj/Release/net8.0/app.manifest
+/mnt/c/Code/AngularPSTV1/git-credential-manager/out/shared/GitLab/obj/Release/net8.0/GitLab.csproj.AssemblyReference.cache
+/mnt/c/Code/AngularPSTV1/git-credential-manager/out/shared/GitLab/obj/Release/net8.0/Avalonia/Resources.Inputs.cache
+/mnt/c/Code/AngularPSTV1/git-credential-manager/out/shared/GitLab/obj/Release/net8.0/Avalonia/resources
+/mnt/c/Code/AngularPSTV1/git-credential-manager/out/shared/GitLab/obj/Release/net8.0/GitLab.GeneratedMSBuildEditorConfig.editorconfig
+/mnt/c/Code/AngularPSTV1/git-credential-manager/out/shared/GitLab/obj/Release/net8.0/GitLab.AssemblyInfoInputs.cache
+/mnt/c/Code/AngularPSTV1/git-credential-manager/out/shared/GitLab/obj/Release/net8.0/GitLab.AssemblyInfo.cs
+/mnt/c/Code/AngularPSTV1/git-credential-manager/out/shared/GitLab/obj/Release/net8.0/GitLab.csproj.CoreCompileInputs.cache
+/mnt/c/Code/AngularPSTV1/git-credential-manager/out/shared/GitLab/obj/Release/net8.0/GitLab.sourcelink.json
+/mnt/c/Code/AngularPSTV1/git-credential-manager/out/shared/GitLab/obj/Release/net8.0/Avalonia/GitLab.dll
+/mnt/c/Code/AngularPSTV1/git-credential-manager/out/shared/GitLab/obj/Release/net8.0/Avalonia/GitLab.pdb
+/mnt/c/Code/AngularPSTV1/git-credential-manager/out/shared/GitLab/obj/Release/net8.0/refint/Avalonia/GitLab.dll
+/mnt/c/Code/AngularPSTV1/git-credential-manager/out/shared/GitLab/obj/Release/net8.0/GitLab.csproj.CopyComplete
+/mnt/c/Code/AngularPSTV1/git-credential-manager/out/shared/GitLab/obj/Release/net8.0/ref/GitLab.dll

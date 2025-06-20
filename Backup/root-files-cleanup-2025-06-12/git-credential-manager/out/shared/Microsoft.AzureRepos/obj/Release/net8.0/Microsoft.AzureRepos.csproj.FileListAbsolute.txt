@@ -1,0 +1,16 @@
+/mnt/c/Code/AngularPSTV1/git-credential-manager/out/shared/Microsoft.AzureRepos/bin/Release/net8.0/Microsoft.AzureRepos.deps.json
+/mnt/c/Code/AngularPSTV1/git-credential-manager/out/shared/Microsoft.AzureRepos/bin/Release/net8.0/Microsoft.AzureRepos.dll
+/mnt/c/Code/AngularPSTV1/git-credential-manager/out/shared/Microsoft.AzureRepos/bin/Release/net8.0/Microsoft.AzureRepos.pdb
+/mnt/c/Code/AngularPSTV1/git-credential-manager/out/shared/Microsoft.AzureRepos/obj/Release/net8.0/app.manifest
+/mnt/c/Code/AngularPSTV1/git-credential-manager/out/shared/Microsoft.AzureRepos/obj/Release/net8.0/Microsoft.AzureRepos.csproj.AssemblyReference.cache
+/mnt/c/Code/AngularPSTV1/git-credential-manager/out/shared/Microsoft.AzureRepos/obj/Release/net8.0/Avalonia/Resources.Inputs.cache
+/mnt/c/Code/AngularPSTV1/git-credential-manager/out/shared/Microsoft.AzureRepos/obj/Release/net8.0/Microsoft.AzureRepos.GeneratedMSBuildEditorConfig.editorconfig
+/mnt/c/Code/AngularPSTV1/git-credential-manager/out/shared/Microsoft.AzureRepos/obj/Release/net8.0/Microsoft.AzureRepos.AssemblyInfoInputs.cache
+/mnt/c/Code/AngularPSTV1/git-credential-manager/out/shared/Microsoft.AzureRepos/obj/Release/net8.0/Microsoft.AzureRepos.AssemblyInfo.cs
+/mnt/c/Code/AngularPSTV1/git-credential-manager/out/shared/Microsoft.AzureRepos/obj/Release/net8.0/Microsoft.AzureRepos.csproj.CoreCompileInputs.cache
+/mnt/c/Code/AngularPSTV1/git-credential-manager/out/shared/Microsoft.AzureRepos/obj/Release/net8.0/Microsoft.AzureRepos.sourcelink.json
+/mnt/c/Code/AngularPSTV1/git-credential-manager/out/shared/Microsoft.AzureRepos/obj/Release/net8.0/Microsoft.AzureRepos.csproj.CopyComplete
+/mnt/c/Code/AngularPSTV1/git-credential-manager/out/shared/Microsoft.AzureRepos/obj/Release/net8.0/Microsoft.AzureRepos.dll
+/mnt/c/Code/AngularPSTV1/git-credential-manager/out/shared/Microsoft.AzureRepos/obj/Release/net8.0/refint/Microsoft.AzureRepos.dll
+/mnt/c/Code/AngularPSTV1/git-credential-manager/out/shared/Microsoft.AzureRepos/obj/Release/net8.0/Microsoft.AzureRepos.pdb
+/mnt/c/Code/AngularPSTV1/git-credential-manager/out/shared/Microsoft.AzureRepos/obj/Release/net8.0/ref/Microsoft.AzureRepos.dll
